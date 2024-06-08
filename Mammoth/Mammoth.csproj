@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Nuget Pack">
-    <PackageId>Mammoth.WordToHtml</PackageId>
+    <PackageId>LarchSys.WordToHtml</PackageId>
     <Version>0.0.0</Version>
     <Title>Mammoth</Title>
     <Authors>LarchSys and Michael Williamson</Authors>
