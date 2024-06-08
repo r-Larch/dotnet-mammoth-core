@@ -1,3 +1,18 @@
+
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/r-Larch/dotnet-mammoth-core/ci.yml) ![NuGet Version](https://img.shields.io/nuget/v/LarchSys.WordToHtml)
+
+**Install Nuget**
+
+```bash
+> dotnet add package LarchSys.WordToHtml --prerelease
+```
+
+# This is a fork of `mwilliamson/dotnet-mammoth`
+
+The original author stoped maintaining the package.
+This fork provides a `.NET Core` port of the original package.
+
+
 # Mammoth .docx to HTML converter for .NET
 
 Mammoth is designed to convert .docx documents,
@@ -500,7 +515,7 @@ If you'd like to say thanks, feel free to [make a donation through Ko-fi](https:
 If you use Mammoth as part of your business,
 please consider supporting the ongoing maintenance of Mammoth by [making a weekly donation through Liberapay](https://liberapay.com/mwilliamson/donate).
 
-## Build and generate `generated.cs`
+## Build / Update `generated.cs`
 
 Choose a filder eg. `c:\Temp\`
 
