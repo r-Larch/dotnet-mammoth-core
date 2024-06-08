@@ -1,4 +1,5 @@
 using System.Net;
+using System.Net.Http;
 using Mammoth.Couscous.java.io;
 
 namespace Mammoth.Couscous.java.net {
@@ -11,17 +12,18 @@ namespace Mammoth.Couscous.java.net {
         
         internal InputStream openStream() {
             try {
-                var response = WebRequest.Create(_url).GetResponse();
+                using var client = new HttpClient();
+                var response = client.GetStreamAsync(_url).GetAwaiter().GetResult();
                 try {
-                    return ToJava.StreamToInputStream(response.GetResponseStream());
+                    return ToJava.StreamToInputStream(response);
                 } catch {
                     response.Close();
                     throw;
                 }
             } catch (System.UriFormatException) {
                 return ToJava.StreamToInputStream(System.IO.File.OpenRead(_url));
-            } catch (System.Net.WebException exception) {
-                throw new java.io.IOException(exception.Message);
+            } catch (WebException exception) {
+                throw new IOException(exception.Message);
             }
         }
     }
