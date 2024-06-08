@@ -2,29 +2,38 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <OutputType>Library</OutputType>
-    <AssemblyTitle>Mammoth</AssemblyTitle>
-    <Description>Convert Word documents from docx to simple HTML</Description>
-    <Company>Michael Williamson</Company>
-    <Product>Mammoth</Product>
-    <Copyright>Copyright © Michael Williamson 2015 - 2016</Copyright>
-    <AssemblyVersion>1.4.0.0</AssemblyVersion>
+    <!--<ImplicitUsings>enable</ImplicitUsings>-->
+    <!--<Nullable>enable</Nullable>-->
+    <NoWarn>CS0168</NoWarn>
+    <IsPackable>true</IsPackable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ConsolePause>false</ConsolePause>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>bin\Release</OutputPath>
-    <ConsolePause>false</ConsolePause>
+  <PropertyGroup Label="Nuget Pack">
+    <PackageId>Mammoth.WordToHtml</PackageId>
+    <Version>1.0.0</Version>
+    <Title>Mammoth</Title>
+    <Authors>LarchSys and Michael Williamson</Authors>
+    <Copyright>Copyright © René Larch 2024 | Michael Williamson 2015 - 2016</Copyright>
+    <PackageTags>docx;html;office;word</PackageTags>
+    <Description>
+      Convert Word documents from docx to simple HTML
+    </Description>
+    <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/r-Larch/dotnet-mammoth-core.git</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Couscous\mammoth\internal\styles\parsing\StyleMapParser.cs" />
-    <Compile Remove="Couscous\mammoth\internal\util\Objects.cs" />
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
