@@ -1,8 +1,13 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class Relationships__Anonymous_0 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Relationship, Mammoth.Couscous.java.util.Map__Entry<string, string>> {
-        public Mammoth.Couscous.java.util.Map__Entry<string, string> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Relationship relationship) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.entry<string, string>(relationship.getRelationshipId(), relationship.getTarget());
+    internal class Relationships__Anonymous_0 : Function<Relationship, Map__Entry<string, string>> {
+        public Map__Entry<string, string> apply(Relationship relationship)
+        {
+            return Maps.entry(relationship.getRelationshipId(), relationship.getTarget());
         }
     }
 }
-

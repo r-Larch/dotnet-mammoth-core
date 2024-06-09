@@ -1,14 +1,22 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_6 : Mammoth.Couscous.java.util.function.BiFunction<Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> {
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> _numbering;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.ParagraphIndent _indent;
-        internal StatefulBodyXmlReader__Anonymous_6(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> numbering, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.ParagraphIndent indent) {
-            this._numbering = numbering;
-            this._indent = indent;
+    internal class StatefulBodyXmlReader__Anonymous_6 : BiFunction<Optional<Style>, List<DocumentElement>, DocumentElement> {
+        internal ParagraphIndent _indent;
+        internal Optional<NumberingLevel> _numbering;
+
+        internal StatefulBodyXmlReader__Anonymous_6(Optional<NumberingLevel> numbering, ParagraphIndent indent)
+        {
+            _numbering = numbering;
+            _indent = indent;
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement apply(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style> style, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> children) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph(style, this._numbering, this._indent, children);
+
+        public DocumentElement apply(Optional<Style> style, List<DocumentElement> children)
+        {
+            return new Paragraph(style, _numbering, _indent, children);
         }
     }
 }
-

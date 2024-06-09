@@ -1,70 +1,104 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class StyleMap {
-        internal static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap _EMPTY;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _bold;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _italic;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _underline;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _strikethrough;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _smallCaps;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _commentReference;
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>> _paragraphStyles;
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>> _runStyles;
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>> _tableStyles;
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>> _breakStyles;
-        static StyleMap() {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap._EMPTY = (new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder()).build();
+        internal static StyleMap _EMPTY;
+        internal Optional<HtmlPath> _bold;
+        internal List<StyleMapping<Break>> _breakStyles;
+        internal Optional<HtmlPath> _commentReference;
+        internal Optional<HtmlPath> _italic;
+        internal List<StyleMapping<Paragraph>> _paragraphStyles;
+        internal List<StyleMapping<Run>> _runStyles;
+        internal Optional<HtmlPath> _smallCaps;
+        internal Optional<HtmlPath> _strikethrough;
+        internal List<StyleMapping<Table>> _tableStyles;
+        internal Optional<HtmlPath> _underline;
+
+        static StyleMap()
+        {
+            _EMPTY = (new StyleMapBuilder()).build();
         }
-        internal StyleMap(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> bold, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> italic, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> underline, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> strikethrough, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> smallCaps, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> commentReference, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>> paragraphStyles, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>> runStyles, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>> tableStyles, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>> breakStyles) {
-            this._bold = bold;
-            this._italic = italic;
-            this._underline = underline;
-            this._strikethrough = strikethrough;
-            this._smallCaps = smallCaps;
-            this._commentReference = commentReference;
-            this._paragraphStyles = paragraphStyles;
-            this._runStyles = runStyles;
-            this._tableStyles = tableStyles;
-            this._breakStyles = breakStyles;
+
+        internal StyleMap(Optional<HtmlPath> bold, Optional<HtmlPath> italic, Optional<HtmlPath> underline, Optional<HtmlPath> strikethrough, Optional<HtmlPath> smallCaps, Optional<HtmlPath> commentReference, List<StyleMapping<Paragraph>> paragraphStyles, List<StyleMapping<Run>> runStyles, List<StyleMapping<Table>> tableStyles, List<StyleMapping<Break>> breakStyles)
+        {
+            _bold = bold;
+            _italic = italic;
+            _underline = underline;
+            _strikethrough = strikethrough;
+            _smallCaps = smallCaps;
+            _commentReference = commentReference;
+            _paragraphStyles = paragraphStyles;
+            _runStyles = runStyles;
+            _tableStyles = tableStyles;
+            _breakStyles = breakStyles;
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder builder() {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder();
+
+        public static StyleMapBuilder builder()
+        {
+            return new StyleMapBuilder();
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap merge(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap high, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap low) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._bold, low._bold), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._italic, low._italic), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._underline, low._underline), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._strikethrough, low._strikethrough), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._smallCaps, low._smallCaps), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._commentReference, low._commentReference), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>>(high._paragraphStyles, low._paragraphStyles), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>>(high._runStyles, low._runStyles), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>>(high._tableStyles, low._tableStyles), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>>(high._breakStyles, low._breakStyles));
+
+        public static StyleMap merge(StyleMap high, StyleMap low)
+        {
+            return new StyleMap(Optionals.first(high._bold, low._bold), Optionals.first(high._italic, low._italic), Optionals.first(high._underline, low._underline), Optionals.first(high._strikethrough, low._strikethrough), Optionals.first(high._smallCaps, low._smallCaps), Optionals.first(high._commentReference, low._commentReference), Lists.eagerConcat(high._paragraphStyles, low._paragraphStyles), Lists.eagerConcat(high._runStyles, low._runStyles), Lists.eagerConcat(high._tableStyles, low._tableStyles), Lists.eagerConcat(high._breakStyles, low._breakStyles));
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap update(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap styleMap) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap.merge(styleMap, this);
+
+        public StyleMap update(StyleMap styleMap)
+        {
+            return merge(styleMap, this);
         }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getBold() {
-            return this._bold;
+
+        public Optional<HtmlPath> getBold()
+        {
+            return _bold;
         }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getItalic() {
-            return this._italic;
+
+        public Optional<HtmlPath> getItalic()
+        {
+            return _italic;
         }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getUnderline() {
-            return this._underline;
+
+        public Optional<HtmlPath> getUnderline()
+        {
+            return _underline;
         }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getStrikethrough() {
-            return this._strikethrough;
+
+        public Optional<HtmlPath> getStrikethrough()
+        {
+            return _strikethrough;
         }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getSmallCaps() {
-            return this._smallCaps;
+
+        public Optional<HtmlPath> getSmallCaps()
+        {
+            return _smallCaps;
         }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getCommentReference() {
-            return this._commentReference;
+
+        public Optional<HtmlPath> getCommentReference()
+        {
+            return _commentReference;
         }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getParagraphHtmlPath(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph paragraph) {
-            return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.tryFind<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>>(this._paragraphStyles, new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_0(paragraph))).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_1());
+
+        public Optional<HtmlPath> getParagraphHtmlPath(Paragraph paragraph)
+        {
+            return (Iterables.tryFind(_paragraphStyles, new StyleMap__Anonymous_0(paragraph))).map(new StyleMap__Anonymous_1());
         }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getRunHtmlPath(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run run) {
-            return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.tryFind<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>>(this._runStyles, new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_2(run))).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_3());
+
+        public Optional<HtmlPath> getRunHtmlPath(Run run)
+        {
+            return (Iterables.tryFind(_runStyles, new StyleMap__Anonymous_2(run))).map(new StyleMap__Anonymous_3());
         }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getTableHtmlPath(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table table) {
-            return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.tryFind<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>>(this._tableStyles, new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_4(table))).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_5());
+
+        public Optional<HtmlPath> getTableHtmlPath(Table table)
+        {
+            return (Iterables.tryFind(_tableStyles, new StyleMap__Anonymous_4(table))).map(new StyleMap__Anonymous_5());
         }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getBreakHtmlPath(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break breakElement) {
-            return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.tryFind<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>>(this._breakStyles, new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_6(breakElement))).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_7());
+
+        public Optional<HtmlPath> getBreakHtmlPath(Break breakElement)
+        {
+            return (Iterables.tryFind(_breakStyles, new StyleMap__Anonymous_6(breakElement))).map(new StyleMap__Anonymous_7());
         }
     }
 }
-

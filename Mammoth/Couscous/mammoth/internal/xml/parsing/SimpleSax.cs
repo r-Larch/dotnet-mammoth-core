@@ -1,10 +1,13 @@
+using System;
+using System.Xml;
 using Mammoth.Couscous.java.io;
 using Mammoth.Couscous.java.util;
-using System.Xml;
+
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
     internal static class SimpleSax {
-        internal static void parseStream(InputStream input, SimpleSaxHandler handler) {
+        internal static void parseStream(InputStream input, SimpleSaxHandler handler)
+        {
             var reader = XmlReader.Create(input.Stream);
             while (reader.Read()) {
                 switch (reader.NodeType) {
@@ -12,14 +15,16 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
                         var name = new ElementName(reader.NamespaceURI, reader.LocalName);
                         var attributes = new HashMap<ElementName, string>();
                         var isEmpty = reader.IsEmptyElement;
-                        for (int attributeIndex = 0; attributeIndex < reader.AttributeCount; attributeIndex++) {
+                        for (var attributeIndex = 0; attributeIndex < reader.AttributeCount; attributeIndex++) {
                             reader.MoveToAttribute(attributeIndex);
                             attributes.put(new ElementName(reader.NamespaceURI, reader.LocalName), reader.Value);
                         }
+
                         handler.startElement(name, attributes);
                         if (isEmpty) {
                             handler.endElement();
                         }
+
                         break;
                     case XmlNodeType.CDATA:
                     case XmlNodeType.Text:
@@ -27,16 +32,17 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
                         handler.characters(reader.Value);
                         break;
                     case XmlNodeType.EntityReference:
-                       throw new System.NotImplementedException();
+                        throw new NotImplementedException();
                     case XmlNodeType.EndElement:
                         handler.endElement();
                         break;
-               } 
+                }
             }
         }
-        
-        internal static void parseString(string value, SimpleSaxHandler handler) {
-            throw new System.NotImplementedException();
+
+        internal static void parseString(string value, SimpleSaxHandler handler)
+        {
+            throw new NotImplementedException();
         }
     }
 }

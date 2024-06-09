@@ -1,12 +1,20 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_4 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
-        internal StatefulBodyXmlReader__Anonymous_4(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader) {
-            this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+    internal class StatefulBodyXmlReader__Anonymous_4 : Function<string, Optional<Style>> {
+        internal StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+
+        internal StatefulBodyXmlReader__Anonymous_4(StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader)
+        {
+            _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
         }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style> apply(string arg0) {
-            return ((this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader)._styles).findCharacterStyleById(arg0);
+
+        public Optional<Style> apply(string arg0)
+        {
+            return ((_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader)._styles).findCharacterStyleById(arg0);
         }
     }
 }
-

@@ -1,16 +1,25 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_7 : Mammoth.Couscous.java.util.function.Supplier<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run _run;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context _context;
-        internal DocumentToHtml__Anonymous_7(Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run run, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
-            this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml = this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
-            this._run = run;
-            this._context = context;
+    internal class DocumentToHtml__Anonymous_7 : Supplier<List<HtmlNode>> {
+        internal DocumentToHtml__Context _context;
+        internal Run _run;
+        internal DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+
+        internal DocumentToHtml__Anonymous_7(DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, Run run, DocumentToHtml__Context context)
+        {
+            _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml = this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+            _run = run;
+            _context = context;
         }
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> get() {
-            return (this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertChildrenToHtml(this._run, this._context);
+
+        public List<HtmlNode> get()
+        {
+            return (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertChildrenToHtml(_run, _context);
         }
     }
 }
-

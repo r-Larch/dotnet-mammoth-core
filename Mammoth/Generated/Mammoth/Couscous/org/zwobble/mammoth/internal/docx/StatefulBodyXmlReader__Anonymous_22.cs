@@ -1,14 +1,22 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_22 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> {
+    internal class StatefulBodyXmlReader__Anonymous_22 : Function<List<DocumentElement>, DocumentElement> {
         internal string _href;
-        internal Mammoth.Couscous.java.util.Optional<string> _targetFrame;
-        internal StatefulBodyXmlReader__Anonymous_22(string href, Mammoth.Couscous.java.util.Optional<string> targetFrame) {
-            this._href = href;
-            this._targetFrame = targetFrame;
+        internal Optional<string> _targetFrame;
+
+        internal StatefulBodyXmlReader__Anonymous_22(string href, Optional<string> targetFrame)
+        {
+            _href = href;
+            _targetFrame = targetFrame;
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement apply(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> children) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink.href(this._href, this._targetFrame, children);
+
+        public DocumentElement apply(List<DocumentElement> children)
+        {
+            return Hyperlink.href(_href, _targetFrame, children);
         }
     }
 }
-

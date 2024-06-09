@@ -1,5 +1,5 @@
 namespace Mammoth.Couscous.java.util.function {
     internal interface Predicate<T> {
-		bool test(T value);
+        bool test(T value);
     }
 }

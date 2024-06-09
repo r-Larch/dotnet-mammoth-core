@@ -1,19 +1,27 @@
+using Mammoth.Couscous.java.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
     internal class XmlElementBuilder {
+        internal Map<string, string> _attributes;
+        internal List<XmlNode> _children;
         internal string _name;
-        internal Mammoth.Couscous.java.util.Map<string, string> _attributes;
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlNode> _children;
-        internal XmlElementBuilder(string name, Mammoth.Couscous.java.util.Map<string, string> attributes) {
-            this._name = name;
-            this._attributes = attributes;
-            this._children = new Mammoth.Couscous.java.util.ArrayList<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlNode>();
+
+        internal XmlElementBuilder(string name, Map<string, string> attributes)
+        {
+            _name = name;
+            _attributes = attributes;
+            _children = new ArrayList<XmlNode>();
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement build() {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement(this._name, this._attributes, this._children);
+
+        public XmlElement build()
+        {
+            return new XmlElement(_name, _attributes, _children);
         }
-        public void addChild(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlNode node) {
-            (this._children).add(node);
+
+        public void addChild(XmlNode node)
+        {
+            (_children).add(node);
         }
     }
 }
-

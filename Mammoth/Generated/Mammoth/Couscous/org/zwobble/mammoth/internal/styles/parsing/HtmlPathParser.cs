@@ -1,67 +1,88 @@
+using Mammoth.Couscous.java.lang;
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class HtmlPathParser {
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath parse(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokens) {
-            if (tokens.trySkip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, "!")) {
-                return Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath_static._IGNORE;
-            } else {
-                return Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.HtmlPathParser.parseHtmlPathElements(tokens);
+        public static HtmlPath parse(TokenIterator<TokenType> tokens)
+        {
+            if (tokens.trySkip(TokenType._SYMBOL, "!")) {
+                return HtmlPath_static._IGNORE;
             }
+
+            return parseHtmlPathElements(tokens);
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath parseHtmlPathElements(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokens) {
-            Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPathElement> elements = new Mammoth.Couscous.java.util.ArrayList<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPathElement>();
-            if (tokens.peekTokenType() == Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._IDENTIFIER) {
-                Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPathElement element = Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.HtmlPathParser.parseElement(tokens);
+
+        public static HtmlPath parseHtmlPathElements(TokenIterator<TokenType> tokens)
+        {
+            List<HtmlPathElement> elements = new ArrayList<HtmlPathElement>();
+            if (tokens.peekTokenType() == TokenType._IDENTIFIER) {
+                var element = parseElement(tokens);
                 elements.add(element);
-                while ((tokens.peekTokenType() == Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._WHITESPACE) && tokens.isNext(1, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, ">")) {
-                    tokens.skip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._WHITESPACE);
-                    tokens.skip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, ">");
-                    tokens.skip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._WHITESPACE);
-                    elements.add(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.HtmlPathParser.parseElement(tokens));
+                while ((tokens.peekTokenType() == TokenType._WHITESPACE) && tokens.isNext(1, TokenType._SYMBOL, ">")) {
+                    tokens.skip(TokenType._WHITESPACE);
+                    tokens.skip(TokenType._SYMBOL, ">");
+                    tokens.skip(TokenType._WHITESPACE);
+                    elements.add(parseElement(tokens));
                 }
             }
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPathElements(elements);
+
+            return new HtmlPathElements(elements);
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPathElement parseElement(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokens) {
-            Mammoth.Couscous.java.util.List<string> tagNames = Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.HtmlPathParser.parseTagNames(tokens);
-            Mammoth.Couscous.java.util.List<string> classNames = Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.HtmlPathParser.parseClassNames(tokens);
-            Mammoth.Couscous.java.util.Map<string, string> attributes = classNames.isEmpty() ? Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.map<string, string>() : Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.map<string, string>("class", java.lang.String.join(" ", classNames));
-            bool isFresh = Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.HtmlPathParser.parseIsFresh(tokens);
-            string separator = Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.HtmlPathParser.parseSeparator(tokens);
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPathElement(new Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlTag(tagNames, attributes, !isFresh, separator));
+
+        public static HtmlPathElement parseElement(TokenIterator<TokenType> tokens)
+        {
+            var tagNames = parseTagNames(tokens);
+            var classNames = parseClassNames(tokens);
+            var attributes = classNames.isEmpty() ? Maps.map<string, string>() : Maps.map("class", String.join(" ", classNames));
+            var isFresh = parseIsFresh(tokens);
+            var separator = parseSeparator(tokens);
+            return new HtmlPathElement(new HtmlTag(tagNames, attributes, !isFresh, separator));
         }
-        public static Mammoth.Couscous.java.util.List<string> parseTagNames(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokens) {
-            Mammoth.Couscous.java.util.List<string> tagNames = new Mammoth.Couscous.java.util.ArrayList<string>();
-            tagNames.add(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenParser.parseIdentifier(tokens));
-            while (tokens.trySkip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, "|")) {
-                tagNames.add(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenParser.parseIdentifier(tokens));
+
+        public static List<string> parseTagNames(TokenIterator<TokenType> tokens)
+        {
+            List<string> tagNames = new ArrayList<string>();
+            tagNames.add(TokenParser.parseIdentifier(tokens));
+            while (tokens.trySkip(TokenType._SYMBOL, "|")) {
+                tagNames.add(TokenParser.parseIdentifier(tokens));
             }
+
             return tagNames;
         }
-        public static Mammoth.Couscous.java.util.List<string> parseClassNames(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokens) {
-            Mammoth.Couscous.java.util.List<string> classNames = new Mammoth.Couscous.java.util.ArrayList<string>();
+
+        public static List<string> parseClassNames(TokenIterator<TokenType> tokens)
+        {
+            List<string> classNames = new ArrayList<string>();
             while (true) {
-                Mammoth.Couscous.java.util.Optional<string> className = Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenParser.parseClassName(tokens);
+                var className = TokenParser.parseClassName(tokens);
                 if (className.isPresent()) {
                     classNames.add(className.get());
-                } else {
+                }
+                else {
                     return classNames;
                 }
             }
         }
-        public static bool parseIsFresh(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokens) {
-            return tokens.tryParse(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.HtmlPathParser__Anonymous_0(tokens));
+
+        public static bool parseIsFresh(TokenIterator<TokenType> tokens)
+        {
+            return tokens.tryParse(new HtmlPathParser__Anonymous_0(tokens));
         }
-        public static string parseSeparator(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokens) {
-            bool isSeparator = tokens.tryParse(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.HtmlPathParser__Anonymous_1(tokens));
+
+        public static string parseSeparator(TokenIterator<TokenType> tokens)
+        {
+            var isSeparator = tokens.tryParse(new HtmlPathParser__Anonymous_1(tokens));
             if (isSeparator) {
-                tokens.skip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, "(");
-                string value = Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenParser.parseString(tokens);
-                tokens.skip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, ")");
+                tokens.skip(TokenType._SYMBOL, "(");
+                var value = TokenParser.parseString(tokens);
+                tokens.skip(TokenType._SYMBOL, ")");
                 return value;
-            } else {
-                return "";
             }
+
+            return "";
         }
     }
 }
-

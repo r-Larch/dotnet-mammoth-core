@@ -3,4 +3,3 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
         bool matches(string value);
     }
 }
-

@@ -1,14 +1,24 @@
+using Mammoth.Couscous.java.io;
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.archives;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class DocumentReader__Anonymous_15 : Mammoth.Couscous.org.zwobble.mammoth.@internal.util.SupplierWithException<Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement>, Mammoth.Couscous.java.io.IOException> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive _zipFile;
+    internal class DocumentReader__Anonymous_15 : SupplierWithException<Optional<XmlElement>, IOException> {
         internal string _name;
-        internal DocumentReader__Anonymous_15(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile, string name) {
-            this._zipFile = zipFile;
-            this._name = name;
+        internal Archive _zipFile;
+
+        internal DocumentReader__Anonymous_15(Archive zipFile, string name)
+        {
+            _zipFile = zipFile;
+            _name = name;
         }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement> get() {
-            return ((this._zipFile).tryGetInputStream(this._name)).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__Anonymous_14());
+
+        public Optional<XmlElement> get()
+        {
+            return ((_zipFile).tryGetInputStream(_name)).map(new DocumentReader__Anonymous_14());
         }
     }
 }
-

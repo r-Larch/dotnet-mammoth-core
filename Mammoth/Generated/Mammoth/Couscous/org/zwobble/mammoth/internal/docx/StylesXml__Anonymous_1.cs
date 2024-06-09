@@ -1,8 +1,14 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StylesXml__Anonymous_1 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement, Mammoth.Couscous.java.util.Map__Entry<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>> {
-        public Mammoth.Couscous.java.util.Map__Entry<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement arg0) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StylesXml.readStyle(arg0);
+    internal class StylesXml__Anonymous_1 : Function<XmlElement, Map__Entry<string, Style>> {
+        public Map__Entry<string, Style> apply(XmlElement arg0)
+        {
+            return StylesXml.readStyle(arg0);
         }
     }
 }
-

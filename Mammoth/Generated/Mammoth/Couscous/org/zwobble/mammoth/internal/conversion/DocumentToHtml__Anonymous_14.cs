@@ -1,12 +1,19 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_14 : Mammoth.Couscous.java.util.function.Consumer<string> {
-        internal Mammoth.Couscous.java.util.Map<string, string> _attributes;
-        internal DocumentToHtml__Anonymous_14(Mammoth.Couscous.java.util.Map<string, string> attributes) {
-            this._attributes = attributes;
+    internal class DocumentToHtml__Anonymous_14 : Consumer<string> {
+        internal Map<string, string> _attributes;
+
+        internal DocumentToHtml__Anonymous_14(Map<string, string> attributes)
+        {
+            _attributes = attributes;
         }
-        public void accept(string targetFrame) {
-            (this._attributes).put("target", targetFrame);
+
+        public void accept(string targetFrame)
+        {
+            (_attributes).put("target", targetFrame);
         }
     }
 }
-

@@ -1,8 +1,12 @@
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StyleMap__Anonymous_7 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> {
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break> arg0) {
+    internal class StyleMap__Anonymous_7 : Function<StyleMapping<Break>, HtmlPath> {
+        public HtmlPath apply(StyleMapping<Break> arg0)
+        {
             return arg0.getHtmlPath();
         }
     }
 }
-

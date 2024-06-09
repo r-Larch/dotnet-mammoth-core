@@ -1,12 +1,19 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
-    internal class NamespacePrefixes__Anonymous_0 : Mammoth.Couscous.java.util.function.Predicate<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.NamespacePrefix> {
-        internal Mammoth.Couscous.java.util.Optional<string> _prefix;
-        internal NamespacePrefixes__Anonymous_0(Mammoth.Couscous.java.util.Optional<string> prefix) {
-            this._prefix = prefix;
+    internal class NamespacePrefixes__Anonymous_0 : Predicate<NamespacePrefix> {
+        internal Optional<string> _prefix;
+
+        internal NamespacePrefixes__Anonymous_0(Optional<string> prefix)
+        {
+            _prefix = prefix;
         }
-        public bool test(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.NamespacePrefix @namespace) {
-            return (@namespace.getPrefix()).equals(this._prefix);
+
+        public bool test(NamespacePrefix @namespace)
+        {
+            return (@namespace.getPrefix()).equals(_prefix);
         }
     }
 }
-

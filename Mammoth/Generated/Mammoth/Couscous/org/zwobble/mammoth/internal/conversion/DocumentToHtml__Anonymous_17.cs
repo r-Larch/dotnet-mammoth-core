@@ -1,20 +1,32 @@
+using Mammoth.Couscous.java.io;
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.org.zwobble.mammoth.images;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_17 : Mammoth.Couscous.org.zwobble.mammoth.images.Image {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Image _image;
+    internal class DocumentToHtml__Anonymous_17 : Image {
         internal string _contentType;
-        internal DocumentToHtml__Anonymous_17(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Image image, string contentType) {
-            this._image = image;
-            this._contentType = contentType;
+        internal documents.Image _image;
+
+        internal DocumentToHtml__Anonymous_17(documents.Image image, string contentType)
+        {
+            _image = image;
+            _contentType = contentType;
         }
-        public Mammoth.Couscous.java.util.Optional<string> getAltText() {
-            return (this._image).getAltText();
+
+        public Optional<string> getAltText()
+        {
+            return (_image).getAltText();
         }
-        public string getContentType() {
-            return this._contentType;
+
+        public string getContentType()
+        {
+            return _contentType;
         }
-        public Mammoth.Couscous.java.io.InputStream getInputStream() {
-            return (this._image).open();
+
+        public InputStream getInputStream()
+        {
+            return (_image).open();
         }
     }
 }
-

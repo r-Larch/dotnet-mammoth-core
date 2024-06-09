@@ -1,8 +1,11 @@
+using Mammoth.Couscous.java.util.function;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
-    internal class XmlElement__Anonymous_1 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlNode, string> {
-        public string apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlNode arg0) {
+    internal class XmlElement__Anonymous_1 : Function<XmlNode, string> {
+        public string apply(XmlNode arg0)
+        {
             return arg0.innerText();
         }
     }
 }
-

@@ -1,47 +1,50 @@
-using Mammoth.Couscous.java.util.function;
-
-namespace Mammoth.Couscous.java.util
-{
-    internal interface OptionalInt
-	{
-		bool isPresent();
-		int getAsInt();
-		int orElse(int elseValue);
+namespace Mammoth.Couscous.java.util {
+    internal interface OptionalInt {
+        bool isPresent();
+        int getAsInt();
+        int orElse(int elseValue);
     }
 
-	internal struct NoneInt : OptionalInt {
-		internal static readonly NoneInt Instance = new NoneInt();
-		
-		public bool isPresent() {
-			return false;
-		}
+    internal struct NoneInt : OptionalInt {
+        internal static readonly NoneInt Instance = new();
 
-		public int getAsInt() {
-			throw new NoSuchElementException();
-		}
-		
-		public int orElse(int elseValue) {
-			return elseValue;
-		}
-	}
+        public bool isPresent()
+        {
+            return false;
+        }
 
-	internal struct SomeInt : OptionalInt {
-		private readonly int _value;
+        public int getAsInt()
+        {
+            throw new NoSuchElementException();
+        }
 
-		internal SomeInt(int value) {
-			_value = value;
-		}
+        public int orElse(int elseValue)
+        {
+            return elseValue;
+        }
+    }
 
-		public bool isPresent() {
-			return true;
-		}
+    internal struct SomeInt : OptionalInt {
+        private readonly int _value;
 
-		public int getAsInt() {
-			return _value;
-		}
-		
-		public int orElse(int elseValue) {
-			return _value;
-		}
-	}
+        internal SomeInt(int value)
+        {
+            _value = value;
+        }
+
+        public bool isPresent()
+        {
+            return true;
+        }
+
+        public int getAsInt()
+        {
+            return _value;
+        }
+
+        public int orElse(int elseValue)
+        {
+            return _value;
+        }
+    }
 }

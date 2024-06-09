@@ -1,26 +1,35 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.archives;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class DocumentReader__PartWithBodyReader {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive _zipFile;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ContentTypes _contentTypes;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.FileReader _fileReader;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering _numbering;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Styles _styles;
-        internal DocumentReader__PartWithBodyReader(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ContentTypes contentTypes, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.FileReader fileReader, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering numbering, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Styles styles) {
-            this._zipFile = zipFile;
-            this._contentTypes = contentTypes;
-            this._fileReader = fileReader;
-            this._numbering = numbering;
-            this._styles = styles;
+        internal ContentTypes _contentTypes;
+        internal FileReader _fileReader;
+        internal Numbering _numbering;
+        internal Styles _styles;
+        internal Archive _zipFile;
+
+        internal DocumentReader__PartWithBodyReader(Archive zipFile, ContentTypes contentTypes, FileReader fileReader, Numbering numbering, Styles styles)
+        {
+            _zipFile = zipFile;
+            _contentTypes = contentTypes;
+            _fileReader = fileReader;
+            _numbering = numbering;
+            _styles = styles;
         }
-        public T readPart<T>(string name, Mammoth.Couscous.java.util.function.BiFunction<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.BodyXmlReader, T> readPart, Mammoth.Couscous.java.util.Optional<T> defaultValue) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Relationships relationships = Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.readRelationships(this._zipFile, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.findRelationshipsPathFor(name));
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.BodyXmlReader bodyReader = new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.BodyXmlReader(this._styles, this._numbering, relationships, this._contentTypes, this._zipFile, this._fileReader);
+
+        public T readPart<T>(string name, BiFunction<XmlElement, BodyXmlReader, T> readPart, Optional<T> defaultValue)
+        {
+            var relationships = DocumentReader.readRelationships(_zipFile, DocumentReader.findRelationshipsPathFor(name));
+            var bodyReader = new BodyXmlReader(_styles, _numbering, relationships, _contentTypes, _zipFile, _fileReader);
             if (defaultValue.isPresent()) {
-                return ((Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.tryParseOfficeXml(this._zipFile, name)).map<T>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__Anonymous_17<T>(readPart, bodyReader))).orElse(defaultValue.get());
-            } else {
-                return readPart.apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.parseOfficeXml(this._zipFile, name), bodyReader);
+                return ((DocumentReader.tryParseOfficeXml(_zipFile, name)).map(new DocumentReader__Anonymous_17<T>(readPart, bodyReader))).orElse(defaultValue.get());
             }
+
+            return readPart.apply(DocumentReader.parseOfficeXml(_zipFile, name), bodyReader);
         }
     }
 }
-

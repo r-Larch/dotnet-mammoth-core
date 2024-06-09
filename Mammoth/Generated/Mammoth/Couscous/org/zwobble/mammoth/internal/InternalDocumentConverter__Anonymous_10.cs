@@ -1,12 +1,22 @@
+using Mammoth.Couscous.java.io;
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.archives;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.docx;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_10 : Mammoth.Couscous.org.zwobble.mammoth.@internal.util.SupplierWithException<Mammoth.Couscous.java.util.Optional<string>, Mammoth.Couscous.java.io.IOException> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive _zipFile;
-        internal InternalDocumentConverter__Anonymous_10(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile) {
-            this._zipFile = zipFile;
+    internal class InternalDocumentConverter__Anonymous_10 : SupplierWithException<Optional<string>, IOException> {
+        internal Archive _zipFile;
+
+        internal InternalDocumentConverter__Anonymous_10(Archive zipFile)
+        {
+            _zipFile = zipFile;
         }
-        public Mammoth.Couscous.java.util.Optional<string> get() {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.EmbeddedStyleMap.readStyleMap(this._zipFile);
+
+        public Optional<string> get()
+        {
+            return EmbeddedStyleMap.readStyleMap(_zipFile);
         }
     }
 }
-

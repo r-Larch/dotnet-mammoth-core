@@ -1,14 +1,22 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class HtmlPathElement__Anonymous_0 : Mammoth.Couscous.java.util.function.Supplier<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPathElement _this_org__zwobble__mammoth__internal__styles__HtmlPathElement;
-        internal Mammoth.Couscous.java.util.function.Supplier<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>> _generateNodes;
-        internal HtmlPathElement__Anonymous_0(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPathElement this_org__zwobble__mammoth__internal__styles__HtmlPathElement, Mammoth.Couscous.java.util.function.Supplier<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>> generateNodes) {
-            this._this_org__zwobble__mammoth__internal__styles__HtmlPathElement = this_org__zwobble__mammoth__internal__styles__HtmlPathElement;
-            this._generateNodes = generateNodes;
+    internal class HtmlPathElement__Anonymous_0 : Supplier<List<HtmlNode>> {
+        internal Supplier<List<HtmlNode>> _generateNodes;
+        internal HtmlPathElement _this_org__zwobble__mammoth__internal__styles__HtmlPathElement;
+
+        internal HtmlPathElement__Anonymous_0(HtmlPathElement this_org__zwobble__mammoth__internal__styles__HtmlPathElement, Supplier<List<HtmlNode>> generateNodes)
+        {
+            _this_org__zwobble__mammoth__internal__styles__HtmlPathElement = this_org__zwobble__mammoth__internal__styles__HtmlPathElement;
+            _generateNodes = generateNodes;
         }
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> get() {
-            return (this._this_org__zwobble__mammoth__internal__styles__HtmlPathElement).wrapNodes((this._generateNodes).get());
+
+        public List<HtmlNode> get()
+        {
+            return (_this_org__zwobble__mammoth__internal__styles__HtmlPathElement).wrapNodes((_generateNodes).get());
         }
     }
 }
-

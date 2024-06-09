@@ -1,114 +1,166 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.styles;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__ElementConverterVisitor : Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElementVisitor<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
-        internal DocumentToHtml__ElementConverterVisitor(Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml) {
-            this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml = this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+    internal class DocumentToHtml__ElementConverterVisitor : DocumentElementVisitor<List<HtmlNode>, DocumentToHtml__Context> {
+        internal DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+
+        internal DocumentToHtml__ElementConverterVisitor(DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)
+        {
+            _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml = this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
         }
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph paragraph, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
-            Mammoth.Couscous.java.util.function.Supplier<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>> children = new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Anonymous_5(this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, paragraph, context);
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath mapping = (((this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getParagraphHtmlPath(paragraph)).orElseGet(new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Anonymous_6(paragraph, this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml));
+
+        public List<HtmlNode> visit(Paragraph paragraph, DocumentToHtml__Context context)
+        {
+            Supplier<List<HtmlNode>> children = new DocumentToHtml__Anonymous_5(_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, paragraph, context);
+            var mapping = (((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getParagraphHtmlPath(paragraph)).orElseGet(new DocumentToHtml__Anonymous_6(paragraph, _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml));
             return (mapping.wrap(children)).get();
         }
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run run, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
-            Mammoth.Couscous.java.util.function.Supplier<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>> nodes = new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Anonymous_7(this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, run, context);
+
+        public List<HtmlNode> visit(Run run, DocumentToHtml__Context context)
+        {
+            Supplier<List<HtmlNode>> nodes = new DocumentToHtml__Anonymous_7(_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, run, context);
             if (run.isSmallCaps()) {
-                nodes = ((((this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getSmallCaps()).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath_static._EMPTY)).wrap(nodes);
+                nodes = ((((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getSmallCaps()).orElse(HtmlPath_static._EMPTY)).wrap(nodes);
             }
+
             if (run.isStrikethrough()) {
-                nodes = ((((this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getStrikethrough()).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath_static.collapsibleElement("s"))).wrap(nodes);
+                nodes = ((((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getStrikethrough()).orElse(HtmlPath_static.collapsibleElement("s"))).wrap(nodes);
             }
+
             if (run.isUnderline()) {
-                nodes = ((((this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getUnderline()).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath_static._EMPTY)).wrap(nodes);
+                nodes = ((((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getUnderline()).orElse(HtmlPath_static._EMPTY)).wrap(nodes);
             }
-            if (run.getVerticalAlignment() == Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.VerticalAlignment._SUBSCRIPT) {
-                nodes = (Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath_static.collapsibleElement("sub")).wrap(nodes);
+
+            if (run.getVerticalAlignment() == VerticalAlignment._SUBSCRIPT) {
+                nodes = (HtmlPath_static.collapsibleElement("sub")).wrap(nodes);
             }
-            if (run.getVerticalAlignment() == Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.VerticalAlignment._SUPERSCRIPT) {
-                nodes = (Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath_static.collapsibleElement("sup")).wrap(nodes);
+
+            if (run.getVerticalAlignment() == VerticalAlignment._SUPERSCRIPT) {
+                nodes = (HtmlPath_static.collapsibleElement("sup")).wrap(nodes);
             }
+
             if (run.isItalic()) {
-                nodes = ((((this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getItalic()).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath_static.collapsibleElement("em"))).wrap(nodes);
+                nodes = ((((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getItalic()).orElse(HtmlPath_static.collapsibleElement("em"))).wrap(nodes);
             }
+
             if (run.isBold()) {
-                nodes = ((((this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getBold()).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath_static.collapsibleElement("strong"))).wrap(nodes);
+                nodes = ((((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getBold()).orElse(HtmlPath_static.collapsibleElement("strong"))).wrap(nodes);
             }
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath mapping = (((this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getRunHtmlPath(run)).orElseGet(new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Anonymous_8(run, this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml));
+
+            var mapping = (((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getRunHtmlPath(run)).orElseGet(new DocumentToHtml__Anonymous_8(run, _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml));
             return (mapping.wrap(nodes)).get();
         }
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Text text, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
+
+        public List<HtmlNode> visit(Text text, DocumentToHtml__Context context)
+        {
             if ((text.getValue()).isEmpty()) {
-                return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>();
-            } else {
-                return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.text(text.getValue()));
+                return Lists.list<HtmlNode>();
             }
+
+            return Lists.list(Html.text(text.getValue()));
         }
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Tab tab, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.text("\t"));
+
+        public List<HtmlNode> visit(Tab tab, DocumentToHtml__Context context)
+        {
+            return Lists.list(Html.text("\t"));
         }
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break breakElement, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath mapping = (((this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getBreakHtmlPath(breakElement)).orElseGet(new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Anonymous_9(breakElement));
-            return (mapping.wrap(new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Anonymous_10())).get();
+
+        public List<HtmlNode> visit(Break breakElement, DocumentToHtml__Context context)
+        {
+            var mapping = (((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getBreakHtmlPath(breakElement)).orElseGet(new DocumentToHtml__Anonymous_9(breakElement));
+            return (mapping.wrap(new DocumentToHtml__Anonymous_10())).get();
         }
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table table, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath mapping = (((this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getTableHtmlPath(table)).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath_static.element("table"));
-            return (mapping.wrap(new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Anonymous_11(this, table, context))).get();
+
+        public List<HtmlNode> visit(Table table, DocumentToHtml__Context context)
+        {
+            var mapping = (((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getTableHtmlPath(table)).orElse(HtmlPath_static.element("table"));
+            return (mapping.wrap(new DocumentToHtml__Anonymous_11(this, table, context))).get();
         }
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> generateTableChildren(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table table, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
-            int bodyIndex = (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.findIndex<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(table.getChildren(), new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Anonymous_12(this))).orElse((table.getChildren()).size());
-            if (bodyIndex == 0) {
-                return (this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertToHtml(table.getChildren(), context.isHeader(false));
-            } else {
-                Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> headRows = (this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertToHtml((table.getChildren()).subList(0, bodyIndex), context.isHeader(true));
-                Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> bodyRows = (this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertToHtml((table.getChildren()).subList(bodyIndex, (table.getChildren()).size()), context.isHeader(false));
-                return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.element("thead", headRows), Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.element("tbody", bodyRows));
-            }
+
+        public List<HtmlNode> visit(TableRow tableRow, DocumentToHtml__Context context)
+        {
+            return Lists.list(Html.element("tr", (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertChildrenToHtml(tableRow, context)));
         }
-        public bool isHeader(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement child) {
-            return ((Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Casts.tryCast<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.TableRow>(typeof(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.TableRow), child)).map<bool>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Anonymous_13())).orElse(false);
-        }
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.TableRow tableRow, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.element("tr", (this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertChildrenToHtml(tableRow, context)));
-        }
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.TableCell tableCell, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
-            string tagName = context._isHeader ? "th" : "td";
-            Mammoth.Couscous.java.util.Map<string, string> attributes = new Mammoth.Couscous.java.util.HashMap<string, string>();
+
+        public List<HtmlNode> visit(TableCell tableCell, DocumentToHtml__Context context)
+        {
+            var tagName = context._isHeader ? "th" : "td";
+            Map<string, string> attributes = new HashMap<string, string>();
             if (tableCell.getColspan() != 1) {
                 attributes.put("colspan", (tableCell.getColspan()).ToString());
             }
+
             if (tableCell.getRowspan() != 1) {
                 attributes.put("rowspan", (tableCell.getRowspan()).ToString());
             }
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.element(tagName, attributes, Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.cons<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html._FORCE_WRITE, (this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertChildrenToHtml(tableCell, context))));
+
+            return Lists.list(Html.element(tagName, attributes, Lists.cons(Html._FORCE_WRITE, (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertChildrenToHtml(tableCell, context))));
         }
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink hyperlink, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
-            Mammoth.Couscous.java.util.Map<string, string> attributes = Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.mutableMap<string, string>("href", this.generateHref(hyperlink));
-            (hyperlink.getTargetFrame()).ifPresent(new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Anonymous_14(attributes));
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.collapsibleElement("a", attributes, (this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertChildrenToHtml(hyperlink, context)));
+
+        public List<HtmlNode> visit(Hyperlink hyperlink, DocumentToHtml__Context context)
+        {
+            var attributes = Maps.mutableMap("href", generateHref(hyperlink));
+            (hyperlink.getTargetFrame()).ifPresent(new DocumentToHtml__Anonymous_14(attributes));
+            return Lists.list(Html.collapsibleElement("a", attributes, (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertChildrenToHtml(hyperlink, context)));
         }
-        public string generateHref(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink hyperlink) {
+
+        public List<HtmlNode> visit(Bookmark bookmark, DocumentToHtml__Context context)
+        {
+            return Lists.list(Html.element("a", Maps.map("id", (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).generateId(bookmark.getName())), Lists.list(Html._FORCE_WRITE)));
+        }
+
+        public List<HtmlNode> visit(NoteReference noteReference, DocumentToHtml__Context context)
+        {
+            ((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._noteReferences).add(noteReference);
+            var noteAnchor = (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).generateNoteHtmlId(noteReference.getNoteType(), noteReference.getNoteId());
+            var noteReferenceAnchor = (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).generateNoteRefHtmlId(noteReference.getNoteType(), noteReference.getNoteId());
+            return Lists.list(Html.element("sup", Lists.list(Html.element("a", Maps.map("href", "#" + noteAnchor, "id", noteReferenceAnchor), Lists.list(Html.text(("[" + ((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._noteReferences).size()) + "]"))))));
+        }
+
+        public List<HtmlNode> visit(CommentReference commentReference, DocumentToHtml__Context context)
+        {
+            return (((((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getCommentReference()).orElse(HtmlPath_static._IGNORE)).wrap(new DocumentToHtml__Anonymous_16(commentReference, _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml))).get();
+        }
+
+        public List<HtmlNode> visit(Image image, DocumentToHtml__Context context)
+        {
+            return ((image.getContentType()).map(new DocumentToHtml__Anonymous_19(_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, image))).orElse(Lists.list<HtmlNode>());
+        }
+
+        public List<HtmlNode> generateTableChildren(Table table, DocumentToHtml__Context context)
+        {
+            var bodyIndex = (Iterables.findIndex(table.getChildren(), new DocumentToHtml__Anonymous_12(this))).orElse((table.getChildren()).size());
+            if (bodyIndex == 0) {
+                return (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertToHtml(table.getChildren(), context.isHeader(false));
+            }
+
+            var headRows = (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertToHtml((table.getChildren()).subList(0, bodyIndex), context.isHeader(true));
+            var bodyRows = (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertToHtml((table.getChildren()).subList(bodyIndex, (table.getChildren()).size()), context.isHeader(false));
+            return Lists.list(Html.element("thead", headRows), Html.element("tbody", bodyRows));
+        }
+
+        public bool isHeader(DocumentElement child)
+        {
+            return ((Casts.tryCast<TableRow>(typeof(TableRow), child)).map(new DocumentToHtml__Anonymous_13())).orElse(false);
+        }
+
+        public string generateHref(Hyperlink hyperlink)
+        {
             if ((hyperlink.getHref()).isPresent()) {
                 return (hyperlink.getHref()).get();
-            } else if ((hyperlink.getAnchor()).isPresent()) {
-                return "#" + (this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).generateId((hyperlink.getAnchor()).get());
-            } else {
-                return "";
             }
-        }
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Bookmark bookmark, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.element("a", Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.map<string, string>("id", (this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).generateId(bookmark.getName())), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html._FORCE_WRITE)));
-        }
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NoteReference noteReference, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
-            ((this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._noteReferences).add(noteReference);
-            string noteAnchor = (this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).generateNoteHtmlId(noteReference.getNoteType(), noteReference.getNoteId());
-            string noteReferenceAnchor = (this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).generateNoteRefHtmlId(noteReference.getNoteType(), noteReference.getNoteId());
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.element("sup", Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.element("a", Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.map<string, string>("href", "#" + noteAnchor, "id", noteReferenceAnchor), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.text(("[" + ((this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._noteReferences).size()) + "]"))))));
-        }
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.CommentReference commentReference, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
-            return (((((this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getCommentReference()).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath_static._IGNORE)).wrap(new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Anonymous_16(commentReference, this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml))).get();
-        }
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Image image, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
-            return ((image.getContentType()).map<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Anonymous_19(this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, image))).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>());
+
+            if ((hyperlink.getAnchor()).isPresent()) {
+                return "#" + (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).generateId((hyperlink.getAnchor()).get());
+            }
+
+            return "";
         }
     }
 }
-

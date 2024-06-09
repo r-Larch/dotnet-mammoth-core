@@ -1,34 +1,51 @@
+using Mammoth.Couscous.java.io;
+using Mammoth.Couscous.java.net;
+using Mammoth.Couscous.java.nio.file;
+using Mammoth.Couscous.java.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class PathRelativeFileReader : Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.FileReader {
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.java.nio.file.Path> _path;
-        internal PathRelativeFileReader(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.java.nio.file.Path> path) {
-            this._path = path;
+    internal class PathRelativeFileReader : FileReader {
+        internal Optional<Path> _path;
+
+        internal PathRelativeFileReader(Optional<Path> path)
+        {
+            _path = path;
         }
-        public Mammoth.Couscous.java.io.InputStream getInputStream(string uri) {
+
+        public InputStream getInputStream(string uri)
+        {
             try {
-                Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.java.net.URI> absoluteUri = Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.PathRelativeFileReader.asAbsoluteUri(uri);
+                var absoluteUri = asAbsoluteUri(uri);
                 if (absoluteUri.isPresent()) {
-                    return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.PathRelativeFileReader.open(absoluteUri.get());
-                } else if ((this._path).isPresent()) {
-                    return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.PathRelativeFileReader.open((((this._path).get()).toUri()).resolve(uri));
-                } else {
-                    throw new Mammoth.Couscous.java.io.IOException("path of document is unknown, but is required for relative URI");
+                    return open(absoluteUri.get());
                 }
-            } catch (Mammoth.Couscous.java.io.IOException exception) {
-                throw new Mammoth.Couscous.java.io.IOException((("could not open external image '" + uri) + "': ") + exception.getMessage());
+
+                if ((_path).isPresent()) {
+                    return open((((_path).get()).toUri()).resolve(uri));
+                }
+
+                throw new IOException("path of document is unknown, but is required for relative URI");
+            }
+            catch (IOException exception) {
+                throw new IOException((("could not open external image '" + uri) + "': ") + exception.getMessage());
             }
         }
-        public static Mammoth.Couscous.java.io.InputStream open(Mammoth.Couscous.java.net.URI uri) {
+
+        public static InputStream open(URI uri)
+        {
             return (uri.toURL()).openStream();
         }
-        public static Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.java.net.URI> asAbsoluteUri(string uriString) {
+
+        public static Optional<URI> asAbsoluteUri(string uriString)
+        {
             try {
-                Mammoth.Couscous.java.net.URI uri = new Mammoth.Couscous.java.net.URI(uriString);
-                return uri.isAbsolute() ? Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.java.net.URI>(uri) : Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.java.net.URI>();
-            } catch (Mammoth.Couscous.java.net.URISyntaxException exception) {
-                return Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.java.net.URI>();
+                var uri = new URI(uriString);
+                return uri.isAbsolute() ? Optional.of(uri) : Optional.empty<URI>();
+            }
+            catch (URISyntaxException exception) {
+                return Optional.empty<URI>();
             }
         }
     }
 }
-

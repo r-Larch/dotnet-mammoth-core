@@ -1,5 +1,8 @@
+using System.IO;
+
+
 namespace Mammoth.Couscous.java.io {
     internal interface InputStream {
-        System.IO.Stream Stream { get; }
+        Stream Stream { get; }
     }
 }

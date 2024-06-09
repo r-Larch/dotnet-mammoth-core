@@ -1,14 +1,22 @@
+using Mammoth.Couscous.java.io;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.results;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_14 : Mammoth.Couscous.org.zwobble.mammoth.@internal.util.SupplierWithException<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>, Mammoth.Couscous.java.io.IOException> {
-        internal Mammoth.Couscous.java.io.File _file;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        internal InternalDocumentConverter__Anonymous_14(Mammoth.Couscous.java.io.File file, Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter) {
-            this._file = file;
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+    internal class InternalDocumentConverter__Anonymous_14 : SupplierWithException<InternalResult<string>, IOException> {
+        internal File _file;
+        internal InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+
+        internal InternalDocumentConverter__Anonymous_14(File file, InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter)
+        {
+            _file = file;
+            _this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> get() {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter.withDocxFile<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(this._file, new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_13(this._this_org__zwobble__mammoth__internal__InternalDocumentConverter, this._file));
+
+        public InternalResult<string> get()
+        {
+            return InternalDocumentConverter.withDocxFile(_file, new InternalDocumentConverter__Anonymous_13(_this_org__zwobble__mammoth__internal__InternalDocumentConverter, _file));
         }
     }
 }
-

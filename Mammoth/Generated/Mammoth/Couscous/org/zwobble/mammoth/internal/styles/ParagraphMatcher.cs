@@ -1,41 +1,64 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class ParagraphMatcher : Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.DocumentElementMatcher<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph> {
-        internal static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher _ANY;
-        internal Mammoth.Couscous.java.util.Optional<string> _styleId;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> _styleName;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> _numbering;
-        static ParagraphMatcher() {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher._ANY = new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher(Mammoth.Couscous.java.util.Optional.empty<string>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>());
+    internal class ParagraphMatcher : DocumentElementMatcher<Paragraph> {
+        internal static ParagraphMatcher _ANY;
+        internal Optional<NumberingLevel> _numbering;
+        internal Optional<string> _styleId;
+        internal Optional<StringMatcher> _styleName;
+
+        static ParagraphMatcher()
+        {
+            _ANY = new ParagraphMatcher(Optional.empty<string>(), Optional.empty<StringMatcher>(), Optional.empty<NumberingLevel>());
         }
-        internal ParagraphMatcher(Mammoth.Couscous.java.util.Optional<string> styleId, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> styleName, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> numbering) {
-            this._styleId = styleId;
-            this._styleName = styleName;
-            this._numbering = numbering;
+
+        internal ParagraphMatcher(Optional<string> styleId, Optional<StringMatcher> styleName, Optional<NumberingLevel> numbering)
+        {
+            _styleId = styleId;
+            _styleName = styleName;
+            _numbering = numbering;
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher styleId(string styleId) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher(Mammoth.Couscous.java.util.Optional.of<string>(styleId), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>());
+
+        public bool matches(Paragraph paragraph)
+        {
+            return matchesStyle(paragraph) && matchesNumbering(paragraph);
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher styleName(string styleName) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher.styleName(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.EqualToStringMatcher(styleName));
+
+        public static ParagraphMatcher styleId(string styleId)
+        {
+            return new ParagraphMatcher(Optional.of(styleId), Optional.empty<StringMatcher>(), Optional.empty<NumberingLevel>());
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher styleName(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher styleName) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher(Mammoth.Couscous.java.util.Optional.empty<string>(), Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>(styleName), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>());
+
+        public static ParagraphMatcher styleName(string styleName)
+        {
+            return ParagraphMatcher.styleName(new EqualToStringMatcher(styleName));
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher orderedList(string level) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher(Mammoth.Couscous.java.util.Optional.empty<string>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>(), Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel.ordered(level)));
+
+        public static ParagraphMatcher styleName(StringMatcher styleName)
+        {
+            return new ParagraphMatcher(Optional.empty<string>(), Optional.of(styleName), Optional.empty<NumberingLevel>());
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher unorderedList(string level) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher(Mammoth.Couscous.java.util.Optional.empty<string>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>(), Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel.unordered(level)));
+
+        public static ParagraphMatcher orderedList(string level)
+        {
+            return new ParagraphMatcher(Optional.empty<string>(), Optional.empty<StringMatcher>(), Optional.of(NumberingLevel.ordered(level)));
         }
-        public bool matches(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph paragraph) {
-            return this.matchesStyle(paragraph) && this.matchesNumbering(paragraph);
+
+        public static ParagraphMatcher unorderedList(string level)
+        {
+            return new ParagraphMatcher(Optional.empty<string>(), Optional.empty<StringMatcher>(), Optional.of(NumberingLevel.unordered(level)));
         }
-        public bool matchesStyle(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph paragraph) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.DocumentElementMatching.matchesStyle(this._styleId, this._styleName, paragraph.getStyle());
+
+        public bool matchesStyle(Paragraph paragraph)
+        {
+            return DocumentElementMatching.matchesStyle(_styleId, _styleName, paragraph.getStyle());
         }
-        public bool matchesNumbering(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph paragraph) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.DocumentElementMatching.matches<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(this._numbering, paragraph.getNumbering(), new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher__Anonymous_0());
+
+        public bool matchesNumbering(Paragraph paragraph)
+        {
+            return DocumentElementMatching.matches(_numbering, paragraph.getNumbering(), new ParagraphMatcher__Anonymous_0());
         }
     }
 }
-

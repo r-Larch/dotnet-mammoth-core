@@ -1,25 +1,39 @@
+using Mammoth.Couscous.java.io;
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class Image : Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement {
-        internal Mammoth.Couscous.java.util.Optional<string> _altText;
-        internal Mammoth.Couscous.java.util.Optional<string> _contentType;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.util.InputStreamSupplier _open;
-        internal Image(Mammoth.Couscous.java.util.Optional<string> altText, Mammoth.Couscous.java.util.Optional<string> contentType, Mammoth.Couscous.org.zwobble.mammoth.@internal.util.InputStreamSupplier open) {
-            this._altText = altText;
-            this._contentType = contentType;
-            this._open = open;
+    internal class Image : DocumentElement {
+        internal Optional<string> _altText;
+        internal Optional<string> _contentType;
+        internal InputStreamSupplier _open;
+
+        internal Image(Optional<string> altText, Optional<string> contentType, InputStreamSupplier open)
+        {
+            _altText = altText;
+            _contentType = contentType;
+            _open = open;
         }
-        public Mammoth.Couscous.java.util.Optional<string> getAltText() {
-            return this._altText;
-        }
-        public Mammoth.Couscous.java.util.Optional<string> getContentType() {
-            return this._contentType;
-        }
-        public Mammoth.Couscous.java.io.InputStream open() {
-            return (this._open).open();
-        }
-        public T accept<T, U>(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElementVisitor<T, U> visitor, U context) {
+
+        public T accept<T, U>(DocumentElementVisitor<T, U> visitor, U context)
+        {
             return visitor.visit(this, context);
+        }
+
+        public Optional<string> getAltText()
+        {
+            return _altText;
+        }
+
+        public Optional<string> getContentType()
+        {
+            return _contentType;
+        }
+
+        public InputStream open()
+        {
+            return (_open).open();
         }
     }
 }
-

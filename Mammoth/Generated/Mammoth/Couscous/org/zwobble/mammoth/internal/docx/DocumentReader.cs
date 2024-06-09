@@ -1,66 +1,103 @@
+using Mammoth.Couscous.java.io;
+using Mammoth.Couscous.java.nio.file;
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.archives;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.results;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class DocumentReader {
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Document> readDocument(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.java.nio.file.Path> path, Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__PartPaths partPaths = Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.findPartPaths(zipFile);
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Styles styles = Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.readStyles(zipFile, partPaths);
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering numbering = Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.readNumbering(zipFile, partPaths);
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ContentTypes contentTypes = Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.readContentTypes(zipFile);
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.FileReader fileReader = new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.PathRelativeFileReader(path);
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__PartWithBodyReader partReader = new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__PartWithBodyReader(zipFile, contentTypes, fileReader, numbering, styles);
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult.flatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Notes, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Comment>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Document>(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.readNotes(partReader, partPaths), Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.readComments(partReader, partPaths), new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__Anonymous_1(partReader, partPaths));
+        public static InternalResult<Document> readDocument(Optional<Path> path, Archive zipFile)
+        {
+            var partPaths = findPartPaths(zipFile);
+            var styles = readStyles(zipFile, partPaths);
+            var numbering = readNumbering(zipFile, partPaths);
+            var contentTypes = readContentTypes(zipFile);
+            FileReader fileReader = new PathRelativeFileReader(path);
+            var partReader = new DocumentReader__PartWithBodyReader(zipFile, contentTypes, fileReader, numbering, styles);
+            return InternalResult.flatMap(readNotes(partReader, partPaths), readComments(partReader, partPaths), new DocumentReader__Anonymous_1(partReader, partPaths));
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__PartPaths findPartPaths(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive archive) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Relationships packageRelationships = Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.readPackageRelationships(archive);
-            string documentFilename = Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.findDocumentFilename(archive, packageRelationships);
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Relationships documentRelationships = Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.readRelationships(archive, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.findRelationshipsPathFor(documentFilename));
-            Mammoth.Couscous.java.util.function.Function<string, string> find = new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__Anonymous_2(archive, documentRelationships, documentFilename);
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__PartPaths(documentFilename, find.apply("comments"), find.apply("endnotes"), find.apply("footnotes"), find.apply("numbering"), find.apply("styles"));
+
+        public static DocumentReader__PartPaths findPartPaths(Archive archive)
+        {
+            var packageRelationships = readPackageRelationships(archive);
+            var documentFilename = findDocumentFilename(archive, packageRelationships);
+            var documentRelationships = readRelationships(archive, findRelationshipsPathFor(documentFilename));
+            Function<string, string> find = new DocumentReader__Anonymous_2(archive, documentRelationships, documentFilename);
+            return new DocumentReader__PartPaths(documentFilename, find.apply("comments"), find.apply("endnotes"), find.apply("footnotes"), find.apply("numbering"), find.apply("styles"));
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Relationships readPackageRelationships(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive archive) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.readRelationships(archive, "_rels/.rels");
+
+        public static Relationships readPackageRelationships(Archive archive)
+        {
+            return readRelationships(archive, "_rels/.rels");
         }
-        public static string findDocumentFilename(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive archive, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Relationships packageRelationships) {
-            string officeDocumentType = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument";
-            string mainDocumentPath = Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.findPartPath(archive, packageRelationships, officeDocumentType, "", "word/document.xml");
+
+        public static string findDocumentFilename(Archive archive, Relationships packageRelationships)
+        {
+            var officeDocumentType = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument";
+            var mainDocumentPath = findPartPath(archive, packageRelationships, officeDocumentType, "", "word/document.xml");
             if (archive.exists(mainDocumentPath)) {
                 return mainDocumentPath;
-            } else {
-                throw new Mammoth.Couscous.org.zwobble.mammoth.@internal.util.PassThroughException(new Mammoth.Couscous.java.io.IOException("Could not find main document part. Are you sure this is a valid .docx file?"));
             }
+
+            throw new PassThroughException(new IOException("Could not find main document part. Are you sure this is a valid .docx file?"));
         }
-        public static string findPartPath(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive archive, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Relationships relationships, string relationshipType, string basePath, string fallbackPath) {
-            Mammoth.Couscous.java.util.List<string> targets = Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerMap<string, string>(relationships.findTargetsByType(relationshipType), new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__Anonymous_3(basePath));
-            Mammoth.Couscous.java.util.List<string> validTargets = Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerFilter<string>(targets, new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__Anonymous_4(archive));
-            return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.tryGetFirst<string>(validTargets)).orElse(fallbackPath);
+
+        public static string findPartPath(Archive archive, Relationships relationships, string relationshipType, string basePath, string fallbackPath)
+        {
+            var targets = Lists.eagerMap(relationships.findTargetsByType(relationshipType), new DocumentReader__Anonymous_3(basePath));
+            var validTargets = Lists.eagerFilter(targets, new DocumentReader__Anonymous_4(archive));
+            return (Lists.tryGetFirst(validTargets)).orElse(fallbackPath);
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Comment>> readComments(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__PartWithBodyReader partReader, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__PartPaths partPaths) {
-            return partReader.readPart<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Comment>>>(partPaths.getComments(), new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__Anonymous_5(), Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Comment>>>(Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult.success<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Comment>>(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Comment>())));
+
+        public static InternalResult<List<Comment>> readComments(DocumentReader__PartWithBodyReader partReader, DocumentReader__PartPaths partPaths)
+        {
+            return partReader.readPart(partPaths.getComments(), new DocumentReader__Anonymous_5(), Optional.of(InternalResult.success(Lists.list<Comment>())));
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Notes> readNotes(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__PartWithBodyReader partReader, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__PartPaths partPaths) {
-            return (Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult.map<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Note>, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Note>, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Note>>(partReader.readPart<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Note>>>(partPaths.getFootnotes(), new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__Anonymous_6(), Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Note>>>(Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult.success<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Note>>(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Note>()))), partReader.readPart<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Note>>>(partPaths.getEndnotes(), new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__Anonymous_7(), Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Note>>>(Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult.success<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Note>>(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Note>()))), new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__Anonymous_8())).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Notes>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__Anonymous_9());
+
+        public static InternalResult<Notes> readNotes(DocumentReader__PartWithBodyReader partReader, DocumentReader__PartPaths partPaths)
+        {
+            return (InternalResult.map(partReader.readPart(partPaths.getFootnotes(), new DocumentReader__Anonymous_6(), Optional.of(InternalResult.success(Lists.list<Note>()))), partReader.readPart(partPaths.getEndnotes(), new DocumentReader__Anonymous_7(), Optional.of(InternalResult.success(Lists.list<Note>()))), new DocumentReader__Anonymous_8())).map(new DocumentReader__Anonymous_9());
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Styles readStyles(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive file, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__PartPaths partPaths) {
-            return ((Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.tryParseOfficeXml(file, partPaths.getStyles())).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Styles>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__Anonymous_10())).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Styles._EMPTY);
+
+        public static Styles readStyles(Archive file, DocumentReader__PartPaths partPaths)
+        {
+            return ((tryParseOfficeXml(file, partPaths.getStyles())).map(new DocumentReader__Anonymous_10())).orElse(Styles._EMPTY);
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering readNumbering(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive file, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__PartPaths partPaths) {
-            return ((Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.tryParseOfficeXml(file, partPaths.getNumbering())).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__Anonymous_11())).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering._EMPTY);
+
+        public static Numbering readNumbering(Archive file, DocumentReader__PartPaths partPaths)
+        {
+            return ((tryParseOfficeXml(file, partPaths.getNumbering())).map(new DocumentReader__Anonymous_11())).orElse(Numbering._EMPTY);
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ContentTypes readContentTypes(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive file) {
-            return ((Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.tryParseOfficeXml(file, "[Content_Types].xml")).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ContentTypes>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__Anonymous_12())).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ContentTypes._DEFAULT);
+
+        public static ContentTypes readContentTypes(Archive file)
+        {
+            return ((tryParseOfficeXml(file, "[Content_Types].xml")).map(new DocumentReader__Anonymous_12())).orElse(ContentTypes._DEFAULT);
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Relationships readRelationships(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile, string name) {
-            return ((Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.tryParseOfficeXml(zipFile, name)).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Relationships>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__Anonymous_13())).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Relationships._EMPTY);
+
+        public static Relationships readRelationships(Archive zipFile, string name)
+        {
+            return ((tryParseOfficeXml(zipFile, name)).map(new DocumentReader__Anonymous_13())).orElse(Relationships._EMPTY);
         }
-        public static string findRelationshipsPathFor(string name) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.ZipPaths__SplitPath parts = Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.ZipPaths.splitPath(name);
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.ZipPaths.joinPath(new string[] {parts.getDirname(), "_rels", parts.getBasename() + ".rels"});
+
+        public static string findRelationshipsPathFor(string name)
+        {
+            var parts = ZipPaths.splitPath(name);
+            return ZipPaths.joinPath(new[] { parts.getDirname(), "_rels", parts.getBasename() + ".rels" });
         }
-        public static Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement> tryParseOfficeXml(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile, string name) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.PassThroughException.wrap<Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__Anonymous_15(zipFile, name));
+
+        public static Optional<XmlElement> tryParseOfficeXml(Archive zipFile, string name)
+        {
+            return PassThroughException.wrap(new DocumentReader__Anonymous_15(zipFile, name));
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement parseOfficeXml(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile, string name) {
-            return (Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.tryParseOfficeXml(zipFile, name)).orElseThrow<Mammoth.Couscous.org.zwobble.mammoth.@internal.util.PassThroughException>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader__Anonymous_16(name));
+
+        public static XmlElement parseOfficeXml(Archive zipFile, string name)
+        {
+            return (tryParseOfficeXml(zipFile, name)).orElseThrow(new DocumentReader__Anonymous_16(name));
         }
     }
 }
-

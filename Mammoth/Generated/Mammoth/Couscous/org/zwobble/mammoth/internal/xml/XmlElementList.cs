@@ -1,15 +1,25 @@
+using Mammoth.Couscous.java.lang;
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
-    internal class XmlElementList : Mammoth.Couscous.java.lang.Iterable<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement> {
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement> _elements;
-        internal XmlElementList(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement> elements) {
-            this._elements = elements;
+    internal class XmlElementList : Iterable<XmlElement> {
+        internal List<XmlElement> _elements;
+
+        internal XmlElementList(List<XmlElement> elements)
+        {
+            _elements = elements;
         }
-        public Mammoth.Couscous.java.util.Iterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement> iterator() {
-            return (this._elements).iterator();
+
+        public Iterator<XmlElement> iterator()
+        {
+            return (_elements).iterator();
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementList findChildren(string name) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementList(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerFlatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement, Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement>(this._elements, new Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementList__Anonymous_0(name)));
+
+        public XmlElementList findChildren(string name)
+        {
+            return new XmlElementList(Lists.eagerFlatMap(_elements, new XmlElementList__Anonymous_0(name)));
         }
     }
 }
-

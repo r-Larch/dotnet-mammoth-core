@@ -1,12 +1,18 @@
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StartsWithStringMatcher : Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher {
+    internal class StartsWithStringMatcher : StringMatcher {
         internal string _prefix;
-        internal StartsWithStringMatcher(string prefix) {
-            this._prefix = prefix;
+
+        internal StartsWithStringMatcher(string prefix)
+        {
+            _prefix = prefix;
         }
-        public bool matches(string value) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Strings.startsWithIgnoreCase(value, this._prefix);
+
+        public bool matches(string value)
+        {
+            return Strings.startsWithIgnoreCase(value, _prefix);
         }
     }
 }
-

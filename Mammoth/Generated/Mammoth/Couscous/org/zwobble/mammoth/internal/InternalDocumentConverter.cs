@@ -1,57 +1,97 @@
+using Mammoth.Couscous.java.io;
+using Mammoth.Couscous.java.lang;
+using Mammoth.Couscous.java.nio.file;
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.archives;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.docx;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.results;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
     internal class InternalDocumentConverter {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtmlOptions _options;
-        internal InternalDocumentConverter(Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtmlOptions options) {
-            this._options = options;
+        internal DocumentToHtmlOptions _options;
+
+        internal InternalDocumentConverter(DocumentToHtmlOptions options)
+        {
+            _options = options;
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> convertToHtml(Mammoth.Couscous.java.io.InputStream stream) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.PassThroughException.unwrap<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_1(stream, this));
+
+        public InternalResult<string> convertToHtml(InputStream stream)
+        {
+            return PassThroughException.unwrap(new InternalDocumentConverter__Anonymous_1(stream, this));
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> convertToHtml(Mammoth.Couscous.java.io.File file) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.PassThroughException.unwrap<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_3(file, this));
+
+        public InternalResult<string> convertToHtml(File file)
+        {
+            return PassThroughException.unwrap(new InternalDocumentConverter__Anonymous_3(file, this));
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> convertToHtml(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.java.nio.file.Path> path, Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile) {
-            Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap> styleMap = (this.readEmbeddedStyleMap(zipFile)).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_4());
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtmlOptions conversionOptions = (styleMap.map<Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtmlOptions>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_5(this))).orElse(this._options);
-            return ((((Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.readDocument(path, zipFile)).flatMap<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_6(conversionOptions))).map<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_7())).map<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_8())).map<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_9());
+
+        public InternalResult<string> convertToHtml(Optional<Path> path, Archive zipFile)
+        {
+            var styleMap = (readEmbeddedStyleMap(zipFile)).map(new InternalDocumentConverter__Anonymous_4());
+            var conversionOptions = (styleMap.map(new InternalDocumentConverter__Anonymous_5(this))).orElse(_options);
+            return ((((DocumentReader.readDocument(path, zipFile)).flatMap(new InternalDocumentConverter__Anonymous_6(conversionOptions))).map(new InternalDocumentConverter__Anonymous_7())).map(new InternalDocumentConverter__Anonymous_8())).map(new InternalDocumentConverter__Anonymous_9());
         }
-        public Mammoth.Couscous.java.util.Optional<string> readEmbeddedStyleMap(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.PassThroughException.wrap<Mammoth.Couscous.java.util.Optional<string>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_10(zipFile));
+
+        public Optional<string> readEmbeddedStyleMap(Archive zipFile)
+        {
+            return PassThroughException.wrap(new InternalDocumentConverter__Anonymous_10(zipFile));
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> extractRawText(Mammoth.Couscous.java.io.InputStream stream) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.PassThroughException.unwrap<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_12(stream, this));
+
+        public InternalResult<string> extractRawText(InputStream stream)
+        {
+            return PassThroughException.unwrap(new InternalDocumentConverter__Anonymous_12(stream, this));
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> extractRawText(Mammoth.Couscous.java.io.File file) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.PassThroughException.unwrap<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_14(file, this));
+
+        public InternalResult<string> extractRawText(File file)
+        {
+            return PassThroughException.unwrap(new InternalDocumentConverter__Anonymous_14(file, this));
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> extractRawText(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.java.nio.file.Path> path, Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile) {
-            return (Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.readDocument(path, zipFile)).map<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_15());
+
+        public InternalResult<string> extractRawText(Optional<Path> path, Archive zipFile)
+        {
+            return (DocumentReader.readDocument(path, zipFile)).map(new InternalDocumentConverter__Anonymous_15());
         }
-        public static T withDocxFile<T>(Mammoth.Couscous.java.io.File file, Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive, T> function) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile = new Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.ZippedArchive(file);
+
+        public static T withDocxFile<T>(File file, Function<Archive, T> function)
+        {
+            Archive zipFile = new ZippedArchive(file);
             try {
                 return function.apply(zipFile);
-            } finally {
+            }
+            finally {
                 zipFile.close();
             }
         }
-        public static T withDocxFile<T>(Mammoth.Couscous.java.io.InputStream stream, Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive, T> function) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile = Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.InMemoryArchive.fromStream(stream);
+
+        public static T withDocxFile<T>(InputStream stream, Function<Archive, T> function)
+        {
+            var zipFile = InMemoryArchive.fromStream(stream);
             try {
                 return function.apply(zipFile);
-            } finally {
+            }
+            finally {
                 zipFile.close();
             }
         }
-        public static string extractRawTextOfChildren(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.HasChildren parent) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter.extractRawText(parent.getChildren());
+
+        public static string extractRawTextOfChildren(HasChildren parent)
+        {
+            return extractRawText(parent.getChildren());
         }
-        public static string extractRawText(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> nodes) {
-            return java.lang.String.join("", Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.lazyMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement, string>(nodes, new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_16()));
+
+        public static string extractRawText(List<DocumentElement> nodes)
+        {
+            return String.join("", Iterables.lazyMap(nodes, new InternalDocumentConverter__Anonymous_16()));
         }
-        public static string extractRawText(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement node) {
-            return ((Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Casts.tryCast<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Text>(typeof(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Text), node)).map<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_17())).orElseGet(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_20(node));
+
+        public static string extractRawText(DocumentElement node)
+        {
+            return ((Casts.tryCast<Text>(typeof(Text), node)).map(new InternalDocumentConverter__Anonymous_17())).orElseGet(new InternalDocumentConverter__Anonymous_20(node));
         }
     }
 }
-

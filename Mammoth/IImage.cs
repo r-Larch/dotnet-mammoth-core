@@ -1,5 +1,6 @@
 using System.IO;
 
+
 namespace Mammoth {
     public interface IImage {
         string AltText { get; }

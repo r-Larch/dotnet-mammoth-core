@@ -1,24 +1,37 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class RunMatcher : Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.DocumentElementMatcher<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run> {
-        internal static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.RunMatcher _ANY;
-        internal Mammoth.Couscous.java.util.Optional<string> _styleId;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> _styleName;
-        static RunMatcher() {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.RunMatcher._ANY = new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.RunMatcher(Mammoth.Couscous.java.util.Optional.empty<string>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>());
+    internal class RunMatcher : DocumentElementMatcher<Run> {
+        internal static RunMatcher _ANY;
+        internal Optional<string> _styleId;
+        internal Optional<StringMatcher> _styleName;
+
+        static RunMatcher()
+        {
+            _ANY = new RunMatcher(Optional.empty<string>(), Optional.empty<StringMatcher>());
         }
-        internal RunMatcher(Mammoth.Couscous.java.util.Optional<string> styleId, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> styleName) {
-            this._styleId = styleId;
-            this._styleName = styleName;
+
+        internal RunMatcher(Optional<string> styleId, Optional<StringMatcher> styleName)
+        {
+            _styleId = styleId;
+            _styleName = styleName;
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.RunMatcher styleId(string styleId) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.RunMatcher(Mammoth.Couscous.java.util.Optional.of<string>(styleId), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>());
+
+        public bool matches(Run run)
+        {
+            return DocumentElementMatching.matchesStyle(_styleId, _styleName, run.getStyle());
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.RunMatcher styleName(string styleName) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.RunMatcher(Mammoth.Couscous.java.util.Optional.empty<string>(), Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.EqualToStringMatcher(styleName)));
+
+        public static RunMatcher styleId(string styleId)
+        {
+            return new RunMatcher(Optional.of(styleId), Optional.empty<StringMatcher>());
         }
-        public bool matches(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run run) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.DocumentElementMatching.matchesStyle(this._styleId, this._styleName, run.getStyle());
+
+        public static RunMatcher styleName(string styleName)
+        {
+            return new RunMatcher(Optional.empty<string>(), Optional.of<StringMatcher>(new EqualToStringMatcher(styleName)));
         }
     }
 }
-

@@ -1,12 +1,19 @@
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class NotesXmlReader__Anonymous_0 : Mammoth.Couscous.java.util.function.Predicate<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.NotesXmlReader _this_org__zwobble__mammoth__internal__docx__NotesXmlReader;
-        internal NotesXmlReader__Anonymous_0(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.NotesXmlReader this_org__zwobble__mammoth__internal__docx__NotesXmlReader) {
-            this._this_org__zwobble__mammoth__internal__docx__NotesXmlReader = this_org__zwobble__mammoth__internal__docx__NotesXmlReader;
+    internal class NotesXmlReader__Anonymous_0 : Predicate<XmlElement> {
+        internal NotesXmlReader _this_org__zwobble__mammoth__internal__docx__NotesXmlReader;
+
+        internal NotesXmlReader__Anonymous_0(NotesXmlReader this_org__zwobble__mammoth__internal__docx__NotesXmlReader)
+        {
+            _this_org__zwobble__mammoth__internal__docx__NotesXmlReader = this_org__zwobble__mammoth__internal__docx__NotesXmlReader;
         }
-        public bool test(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement arg0) {
-            return (this._this_org__zwobble__mammoth__internal__docx__NotesXmlReader).isNoteElement(arg0);
+
+        public bool test(XmlElement arg0)
+        {
+            return (_this_org__zwobble__mammoth__internal__docx__NotesXmlReader).isNoteElement(arg0);
         }
     }
 }
-

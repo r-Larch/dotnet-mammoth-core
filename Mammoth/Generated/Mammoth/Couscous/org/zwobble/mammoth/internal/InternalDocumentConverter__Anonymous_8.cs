@@ -1,8 +1,13 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_8 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>> {
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> apply(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> arg0) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.collapse(arg0);
+    internal class InternalDocumentConverter__Anonymous_8 : Function<List<HtmlNode>, List<HtmlNode>> {
+        public List<HtmlNode> apply(List<HtmlNode> arg0)
+        {
+            return Html.collapse(arg0);
         }
     }
 }
-

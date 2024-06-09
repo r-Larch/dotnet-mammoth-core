@@ -1,17 +1,25 @@
+using Mammoth.Couscous.java.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
     internal class NamespacePrefix {
-        internal Mammoth.Couscous.java.util.Optional<string> _prefix;
+        internal Optional<string> _prefix;
         internal string _uri;
-        internal NamespacePrefix(Mammoth.Couscous.java.util.Optional<string> prefix, string uri) {
-            this._prefix = prefix;
-            this._uri = uri;
+
+        internal NamespacePrefix(Optional<string> prefix, string uri)
+        {
+            _prefix = prefix;
+            _uri = uri;
         }
-        public Mammoth.Couscous.java.util.Optional<string> getPrefix() {
-            return this._prefix;
+
+        public Optional<string> getPrefix()
+        {
+            return _prefix;
         }
-        public string getUri() {
-            return this._uri;
+
+        public string getUri()
+        {
+            return _uri;
         }
     }
 }
-

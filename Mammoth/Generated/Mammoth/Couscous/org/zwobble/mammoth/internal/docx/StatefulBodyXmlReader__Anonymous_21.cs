@@ -1,14 +1,21 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_21 : Mammoth.Couscous.java.util.function.Function<string, string> {
+    internal class StatefulBodyXmlReader__Anonymous_21 : Function<string, string> {
+        internal Optional<string> _anchor;
         internal string _targetHref;
-        internal Mammoth.Couscous.java.util.Optional<string> _anchor;
-        internal StatefulBodyXmlReader__Anonymous_21(string targetHref, Mammoth.Couscous.java.util.Optional<string> anchor) {
-            this._targetHref = targetHref;
-            this._anchor = anchor;
+
+        internal StatefulBodyXmlReader__Anonymous_21(string targetHref, Optional<string> anchor)
+        {
+            _targetHref = targetHref;
+            _anchor = anchor;
         }
-        public string apply(string fragment) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Uris.replaceFragment(this._targetHref, (this._anchor).get());
+
+        public string apply(string fragment)
+        {
+            return Uris.replaceFragment(_targetHref, (_anchor).get());
         }
     }
 }
-

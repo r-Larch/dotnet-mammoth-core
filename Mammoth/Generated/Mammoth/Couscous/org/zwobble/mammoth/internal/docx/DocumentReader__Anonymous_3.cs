@@ -1,12 +1,20 @@
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.archives;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class DocumentReader__Anonymous_3 : Mammoth.Couscous.java.util.function.Function<string, string> {
+    internal class DocumentReader__Anonymous_3 : Function<string, string> {
         internal string _basePath;
-        internal DocumentReader__Anonymous_3(string basePath) {
-            this._basePath = basePath;
+
+        internal DocumentReader__Anonymous_3(string basePath)
+        {
+            _basePath = basePath;
         }
-        public string apply(string target) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Strings.trimLeft(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.ZipPaths.joinPath(new string[] {this._basePath, target}), '/');
+
+        public string apply(string target)
+        {
+            return Strings.trimLeft(ZipPaths.joinPath(new[] { _basePath, target }), '/');
         }
     }
 }
-

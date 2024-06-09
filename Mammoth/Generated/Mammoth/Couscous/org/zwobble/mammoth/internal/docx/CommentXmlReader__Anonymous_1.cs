@@ -1,16 +1,25 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class CommentXmlReader__Anonymous_1 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Comment> {
+    internal class CommentXmlReader__Anonymous_1 : Function<List<DocumentElement>, Comment> {
         internal string _commentId;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.CommentXmlReader _this_org__zwobble__mammoth__internal__docx__CommentXmlReader;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement _element;
-        internal CommentXmlReader__Anonymous_1(string commentId, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.CommentXmlReader this_org__zwobble__mammoth__internal__docx__CommentXmlReader, Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement element) {
-            this._commentId = commentId;
-            this._this_org__zwobble__mammoth__internal__docx__CommentXmlReader = this_org__zwobble__mammoth__internal__docx__CommentXmlReader;
-            this._element = element;
+        internal XmlElement _element;
+        internal CommentXmlReader _this_org__zwobble__mammoth__internal__docx__CommentXmlReader;
+
+        internal CommentXmlReader__Anonymous_1(string commentId, CommentXmlReader this_org__zwobble__mammoth__internal__docx__CommentXmlReader, XmlElement element)
+        {
+            _commentId = commentId;
+            _this_org__zwobble__mammoth__internal__docx__CommentXmlReader = this_org__zwobble__mammoth__internal__docx__CommentXmlReader;
+            _element = element;
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Comment apply(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> children) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Comment(this._commentId, children, (this._this_org__zwobble__mammoth__internal__docx__CommentXmlReader).readOptionalAttribute(this._element, "w:author"), (this._this_org__zwobble__mammoth__internal__docx__CommentXmlReader).readOptionalAttribute(this._element, "w:initials"));
+
+        public Comment apply(List<DocumentElement> children)
+        {
+            return new Comment(_commentId, children, (_this_org__zwobble__mammoth__internal__docx__CommentXmlReader).readOptionalAttribute(_element, "w:author"), (_this_org__zwobble__mammoth__internal__docx__CommentXmlReader).readOptionalAttribute(_element, "w:initials"));
         }
     }
 }
-

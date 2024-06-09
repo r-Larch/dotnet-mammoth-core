@@ -1,8 +1,12 @@
+using Mammoth.Couscous.java.lang;
+using Mammoth.Couscous.java.util.function;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class ReadResult__Anonymous_2 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult, Mammoth.Couscous.java.lang.Iterable<string>> {
-        public Mammoth.Couscous.java.lang.Iterable<string> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult result) {
+    internal class ReadResult__Anonymous_2 : Function<ReadResult, Iterable<string>> {
+        public Iterable<string> apply(ReadResult result)
+        {
             return result._warnings;
         }
     }
 }
-

@@ -1,6 +1,8 @@
+using Mammoth.Couscous.java.io;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal interface FileReader {
-        Mammoth.Couscous.java.io.InputStream getInputStream(string uri);
+        InputStream getInputStream(string uri);
     }
 }
-

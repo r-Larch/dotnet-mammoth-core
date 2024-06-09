@@ -1,12 +1,19 @@
+using Mammoth.Couscous.java.lang;
+using Mammoth.Couscous.java.util.function;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
-    internal class Html__Anonymous_0 : Mammoth.Couscous.java.util.function.Consumer<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> {
-        internal Mammoth.Couscous.java.lang.StringBuilder _builder;
-        internal Html__Anonymous_0(Mammoth.Couscous.java.lang.StringBuilder builder) {
-            this._builder = builder;
+    internal class Html__Anonymous_0 : Consumer<HtmlNode> {
+        internal StringBuilder _builder;
+
+        internal Html__Anonymous_0(StringBuilder builder)
+        {
+            _builder = builder;
         }
-        public void accept(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode node) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlWriter.write(node, this._builder);
+
+        public void accept(HtmlNode node)
+        {
+            HtmlWriter.write(node, _builder);
         }
     }
 }
-

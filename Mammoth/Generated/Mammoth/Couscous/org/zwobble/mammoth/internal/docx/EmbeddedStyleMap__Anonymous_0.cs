@@ -1,8 +1,13 @@
+using Mammoth.Couscous.java.io;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class EmbeddedStyleMap__Anonymous_0 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.io.InputStream, string> {
-        public string apply(Mammoth.Couscous.java.io.InputStream arg0) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Streams.toString(arg0);
+    internal class EmbeddedStyleMap__Anonymous_0 : Function<InputStream, string> {
+        public string apply(InputStream arg0)
+        {
+            return Streams.toString(arg0);
         }
     }
 }
-

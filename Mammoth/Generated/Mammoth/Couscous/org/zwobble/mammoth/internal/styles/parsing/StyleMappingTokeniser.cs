@@ -1,14 +1,20 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class StyleMappingTokeniser {
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokenise(string line) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.StyleMappingTokeniser.tokeniseToList(line), new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(line.Length, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._EOF, ""));
+        public static TokenIterator<TokenType> tokenise(string line)
+        {
+            return new TokenIterator<TokenType>(tokeniseToList(line), new Token<TokenType>(line.Length, TokenType._EOF, ""));
         }
-        public static Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>> tokeniseToList(string line) {
-            string stringPrefix = "'(?:(?:\\\\.|[^'])*)";
-            string identifierCharacter = "(?:[a-zA-Z\\-_]|\\\\.)";
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokeniser = new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._UNKNOWN, Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser__TokenRule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser__TokenRule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>[] {Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser.rule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._IDENTIFIER, ((identifierCharacter + "(?:") + identifierCharacter) + "|[0-9])*"), Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser.rule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, ":|>|=>|\\^=|=|\\(|\\)|\\[|\\]|\\||!|\\."), Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser.rule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._WHITESPACE, "\\s+"), Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser.rule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._STRING, stringPrefix + "'"), Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser.rule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._UNTERMINATED_STRING, stringPrefix), Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser.rule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._INTEGER, "[0-9]+")}));
+
+        public static List<Token<TokenType>> tokeniseToList(string line)
+        {
+            var stringPrefix = "'(?:(?:\\\\.|[^'])*)";
+            var identifierCharacter = "(?:[a-zA-Z\\-_]|\\\\.)";
+            var tokeniser = new RegexTokeniser<TokenType>(TokenType._UNKNOWN, Lists.list(RegexTokeniser.rule(TokenType._IDENTIFIER, ((identifierCharacter + "(?:") + identifierCharacter) + "|[0-9])*"), RegexTokeniser.rule(TokenType._SYMBOL, ":|>|=>|\\^=|=|\\(|\\)|\\[|\\]|\\||!|\\."), RegexTokeniser.rule(TokenType._WHITESPACE, "\\s+"), RegexTokeniser.rule(TokenType._STRING, stringPrefix + "'"), RegexTokeniser.rule(TokenType._UNTERMINATED_STRING, stringPrefix), RegexTokeniser.rule(TokenType._INTEGER, "[0-9]+")));
             return tokeniser.tokenise(line);
         }
     }
 }
-

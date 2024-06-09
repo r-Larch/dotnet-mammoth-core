@@ -1,29 +1,38 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class ContentTypes {
-        internal static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ContentTypes _DEFAULT;
-        internal static Mammoth.Couscous.java.util.Map<string, string> _imageExtensions;
-        internal Mammoth.Couscous.java.util.Map<string, string> _extensionDefaults;
-        internal Mammoth.Couscous.java.util.Map<string, string> _overrides;
-        static ContentTypes() {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ContentTypes._DEFAULT = new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ContentTypes(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.map<string, string>(), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.map<string, string>());
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ContentTypes._imageExtensions = ((((((((Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.builder<string, string>()).put("png", "png")).put("gif", "gif")).put("jpeg", "jpeg")).put("jpg", "jpeg")).put("bmp", "bmp")).put("tif", "tiff")).put("tiff", "tiff")).build();
+        internal static ContentTypes _DEFAULT;
+        internal static Map<string, string> _imageExtensions;
+        internal Map<string, string> _extensionDefaults;
+        internal Map<string, string> _overrides;
+
+        static ContentTypes()
+        {
+            _DEFAULT = new ContentTypes(Maps.map<string, string>(), Maps.map<string, string>());
+            _imageExtensions = ((((((((Maps.builder<string, string>()).put("png", "png")).put("gif", "gif")).put("jpeg", "jpeg")).put("jpg", "jpeg")).put("bmp", "bmp")).put("tif", "tiff")).put("tiff", "tiff")).build();
         }
-        internal ContentTypes(Mammoth.Couscous.java.util.Map<string, string> extensionDefaults, Mammoth.Couscous.java.util.Map<string, string> overrides) {
-            this._extensionDefaults = extensionDefaults;
-            this._overrides = overrides;
+
+        internal ContentTypes(Map<string, string> extensionDefaults, Map<string, string> overrides)
+        {
+            _extensionDefaults = extensionDefaults;
+            _overrides = overrides;
         }
-        public Mammoth.Couscous.java.util.Optional<string> findContentType(string path) {
-            if ((this._overrides).containsKey(path)) {
-                return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.lookup<string, string>(this._overrides, path);
-            } else {
-                string extension = Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Paths.getExtension(path);
-                if ((this._extensionDefaults).containsKey(extension)) {
-                    return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.lookup<string, string>(this._extensionDefaults, extension);
-                } else {
-                    return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.lookup<string, string>(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ContentTypes._imageExtensions, extension.ToLower())).map<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ContentTypes__Anonymous_0());
-                }
+
+        public Optional<string> findContentType(string path)
+        {
+            if ((_overrides).containsKey(path)) {
+                return Maps.lookup(_overrides, path);
             }
+
+            var extension = Paths.getExtension(path);
+            if ((_extensionDefaults).containsKey(extension)) {
+                return Maps.lookup(_extensionDefaults, extension);
+            }
+
+            return (Maps.lookup(_imageExtensions, extension.ToLower())).map(new ContentTypes__Anonymous_0());
         }
     }
 }
-

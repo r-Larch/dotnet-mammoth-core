@@ -3,4 +3,3 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
         T get();
     }
 }
-

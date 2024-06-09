@@ -1,13 +1,16 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
-    internal class HtmlPathParser__Anonymous_0 : Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator__Action {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> _tokens;
-        internal HtmlPathParser__Anonymous_0(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokens) {
-            this._tokens = tokens;
+    internal class HtmlPathParser__Anonymous_0 : TokenIterator__Action {
+        internal TokenIterator<TokenType> _tokens;
+
+        internal HtmlPathParser__Anonymous_0(TokenIterator<TokenType> tokens)
+        {
+            _tokens = tokens;
         }
-        public void run() {
-            (this._tokens).skip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, ":");
-            (this._tokens).skip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._IDENTIFIER, "fresh");
+
+        public void run()
+        {
+            (_tokens).skip(TokenType._SYMBOL, ":");
+            (_tokens).skip(TokenType._IDENTIFIER, "fresh");
         }
     }
 }
-

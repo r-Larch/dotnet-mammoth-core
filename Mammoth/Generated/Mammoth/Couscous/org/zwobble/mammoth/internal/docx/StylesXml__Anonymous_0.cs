@@ -1,12 +1,19 @@
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StylesXml__Anonymous_0 : Mammoth.Couscous.java.util.function.Predicate<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement> {
+    internal class StylesXml__Anonymous_0 : Predicate<XmlElement> {
         internal string _styleType;
-        internal StylesXml__Anonymous_0(string styleType) {
-            this._styleType = styleType;
+
+        internal StylesXml__Anonymous_0(string styleType)
+        {
+            _styleType = styleType;
         }
-        public bool test(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement styleElement) {
-            return (styleElement.getAttribute("w:type")).Equals(this._styleType);
+
+        public bool test(XmlElement styleElement)
+        {
+            return (styleElement.getAttribute("w:type")).Equals(_styleType);
         }
     }
 }
-

@@ -1,28 +1,36 @@
+using System;
 using System.Net;
 using System.Net.Http;
 using Mammoth.Couscous.java.io;
+using File = System.IO.File;
+
 
 namespace Mammoth.Couscous.java.net {
     internal class URL {
         private readonly string _url;
-        
-        internal URL(string url) {
+
+        internal URL(string url)
+        {
             _url = url;
         }
-        
-        internal InputStream openStream() {
+
+        internal InputStream openStream()
+        {
             try {
                 using var client = new HttpClient();
                 var response = client.GetStreamAsync(_url).GetAwaiter().GetResult();
                 try {
                     return ToJava.StreamToInputStream(response);
-                } catch {
+                }
+                catch {
                     response.Close();
                     throw;
                 }
-            } catch (System.UriFormatException) {
-                return ToJava.StreamToInputStream(System.IO.File.OpenRead(_url));
-            } catch (WebException exception) {
+            }
+            catch (UriFormatException) {
+                return ToJava.StreamToInputStream(File.OpenRead(_url));
+            }
+            catch (WebException exception) {
                 throw new IOException(exception.Message);
             }
         }

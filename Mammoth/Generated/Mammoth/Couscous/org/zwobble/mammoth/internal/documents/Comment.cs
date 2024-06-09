@@ -1,27 +1,39 @@
+using Mammoth.Couscous.java.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Comment {
+        internal Optional<string> _authorInitials;
+        internal Optional<string> _authorName;
+        internal List<DocumentElement> _body;
         internal string _commentId;
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> _body;
-        internal Mammoth.Couscous.java.util.Optional<string> _authorName;
-        internal Mammoth.Couscous.java.util.Optional<string> _authorInitials;
-        internal Comment(string commentId, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> body, Mammoth.Couscous.java.util.Optional<string> authorName, Mammoth.Couscous.java.util.Optional<string> authorInitials) {
-            this._commentId = commentId;
-            this._body = body;
-            this._authorName = authorName;
-            this._authorInitials = authorInitials;
+
+        internal Comment(string commentId, List<DocumentElement> body, Optional<string> authorName, Optional<string> authorInitials)
+        {
+            _commentId = commentId;
+            _body = body;
+            _authorName = authorName;
+            _authorInitials = authorInitials;
         }
-        public string getCommentId() {
-            return this._commentId;
+
+        public string getCommentId()
+        {
+            return _commentId;
         }
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> getBody() {
-            return this._body;
+
+        public List<DocumentElement> getBody()
+        {
+            return _body;
         }
-        public Mammoth.Couscous.java.util.Optional<string> getAuthorInitials() {
-            return this._authorInitials;
+
+        public Optional<string> getAuthorInitials()
+        {
+            return _authorInitials;
         }
-        public Mammoth.Couscous.java.util.Optional<string> getAuthorName() {
-            return this._authorName;
+
+        public Optional<string> getAuthorName()
+        {
+            return _authorName;
         }
     }
 }
-

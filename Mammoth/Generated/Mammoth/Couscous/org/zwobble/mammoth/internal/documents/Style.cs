@@ -1,21 +1,31 @@
+using Mammoth.Couscous.java.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Style {
+        internal Optional<string> _name;
         internal string _styleId;
-        internal Mammoth.Couscous.java.util.Optional<string> _name;
-        internal Style(string styleId, Mammoth.Couscous.java.util.Optional<string> name) {
-            this._styleId = styleId;
-            this._name = name;
+
+        internal Style(string styleId, Optional<string> name)
+        {
+            _styleId = styleId;
+            _name = name;
         }
-        public string getStyleId() {
-            return this._styleId;
+
+        public string getStyleId()
+        {
+            return _styleId;
         }
-        public Mammoth.Couscous.java.util.Optional<string> getName() {
-            return this._name;
+
+        public Optional<string> getName()
+        {
+            return _name;
         }
-        public string describe() {
-            string styleIdDescription = "Style ID: " + this._styleId;
-            return ((this._name).map<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style__Anonymous_0(styleIdDescription))).orElse(styleIdDescription);
+
+        public string describe()
+        {
+            var styleIdDescription = "Style ID: " + _styleId;
+            return ((_name).map(new Style__Anonymous_0(styleIdDescription))).orElse(styleIdDescription);
         }
     }
 }
-

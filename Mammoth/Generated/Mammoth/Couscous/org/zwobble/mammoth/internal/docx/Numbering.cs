@@ -1,16 +1,26 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class Numbering {
-        internal static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering _EMPTY;
-        internal Mammoth.Couscous.java.util.Map<string, Mammoth.Couscous.java.util.Map<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>> _numbering;
-        static Numbering() {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering._EMPTY = new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.map<string, Mammoth.Couscous.java.util.Map<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>>());
+        internal static Numbering _EMPTY;
+        internal Map<string, Map<string, NumberingLevel>> _numbering;
+
+        static Numbering()
+        {
+            _EMPTY = new Numbering(Maps.map<string, Map<string, NumberingLevel>>());
         }
-        internal Numbering(Mammoth.Couscous.java.util.Map<string, Mammoth.Couscous.java.util.Map<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>> numbering) {
-            this._numbering = numbering;
+
+        internal Numbering(Map<string, Map<string, NumberingLevel>> numbering)
+        {
+            _numbering = numbering;
         }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> findLevel(string numId, string level) {
-            return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.lookup<string, Mammoth.Couscous.java.util.Map<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>>(this._numbering, numId)).flatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_0(level));
+
+        public Optional<NumberingLevel> findLevel(string numId, string level)
+        {
+            return (Maps.lookup(_numbering, numId)).flatMap(new Numbering__Anonymous_0(level));
         }
     }
 }
-

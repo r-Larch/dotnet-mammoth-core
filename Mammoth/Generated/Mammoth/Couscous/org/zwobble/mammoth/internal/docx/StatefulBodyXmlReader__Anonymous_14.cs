@@ -1,27 +1,37 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_14 : Mammoth.Couscous.java.util.function.BiFunction<int, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> {
-        internal Mammoth.Couscous.java.util.Set<Mammoth.Couscous.java.util.Map__Entry<int, int>> _merged;
-        internal Mammoth.Couscous.java.util.Map<Mammoth.Couscous.java.util.Map__Entry<int, int>, int> _rowspans;
-        internal StatefulBodyXmlReader__Anonymous_14(Mammoth.Couscous.java.util.Set<Mammoth.Couscous.java.util.Map__Entry<int, int>> merged, Mammoth.Couscous.java.util.Map<Mammoth.Couscous.java.util.Map__Entry<int, int>, int> rowspans) {
-            this._merged = merged;
-            this._rowspans = rowspans;
+    internal class StatefulBodyXmlReader__Anonymous_14 : BiFunction<int, DocumentElement, DocumentElement> {
+        internal Set<Map__Entry<int, int>> _merged;
+        internal Map<Map__Entry<int, int>, int> _rowspans;
+
+        internal StatefulBodyXmlReader__Anonymous_14(Set<Map__Entry<int, int>> merged, Map<Map__Entry<int, int>, int> rowspans)
+        {
+            _merged = merged;
+            _rowspans = rowspans;
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement apply(int rowIndex, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement rowElement) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.TableRow row = (Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.TableRow) rowElement;
-            Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> mergedCells = new Mammoth.Couscous.java.util.ArrayList<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>();
-             {
-                int cellIndex = 0;
+
+        public DocumentElement apply(int rowIndex, DocumentElement rowElement)
+        {
+            var row = (TableRow) rowElement;
+            List<DocumentElement> mergedCells = new ArrayList<DocumentElement>();
+            {
+                var cellIndex = 0;
                 while (cellIndex < (row.getChildren()).size()) {
-                    Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__UnmergedTableCell cell = (Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__UnmergedTableCell) (row.getChildren()).get(cellIndex);
-                    Mammoth.Couscous.java.util.Map__Entry<int, int> position = Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.entry<int, int>(rowIndex, cellIndex);
-                    if (!(this._merged).contains(position)) {
-                        mergedCells.add(new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.TableCell((Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.lookup<Mammoth.Couscous.java.util.Map__Entry<int, int>, int>(this._rowspans, position)).get(), cell._colspan, cell._children));
+                    var cell = (StatefulBodyXmlReader__UnmergedTableCell) (row.getChildren()).get(cellIndex);
+                    var position = Maps.entry(rowIndex, cellIndex);
+                    if (!(_merged).contains(position)) {
+                        mergedCells.add(new TableCell((Maps.lookup(_rowspans, position)).get(), cell._colspan, cell._children));
                     }
+
                     cellIndex = cellIndex + 1;
                 }
             }
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.TableRow(mergedCells, row.isHeader());
+            return new TableRow(mergedCells, row.isHeader());
         }
     }
 }
-

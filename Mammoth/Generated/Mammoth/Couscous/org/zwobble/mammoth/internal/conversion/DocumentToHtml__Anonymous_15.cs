@@ -1,12 +1,19 @@
+using Mammoth.Couscous.java.lang;
+using Mammoth.Couscous.java.util.function;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_15 : Mammoth.Couscous.java.util.function.Supplier<Mammoth.Couscous.java.lang.RuntimeException> {
+    internal class DocumentToHtml__Anonymous_15 : Supplier<RuntimeException> {
         internal string _commentId;
-        internal DocumentToHtml__Anonymous_15(string commentId) {
-            this._commentId = commentId;
+
+        internal DocumentToHtml__Anonymous_15(string commentId)
+        {
+            _commentId = commentId;
         }
-        public Mammoth.Couscous.java.lang.RuntimeException get() {
-            return new Mammoth.Couscous.java.lang.RuntimeException("Referenced comment could not be found, id: " + this._commentId);
+
+        public RuntimeException get()
+        {
+            return new RuntimeException("Referenced comment could not be found, id: " + _commentId);
         }
     }
 }
-

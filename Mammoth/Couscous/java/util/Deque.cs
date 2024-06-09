@@ -3,7 +3,7 @@ namespace Mammoth.Couscous.java.util {
         int size();
         T getFirst();
         T getLast();
-        
+
         void add(T value);
         T removeLast();
     }

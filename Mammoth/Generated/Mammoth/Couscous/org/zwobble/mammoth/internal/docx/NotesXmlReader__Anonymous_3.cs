@@ -1,14 +1,23 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class NotesXmlReader__Anonymous_3 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Note> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.NotesXmlReader _this_org__zwobble__mammoth__internal__docx__NotesXmlReader;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement _element;
-        internal NotesXmlReader__Anonymous_3(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.NotesXmlReader this_org__zwobble__mammoth__internal__docx__NotesXmlReader, Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement element) {
-            this._this_org__zwobble__mammoth__internal__docx__NotesXmlReader = this_org__zwobble__mammoth__internal__docx__NotesXmlReader;
-            this._element = element;
+    internal class NotesXmlReader__Anonymous_3 : Function<List<DocumentElement>, Note> {
+        internal XmlElement _element;
+        internal NotesXmlReader _this_org__zwobble__mammoth__internal__docx__NotesXmlReader;
+
+        internal NotesXmlReader__Anonymous_3(NotesXmlReader this_org__zwobble__mammoth__internal__docx__NotesXmlReader, XmlElement element)
+        {
+            _this_org__zwobble__mammoth__internal__docx__NotesXmlReader = this_org__zwobble__mammoth__internal__docx__NotesXmlReader;
+            _element = element;
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Note apply(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> children) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Note((this._this_org__zwobble__mammoth__internal__docx__NotesXmlReader)._noteType, (this._element).getAttribute("w:id"), children);
+
+        public Note apply(List<DocumentElement> children)
+        {
+            return new Note((_this_org__zwobble__mammoth__internal__docx__NotesXmlReader)._noteType, (_element).getAttribute("w:id"), children);
         }
     }
 }
-

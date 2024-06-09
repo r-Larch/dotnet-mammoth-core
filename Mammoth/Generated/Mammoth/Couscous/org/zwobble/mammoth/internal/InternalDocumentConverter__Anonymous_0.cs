@@ -1,12 +1,22 @@
+using Mammoth.Couscous.java.nio.file;
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.archives;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.results;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_0 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive, Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        internal InternalDocumentConverter__Anonymous_0(Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter) {
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+    internal class InternalDocumentConverter__Anonymous_0 : Function<Archive, InternalResult<string>> {
+        internal InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+
+        internal InternalDocumentConverter__Anonymous_0(InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter)
+        {
+            _this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile) {
-            return (this._this_org__zwobble__mammoth__internal__InternalDocumentConverter).convertToHtml(Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.java.nio.file.Path>(), zipFile);
+
+        public InternalResult<string> apply(Archive zipFile)
+        {
+            return (_this_org__zwobble__mammoth__internal__InternalDocumentConverter).convertToHtml(Optional.empty<Path>(), zipFile);
         }
     }
 }
-

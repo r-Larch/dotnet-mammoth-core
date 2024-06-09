@@ -1,14 +1,24 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class HtmlPathElements : Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath {
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPathElement> _elements;
-        internal HtmlPathElements(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPathElement> elements) {
-            this._elements = elements;
+    internal class HtmlPathElements : HtmlPath {
+        internal List<HtmlPathElement> _elements;
+
+        internal HtmlPathElements(List<HtmlPathElement> elements)
+        {
+            _elements = elements;
         }
-        public Mammoth.Couscous.java.util.function.Supplier<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>> wrap(Mammoth.Couscous.java.util.function.Supplier<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>> generateNodes) {
-             {
-                Mammoth.Couscous.java.util.Iterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPathElement> _couscous_desugar_foreach_to_for6 = (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.reversed<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPathElement>(this._elements)).iterator();
+
+        public Supplier<List<HtmlNode>> wrap(Supplier<List<HtmlNode>> generateNodes)
+        {
+            {
+                var _couscous_desugar_foreach_to_for6 = (Lists.reversed(_elements)).iterator();
                 while (_couscous_desugar_foreach_to_for6.hasNext()) {
-                    Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPathElement element = _couscous_desugar_foreach_to_for6.next();
+                    var element = _couscous_desugar_foreach_to_for6.next();
                     generateNodes = element.wrap(generateNodes);
                 }
             }
@@ -16,4 +26,3 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
         }
     }
 }
-

@@ -1,5 +1,8 @@
+using Mammoth.Couscous.java.util;
+
+
 namespace Mammoth.Couscous.java.lang {
     internal interface Iterable<out T> {
-        util.Iterator<T> iterator();
+        Iterator<T> iterator();
     }
 }

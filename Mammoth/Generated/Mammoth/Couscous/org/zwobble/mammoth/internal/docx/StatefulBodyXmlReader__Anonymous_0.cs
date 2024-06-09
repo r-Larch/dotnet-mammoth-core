@@ -1,18 +1,29 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_0 : Mammoth.Couscous.java.util.function.BiFunction<Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike _properties;
-        internal StatefulBodyXmlReader__Anonymous_0(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader, Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike properties) {
-            this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
-            this._properties = properties;
+    internal class StatefulBodyXmlReader__Anonymous_0 : BiFunction<Optional<Style>, List<DocumentElement>, DocumentElement> {
+        internal XmlElementLike _properties;
+        internal StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+
+        internal StatefulBodyXmlReader__Anonymous_0(StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader, XmlElementLike properties)
+        {
+            _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+            _properties = properties;
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement apply(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style> style, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> children) {
-            Mammoth.Couscous.java.util.Optional<string> hyperlinkHref = (this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).currentHyperlinkHref();
+
+        public DocumentElement apply(Optional<Style> style, List<DocumentElement> children)
+        {
+            var hyperlinkHref = (_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).currentHyperlinkHref();
             if (hyperlinkHref.isPresent()) {
-                children = Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink.href(hyperlinkHref.get(), Mammoth.Couscous.java.util.Optional.empty<string>(), children));
+                children = Lists.list<DocumentElement>(Hyperlink.href(hyperlinkHref.get(), Optional.empty<string>(), children));
             }
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run((this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isBold(this._properties), (this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isItalic(this._properties), (this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isUnderline(this._properties), (this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isStrikethrough(this._properties), (this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isSmallCaps(this._properties), (this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).readVerticalAlignment(this._properties), style, children);
+
+            return new Run((_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isBold(_properties), (_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isItalic(_properties), (_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isUnderline(_properties), (_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isStrikethrough(_properties), (_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isSmallCaps(_properties), (_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).readVerticalAlignment(_properties), style, children);
         }
     }
 }
-

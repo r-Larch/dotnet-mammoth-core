@@ -1,55 +1,90 @@
+using Mammoth.Couscous.java.lang;
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.results;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class ReadResult {
-        internal static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult _EMPTY_SUCCESS;
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> _elements;
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> _extra;
-        internal Mammoth.Couscous.java.lang.Iterable<string> _warnings;
-        static ReadResult() {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult._EMPTY_SUCCESS = Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.success(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>());
+        internal static ReadResult _EMPTY_SUCCESS;
+        internal List<DocumentElement> _elements;
+        internal List<DocumentElement> _extra;
+        internal Iterable<string> _warnings;
+
+        static ReadResult()
+        {
+            _EMPTY_SUCCESS = success(Lists.list<DocumentElement>());
         }
-        internal ReadResult(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> elements, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> extra, Mammoth.Couscous.java.lang.Iterable<string> warnings) {
-            this._elements = elements;
-            this._extra = extra;
-            this._warnings = warnings;
+
+        internal ReadResult(List<DocumentElement> elements, List<DocumentElement> extra, Iterable<string> warnings)
+        {
+            _elements = elements;
+            _extra = extra;
+            _warnings = warnings;
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult flatMap<T>(Mammoth.Couscous.java.lang.Iterable<T> iterable, Mammoth.Couscous.java.util.function.Function<T, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult> function) {
-            Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult> results = Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerMap<T, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult>(iterable, function);
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerFlatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(results, new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult__Anonymous_0()), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerFlatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(results, new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult__Anonymous_1()), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.lazyFlatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult, string>(results, new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult__Anonymous_2()));
+
+        public static ReadResult flatMap<T>(Iterable<T> iterable, Function<T, ReadResult> function)
+        {
+            var results = Lists.eagerMap(iterable, function);
+            return new ReadResult(Lists.eagerFlatMap(results, new ReadResult__Anonymous_0()), Lists.eagerFlatMap(results, new ReadResult__Anonymous_1()), Iterables.lazyFlatMap(results, new ReadResult__Anonymous_2()));
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult map<T>(Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<T> first, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult second, Mammoth.Couscous.java.util.function.BiFunction<T, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> function) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(function.apply(first.getValue(), second._elements)), second._extra, Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.lazyConcat<string>(first.getWarnings(), second._warnings));
+
+        public static ReadResult map<T>(InternalResult<T> first, ReadResult second, BiFunction<T, List<DocumentElement>, DocumentElement> function)
+        {
+            return new ReadResult(Lists.list(function.apply(first.getValue(), second._elements)), second._extra, Iterables.lazyConcat(first.getWarnings(), second._warnings));
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult success(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement element) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.success(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(element));
+
+        public static ReadResult success(DocumentElement element)
+        {
+            return success(Lists.list(element));
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult success(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> elements) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult(elements, Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<string>());
+
+        public static ReadResult success(List<DocumentElement> elements)
+        {
+            return new ReadResult(elements, Lists.list<DocumentElement>(), Lists.list<string>());
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult emptyWithWarning(string warning) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.withWarning(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(), warning);
+
+        public static ReadResult emptyWithWarning(string warning)
+        {
+            return withWarning(Lists.list<DocumentElement>(), warning);
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult withWarning(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement element, string warning) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.withWarning(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(element), warning);
+
+        public static ReadResult withWarning(DocumentElement element, string warning)
+        {
+            return withWarning(Lists.list(element), warning);
         }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult withWarning(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> elements, string warning) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult(elements, Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<string>(warning));
+
+        public static ReadResult withWarning(List<DocumentElement> elements, string warning)
+        {
+            return new ReadResult(elements, Lists.list<DocumentElement>(), Lists.list(warning));
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult map(Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> function) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(function.apply(this._elements)), this._extra, this._warnings);
+
+        public ReadResult map(Function<List<DocumentElement>, DocumentElement> function)
+        {
+            return new ReadResult(Lists.list(function.apply(_elements)), _extra, _warnings);
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult flatMap(Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult> function) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult result = function.apply(this._elements);
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult(result._elements, Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(this._extra, result._extra), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.lazyConcat<string>(this._warnings, result._warnings));
+
+        public ReadResult flatMap(Function<List<DocumentElement>, ReadResult> function)
+        {
+            var result = function.apply(_elements);
+            return new ReadResult(result._elements, Lists.eagerConcat(_extra, result._extra), Iterables.lazyConcat(_warnings, result._warnings));
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult toExtra() {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(this._extra, this._elements), this._warnings);
+
+        public ReadResult toExtra()
+        {
+            return new ReadResult(Lists.list<DocumentElement>(), Lists.eagerConcat(_extra, _elements), _warnings);
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult appendExtra() {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(this._elements, this._extra), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(), this._warnings);
+
+        public ReadResult appendExtra()
+        {
+            return new ReadResult(Lists.eagerConcat(_elements, _extra), Lists.list<DocumentElement>(), _warnings);
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>> toResult() {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>>(this._elements, this._warnings);
+
+        public InternalResult<List<DocumentElement>> toResult()
+        {
+            return new InternalResult<List<DocumentElement>>(_elements, _warnings);
         }
     }
 }
-

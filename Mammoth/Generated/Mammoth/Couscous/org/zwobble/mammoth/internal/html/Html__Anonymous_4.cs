@@ -1,8 +1,13 @@
+using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
+
+
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
-    internal class Html__Anonymous_4 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlElement>> {
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlElement> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode last) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Casts.tryCast<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlElement>(typeof(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlElement), last);
+    internal class Html__Anonymous_4 : Function<HtmlNode, Optional<HtmlElement>> {
+        public Optional<HtmlElement> apply(HtmlNode last)
+        {
+            return Casts.tryCast<HtmlElement>(typeof(HtmlElement), last);
         }
     }
 }
-

@@ -1,14 +1,18 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
-    internal class Html__Anonymous_3 : Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode__Mapper<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> {
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlElement element) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlElement(element.getTag(), Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.collapse(element.getChildren()));
+    internal class Html__Anonymous_3 : HtmlNode__Mapper<HtmlNode> {
+        public HtmlNode visit(HtmlElement element)
+        {
+            return new HtmlElement(element.getTag(), Html.collapse(element.getChildren()));
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlTextNode node) {
+
+        public HtmlNode visit(HtmlTextNode node)
+        {
             return node;
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlForceWrite forceWrite) {
+
+        public HtmlNode visit(HtmlForceWrite forceWrite)
+        {
             return forceWrite;
         }
     }
 }
-
