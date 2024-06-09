@@ -1,9 +1,9 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Break : DocumentElement {
-        internal static Break _LINE_BREAK;
-        internal static Break _PAGE_BREAK;
-        internal static Break _COLUMN_BREAK;
-        internal Break__Type _type;
+        public static Break _LINE_BREAK;
+        public static Break _PAGE_BREAK;
+        public static Break _COLUMN_BREAK;
+        private Break__Type _type;
 
         static Break()
         {

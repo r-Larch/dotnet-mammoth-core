@@ -6,7 +6,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class OfficeXml {
-        internal static NamespacePrefixes _XML_NAMESPACES;
+        private static NamespacePrefixes _XML_NAMESPACES;
 
         static OfficeXml()
         {

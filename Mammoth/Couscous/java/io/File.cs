@@ -8,7 +8,7 @@ namespace Mammoth.Couscous.java.io {
             Path = path;
         }
 
-        internal string Path { get; }
+        public string Path { get; }
 
         internal Path toPath()
         {

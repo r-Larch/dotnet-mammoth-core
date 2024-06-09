@@ -1,6 +1,6 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
     internal class DocumentToHtml__Context {
-        internal bool _isHeader;
+        public bool _isHeader;
 
         internal DocumentToHtml__Context(bool isHeader)
         {

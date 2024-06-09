@@ -1,7 +1,7 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class NumberingLevel {
-        internal bool _isOrdered;
-        internal string _levelIndex;
+        private bool _isOrdered;
+        private string _levelIndex;
 
         internal NumberingLevel(string levelIndex, bool isOrdered)
         {

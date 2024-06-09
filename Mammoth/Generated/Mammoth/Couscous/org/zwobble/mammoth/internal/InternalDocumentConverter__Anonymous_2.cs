@@ -7,8 +7,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.results;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
     internal class InternalDocumentConverter__Anonymous_2 : Function<Archive, InternalResult<string>> {
-        internal File _file;
-        internal InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+        private File _file;
+        private InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
 
         internal InternalDocumentConverter__Anonymous_2(InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter, File file)
         {

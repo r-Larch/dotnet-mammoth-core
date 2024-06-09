@@ -4,7 +4,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__Anonymous_5 : Function<XmlElement, ReadResult> {
-        internal StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        private StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
 
         internal StatefulBodyXmlReader__Anonymous_5(StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader)
         {

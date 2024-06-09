@@ -6,8 +6,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__Anonymous_14 : BiFunction<int, DocumentElement, DocumentElement> {
-        internal Set<Map__Entry<int, int>> _merged;
-        internal Map<Map__Entry<int, int>, int> _rowspans;
+        private Set<Map__Entry<int, int>> _merged;
+        private Map<Map__Entry<int, int>, int> _rowspans;
 
         internal StatefulBodyXmlReader__Anonymous_14(Set<Map__Entry<int, int>> merged, Map<Map__Entry<int, int>, int> rowspans)
         {

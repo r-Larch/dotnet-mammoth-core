@@ -1,8 +1,8 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class Relationship {
-        internal string _relationshipId;
-        internal string _target;
-        internal string _type;
+        private string _relationshipId;
+        private string _target;
+        private string _type;
 
         internal Relationship(string relationshipId, string target, string type)
         {

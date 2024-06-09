@@ -3,10 +3,10 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Hyperlink : DocumentElement, HasChildren {
-        internal Optional<string> _anchor;
-        internal List<DocumentElement> _children;
-        internal Optional<string> _href;
-        internal Optional<string> _targetFrame;
+        private Optional<string> _anchor;
+        private List<DocumentElement> _children;
+        private Optional<string> _href;
+        private Optional<string> _targetFrame;
 
         internal Hyperlink(Optional<string> href, Optional<string> anchor, Optional<string> targetFrame, List<DocumentElement> children)
         {

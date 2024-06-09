@@ -4,7 +4,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
     internal class NullXmlElement : XmlElementLike {
-        internal static XmlElementLike _INSTANCE;
+        public static XmlElementLike _INSTANCE;
 
         static NullXmlElement()
         {

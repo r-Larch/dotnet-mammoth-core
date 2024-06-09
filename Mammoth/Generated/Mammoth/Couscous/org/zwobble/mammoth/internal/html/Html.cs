@@ -5,7 +5,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
     internal class Html {
-        internal static HtmlNode _FORCE_WRITE;
+        public static HtmlNode _FORCE_WRITE;
 
         static Html()
         {

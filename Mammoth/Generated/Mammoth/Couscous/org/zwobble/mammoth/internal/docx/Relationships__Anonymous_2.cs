@@ -4,7 +4,7 @@ using Mammoth.Couscous.java.util.function;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class Relationships__Anonymous_2 : Supplier<RuntimeException> {
-        internal string _relationshipId;
+        private string _relationshipId;
 
         internal Relationships__Anonymous_2(string relationshipId)
         {

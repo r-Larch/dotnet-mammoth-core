@@ -8,9 +8,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class TokenIterator<T> {
-        internal Token<T> _end;
-        internal int _index;
-        internal List<Token<T>> _tokens;
+        private Token<T> _end;
+        private int _index;
+        private List<Token<T>> _tokens;
 
         internal TokenIterator(List<Token<T>> tokens, Token<T> end)
         {

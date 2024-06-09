@@ -3,10 +3,10 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
     internal class HtmlTag {
-        internal Map<string, string> _attributes;
-        internal bool _isCollapsible;
-        internal string _separator;
-        internal List<string> _tagNames;
+        private Map<string, string> _attributes;
+        private bool _isCollapsible;
+        private string _separator;
+        private List<string> _tagNames;
 
         internal HtmlTag(List<string> tagNames, Map<string, string> attributes, bool isCollapsible, string separator)
         {

@@ -19,7 +19,7 @@ namespace Mammoth.Couscous.java.util {
     }
 
     internal struct None<T> : None, Optional<T> {
-        internal static readonly None<T> Instance = new();
+        public static readonly None<T> Instance = new();
 
         public override bool Equals(object other)
         {

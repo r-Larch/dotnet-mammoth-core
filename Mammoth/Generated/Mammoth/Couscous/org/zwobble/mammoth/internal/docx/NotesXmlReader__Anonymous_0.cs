@@ -4,7 +4,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class NotesXmlReader__Anonymous_0 : Predicate<XmlElement> {
-        internal NotesXmlReader _this_org__zwobble__mammoth__internal__docx__NotesXmlReader;
+        private NotesXmlReader _this_org__zwobble__mammoth__internal__docx__NotesXmlReader;
 
         internal NotesXmlReader__Anonymous_0(NotesXmlReader this_org__zwobble__mammoth__internal__docx__NotesXmlReader)
         {

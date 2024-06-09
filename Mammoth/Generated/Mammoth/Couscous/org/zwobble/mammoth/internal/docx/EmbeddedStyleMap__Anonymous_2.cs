@@ -5,8 +5,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class EmbeddedStyleMap__Anonymous_2 : Predicate<XmlNode> {
-        internal XmlElement _element;
-        internal string _identifyingAttribute;
+        private XmlElement _element;
+        private string _identifyingAttribute;
 
         internal EmbeddedStyleMap__Anonymous_2(XmlElement element, string identifyingAttribute)
         {

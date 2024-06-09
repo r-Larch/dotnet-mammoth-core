@@ -3,10 +3,10 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Paragraph : DocumentElement, HasChildren {
-        internal List<DocumentElement> _children;
-        internal ParagraphIndent _indent;
-        internal Optional<NumberingLevel> _numbering;
-        internal Optional<Style> _style;
+        private List<DocumentElement> _children;
+        private ParagraphIndent _indent;
+        private Optional<NumberingLevel> _numbering;
+        private Optional<Style> _style;
 
         internal Paragraph(Optional<Style> style, Optional<NumberingLevel> numbering, ParagraphIndent indent, List<DocumentElement> children)
         {

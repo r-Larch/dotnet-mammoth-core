@@ -4,9 +4,9 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class TableMatcher : DocumentElementMatcher<Table> {
-        internal static TableMatcher _ANY;
-        internal Optional<string> _styleId;
-        internal Optional<StringMatcher> _styleName;
+        public static TableMatcher _ANY;
+        private Optional<string> _styleId;
+        private Optional<StringMatcher> _styleName;
 
         static TableMatcher()
         {

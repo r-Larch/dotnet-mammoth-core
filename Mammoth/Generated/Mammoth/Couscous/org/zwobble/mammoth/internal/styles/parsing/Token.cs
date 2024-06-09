@@ -5,9 +5,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class Token<T> {
-        internal int _characterIndex;
-        internal T _tokenType;
-        internal string _value;
+        private int _characterIndex;
+        private T _tokenType;
+        private string _value;
 
         internal Token(int characterIndex, T tokenType, string value)
         {

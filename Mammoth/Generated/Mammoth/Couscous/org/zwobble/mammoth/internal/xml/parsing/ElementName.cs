@@ -1,7 +1,7 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
     internal class ElementName {
-        internal string _localName;
-        internal string _uri;
+        private string _localName;
+        private string _uri;
 
         internal ElementName(string uri, string localName)
         {

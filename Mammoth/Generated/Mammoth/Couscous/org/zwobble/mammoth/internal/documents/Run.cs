@@ -3,14 +3,14 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Run : DocumentElement, HasChildren {
-        internal List<DocumentElement> _children;
-        internal bool _isBold;
-        internal bool _isItalic;
-        internal bool _isSmallCaps;
-        internal bool _isStrikethrough;
-        internal bool _isUnderline;
-        internal Optional<Style> _style;
-        internal VerticalAlignment _verticalAlignment;
+        private List<DocumentElement> _children;
+        private bool _isBold;
+        private bool _isItalic;
+        private bool _isSmallCaps;
+        private bool _isStrikethrough;
+        private bool _isUnderline;
+        private Optional<Style> _style;
+        private VerticalAlignment _verticalAlignment;
 
         internal Run(bool isBold, bool isItalic, bool isUnderline, bool isStrikethrough, bool isSmallCaps, VerticalAlignment verticalAlignment, Optional<Style> style, List<DocumentElement> children)
         {

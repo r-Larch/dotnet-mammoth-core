@@ -5,7 +5,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Notes__Anonymous_3 : Function<Map<string, Note>, Optional<Note>> {
-        internal string _noteId;
+        private string _noteId;
 
         internal Notes__Anonymous_3(string noteId)
         {

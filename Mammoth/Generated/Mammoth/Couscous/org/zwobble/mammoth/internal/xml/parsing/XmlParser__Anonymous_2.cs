@@ -3,7 +3,7 @@ using Mammoth.Couscous.java.util.function;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
     internal class XmlParser__Anonymous_2 : Function<NamespacePrefix, string> {
-        internal ElementName _name;
+        private ElementName _name;
 
         internal XmlParser__Anonymous_2(ElementName name)
         {

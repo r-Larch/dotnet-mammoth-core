@@ -4,8 +4,8 @@ using Mammoth.Couscous.java.util.function;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__Anonymous_21 : Function<string, string> {
-        internal Optional<string> _anchor;
-        internal string _targetHref;
+        private Optional<string> _anchor;
+        private string _targetHref;
 
         internal StatefulBodyXmlReader__Anonymous_21(string targetHref, Optional<string> anchor)
         {

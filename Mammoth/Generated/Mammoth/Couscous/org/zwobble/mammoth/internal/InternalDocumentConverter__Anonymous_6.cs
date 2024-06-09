@@ -8,7 +8,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.results;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
     internal class InternalDocumentConverter__Anonymous_6 : Function<Document, InternalResult<List<HtmlNode>>> {
-        internal DocumentToHtmlOptions _conversionOptions;
+        private DocumentToHtmlOptions _conversionOptions;
 
         internal InternalDocumentConverter__Anonymous_6(DocumentToHtmlOptions conversionOptions)
         {

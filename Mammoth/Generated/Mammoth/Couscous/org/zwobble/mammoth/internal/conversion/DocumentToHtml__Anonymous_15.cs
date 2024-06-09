@@ -4,7 +4,7 @@ using Mammoth.Couscous.java.util.function;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
     internal class DocumentToHtml__Anonymous_15 : Supplier<RuntimeException> {
-        internal string _commentId;
+        private string _commentId;
 
         internal DocumentToHtml__Anonymous_15(string commentId)
         {

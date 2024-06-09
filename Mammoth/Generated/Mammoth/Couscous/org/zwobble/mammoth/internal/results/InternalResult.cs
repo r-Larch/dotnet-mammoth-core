@@ -38,8 +38,8 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.results {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.results {
     internal class InternalResult<T> {
-        internal T _value;
-        internal Iterable<string> _warnings;
+        public T _value;
+        public Iterable<string> _warnings;
 
         internal InternalResult(T value, Iterable<string> warnings)
         {

@@ -4,8 +4,8 @@ using System.IO;
 using Mammoth.Couscous;
 using Mammoth.Couscous.java.util;
 using Mammoth.Couscous.org.zwobble.mammoth.images;
-using Mammoth.Couscous.org.zwobble.mammoth.@internal;
 using Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal;
 using File = Mammoth.Couscous.java.io.File;
 
 

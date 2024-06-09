@@ -7,7 +7,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
     internal class InternalDocumentConverter__Anonymous_10 : SupplierWithException<Optional<string>, IOException> {
-        internal Archive _zipFile;
+        private Archive _zipFile;
 
         internal InternalDocumentConverter__Anonymous_10(Archive zipFile)
         {

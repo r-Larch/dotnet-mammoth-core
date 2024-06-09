@@ -4,7 +4,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
     internal class DocumentToHtml__Anonymous_1 : Function<NoteReference, Note> {
-        internal Document _document;
+        private Document _document;
 
         internal DocumentToHtml__Anonymous_1(Document document)
         {

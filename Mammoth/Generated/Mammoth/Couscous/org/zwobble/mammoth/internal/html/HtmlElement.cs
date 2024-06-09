@@ -4,9 +4,9 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
     internal class HtmlElement : HtmlNode {
-        internal static Set<string> _VOID_TAG_NAMES;
-        internal List<HtmlNode> _children;
-        internal HtmlTag _tag;
+        private static Set<string> _VOID_TAG_NAMES;
+        private List<HtmlNode> _children;
+        private HtmlTag _tag;
 
         static HtmlElement()
         {

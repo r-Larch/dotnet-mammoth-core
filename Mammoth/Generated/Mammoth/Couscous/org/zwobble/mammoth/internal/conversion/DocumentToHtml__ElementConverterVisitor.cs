@@ -8,7 +8,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
     internal class DocumentToHtml__ElementConverterVisitor : DocumentElementVisitor<List<HtmlNode>, DocumentToHtml__Context> {
-        internal DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+        private DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
 
         internal DocumentToHtml__ElementConverterVisitor(DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)
         {

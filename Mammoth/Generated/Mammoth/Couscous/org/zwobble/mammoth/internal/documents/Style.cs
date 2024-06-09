@@ -3,8 +3,8 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Style {
-        internal Optional<string> _name;
-        internal string _styleId;
+        private Optional<string> _name;
+        private string _styleId;
 
         internal Style(string styleId, Optional<string> name)
         {

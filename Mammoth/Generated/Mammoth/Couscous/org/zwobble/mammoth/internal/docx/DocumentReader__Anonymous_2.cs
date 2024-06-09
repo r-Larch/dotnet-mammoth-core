@@ -4,9 +4,9 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.archives;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class DocumentReader__Anonymous_2 : Function<string, string> {
-        internal Archive _archive;
-        internal string _documentFilename;
-        internal Relationships _documentRelationships;
+        private Archive _archive;
+        private string _documentFilename;
+        private Relationships _documentRelationships;
 
         internal DocumentReader__Anonymous_2(Archive archive, Relationships documentRelationships, string documentFilename)
         {

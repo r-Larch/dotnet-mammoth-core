@@ -155,13 +155,13 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
         internal class Builder<K, V> {
             private readonly Dictionary<K, V> _values = new();
 
-            internal Builder<K, V> put(K key, V value)
+            public Builder<K, V> put(K key, V value)
             {
                 _values[key] = value;
                 return this;
             }
 
-            internal Map<K, V> build()
+            public Map<K, V> build()
             {
                 return ToJava.DictionaryToMap(_values);
             }

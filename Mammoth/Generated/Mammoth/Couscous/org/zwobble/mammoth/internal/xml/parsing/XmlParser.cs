@@ -3,7 +3,7 @@ using Mammoth.Couscous.java.io;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
     internal class XmlParser {
-        internal NamespacePrefixes _namespaces;
+        public NamespacePrefixes _namespaces;
 
         internal XmlParser(NamespacePrefixes namespaces)
         {

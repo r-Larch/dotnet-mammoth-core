@@ -6,8 +6,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.results;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class DocumentReader__Anonymous_1 : BiFunction<Notes, List<Comment>, InternalResult<Document>> {
-        internal DocumentReader__PartPaths _partPaths;
-        internal DocumentReader__PartWithBodyReader _partReader;
+        private DocumentReader__PartPaths _partPaths;
+        private DocumentReader__PartWithBodyReader _partReader;
 
         internal DocumentReader__Anonymous_1(DocumentReader__PartWithBodyReader partReader, DocumentReader__PartPaths partPaths)
         {

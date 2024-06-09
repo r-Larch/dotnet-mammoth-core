@@ -3,7 +3,7 @@ using Mammoth.Couscous.java.util.function;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
     internal class XmlElement__Anonymous_2 : Predicate<XmlElement> {
-        internal string _name;
+        private string _name;
 
         internal XmlElement__Anonymous_2(string name)
         {

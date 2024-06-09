@@ -6,7 +6,7 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class PathRelativeFileReader : FileReader {
-        internal Optional<Path> _path;
+        private Optional<Path> _path;
 
         internal PathRelativeFileReader(Optional<Path> path)
         {

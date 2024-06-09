@@ -5,14 +5,14 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
     internal class DocumentToHtmlOptions {
-        internal static DocumentToHtmlOptions _DEFAULT;
-        internal bool _disableDefaultStyleMap;
-        internal bool _disableEmbeddedStyleMap;
-        internal StyleMap _embeddedStyleMap;
-        internal string _idPrefix;
-        internal ImageConverter__ImgElement _imageConverter;
-        internal bool _preserveEmptyParagraphs;
-        internal StyleMap _styleMap;
+        public static DocumentToHtmlOptions _DEFAULT;
+        private bool _disableDefaultStyleMap;
+        private bool _disableEmbeddedStyleMap;
+        private StyleMap _embeddedStyleMap;
+        private string _idPrefix;
+        private ImageConverter__ImgElement _imageConverter;
+        private bool _preserveEmptyParagraphs;
+        private StyleMap _styleMap;
 
         static DocumentToHtmlOptions()
         {

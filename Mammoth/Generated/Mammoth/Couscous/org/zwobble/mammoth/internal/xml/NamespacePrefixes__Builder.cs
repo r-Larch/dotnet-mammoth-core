@@ -3,7 +3,7 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
     internal class NamespacePrefixes__Builder {
-        internal Map<string, NamespacePrefix> _uriToPrefix;
+        private Map<string, NamespacePrefix> _uriToPrefix;
 
         internal NamespacePrefixes__Builder()
         {

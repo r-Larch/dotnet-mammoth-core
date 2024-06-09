@@ -4,9 +4,9 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__UnmergedTableCell : DocumentElement {
-        internal List<DocumentElement> _children;
-        internal int _colspan;
-        internal bool _vmerge;
+        public List<DocumentElement> _children;
+        public int _colspan;
+        public bool _vmerge;
 
         internal StatefulBodyXmlReader__UnmergedTableCell(bool vmerge, int colspan, List<DocumentElement> children)
         {

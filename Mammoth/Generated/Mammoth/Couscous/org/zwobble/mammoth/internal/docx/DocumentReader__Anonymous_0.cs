@@ -7,8 +7,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class DocumentReader__Anonymous_0 : BiFunction<XmlElement, BodyXmlReader, InternalResult<Document>> {
-        internal List<Comment> _comments;
-        internal Notes _notes;
+        private List<Comment> _comments;
+        private Notes _notes;
 
         internal DocumentReader__Anonymous_0(Notes notes, List<Comment> comments)
         {

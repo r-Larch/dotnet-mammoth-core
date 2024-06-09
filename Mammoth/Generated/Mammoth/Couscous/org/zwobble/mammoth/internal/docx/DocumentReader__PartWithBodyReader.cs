@@ -6,11 +6,11 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class DocumentReader__PartWithBodyReader {
-        internal ContentTypes _contentTypes;
-        internal FileReader _fileReader;
-        internal Numbering _numbering;
-        internal Styles _styles;
-        internal Archive _zipFile;
+        private ContentTypes _contentTypes;
+        private FileReader _fileReader;
+        private Numbering _numbering;
+        private Styles _styles;
+        private Archive _zipFile;
 
         internal DocumentReader__PartWithBodyReader(Archive zipFile, ContentTypes contentTypes, FileReader fileReader, Numbering numbering, Styles styles)
         {

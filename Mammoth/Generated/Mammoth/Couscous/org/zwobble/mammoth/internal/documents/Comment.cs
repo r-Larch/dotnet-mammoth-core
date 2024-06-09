@@ -3,10 +3,10 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Comment {
-        internal Optional<string> _authorInitials;
-        internal Optional<string> _authorName;
-        internal List<DocumentElement> _body;
-        internal string _commentId;
+        private Optional<string> _authorInitials;
+        private Optional<string> _authorName;
+        private List<DocumentElement> _body;
+        private string _commentId;
 
         internal Comment(string commentId, List<DocumentElement> body, Optional<string> authorName, Optional<string> authorInitials)
         {

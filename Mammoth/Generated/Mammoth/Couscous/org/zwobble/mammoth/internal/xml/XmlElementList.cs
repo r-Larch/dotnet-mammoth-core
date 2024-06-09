@@ -5,7 +5,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
     internal class XmlElementList : Iterable<XmlElement> {
-        internal List<XmlElement> _elements;
+        private List<XmlElement> _elements;
 
         internal XmlElementList(List<XmlElement> elements)
         {

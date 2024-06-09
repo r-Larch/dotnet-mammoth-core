@@ -1,11 +1,11 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class DocumentReader__PartPaths {
-        internal string _comments;
-        internal string _endnotes;
-        internal string _footnotes;
-        internal string _mainDocument;
-        internal string _numbering;
-        internal string _styles;
+        private string _comments;
+        private string _endnotes;
+        private string _footnotes;
+        private string _mainDocument;
+        private string _numbering;
+        private string _styles;
 
         internal DocumentReader__PartPaths(string mainDocument, string comments, string endnotes, string footnotes, string numbering, string styles)
         {

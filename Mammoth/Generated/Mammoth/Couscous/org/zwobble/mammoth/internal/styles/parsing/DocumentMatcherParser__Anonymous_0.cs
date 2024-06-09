@@ -3,7 +3,7 @@ using Mammoth.Couscous.java.util.function;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class DocumentMatcherParser__Anonymous_0 : BiConsumer<StyleMapBuilder, HtmlPath> {
-        internal ParagraphMatcher _paragraph;
+        private ParagraphMatcher _paragraph;
 
         internal DocumentMatcherParser__Anonymous_0(ParagraphMatcher paragraph)
         {

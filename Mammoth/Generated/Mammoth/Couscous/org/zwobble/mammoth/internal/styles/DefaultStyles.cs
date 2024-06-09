@@ -4,7 +4,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class DefaultStyles {
-        internal static StyleMap _DEFAULT_STYLE_MAP;
+        public static StyleMap _DEFAULT_STYLE_MAP;
 
         static DefaultStyles()
         {

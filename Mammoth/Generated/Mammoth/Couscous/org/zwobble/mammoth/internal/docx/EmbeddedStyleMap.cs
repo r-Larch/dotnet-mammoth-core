@@ -7,12 +7,12 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class EmbeddedStyleMap {
-        internal static string _STYLE_MAP_PATH;
-        internal static string _ABSOLUTE_STYLE_MAP_PATH;
-        internal static string _RELATIONSHIPS_PATH;
-        internal static string _CONTENT_TYPES_PATH;
-        internal static NamespacePrefixes _RELATIONSHIPS_NAMESPACES;
-        internal static NamespacePrefixes _CONTENT_TYPES_NAMESPACES;
+        private static string _STYLE_MAP_PATH;
+        private static string _ABSOLUTE_STYLE_MAP_PATH;
+        private static string _RELATIONSHIPS_PATH;
+        private static string _CONTENT_TYPES_PATH;
+        private static NamespacePrefixes _RELATIONSHIPS_NAMESPACES;
+        private static NamespacePrefixes _CONTENT_TYPES_NAMESPACES;
 
         static EmbeddedStyleMap()
         {

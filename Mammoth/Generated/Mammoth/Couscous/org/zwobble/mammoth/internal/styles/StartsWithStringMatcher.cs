@@ -3,7 +3,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class StartsWithStringMatcher : StringMatcher {
-        internal string _prefix;
+        private string _prefix;
 
         internal StartsWithStringMatcher(string prefix)
         {

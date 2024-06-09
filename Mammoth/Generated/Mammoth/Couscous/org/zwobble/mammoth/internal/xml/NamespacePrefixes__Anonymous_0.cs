@@ -4,7 +4,7 @@ using Mammoth.Couscous.java.util.function;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
     internal class NamespacePrefixes__Anonymous_0 : Predicate<NamespacePrefix> {
-        internal Optional<string> _prefix;
+        private Optional<string> _prefix;
 
         internal NamespacePrefixes__Anonymous_0(Optional<string> prefix)
         {

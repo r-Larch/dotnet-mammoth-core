@@ -9,8 +9,8 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class RegexTokeniser__TokenRule<T> {
-        internal Pattern _regex;
-        internal T _type;
+        public Pattern _regex;
+        public T _type;
 
         internal RegexTokeniser__TokenRule(T type, Pattern regex)
         {

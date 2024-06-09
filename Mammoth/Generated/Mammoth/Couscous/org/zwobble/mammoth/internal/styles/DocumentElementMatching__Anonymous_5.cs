@@ -9,8 +9,8 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class DocumentElementMatching__Anonymous_5<T, U> : Function<T, bool> {
-        internal Optional<U> _actual;
-        internal BiPredicate<T, U> _areEqual;
+        private Optional<U> _actual;
+        private BiPredicate<T, U> _areEqual;
 
         internal DocumentElementMatching__Anonymous_5(Optional<U> actual, BiPredicate<T, U> areEqual)
         {

@@ -5,10 +5,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class Styles {
-        internal static Styles _EMPTY;
-        internal Map<string, Style> _characterStyles;
-        internal Map<string, Style> _paragraphStyles;
-        internal Map<string, Style> _tableStyles;
+        public static Styles _EMPTY;
+        private Map<string, Style> _characterStyles;
+        private Map<string, Style> _paragraphStyles;
+        private Map<string, Style> _tableStyles;
 
         static Styles()
         {

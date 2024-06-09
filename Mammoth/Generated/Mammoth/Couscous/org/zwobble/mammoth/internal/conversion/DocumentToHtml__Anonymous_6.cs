@@ -5,8 +5,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.styles;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
     internal class DocumentToHtml__Anonymous_6 : Supplier<HtmlPath> {
-        internal Paragraph _paragraph;
-        internal DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+        private Paragraph _paragraph;
+        private DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
 
         internal DocumentToHtml__Anonymous_6(Paragraph paragraph, DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)
         {

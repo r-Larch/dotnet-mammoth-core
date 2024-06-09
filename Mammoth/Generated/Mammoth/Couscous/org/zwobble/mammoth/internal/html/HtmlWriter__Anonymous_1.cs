@@ -3,7 +3,7 @@ using Mammoth.Couscous.java.lang;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
     internal class HtmlWriter__Anonymous_1 : HtmlNode__Visitor {
-        internal StringBuilder _builder;
+        private StringBuilder _builder;
 
         internal HtmlWriter__Anonymous_1(StringBuilder builder)
         {

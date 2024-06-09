@@ -4,8 +4,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class EmbeddedStyleMap__Anonymous_1 : Function<XmlElement, bool> {
-        internal XmlElement _element;
-        internal string _identifyingAttribute;
+        private XmlElement _element;
+        private string _identifyingAttribute;
 
         internal EmbeddedStyleMap__Anonymous_1(XmlElement element, string identifyingAttribute)
         {

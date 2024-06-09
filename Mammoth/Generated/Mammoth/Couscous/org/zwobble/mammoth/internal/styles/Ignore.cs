@@ -5,7 +5,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class Ignore : HtmlPath {
-        internal static HtmlPath _INSTANCE;
+        public static HtmlPath _INSTANCE;
 
         static Ignore()
         {

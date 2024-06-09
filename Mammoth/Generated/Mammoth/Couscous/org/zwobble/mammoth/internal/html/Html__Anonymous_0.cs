@@ -4,7 +4,7 @@ using Mammoth.Couscous.java.util.function;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
     internal class Html__Anonymous_0 : Consumer<HtmlNode> {
-        internal StringBuilder _builder;
+        private StringBuilder _builder;
 
         internal Html__Anonymous_0(StringBuilder builder)
         {

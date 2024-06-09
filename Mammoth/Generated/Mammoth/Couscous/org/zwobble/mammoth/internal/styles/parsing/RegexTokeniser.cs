@@ -15,8 +15,8 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class RegexTokeniser<T> {
-        internal Pattern _pattern;
-        internal List<T> _rules;
+        private Pattern _pattern;
+        private List<T> _rules;
 
         internal RegexTokeniser(T unknown, List<RegexTokeniser__TokenRule<T>> rules)
         {

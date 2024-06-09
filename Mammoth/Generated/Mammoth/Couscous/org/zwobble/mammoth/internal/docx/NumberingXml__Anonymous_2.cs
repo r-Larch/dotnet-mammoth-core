@@ -6,7 +6,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class NumberingXml__Anonymous_2 : Function<XmlElement, Map__Entry<string, Map<string, NumberingLevel>>> {
-        internal Map<string, Map<string, NumberingLevel>> _abstractNums;
+        private Map<string, Map<string, NumberingLevel>> _abstractNums;
 
         internal NumberingXml__Anonymous_2(Map<string, Map<string, NumberingLevel>> abstractNums)
         {

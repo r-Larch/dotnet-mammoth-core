@@ -11,15 +11,15 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader {
-        internal static Set<string> _IMAGE_TYPES_SUPPORTED_BY_BROWSERS;
-        internal Queue<StatefulBodyXmlReader__ComplexField> _complexFieldStack;
-        internal ContentTypes _contentTypes;
-        internal StringBuilder _currentInstrText;
-        internal Archive _file;
-        internal FileReader _fileReader;
-        internal Numbering _numbering;
-        internal Relationships _relationships;
-        internal Styles _styles;
+        private static Set<string> _IMAGE_TYPES_SUPPORTED_BY_BROWSERS;
+        private Queue<StatefulBodyXmlReader__ComplexField> _complexFieldStack;
+        private ContentTypes _contentTypes;
+        private StringBuilder _currentInstrText;
+        public Archive _file;
+        public FileReader _fileReader;
+        public Numbering _numbering;
+        private Relationships _relationships;
+        public Styles _styles;
 
         static StatefulBodyXmlReader()
         {

@@ -6,9 +6,9 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class CommentXmlReader__Anonymous_1 : Function<List<DocumentElement>, Comment> {
-        internal string _commentId;
-        internal XmlElement _element;
-        internal CommentXmlReader _this_org__zwobble__mammoth__internal__docx__CommentXmlReader;
+        private string _commentId;
+        private XmlElement _element;
+        private CommentXmlReader _this_org__zwobble__mammoth__internal__docx__CommentXmlReader;
 
         internal CommentXmlReader__Anonymous_1(string commentId, CommentXmlReader this_org__zwobble__mammoth__internal__docx__CommentXmlReader, XmlElement element)
         {

@@ -4,9 +4,9 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class Relationships {
-        internal static Relationships _EMPTY;
-        internal Map<string, string> _targetsByRelationshipId;
-        internal Map<string, List<string>> _targetsByType;
+        public static Relationships _EMPTY;
+        private Map<string, string> _targetsByRelationshipId;
+        private Map<string, List<string>> _targetsByType;
 
         static Relationships()
         {

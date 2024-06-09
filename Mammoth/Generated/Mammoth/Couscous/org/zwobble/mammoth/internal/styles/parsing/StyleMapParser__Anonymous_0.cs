@@ -3,8 +3,8 @@ using Mammoth.Couscous.java.util.function;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class StyleMapParser__Anonymous_0 : Consumer<StyleMapBuilder> {
-        internal BiConsumer<StyleMapBuilder, HtmlPath> _documentMatcher;
-        internal HtmlPath _htmlPath;
+        private BiConsumer<StyleMapBuilder, HtmlPath> _documentMatcher;
+        private HtmlPath _htmlPath;
 
         internal StyleMapParser__Anonymous_0(BiConsumer<StyleMapBuilder, HtmlPath> documentMatcher, HtmlPath htmlPath)
         {

@@ -9,8 +9,8 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class DocumentReader__Anonymous_17<T> : Function<XmlElement, T> {
-        internal BodyXmlReader _bodyReader;
-        internal BiFunction<XmlElement, BodyXmlReader, T> _readPart;
+        private BodyXmlReader _bodyReader;
+        private BiFunction<XmlElement, BodyXmlReader, T> _readPart;
 
         internal DocumentReader__Anonymous_17(BiFunction<XmlElement, BodyXmlReader, T> readPart, BodyXmlReader bodyReader)
         {

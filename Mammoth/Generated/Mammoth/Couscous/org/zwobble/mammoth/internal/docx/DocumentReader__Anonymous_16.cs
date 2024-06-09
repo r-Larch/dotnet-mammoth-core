@@ -5,7 +5,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class DocumentReader__Anonymous_16 : Supplier<PassThroughException> {
-        internal string _name;
+        private string _name;
 
         internal DocumentReader__Anonymous_16(string name)
         {

@@ -5,12 +5,12 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class BodyXmlReader {
-        internal ContentTypes _contentTypes;
-        internal Archive _file;
-        internal FileReader _fileReader;
-        internal Numbering _numbering;
-        internal Relationships _relationships;
-        internal Styles _styles;
+        private ContentTypes _contentTypes;
+        private Archive _file;
+        private FileReader _fileReader;
+        private Numbering _numbering;
+        private Relationships _relationships;
+        private Styles _styles;
 
         internal BodyXmlReader(Styles styles, Numbering numbering, Relationships relationships, ContentTypes contentTypes, Archive file, FileReader fileReader)
         {

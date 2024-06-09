@@ -5,8 +5,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class Numbering {
-        internal static Numbering _EMPTY;
-        internal Map<string, Map<string, NumberingLevel>> _numbering;
+        public static Numbering _EMPTY;
+        private Map<string, Map<string, NumberingLevel>> _numbering;
 
         static Numbering()
         {

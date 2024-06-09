@@ -1,6 +1,6 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class CommentReference : DocumentElement {
-        internal string _commentId;
+        private string _commentId;
 
         internal CommentReference(string commentId)
         {

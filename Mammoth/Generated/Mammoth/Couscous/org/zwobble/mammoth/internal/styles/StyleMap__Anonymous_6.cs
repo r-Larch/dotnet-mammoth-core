@@ -4,7 +4,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class StyleMap__Anonymous_6 : Predicate<StyleMapping<Break>> {
-        internal Break _breakElement;
+        private Break _breakElement;
 
         internal StyleMap__Anonymous_6(Break breakElement)
         {

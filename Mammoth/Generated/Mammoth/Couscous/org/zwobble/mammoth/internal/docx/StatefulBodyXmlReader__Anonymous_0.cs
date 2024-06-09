@@ -7,8 +7,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__Anonymous_0 : BiFunction<Optional<Style>, List<DocumentElement>, DocumentElement> {
-        internal XmlElementLike _properties;
-        internal StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        private XmlElementLike _properties;
+        private StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
 
         internal StatefulBodyXmlReader__Anonymous_0(StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader, XmlElementLike properties)
         {

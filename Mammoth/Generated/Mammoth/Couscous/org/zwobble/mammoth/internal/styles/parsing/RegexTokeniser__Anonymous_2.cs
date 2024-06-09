@@ -5,7 +5,7 @@ using Mammoth.Couscous.java.util.regex;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class RegexTokeniser__Anonymous_2 : Predicate<int> {
-        internal Matcher _matcher;
+        private Matcher _matcher;
 
         internal RegexTokeniser__Anonymous_2(Matcher matcher)
         {

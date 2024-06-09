@@ -3,9 +3,9 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class TableCell : DocumentElement, HasChildren {
-        internal List<DocumentElement> _children;
-        internal int _colspan;
-        internal int _rowspan;
+        private List<DocumentElement> _children;
+        private int _colspan;
+        private int _rowspan;
 
         internal TableCell(int rowspan, int colspan, List<DocumentElement> children)
         {

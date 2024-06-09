@@ -13,7 +13,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
     internal class InternalDocumentConverter {
-        internal DocumentToHtmlOptions _options;
+        public DocumentToHtmlOptions _options;
 
         internal InternalDocumentConverter(DocumentToHtmlOptions options)
         {

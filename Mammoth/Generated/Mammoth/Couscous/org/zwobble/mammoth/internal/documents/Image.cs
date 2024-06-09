@@ -5,9 +5,9 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Image : DocumentElement {
-        internal Optional<string> _altText;
-        internal Optional<string> _contentType;
-        internal InputStreamSupplier _open;
+        private Optional<string> _altText;
+        private Optional<string> _contentType;
+        private InputStreamSupplier _open;
 
         internal Image(Optional<string> altText, Optional<string> contentType, InputStreamSupplier open)
         {

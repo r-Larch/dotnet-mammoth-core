@@ -5,8 +5,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.images;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
     internal class DocumentToHtml__Anonymous_17 : Image {
-        internal string _contentType;
-        internal documents.Image _image;
+        private string _contentType;
+        private documents.Image _image;
 
         internal DocumentToHtml__Anonymous_17(documents.Image image, string contentType)
         {

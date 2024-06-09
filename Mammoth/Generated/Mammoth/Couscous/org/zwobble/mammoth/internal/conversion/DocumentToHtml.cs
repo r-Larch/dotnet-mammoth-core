@@ -10,15 +10,15 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
     internal class DocumentToHtml {
-        internal static DocumentToHtml__Context _INITIAL_CONTEXT;
-        internal Map<string, Comment> _comments;
-        internal string _idPrefix;
-        internal ImageConverter__ImgElement _imageConverter;
-        internal List<NoteReference> _noteReferences;
-        internal bool _preserveEmptyParagraphs;
-        internal List<DocumentToHtml__ReferencedComment> _referencedComments;
-        internal StyleMap _styleMap;
-        internal Set<string> _warnings;
+        private static DocumentToHtml__Context _INITIAL_CONTEXT;
+        public Map<string, Comment> _comments;
+        private string _idPrefix;
+        public ImageConverter__ImgElement _imageConverter;
+        public List<NoteReference> _noteReferences;
+        public bool _preserveEmptyParagraphs;
+        public List<DocumentToHtml__ReferencedComment> _referencedComments;
+        public StyleMap _styleMap;
+        public Set<string> _warnings;
 
         static DocumentToHtml()
         {

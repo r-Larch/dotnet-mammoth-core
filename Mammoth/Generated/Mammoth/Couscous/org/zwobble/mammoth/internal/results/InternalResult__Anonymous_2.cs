@@ -8,8 +8,8 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.results {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.results {
     internal class InternalResult__Anonymous_2<T> : Result<T> {
-        internal InternalResult<T> _this_org__zwobble__mammoth__internal__results__InternalResult;
-        internal Set<string> _warnings;
+        private InternalResult<T> _this_org__zwobble__mammoth__internal__results__InternalResult;
+        private Set<string> _warnings;
 
         internal InternalResult__Anonymous_2(InternalResult<T> this_org__zwobble__mammoth__internal__results__InternalResult, Set<string> warnings)
         {

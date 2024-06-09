@@ -4,10 +4,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class ParagraphMatcher : DocumentElementMatcher<Paragraph> {
-        internal static ParagraphMatcher _ANY;
-        internal Optional<NumberingLevel> _numbering;
-        internal Optional<string> _styleId;
-        internal Optional<StringMatcher> _styleName;
+        public static ParagraphMatcher _ANY;
+        private Optional<NumberingLevel> _numbering;
+        private Optional<string> _styleId;
+        private Optional<StringMatcher> _styleName;
 
         static ParagraphMatcher()
         {

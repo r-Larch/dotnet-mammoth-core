@@ -6,7 +6,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class Numbering__Anonymous_0 : Function<Map<string, NumberingLevel>, Optional<NumberingLevel>> {
-        internal string _level;
+        private string _level;
 
         internal Numbering__Anonymous_0(string level)
         {

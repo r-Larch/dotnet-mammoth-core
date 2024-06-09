@@ -4,9 +4,9 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class RunMatcher : DocumentElementMatcher<Run> {
-        internal static RunMatcher _ANY;
-        internal Optional<string> _styleId;
-        internal Optional<StringMatcher> _styleName;
+        public static RunMatcher _ANY;
+        private Optional<string> _styleId;
+        private Optional<StringMatcher> _styleName;
 
         static RunMatcher()
         {

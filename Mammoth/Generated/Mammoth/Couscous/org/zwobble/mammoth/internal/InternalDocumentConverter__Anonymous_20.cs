@@ -5,7 +5,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
     internal class InternalDocumentConverter__Anonymous_20 : Supplier<string> {
-        internal DocumentElement _node;
+        private DocumentElement _node;
 
         internal InternalDocumentConverter__Anonymous_20(DocumentElement node)
         {

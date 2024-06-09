@@ -5,9 +5,9 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
     internal class XmlElement : XmlNode, XmlElementLike {
-        internal Map<string, string> _attributes;
-        internal List<XmlNode> _children;
-        internal string _name;
+        private Map<string, string> _attributes;
+        private List<XmlNode> _children;
+        private string _name;
 
         internal XmlElement(string name, Map<string, string> attributes, List<XmlNode> children)
         {

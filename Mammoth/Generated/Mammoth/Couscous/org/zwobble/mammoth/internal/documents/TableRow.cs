@@ -3,8 +3,8 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class TableRow : DocumentElement, HasChildren {
-        internal List<DocumentElement> _children;
-        internal bool _isHeader;
+        private List<DocumentElement> _children;
+        private bool _isHeader;
 
         internal TableRow(List<DocumentElement> children, bool isHeader)
         {

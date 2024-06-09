@@ -6,7 +6,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class CommentXmlReader {
-        internal BodyXmlReader _bodyReader;
+        private BodyXmlReader _bodyReader;
 
         internal CommentXmlReader(BodyXmlReader bodyReader)
         {

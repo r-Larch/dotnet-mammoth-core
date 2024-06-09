@@ -7,8 +7,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
     internal class DocumentToHtml__Anonymous_16 : Supplier<List<HtmlNode>> {
-        internal CommentReference _commentReference;
-        internal DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+        private CommentReference _commentReference;
+        private DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
 
         internal DocumentToHtml__Anonymous_16(CommentReference commentReference, DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)
         {

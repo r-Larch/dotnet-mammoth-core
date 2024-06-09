@@ -3,8 +3,8 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
     internal class NamespacePrefix {
-        internal Optional<string> _prefix;
-        internal string _uri;
+        private Optional<string> _prefix;
+        private string _uri;
 
         internal NamespacePrefix(Optional<string> prefix, string uri)
         {

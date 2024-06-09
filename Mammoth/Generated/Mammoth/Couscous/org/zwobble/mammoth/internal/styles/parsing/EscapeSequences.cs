@@ -4,7 +4,7 @@ using Mammoth.Couscous.java.util.regex;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class EscapeSequences {
-        internal static Pattern _PATTERN;
+        private static Pattern _PATTERN;
 
         static EscapeSequences()
         {

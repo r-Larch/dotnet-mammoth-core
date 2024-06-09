@@ -3,9 +3,9 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
     internal class XmlElementBuilder {
-        internal Map<string, string> _attributes;
-        internal List<XmlNode> _children;
-        internal string _name;
+        private Map<string, string> _attributes;
+        private List<XmlNode> _children;
+        private string _name;
 
         internal XmlElementBuilder(string name, Map<string, string> attributes)
         {

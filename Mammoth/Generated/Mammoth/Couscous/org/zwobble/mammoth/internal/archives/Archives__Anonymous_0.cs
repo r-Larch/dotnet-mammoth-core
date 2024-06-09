@@ -4,7 +4,7 @@ using Mammoth.Couscous.java.util.function;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.archives {
     internal class Archives__Anonymous_0 : Supplier<IOException> {
-        internal string _name;
+        private string _name;
 
         internal Archives__Anonymous_0(string name)
         {

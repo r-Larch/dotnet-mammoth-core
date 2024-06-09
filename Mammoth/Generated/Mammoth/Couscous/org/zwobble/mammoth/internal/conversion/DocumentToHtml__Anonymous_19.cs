@@ -8,8 +8,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
     internal class DocumentToHtml__Anonymous_19 : Function<string, List<HtmlNode>> {
-        internal Image _image;
-        internal DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+        private Image _image;
+        private DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
 
         internal DocumentToHtml__Anonymous_19(DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, Image image)
         {

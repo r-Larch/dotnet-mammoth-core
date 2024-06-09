@@ -3,10 +3,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class BreakMatcher : DocumentElementMatcher<Break> {
-        internal static BreakMatcher _LINE_BREAK;
-        internal static BreakMatcher _PAGE_BREAK;
-        internal static BreakMatcher _COLUMN_BREAK;
-        internal Break__Type _breakType;
+        public static BreakMatcher _LINE_BREAK;
+        public static BreakMatcher _PAGE_BREAK;
+        public static BreakMatcher _COLUMN_BREAK;
+        private Break__Type _breakType;
 
         static BreakMatcher()
         {

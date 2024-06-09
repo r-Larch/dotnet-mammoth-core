@@ -1,6 +1,6 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class HtmlPathParser__Anonymous_0 : TokenIterator__Action {
-        internal TokenIterator<TokenType> _tokens;
+        private TokenIterator<TokenType> _tokens;
 
         internal HtmlPathParser__Anonymous_0(TokenIterator<TokenType> tokens)
         {

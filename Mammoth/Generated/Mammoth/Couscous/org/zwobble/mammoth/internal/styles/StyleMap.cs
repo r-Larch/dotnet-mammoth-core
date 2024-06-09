@@ -5,17 +5,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class StyleMap {
-        internal static StyleMap _EMPTY;
-        internal Optional<HtmlPath> _bold;
-        internal List<StyleMapping<Break>> _breakStyles;
-        internal Optional<HtmlPath> _commentReference;
-        internal Optional<HtmlPath> _italic;
-        internal List<StyleMapping<Paragraph>> _paragraphStyles;
-        internal List<StyleMapping<Run>> _runStyles;
-        internal Optional<HtmlPath> _smallCaps;
-        internal Optional<HtmlPath> _strikethrough;
-        internal List<StyleMapping<Table>> _tableStyles;
-        internal Optional<HtmlPath> _underline;
+        public static StyleMap _EMPTY;
+        private Optional<HtmlPath> _bold;
+        private List<StyleMapping<Break>> _breakStyles;
+        private Optional<HtmlPath> _commentReference;
+        private Optional<HtmlPath> _italic;
+        private List<StyleMapping<Paragraph>> _paragraphStyles;
+        private List<StyleMapping<Run>> _runStyles;
+        private Optional<HtmlPath> _smallCaps;
+        private Optional<HtmlPath> _strikethrough;
+        private List<StyleMapping<Table>> _tableStyles;
+        private Optional<HtmlPath> _underline;
 
         static StyleMap()
         {

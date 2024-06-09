@@ -7,9 +7,9 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class NotesXmlReader {
-        internal BodyXmlReader _bodyReader;
-        internal NoteType _noteType;
-        internal string _tagName;
+        private BodyXmlReader _bodyReader;
+        public NoteType _noteType;
+        private string _tagName;
 
         internal NotesXmlReader(BodyXmlReader bodyReader, string tagName, NoteType noteType)
         {

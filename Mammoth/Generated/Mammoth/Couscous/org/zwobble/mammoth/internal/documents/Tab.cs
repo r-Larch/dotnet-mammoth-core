@@ -1,6 +1,6 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Tab : DocumentElement {
-        internal static Tab _TAB;
+        public static Tab _TAB;
 
         static Tab()
         {

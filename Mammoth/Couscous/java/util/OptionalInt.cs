@@ -6,7 +6,7 @@ namespace Mammoth.Couscous.java.util {
     }
 
     internal struct NoneInt : OptionalInt {
-        internal static readonly NoneInt Instance = new();
+        public static readonly NoneInt Instance = new();
 
         public bool isPresent()
         {

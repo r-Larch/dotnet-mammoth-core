@@ -4,8 +4,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
     internal class XmlParser__NodeGenerator : SimpleSaxHandler {
-        internal Deque<XmlElementBuilder> _elementStack;
-        internal XmlParser _this_org__zwobble__mammoth__internal__xml__parsing__XmlParser;
+        private Deque<XmlElementBuilder> _elementStack;
+        private XmlParser _this_org__zwobble__mammoth__internal__xml__parsing__XmlParser;
 
         internal XmlParser__NodeGenerator(XmlParser this_org__zwobble__mammoth__internal__xml__parsing__XmlParser)
         {

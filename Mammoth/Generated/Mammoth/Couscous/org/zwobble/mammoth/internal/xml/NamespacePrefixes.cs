@@ -5,7 +5,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
     internal class NamespacePrefixes : Iterable<NamespacePrefix> {
-        internal Map<string, NamespacePrefix> _uriToPrefix;
+        private Map<string, NamespacePrefix> _uriToPrefix;
 
         internal NamespacePrefixes(Map<string, NamespacePrefix> uriToPrefix)
         {

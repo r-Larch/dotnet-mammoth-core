@@ -6,7 +6,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class HtmlPathElements : HtmlPath {
-        internal List<HtmlPathElement> _elements;
+        private List<HtmlPathElement> _elements;
 
         internal HtmlPathElements(List<HtmlPathElement> elements)
         {

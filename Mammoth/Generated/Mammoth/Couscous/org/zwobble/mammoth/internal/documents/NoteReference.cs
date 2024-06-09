@@ -1,7 +1,7 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class NoteReference : DocumentElement {
-        internal string _noteId;
-        internal NoteType _noteType;
+        private string _noteId;
+        private NoteType _noteType;
 
         internal NoteReference(NoteType noteType, string noteId)
         {

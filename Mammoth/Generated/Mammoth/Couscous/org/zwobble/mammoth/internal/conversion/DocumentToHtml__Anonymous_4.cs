@@ -6,8 +6,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
     internal class DocumentToHtml__Anonymous_4 : Function<DocumentElement, Iterable<HtmlNode>> {
-        internal DocumentToHtml__Context _context;
-        internal DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+        private DocumentToHtml__Context _context;
+        private DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
 
         internal DocumentToHtml__Anonymous_4(DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, DocumentToHtml__Context context)
         {

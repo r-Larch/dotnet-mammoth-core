@@ -5,8 +5,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__Anonymous_23 : Function<List<DocumentElement>, DocumentElement> {
-        internal Optional<string> _anchor;
-        internal Optional<string> _targetFrame;
+        private Optional<string> _anchor;
+        private Optional<string> _targetFrame;
 
         internal StatefulBodyXmlReader__Anonymous_23(Optional<string> anchor, Optional<string> targetFrame)
         {

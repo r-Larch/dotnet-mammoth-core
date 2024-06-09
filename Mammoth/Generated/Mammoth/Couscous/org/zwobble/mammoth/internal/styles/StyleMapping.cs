@@ -5,8 +5,8 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class StyleMapping<T> {
-        internal HtmlPath _htmlPath;
-        internal DocumentElementMatcher<T> _matcher;
+        private HtmlPath _htmlPath;
+        private DocumentElementMatcher<T> _matcher;
 
         internal StyleMapping(DocumentElementMatcher<T> matcher, HtmlPath htmlPath)
         {

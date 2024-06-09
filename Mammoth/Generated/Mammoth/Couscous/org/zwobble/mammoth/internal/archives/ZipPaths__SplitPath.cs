@@ -1,7 +1,7 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.archives {
     internal class ZipPaths__SplitPath {
-        internal string _basename;
-        internal string _dirname;
+        private string _basename;
+        private string _dirname;
 
         internal ZipPaths__SplitPath(string dirname, string basename)
         {

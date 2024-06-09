@@ -1,6 +1,6 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Text : DocumentElement {
-        internal string _value;
+        private string _value;
 
         internal Text(string value)
         {

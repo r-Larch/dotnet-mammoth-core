@@ -5,7 +5,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.styles;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
     internal class DocumentToHtml__Anonymous_9 : Supplier<HtmlPath> {
-        internal Break _breakElement;
+        private Break _breakElement;
 
         internal DocumentToHtml__Anonymous_9(Break breakElement)
         {

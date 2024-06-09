@@ -4,8 +4,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Notes {
-        internal static Notes _EMPTY;
-        internal Map<NoteType, Map<string, Note>> _notes;
+        public static Notes _EMPTY;
+        private Map<NoteType, Map<string, Note>> _notes;
 
         static Notes()
         {

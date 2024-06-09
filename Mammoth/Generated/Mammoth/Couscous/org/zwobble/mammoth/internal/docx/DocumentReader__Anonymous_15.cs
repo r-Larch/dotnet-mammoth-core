@@ -7,8 +7,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class DocumentReader__Anonymous_15 : SupplierWithException<Optional<XmlElement>, IOException> {
-        internal string _name;
-        internal Archive _zipFile;
+        private string _name;
+        private Archive _zipFile;
 
         internal DocumentReader__Anonymous_15(Archive zipFile, string name)
         {

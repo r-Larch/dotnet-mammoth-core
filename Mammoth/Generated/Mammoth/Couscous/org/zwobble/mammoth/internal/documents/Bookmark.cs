@@ -1,6 +1,6 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Bookmark : DocumentElement {
-        internal string _name;
+        private string _name;
 
         internal Bookmark(string name)
         {

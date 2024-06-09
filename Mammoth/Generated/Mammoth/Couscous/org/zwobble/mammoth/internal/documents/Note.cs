@@ -3,9 +3,9 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Note {
-        internal List<DocumentElement> _body;
-        internal string _id;
-        internal NoteType _noteType;
+        private List<DocumentElement> _body;
+        private string _id;
+        private NoteType _noteType;
 
         internal Note(NoteType noteType, string id, List<DocumentElement> body)
         {

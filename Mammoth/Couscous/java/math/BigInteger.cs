@@ -1,6 +1,6 @@
 namespace Mammoth.Couscous.java.math {
     internal class BigInteger {
-        internal static readonly BigInteger _ONE = new(1);
+        public static readonly BigInteger _ONE = new(1);
 
         // TOOD: use proper BigInteger
         private readonly long _value;

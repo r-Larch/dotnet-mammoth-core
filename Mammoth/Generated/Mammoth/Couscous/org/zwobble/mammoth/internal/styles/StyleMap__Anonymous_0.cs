@@ -4,7 +4,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class StyleMap__Anonymous_0 : Predicate<StyleMapping<Paragraph>> {
-        internal Paragraph _paragraph;
+        private Paragraph _paragraph;
 
         internal StyleMap__Anonymous_0(Paragraph paragraph)
         {

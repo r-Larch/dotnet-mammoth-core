@@ -5,8 +5,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class HtmlPath_static {
-        internal static HtmlPath _EMPTY;
-        internal static HtmlPath _IGNORE;
+        public static HtmlPath _EMPTY;
+        public static HtmlPath _IGNORE;
 
         static HtmlPath_static()
         {

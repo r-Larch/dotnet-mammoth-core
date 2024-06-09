@@ -3,8 +3,8 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Table : DocumentElement, HasChildren {
-        internal List<DocumentElement> _children;
-        internal Optional<Style> _style;
+        private List<DocumentElement> _children;
+        private Optional<Style> _style;
 
         internal Table(Optional<Style> style, List<DocumentElement> children)
         {

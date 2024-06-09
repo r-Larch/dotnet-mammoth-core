@@ -1,6 +1,6 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
     internal class HtmlTextNode : HtmlNode {
-        internal string _value;
+        private string _value;
 
         internal HtmlTextNode(string value)
         {

@@ -4,10 +4,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class ContentTypes {
-        internal static ContentTypes _DEFAULT;
-        internal static Map<string, string> _imageExtensions;
-        internal Map<string, string> _extensionDefaults;
-        internal Map<string, string> _overrides;
+        public static ContentTypes _DEFAULT;
+        private static Map<string, string> _imageExtensions;
+        private Map<string, string> _extensionDefaults;
+        private Map<string, string> _overrides;
 
         static ContentTypes()
         {

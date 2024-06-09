@@ -4,7 +4,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StylesXml__Anonymous_0 : Predicate<XmlElement> {
-        internal string _styleType;
+        private string _styleType;
 
         internal StylesXml__Anonymous_0(string styleType)
         {

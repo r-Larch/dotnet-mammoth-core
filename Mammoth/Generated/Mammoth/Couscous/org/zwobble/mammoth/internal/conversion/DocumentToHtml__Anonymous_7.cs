@@ -6,9 +6,9 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
     internal class DocumentToHtml__Anonymous_7 : Supplier<List<HtmlNode>> {
-        internal DocumentToHtml__Context _context;
-        internal Run _run;
-        internal DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+        private DocumentToHtml__Context _context;
+        private Run _run;
+        private DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
 
         internal DocumentToHtml__Anonymous_7(DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, Run run, DocumentToHtml__Context context)
         {

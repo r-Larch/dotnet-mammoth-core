@@ -3,10 +3,10 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class ParagraphIndent {
-        internal Optional<string> _end;
-        internal Optional<string> _firstLine;
-        internal Optional<string> _hanging;
-        internal Optional<string> _start;
+        private Optional<string> _end;
+        private Optional<string> _firstLine;
+        private Optional<string> _hanging;
+        private Optional<string> _start;
 
         internal ParagraphIndent(Optional<string> start, Optional<string> end, Optional<string> firstLine, Optional<string> hanging)
         {

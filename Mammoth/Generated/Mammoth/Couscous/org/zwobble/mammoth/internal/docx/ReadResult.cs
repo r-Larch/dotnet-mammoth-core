@@ -8,10 +8,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class ReadResult {
-        internal static ReadResult _EMPTY_SUCCESS;
-        internal List<DocumentElement> _elements;
-        internal List<DocumentElement> _extra;
-        internal Iterable<string> _warnings;
+        public static ReadResult _EMPTY_SUCCESS;
+        public List<DocumentElement> _elements;
+        public List<DocumentElement> _extra;
+        public Iterable<string> _warnings;
 
         static ReadResult()
         {
