@@ -545,7 +545,7 @@ Ensure to set `PROJECT` var to the solution directory without final backslash!
 
 ```cmd
 set PROJECT=".....TODO_PROJECT_DIR....."
-set JAVA_HOME="c:/Temp/openlogic-openjdk-8u402-b06-windows-32"
+set JAVA_HOME="c:\Temp\openlogic-openjdk-8u402-b06-windows-32"
 set PATH="%JAVA_HOME%;%PATH%"
 
 cd c:\Temp\java-couscous\
@@ -555,5 +555,5 @@ cd %PROJECT%\java-mammoth\
 c:\Temp\apache-maven-3.9.7\bin\mvn clean deploy -P release
 
 cd %PROJECT%
-%JAVA_HOME%/bin/java.exe -jar c:\Tmep\java-couscous\target\couscous-0.0.1-SNAPSHOT.jar
+%JAVA_HOME%\bin\java.exe -jar c:\Temp\java-couscous\target\couscous-0.0.1-SNAPSHOT.jar
 ```
