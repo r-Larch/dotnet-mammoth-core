@@ -18,6 +18,6 @@
     "!java-mammoth/src/main/java/org/zwobble/mammoth/internal/xml/XmlWriter.java"
 
   ],
-  "output": "Mammoth/generated.cs",
+  "output": "Mammoth/Generated/generated.cs",
   "namespace": "Mammoth.Couscous"
 }
