@@ -7,57 +7,57 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous {
     internal static class FromJava {
-        internal static IEnumerable<T> IterableToEnumerable<T>(Iterable<T> iterable)
+        internal static IEnumerable<T> IterableToEnumerable<T>(ITerable<T> iterable)
         {
-            var iterator = iterable.iterator();
-            while (iterator.hasNext()) {
-                yield return iterator.next();
+            var iterator = iterable.Iterator();
+            while (iterator.HasNext()) {
+                yield return iterator.Next();
             }
         }
 
-        internal static IDictionary<TKey, TValue> MapToDictionary<TKey, TValue>(Map<TKey, TValue> map)
+        internal static IDictionary<TKey, TValue> MapToDictionary<TKey, TValue>(IMap<TKey, TValue> map)
         {
             return map.AsDictionary();
         }
     }
 
     internal static class ToJava {
-        internal static Iterable<T> EnumerableToIterable<T>(IEnumerable<T> enumerator)
+        internal static ITerable<T> EnumerableToIterable<T>(IEnumerable<T> enumerator)
         {
             return new IterableWrapper<T>(enumerator);
         }
 
-        internal static Iterator<T> EnumeratorToIterator<T>(IEnumerator<T> enumerator)
+        internal static ITerator<T> EnumeratorToIterator<T>(IEnumerator<T> enumerator)
         {
             return new EnumeratorToIteratorAdapter<T>(enumerator);
         }
 
-        internal static Map<TKey, TValue> DictionaryToMap<TKey, TValue>(IDictionary<TKey, TValue> dictionary)
+        internal static IMap<TKey, TValue> DictionaryToMap<TKey, TValue>(IDictionary<TKey, TValue> dictionary)
         {
             return new HashMap<TKey, TValue>(new Dictionary<TKey, TValue>(dictionary));
         }
 
-        internal static Map<TKey, TValue> DictionaryToMap<TKey, TValue>(Dictionary<TKey, TValue> dictionary)
+        internal static IMap<TKey, TValue> DictionaryToMap<TKey, TValue>(Dictionary<TKey, TValue> dictionary)
         {
             return new HashMap<TKey, TValue>(dictionary);
         }
 
-        internal static java.util.List<T> ListToList<T>(IList<T> list)
+        internal static java.util.IList<T> ListToList<T>(System.Collections.Generic.IList<T> list)
         {
             return new ArrayList<T>(list);
         }
 
-        internal static InputStream StreamToInputStream(Stream stream)
+        internal static INputStream StreamToInputStream(Stream stream)
         {
             return new StreamToInputStreamAdapter(stream);
         }
 
-        internal static Collection<T> CollectionToCollection<T>(ICollection<T> collection)
+        internal static java.util.ICollection<T> CollectionToCollection<T>(System.Collections.Generic.ICollection<T> collection)
         {
             return new CollectionToCollectionAdapter<T>(collection);
         }
 
-        private class IterableWrapper<T> : Iterable<T> {
+        private class IterableWrapper<T> : ITerable<T> {
             private readonly IEnumerable<T> _enumerable;
 
             internal IterableWrapper(IEnumerable<T> enumerable)
@@ -65,13 +65,13 @@ namespace Mammoth.Couscous {
                 _enumerable = enumerable;
             }
 
-            public Iterator<T> iterator()
+            public ITerator<T> Iterator()
             {
                 return EnumeratorToIterator(_enumerable.GetEnumerator());
             }
         }
 
-        private class EnumeratorToIteratorAdapter<T> : Iterator<T> {
+        private class EnumeratorToIteratorAdapter<T> : ITerator<T> {
             private readonly IEnumerator<T> _enumerator;
             private bool _hasNext;
             private bool _ready;
@@ -82,13 +82,13 @@ namespace Mammoth.Couscous {
                 _ready = false;
             }
 
-            public bool hasNext()
+            public bool HasNext()
             {
                 MakeReady();
                 return _hasNext;
             }
 
-            public T next()
+            public T Next()
             {
                 MakeReady();
                 if (_hasNext) {
@@ -113,7 +113,7 @@ namespace Mammoth.Couscous {
             }
         }
 
-        private class StreamToInputStreamAdapter : InputStream {
+        private class StreamToInputStreamAdapter : INputStream {
             internal StreamToInputStreamAdapter(Stream stream)
             {
                 Stream = stream;
@@ -122,35 +122,35 @@ namespace Mammoth.Couscous {
             public Stream Stream { get; }
         }
 
-        private class CollectionToCollectionAdapter<T> : Collection<T> {
-            private readonly ICollection<T> _collection;
+        private class CollectionToCollectionAdapter<T> : java.util.ICollection<T> {
+            private readonly System.Collections.Generic.ICollection<T> _collection;
 
-            internal CollectionToCollectionAdapter(ICollection<T> collection)
+            internal CollectionToCollectionAdapter(System.Collections.Generic.ICollection<T> collection)
             {
                 _collection = collection;
             }
 
-            public bool isEmpty()
+            public bool IsEmpty()
             {
                 return _collection.Count == 0;
             }
 
-            public int size()
+            public int Size()
             {
                 return _collection.Count;
             }
 
-            public bool contains(object value)
+            public bool Contains(object value)
             {
                 return value is T && _collection.Contains((T) value);
             }
 
-            public Iterator<T> iterator()
+            public ITerator<T> Iterator()
             {
                 return EnumeratorToIterator(_collection.GetEnumerator());
             }
 
-            public void add(T value)
+            public void Add(T value)
             {
                 throw new UnsupportedOperationException();
             }

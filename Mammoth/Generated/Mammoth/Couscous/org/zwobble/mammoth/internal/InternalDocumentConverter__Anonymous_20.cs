@@ -4,19 +4,19 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_20 : Supplier<string> {
-        private DocumentElement _node;
+    internal class InternalDocumentConverterAnonymous20 : ISupplier<string> {
+        private IDocumentElement _node;
 
-        internal InternalDocumentConverter__Anonymous_20(DocumentElement node)
+        internal InternalDocumentConverterAnonymous20(IDocumentElement node)
         {
             _node = node;
         }
 
-        public string get()
+        public string Get()
         {
-            var children = ((Casts.tryCast<HasChildren>(typeof(HasChildren), _node)).map(new InternalDocumentConverter__Anonymous_18())).orElse(Lists.list<DocumentElement>());
-            var suffix = ((Casts.tryCast<Paragraph>(typeof(Paragraph), _node)).map(new InternalDocumentConverter__Anonymous_19())).orElse("");
-            return InternalDocumentConverter.extractRawText(children) + suffix;
+            var children = ((Casts.TryCast<IHasChildren>(typeof(IHasChildren), _node)).Map(new InternalDocumentConverterAnonymous18())).OrElse(Lists.List<IDocumentElement>());
+            var suffix = ((Casts.TryCast<Paragraph>(typeof(Paragraph), _node)).Map(new InternalDocumentConverterAnonymous19())).OrElse("");
+            return InternalDocumentConverter.ExtractRawText(children) + suffix;
         }
     }
 }

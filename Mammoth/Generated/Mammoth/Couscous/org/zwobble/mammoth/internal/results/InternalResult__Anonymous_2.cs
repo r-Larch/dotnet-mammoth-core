@@ -2,27 +2,27 @@ using Mammoth.Couscous.java.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.results {
-    internal static class InternalResult__Anonymous_2 {
+    internal static class InternalResultAnonymous2 {
     }
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.results {
-    internal class InternalResult__Anonymous_2<T> : Result<T> {
-        private InternalResult<T> _this_org__zwobble__mammoth__internal__results__InternalResult;
-        private Set<string> _warnings;
+    internal class InternalResultAnonymous2<T> : IResult<T> {
+        private InternalResult<T> _thisOrgZwobbleMammothInternalResultsInternalResult;
+        private ISet<string> _warnings;
 
-        internal InternalResult__Anonymous_2(InternalResult<T> this_org__zwobble__mammoth__internal__results__InternalResult, Set<string> warnings)
+        internal InternalResultAnonymous2(InternalResult<T> thisOrgZwobbleMammothInternalResultsInternalResult, ISet<string> warnings)
         {
-            _this_org__zwobble__mammoth__internal__results__InternalResult = this_org__zwobble__mammoth__internal__results__InternalResult;
+            _thisOrgZwobbleMammothInternalResultsInternalResult = thisOrgZwobbleMammothInternalResultsInternalResult;
             _warnings = warnings;
         }
 
-        public T getValue()
+        public T GetValue()
         {
-            return (_this_org__zwobble__mammoth__internal__results__InternalResult)._value;
+            return (_thisOrgZwobbleMammothInternalResultsInternalResult).Value;
         }
 
-        public Set<string> getWarnings()
+        public ISet<string> GetWarnings()
         {
             return _warnings;
         }

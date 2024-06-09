@@ -1,5 +1,5 @@
 namespace Mammoth.Couscous.java.util.function {
-    internal interface BiPredicate<T, U> {
-        bool test(T first, U second);
+    internal interface IBiPredicate<T, TU> {
+        bool Test(T first, TU second);
     }
 }

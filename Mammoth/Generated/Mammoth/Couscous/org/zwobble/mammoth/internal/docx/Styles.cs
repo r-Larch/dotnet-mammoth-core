@@ -5,36 +5,36 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class Styles {
-        public static Styles _EMPTY;
-        private Map<string, Style> _characterStyles;
-        private Map<string, Style> _paragraphStyles;
-        private Map<string, Style> _tableStyles;
+        public static Styles Empty;
+        private IMap<string, Style> _characterStyles;
+        private IMap<string, Style> _paragraphStyles;
+        private IMap<string, Style> _tableStyles;
 
         static Styles()
         {
-            _EMPTY = new Styles(Maps.map<string, Style>(), Maps.map<string, Style>(), Maps.map<string, Style>());
+            Empty = new Styles(Maps.Map<string, Style>(), Maps.Map<string, Style>(), Maps.Map<string, Style>());
         }
 
-        internal Styles(Map<string, Style> paragraphStyles, Map<string, Style> characterStyles, Map<string, Style> tableStyles)
+        internal Styles(IMap<string, Style> paragraphStyles, IMap<string, Style> characterStyles, IMap<string, Style> tableStyles)
         {
             _paragraphStyles = paragraphStyles;
             _characterStyles = characterStyles;
             _tableStyles = tableStyles;
         }
 
-        public Optional<Style> findParagraphStyleById(string id)
+        public IOptional<Style> FindParagraphStyleById(string id)
         {
-            return Maps.lookup(_paragraphStyles, id);
+            return Maps.Lookup(_paragraphStyles, id);
         }
 
-        public Optional<Style> findCharacterStyleById(string id)
+        public IOptional<Style> FindCharacterStyleById(string id)
         {
-            return Maps.lookup(_characterStyles, id);
+            return Maps.Lookup(_characterStyles, id);
         }
 
-        public Optional<Style> findTableStyleById(string id)
+        public IOptional<Style> FindTableStyleById(string id)
         {
-            return Maps.lookup(_tableStyles, id);
+            return Maps.Lookup(_tableStyles, id);
         }
     }
 }

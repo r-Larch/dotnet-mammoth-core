@@ -4,17 +4,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_8 : Function<string, Optional<Style>> {
-        private StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+    internal class StatefulBodyXmlReaderAnonymous8 : IFunction<string, IOptional<Style>> {
+        private StatefulBodyXmlReader _thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader;
 
-        internal StatefulBodyXmlReader__Anonymous_8(StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader)
+        internal StatefulBodyXmlReaderAnonymous8(StatefulBodyXmlReader thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader)
         {
-            _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+            _thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader = thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader;
         }
 
-        public Optional<Style> apply(string arg0)
+        public IOptional<Style> Apply(string arg0)
         {
-            return ((_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader)._styles).findParagraphStyleById(arg0);
+            return ((_thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader).Styles).FindParagraphStyleById(arg0);
         }
     }
 }

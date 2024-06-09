@@ -2,13 +2,13 @@ using Mammoth.Couscous.java.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class Paragraph : DocumentElement, HasChildren {
-        private List<DocumentElement> _children;
+    internal class Paragraph : IDocumentElement, IHasChildren {
+        private IList<IDocumentElement> _children;
         private ParagraphIndent _indent;
-        private Optional<NumberingLevel> _numbering;
-        private Optional<Style> _style;
+        private IOptional<NumberingLevel> _numbering;
+        private IOptional<Style> _style;
 
-        internal Paragraph(Optional<Style> style, Optional<NumberingLevel> numbering, ParagraphIndent indent, List<DocumentElement> children)
+        internal Paragraph(IOptional<Style> style, IOptional<NumberingLevel> numbering, ParagraphIndent indent, IList<IDocumentElement> children)
         {
             _style = style;
             _numbering = numbering;
@@ -16,27 +16,27 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
             _children = children;
         }
 
-        public T accept<T, U>(DocumentElementVisitor<T, U> visitor, U context)
+        public T Accept<T, TU>(IDocumentElementVisitor<T, TU> visitor, TU context)
         {
-            return visitor.visit(this, context);
+            return visitor.Visit(this, context);
         }
 
-        public List<DocumentElement> getChildren()
+        public IList<IDocumentElement> GetChildren()
         {
             return _children;
         }
 
-        public Optional<Style> getStyle()
+        public IOptional<Style> GetStyle()
         {
             return _style;
         }
 
-        public Optional<NumberingLevel> getNumbering()
+        public IOptional<NumberingLevel> GetNumbering()
         {
             return _numbering;
         }
 
-        public ParagraphIndent getIndent()
+        public ParagraphIndent GetIndent()
         {
             return _indent;
         }

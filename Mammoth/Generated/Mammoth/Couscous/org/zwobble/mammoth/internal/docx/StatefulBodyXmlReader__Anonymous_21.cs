@@ -3,19 +3,19 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_21 : Function<string, string> {
-        private Optional<string> _anchor;
+    internal class StatefulBodyXmlReaderAnonymous21 : IFunction<string, string> {
+        private IOptional<string> _anchor;
         private string _targetHref;
 
-        internal StatefulBodyXmlReader__Anonymous_21(string targetHref, Optional<string> anchor)
+        internal StatefulBodyXmlReaderAnonymous21(string targetHref, IOptional<string> anchor)
         {
             _targetHref = targetHref;
             _anchor = anchor;
         }
 
-        public string apply(string fragment)
+        public string Apply(string fragment)
         {
-            return Uris.replaceFragment(_targetHref, (_anchor).get());
+            return Uris.ReplaceFragment(_targetHref, (_anchor).Get());
         }
     }
 }

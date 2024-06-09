@@ -3,12 +3,12 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Comment {
-        private Optional<string> _authorInitials;
-        private Optional<string> _authorName;
-        private List<DocumentElement> _body;
+        private IOptional<string> _authorInitials;
+        private IOptional<string> _authorName;
+        private IList<IDocumentElement> _body;
         private string _commentId;
 
-        internal Comment(string commentId, List<DocumentElement> body, Optional<string> authorName, Optional<string> authorInitials)
+        internal Comment(string commentId, IList<IDocumentElement> body, IOptional<string> authorName, IOptional<string> authorInitials)
         {
             _commentId = commentId;
             _body = body;
@@ -16,22 +16,22 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
             _authorInitials = authorInitials;
         }
 
-        public string getCommentId()
+        public string GetCommentId()
         {
             return _commentId;
         }
 
-        public List<DocumentElement> getBody()
+        public IList<IDocumentElement> GetBody()
         {
             return _body;
         }
 
-        public Optional<string> getAuthorInitials()
+        public IOptional<string> GetAuthorInitials()
         {
             return _authorInitials;
         }
 
-        public Optional<string> getAuthorName()
+        public IOptional<string> GetAuthorName()
         {
             return _authorName;
         }

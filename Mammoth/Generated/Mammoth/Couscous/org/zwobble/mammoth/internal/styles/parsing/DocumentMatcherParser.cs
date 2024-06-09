@@ -6,134 +6,134 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class DocumentMatcherParser {
-        public static BiConsumer<StyleMapBuilder, HtmlPath> parse(TokenIterator<TokenType> tokens)
+        public static IBiConsumer<StyleMapBuilder, IHtmlPath> Parse(TokenIterator<TokenType> tokens)
         {
-            var identifier = tokens.next(TokenType._IDENTIFIER);
-            switch (identifier.getValue()) {
+            var identifier = tokens.Next(TokenType.Identifier);
+            switch (identifier.GetValue()) {
                 case "p":
-                    var paragraph = parseParagraphMatcher(tokens);
-                    return new DocumentMatcherParser__Anonymous_0(paragraph);
+                    var paragraph = ParseParagraphMatcher(tokens);
+                    return new DocumentMatcherParserAnonymous0(paragraph);
                 case "r":
-                    var run = parseRunMatcher(tokens);
-                    return new DocumentMatcherParser__Anonymous_1(run);
+                    var run = ParseRunMatcher(tokens);
+                    return new DocumentMatcherParserAnonymous1(run);
                 case "table":
-                    var table = parseTableMatcher(tokens);
-                    return new DocumentMatcherParser__Anonymous_2(table);
+                    var table = ParseTableMatcher(tokens);
+                    return new DocumentMatcherParserAnonymous2(table);
                 case "b":
-                    return new DocumentMatcherParser__Anonymous_3();
+                    return new DocumentMatcherParserAnonymous3();
                 case "i":
-                    return new DocumentMatcherParser__Anonymous_4();
+                    return new DocumentMatcherParserAnonymous4();
                 case "u":
-                    return new DocumentMatcherParser__Anonymous_5();
+                    return new DocumentMatcherParserAnonymous5();
                 case "strike":
-                    return new DocumentMatcherParser__Anonymous_6();
+                    return new DocumentMatcherParserAnonymous6();
                 case "small-caps":
-                    return new DocumentMatcherParser__Anonymous_7();
+                    return new DocumentMatcherParserAnonymous7();
                 case "comment-reference":
-                    return new DocumentMatcherParser__Anonymous_8();
+                    return new DocumentMatcherParserAnonymous8();
                 case "br":
-                    var breakMatcher = parseBreakMatcher(tokens);
-                    return new DocumentMatcherParser__Anonymous_9(breakMatcher);
+                    var breakMatcher = ParseBreakMatcher(tokens);
+                    return new DocumentMatcherParserAnonymous9(breakMatcher);
                 default:
-                    throw LineParseException.lineParseException(identifier, "Unrecognised document element: " + identifier);
+                    throw LineParseException.Create(identifier, "Unrecognised document element: " + identifier);
             }
         }
 
-        public static ParagraphMatcher parseParagraphMatcher(TokenIterator<TokenType> tokens)
+        public static ParagraphMatcher ParseParagraphMatcher(TokenIterator<TokenType> tokens)
         {
-            var styleId = parseStyleId(tokens);
-            var styleName = parseStyleName(tokens);
-            var numbering = parseNumbering(tokens);
+            var styleId = ParseStyleId(tokens);
+            var styleName = ParseStyleName(tokens);
+            var numbering = ParseNumbering(tokens);
             return new ParagraphMatcher(styleId, styleName, numbering);
         }
 
-        public static RunMatcher parseRunMatcher(TokenIterator<TokenType> tokens)
+        public static RunMatcher ParseRunMatcher(TokenIterator<TokenType> tokens)
         {
-            var styleId = parseStyleId(tokens);
-            var styleName = parseStyleName(tokens);
+            var styleId = ParseStyleId(tokens);
+            var styleName = ParseStyleName(tokens);
             return new RunMatcher(styleId, styleName);
         }
 
-        public static TableMatcher parseTableMatcher(TokenIterator<TokenType> tokens)
+        public static TableMatcher ParseTableMatcher(TokenIterator<TokenType> tokens)
         {
-            var styleId = parseStyleId(tokens);
-            var styleName = parseStyleName(tokens);
+            var styleId = ParseStyleId(tokens);
+            var styleName = ParseStyleName(tokens);
             return new TableMatcher(styleId, styleName);
         }
 
-        public static Optional<string> parseStyleId(TokenIterator<TokenType> tokens)
+        public static IOptional<string> ParseStyleId(TokenIterator<TokenType> tokens)
         {
-            return TokenParser.parseClassName(tokens);
+            return TokenParser.ParseClassName(tokens);
         }
 
-        public static Optional<StringMatcher> parseStyleName(TokenIterator<TokenType> tokens)
+        public static IOptional<IStringMatcher> ParseStyleName(TokenIterator<TokenType> tokens)
         {
-            if (tokens.trySkip(TokenType._SYMBOL, "[")) {
-                tokens.skip(TokenType._IDENTIFIER, "style-name");
-                var stringMatcher = parseStringMatcher(tokens);
-                tokens.skip(TokenType._SYMBOL, "]");
-                return Optional.of(stringMatcher);
+            if (tokens.TrySkip(TokenType.Symbol, "[")) {
+                tokens.Skip(TokenType.Identifier, "style-name");
+                var stringMatcher = ParseStringMatcher(tokens);
+                tokens.Skip(TokenType.Symbol, "]");
+                return Optional.Of(stringMatcher);
             }
 
-            return Optional.empty<StringMatcher>();
+            return Optional.Empty<IStringMatcher>();
         }
 
-        public static StringMatcher parseStringMatcher(TokenIterator<TokenType> tokens)
+        public static IStringMatcher ParseStringMatcher(TokenIterator<TokenType> tokens)
         {
-            if (tokens.trySkip(TokenType._SYMBOL, "=")) {
-                return new EqualToStringMatcher(TokenParser.parseString(tokens));
+            if (tokens.TrySkip(TokenType.Symbol, "=")) {
+                return new EqualToStringMatcher(TokenParser.ParseString(tokens));
             }
 
-            if (tokens.trySkip(TokenType._SYMBOL, "^=")) {
-                return new StartsWithStringMatcher(TokenParser.parseString(tokens));
+            if (tokens.TrySkip(TokenType.Symbol, "^=")) {
+                return new StartsWithStringMatcher(TokenParser.ParseString(tokens));
             }
 
-            throw LineParseException.lineParseException(tokens.next(), "Expected string matcher but got token " + (tokens.next()).getValue());
+            throw LineParseException.Create(tokens.Next(), "Expected string matcher but got token " + (tokens.Next()).GetValue());
         }
 
-        public static Optional<NumberingLevel> parseNumbering(TokenIterator<TokenType> tokens)
+        public static IOptional<NumberingLevel> ParseNumbering(TokenIterator<TokenType> tokens)
         {
-            if (tokens.trySkip(TokenType._SYMBOL, ":")) {
-                var isOrdered = parseListType(tokens);
-                tokens.skip(TokenType._SYMBOL, "(");
-                var level = ((new BigInteger(tokens.nextValue(TokenType._INTEGER))).subtract(BigInteger._ONE)).toString();
-                tokens.skip(TokenType._SYMBOL, ")");
-                return Optional.of(new NumberingLevel(level, isOrdered));
+            if (tokens.TrySkip(TokenType.Symbol, ":")) {
+                var isOrdered = ParseListType(tokens);
+                tokens.Skip(TokenType.Symbol, "(");
+                var level = ((new BigInteger(tokens.NextValue(TokenType.Integer))).Subtract(BigInteger.One)).ToString();
+                tokens.Skip(TokenType.Symbol, ")");
+                return Optional.Of(new NumberingLevel(level, isOrdered));
             }
 
-            return Optional.empty<NumberingLevel>();
+            return Optional.Empty<NumberingLevel>();
         }
 
-        public static bool parseListType(TokenIterator<TokenType> tokens)
+        public static bool ParseListType(TokenIterator<TokenType> tokens)
         {
-            var listType = tokens.next(TokenType._IDENTIFIER);
-            switch (listType.getValue()) {
+            var listType = tokens.Next(TokenType.Identifier);
+            switch (listType.GetValue()) {
                 case "ordered-list":
                     return true;
                 case "unordered-list":
                     return false;
                 default:
-                    throw LineParseException.lineParseException(listType, "Unrecognised list type: " + listType);
+                    throw LineParseException.Create(listType, "Unrecognised list type: " + listType);
             }
         }
 
-        public static BreakMatcher parseBreakMatcher(TokenIterator<TokenType> tokens)
+        public static BreakMatcher ParseBreakMatcher(TokenIterator<TokenType> tokens)
         {
-            tokens.skip(TokenType._SYMBOL, "[");
-            tokens.skip(TokenType._IDENTIFIER, "type");
-            tokens.skip(TokenType._SYMBOL, "=");
-            var stringToken = tokens.next(TokenType._STRING);
-            tokens.skip(TokenType._SYMBOL, "]");
-            var typeName = TokenParser.parseStringToken(stringToken);
+            tokens.Skip(TokenType.Symbol, "[");
+            tokens.Skip(TokenType.Identifier, "type");
+            tokens.Skip(TokenType.Symbol, "=");
+            var stringToken = tokens.Next(TokenType.String);
+            tokens.Skip(TokenType.Symbol, "]");
+            var typeName = TokenParser.ParseStringToken(stringToken);
             switch (typeName) {
                 case "line":
-                    return BreakMatcher._LINE_BREAK;
+                    return BreakMatcher.LineBreak;
                 case "page":
-                    return BreakMatcher._PAGE_BREAK;
+                    return BreakMatcher.PageBreak;
                 case "column":
-                    return BreakMatcher._COLUMN_BREAK;
+                    return BreakMatcher.ColumnBreak;
                 default:
-                    throw LineParseException.lineParseException(stringToken, "Unrecognised break type: " + typeName);
+                    throw LineParseException.Create(stringToken, "Unrecognised break type: " + typeName);
             }
         }
     }

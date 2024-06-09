@@ -3,17 +3,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.archives;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class DocumentReader__Anonymous_4 : Predicate<string> {
-        private Archive _archive;
+    internal class DocumentReaderAnonymous4 : IPredicate<string> {
+        private IArchive _archive;
 
-        internal DocumentReader__Anonymous_4(Archive archive)
+        internal DocumentReaderAnonymous4(IArchive archive)
         {
             _archive = archive;
         }
 
-        public bool test(string arg0)
+        public bool Test(string arg0)
         {
-            return (_archive).exists(arg0);
+            return (_archive).Exists(arg0);
         }
     }
 }

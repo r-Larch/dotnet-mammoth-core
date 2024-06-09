@@ -1,16 +1,16 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
-    internal class Html__Anonymous_3 : HtmlNode__Mapper<HtmlNode> {
-        public HtmlNode visit(HtmlElement element)
+    internal class HtmlAnonymous3 : IHtmlNodeMapper<IHtmlNode> {
+        public IHtmlNode Visit(HtmlElement element)
         {
-            return new HtmlElement(element.getTag(), Html.collapse(element.getChildren()));
+            return new HtmlElement(element.GetTag(), Html.Collapse(element.GetChildren()));
         }
 
-        public HtmlNode visit(HtmlTextNode node)
+        public IHtmlNode Visit(HtmlTextNode node)
         {
             return node;
         }
 
-        public HtmlNode visit(HtmlForceWrite forceWrite)
+        public IHtmlNode Visit(HtmlForceWrite forceWrite)
         {
             return forceWrite;
         }

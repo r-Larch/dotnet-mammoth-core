@@ -6,60 +6,60 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class HtmlPathParser {
-        public static HtmlPath parse(TokenIterator<TokenType> tokens)
+        public static IHtmlPath Parse(TokenIterator<TokenType> tokens)
         {
-            if (tokens.trySkip(TokenType._SYMBOL, "!")) {
-                return HtmlPath_static._IGNORE;
+            if (tokens.TrySkip(TokenType.Symbol, "!")) {
+                return HtmlPathStatic.Ignore;
             }
 
-            return parseHtmlPathElements(tokens);
+            return ParseHtmlPathElements(tokens);
         }
 
-        public static HtmlPath parseHtmlPathElements(TokenIterator<TokenType> tokens)
+        public static IHtmlPath ParseHtmlPathElements(TokenIterator<TokenType> tokens)
         {
-            List<HtmlPathElement> elements = new ArrayList<HtmlPathElement>();
-            if (tokens.peekTokenType() == TokenType._IDENTIFIER) {
-                var element = parseElement(tokens);
-                elements.add(element);
-                while ((tokens.peekTokenType() == TokenType._WHITESPACE) && tokens.isNext(1, TokenType._SYMBOL, ">")) {
-                    tokens.skip(TokenType._WHITESPACE);
-                    tokens.skip(TokenType._SYMBOL, ">");
-                    tokens.skip(TokenType._WHITESPACE);
-                    elements.add(parseElement(tokens));
+            IList<HtmlPathElement> elements = new ArrayList<HtmlPathElement>();
+            if (tokens.PeekTokenType() == TokenType.Identifier) {
+                var element = ParseElement(tokens);
+                elements.Add(element);
+                while ((tokens.PeekTokenType() == TokenType.Whitespace) && tokens.IsNext(1, TokenType.Symbol, ">")) {
+                    tokens.Skip(TokenType.Whitespace);
+                    tokens.Skip(TokenType.Symbol, ">");
+                    tokens.Skip(TokenType.Whitespace);
+                    elements.Add(ParseElement(tokens));
                 }
             }
 
             return new HtmlPathElements(elements);
         }
 
-        public static HtmlPathElement parseElement(TokenIterator<TokenType> tokens)
+        public static HtmlPathElement ParseElement(TokenIterator<TokenType> tokens)
         {
-            var tagNames = parseTagNames(tokens);
-            var classNames = parseClassNames(tokens);
-            var attributes = classNames.isEmpty() ? Maps.map<string, string>() : Maps.map("class", String.join(" ", classNames));
-            var isFresh = parseIsFresh(tokens);
-            var separator = parseSeparator(tokens);
+            var tagNames = ParseTagNames(tokens);
+            var classNames = ParseClassNames(tokens);
+            var attributes = classNames.IsEmpty() ? Maps.Map<string, string>() : Maps.Map("class", String.Join(" ", classNames));
+            var isFresh = ParseIsFresh(tokens);
+            var separator = ParseSeparator(tokens);
             return new HtmlPathElement(new HtmlTag(tagNames, attributes, !isFresh, separator));
         }
 
-        public static List<string> parseTagNames(TokenIterator<TokenType> tokens)
+        public static IList<string> ParseTagNames(TokenIterator<TokenType> tokens)
         {
-            List<string> tagNames = new ArrayList<string>();
-            tagNames.add(TokenParser.parseIdentifier(tokens));
-            while (tokens.trySkip(TokenType._SYMBOL, "|")) {
-                tagNames.add(TokenParser.parseIdentifier(tokens));
+            IList<string> tagNames = new ArrayList<string>();
+            tagNames.Add(TokenParser.ParseIdentifier(tokens));
+            while (tokens.TrySkip(TokenType.Symbol, "|")) {
+                tagNames.Add(TokenParser.ParseIdentifier(tokens));
             }
 
             return tagNames;
         }
 
-        public static List<string> parseClassNames(TokenIterator<TokenType> tokens)
+        public static IList<string> ParseClassNames(TokenIterator<TokenType> tokens)
         {
-            List<string> classNames = new ArrayList<string>();
+            IList<string> classNames = new ArrayList<string>();
             while (true) {
-                var className = TokenParser.parseClassName(tokens);
-                if (className.isPresent()) {
-                    classNames.add(className.get());
+                var className = TokenParser.ParseClassName(tokens);
+                if (className.IsPresent()) {
+                    classNames.Add(className.Get());
                 }
                 else {
                     return classNames;
@@ -67,18 +67,18 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
             }
         }
 
-        public static bool parseIsFresh(TokenIterator<TokenType> tokens)
+        public static bool ParseIsFresh(TokenIterator<TokenType> tokens)
         {
-            return tokens.tryParse(new HtmlPathParser__Anonymous_0(tokens));
+            return tokens.TryParse(new HtmlPathParserAnonymous0(tokens));
         }
 
-        public static string parseSeparator(TokenIterator<TokenType> tokens)
+        public static string ParseSeparator(TokenIterator<TokenType> tokens)
         {
-            var isSeparator = tokens.tryParse(new HtmlPathParser__Anonymous_1(tokens));
+            var isSeparator = tokens.TryParse(new HtmlPathParserAnonymous1(tokens));
             if (isSeparator) {
-                tokens.skip(TokenType._SYMBOL, "(");
-                var value = TokenParser.parseString(tokens);
-                tokens.skip(TokenType._SYMBOL, ")");
+                tokens.Skip(TokenType.Symbol, "(");
+                var value = TokenParser.ParseString(tokens);
+                tokens.Skip(TokenType.Symbol, ")");
                 return value;
             }
 

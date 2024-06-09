@@ -4,42 +4,42 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
-    internal class NamespacePrefixes : Iterable<NamespacePrefix> {
-        private Map<string, NamespacePrefix> _uriToPrefix;
+    internal class NamespacePrefixes : ITerable<NamespacePrefix> {
+        private IMap<string, NamespacePrefix> _uriToPrefix;
 
-        internal NamespacePrefixes(Map<string, NamespacePrefix> uriToPrefix)
+        internal NamespacePrefixes(IMap<string, NamespacePrefix> uriToPrefix)
         {
             _uriToPrefix = uriToPrefix;
         }
 
-        public Iterator<NamespacePrefix> iterator()
+        public ITerator<NamespacePrefix> Iterator()
         {
-            return ((_uriToPrefix).values()).iterator();
+            return ((_uriToPrefix).Values()).Iterator();
         }
 
-        public static NamespacePrefixes__Builder builder()
+        public static NamespacePrefixesBuilder Builder()
         {
-            return new NamespacePrefixes__Builder();
+            return new NamespacePrefixesBuilder();
         }
 
-        public Optional<NamespacePrefix> lookupUri(string uri)
+        public IOptional<NamespacePrefix> LookupUri(string uri)
         {
-            return Maps.lookup(_uriToPrefix, uri);
+            return Maps.Lookup(_uriToPrefix, uri);
         }
 
-        public Optional<NamespacePrefix> lookupPrefix(string prefix)
+        public IOptional<NamespacePrefix> LookupPrefix(string prefix)
         {
-            return lookupPrefix(Optional.of(prefix));
+            return LookupPrefix(Optional.Of(prefix));
         }
 
-        public Optional<NamespacePrefix> defaultNamespace()
+        public IOptional<NamespacePrefix> DefaultNamespace()
         {
-            return lookupPrefix(Optional.empty<string>());
+            return LookupPrefix(Optional.Empty<string>());
         }
 
-        public Optional<NamespacePrefix> lookupPrefix(Optional<string> prefix)
+        public IOptional<NamespacePrefix> LookupPrefix(IOptional<string> prefix)
         {
-            return Iterables.tryFind((_uriToPrefix).values(), new NamespacePrefixes__Anonymous_0(prefix));
+            return Iterables.TryFind((_uriToPrefix).Values(), new NamespacePrefixesAnonymous0(prefix));
         }
     }
 }

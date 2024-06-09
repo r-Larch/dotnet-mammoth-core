@@ -3,17 +3,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_12 : Predicate<DocumentElement> {
-        private DocumentToHtml__ElementConverterVisitor _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml__ElementConverterVisitor;
+    internal class DocumentToHtmlAnonymous12 : IPredicate<IDocumentElement> {
+        private DocumentToHtmlElementConverterVisitor _thisOrgZwobbleMammothInternalConversionDocumentToHtmlElementConverterVisitor;
 
-        internal DocumentToHtml__Anonymous_12(DocumentToHtml__ElementConverterVisitor this_org__zwobble__mammoth__internal__conversion__DocumentToHtml__ElementConverterVisitor)
+        internal DocumentToHtmlAnonymous12(DocumentToHtmlElementConverterVisitor thisOrgZwobbleMammothInternalConversionDocumentToHtmlElementConverterVisitor)
         {
-            _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml__ElementConverterVisitor = this_org__zwobble__mammoth__internal__conversion__DocumentToHtml__ElementConverterVisitor;
+            _thisOrgZwobbleMammothInternalConversionDocumentToHtmlElementConverterVisitor = thisOrgZwobbleMammothInternalConversionDocumentToHtmlElementConverterVisitor;
         }
 
-        public bool test(DocumentElement child)
+        public bool Test(IDocumentElement child)
         {
-            return !(_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml__ElementConverterVisitor).isHeader(child);
+            return !(_thisOrgZwobbleMammothInternalConversionDocumentToHtmlElementConverterVisitor).IsHeader(child);
         }
     }
 }

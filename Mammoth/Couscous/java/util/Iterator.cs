@@ -1,6 +1,6 @@
 namespace Mammoth.Couscous.java.util {
-    internal interface Iterator<out T> {
-        bool hasNext();
-        T next();
+    internal interface ITerator<out T> {
+        bool HasNext();
+        T Next();
     }
 }

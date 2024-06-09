@@ -4,27 +4,27 @@ using Mammoth.Couscous.java.lang;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
     internal class PassThroughException : RuntimeException {
-        private readonly IOException _exception;
+        private readonly IoException _exception;
 
-        internal PassThroughException(IOException exception)
+        internal PassThroughException(IoException exception)
         {
             _exception = exception;
         }
 
-        internal static T wrap<T>(SupplierWithException<T, IOException> supplier)
+        internal static T Wrap<T>(ISupplierWithException<T, IoException> supplier)
         {
             try {
-                return supplier.get();
+                return supplier.Get();
             }
-            catch (IOException exception) {
+            catch (IoException exception) {
                 throw new PassThroughException(exception);
             }
         }
 
-        internal static T unwrap<T>(SupplierWithException<T, IOException> supplier)
+        internal static T Unwrap<T>(ISupplierWithException<T, IoException> supplier)
         {
             try {
-                return supplier.get();
+                return supplier.Get();
             }
             catch (PassThroughException exception) {
                 throw exception._exception;

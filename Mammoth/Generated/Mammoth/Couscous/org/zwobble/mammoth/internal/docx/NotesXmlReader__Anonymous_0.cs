@@ -3,17 +3,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class NotesXmlReader__Anonymous_0 : Predicate<XmlElement> {
-        private NotesXmlReader _this_org__zwobble__mammoth__internal__docx__NotesXmlReader;
+    internal class NotesXmlReaderAnonymous0 : IPredicate<XmlElement> {
+        private NotesXmlReader _thisOrgZwobbleMammothInternalDocxNotesXmlReader;
 
-        internal NotesXmlReader__Anonymous_0(NotesXmlReader this_org__zwobble__mammoth__internal__docx__NotesXmlReader)
+        internal NotesXmlReaderAnonymous0(NotesXmlReader thisOrgZwobbleMammothInternalDocxNotesXmlReader)
         {
-            _this_org__zwobble__mammoth__internal__docx__NotesXmlReader = this_org__zwobble__mammoth__internal__docx__NotesXmlReader;
+            _thisOrgZwobbleMammothInternalDocxNotesXmlReader = thisOrgZwobbleMammothInternalDocxNotesXmlReader;
         }
 
-        public bool test(XmlElement arg0)
+        public bool Test(XmlElement arg0)
         {
-            return (_this_org__zwobble__mammoth__internal__docx__NotesXmlReader).isNoteElement(arg0);
+            return (_thisOrgZwobbleMammothInternalDocxNotesXmlReader).IsNoteElement(arg0);
         }
     }
 }

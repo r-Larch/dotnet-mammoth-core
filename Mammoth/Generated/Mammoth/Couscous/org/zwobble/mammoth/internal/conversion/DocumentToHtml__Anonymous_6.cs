@@ -4,23 +4,23 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.styles;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_6 : Supplier<HtmlPath> {
+    internal class DocumentToHtmlAnonymous6 : ISupplier<IHtmlPath> {
         private Paragraph _paragraph;
-        private DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+        private DocumentToHtml _thisOrgZwobbleMammothInternalConversionDocumentToHtml;
 
-        internal DocumentToHtml__Anonymous_6(Paragraph paragraph, DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)
+        internal DocumentToHtmlAnonymous6(Paragraph paragraph, DocumentToHtml thisOrgZwobbleMammothInternalConversionDocumentToHtml)
         {
             _paragraph = paragraph;
-            _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml = this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+            _thisOrgZwobbleMammothInternalConversionDocumentToHtml = thisOrgZwobbleMammothInternalConversionDocumentToHtml;
         }
 
-        public HtmlPath get()
+        public IHtmlPath Get()
         {
-            if (((_paragraph).getStyle()).isPresent()) {
-                ((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._warnings).add("Unrecognised paragraph style: " + (((_paragraph).getStyle()).get()).describe());
+            if (((_paragraph).GetStyle()).IsPresent()) {
+                ((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).Warnings).Add("Unrecognised paragraph style: " + (((_paragraph).GetStyle()).Get()).Describe());
             }
 
-            return HtmlPath_static.element("p");
+            return HtmlPathStatic.Element("p");
         }
     }
 }

@@ -6,7 +6,7 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
     internal static class SimpleSax {
-        internal static void parseStream(InputStream input, SimpleSaxHandler handler)
+        internal static void ParseStream(INputStream input, ISimpleSaxHandler handler)
         {
             var reader = XmlReader.Create(input.Stream);
             while (reader.Read()) {
@@ -17,30 +17,30 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
                         var isEmpty = reader.IsEmptyElement;
                         for (var attributeIndex = 0; attributeIndex < reader.AttributeCount; attributeIndex++) {
                             reader.MoveToAttribute(attributeIndex);
-                            attributes.put(new ElementName(reader.NamespaceURI, reader.LocalName), reader.Value);
+                            attributes.Put(new ElementName(reader.NamespaceURI, reader.LocalName), reader.Value);
                         }
 
-                        handler.startElement(name, attributes);
+                        handler.StartElement(name, attributes);
                         if (isEmpty) {
-                            handler.endElement();
+                            handler.EndElement();
                         }
 
                         break;
                     case XmlNodeType.CDATA:
                     case XmlNodeType.Text:
                     case XmlNodeType.SignificantWhitespace:
-                        handler.characters(reader.Value);
+                        handler.Characters(reader.Value);
                         break;
                     case XmlNodeType.EntityReference:
                         throw new NotImplementedException();
                     case XmlNodeType.EndElement:
-                        handler.endElement();
+                        handler.EndElement();
                         break;
                 }
             }
         }
 
-        internal static void parseString(string value, SimpleSaxHandler handler)
+        internal static void ParseString(string value, ISimpleSaxHandler handler)
         {
             throw new NotImplementedException();
         }

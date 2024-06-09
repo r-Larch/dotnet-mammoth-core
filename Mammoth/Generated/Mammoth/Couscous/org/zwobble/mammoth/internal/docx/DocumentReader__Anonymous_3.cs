@@ -4,17 +4,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class DocumentReader__Anonymous_3 : Function<string, string> {
+    internal class DocumentReaderAnonymous3 : IFunction<string, string> {
         private string _basePath;
 
-        internal DocumentReader__Anonymous_3(string basePath)
+        internal DocumentReaderAnonymous3(string basePath)
         {
             _basePath = basePath;
         }
 
-        public string apply(string target)
+        public string Apply(string target)
         {
-            return Strings.trimLeft(ZipPaths.joinPath(new[] { _basePath, target }), '/');
+            return Strings.TrimLeft(ZipPaths.JoinPath(new[] { _basePath, target }), '/');
         }
     }
 }

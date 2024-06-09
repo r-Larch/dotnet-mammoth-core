@@ -5,33 +5,33 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_14 : BiFunction<int, DocumentElement, DocumentElement> {
-        private Set<Map__Entry<int, int>> _merged;
-        private Map<Map__Entry<int, int>, int> _rowspans;
+    internal class StatefulBodyXmlReaderAnonymous14 : IBiFunction<int, IDocumentElement, IDocumentElement> {
+        private ISet<IMapEntry<int, int>> _merged;
+        private IMap<IMapEntry<int, int>, int> _rowspans;
 
-        internal StatefulBodyXmlReader__Anonymous_14(Set<Map__Entry<int, int>> merged, Map<Map__Entry<int, int>, int> rowspans)
+        internal StatefulBodyXmlReaderAnonymous14(ISet<IMapEntry<int, int>> merged, IMap<IMapEntry<int, int>, int> rowspans)
         {
             _merged = merged;
             _rowspans = rowspans;
         }
 
-        public DocumentElement apply(int rowIndex, DocumentElement rowElement)
+        public IDocumentElement Apply(int rowIndex, IDocumentElement rowElement)
         {
             var row = (TableRow) rowElement;
-            List<DocumentElement> mergedCells = new ArrayList<DocumentElement>();
+            IList<IDocumentElement> mergedCells = new ArrayList<IDocumentElement>();
             {
                 var cellIndex = 0;
-                while (cellIndex < (row.getChildren()).size()) {
-                    var cell = (StatefulBodyXmlReader__UnmergedTableCell) (row.getChildren()).get(cellIndex);
-                    var position = Maps.entry(rowIndex, cellIndex);
-                    if (!(_merged).contains(position)) {
-                        mergedCells.add(new TableCell((Maps.lookup(_rowspans, position)).get(), cell._colspan, cell._children));
+                while (cellIndex < (row.GetChildren()).Size()) {
+                    var cell = (StatefulBodyXmlReaderUnmergedTableCell) (row.GetChildren()).Get(cellIndex);
+                    var position = Maps.Entry(rowIndex, cellIndex);
+                    if (!(_merged).Contains(position)) {
+                        mergedCells.Add(new TableCell((Maps.Lookup(_rowspans, position)).Get(), cell.Colspan, cell.Children));
                     }
 
                     cellIndex = cellIndex + 1;
                 }
             }
-            return new TableRow(mergedCells, row.isHeader());
+            return new TableRow(mergedCells, row.IsHeader());
         }
     }
 }

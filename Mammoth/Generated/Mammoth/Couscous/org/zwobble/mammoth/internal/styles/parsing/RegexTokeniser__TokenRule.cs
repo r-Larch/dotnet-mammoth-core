@@ -3,23 +3,23 @@ using Mammoth.Couscous.java.util.regex;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
-    internal static class RegexTokeniser__TokenRule {
+    internal static class RegexTokeniserTokenRule {
     }
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
-    internal class RegexTokeniser__TokenRule<T> {
-        public Pattern _regex;
-        public T _type;
+    internal class RegexTokeniserTokenRule<T> {
+        public Pattern Regex;
+        public T Type;
 
-        internal RegexTokeniser__TokenRule(T type, Pattern regex)
+        internal RegexTokeniserTokenRule(T type, Pattern regex)
         {
-            if ((regex.matcher("")).groupCount() != 0) {
+            if ((regex.Matcher("")).GroupCount() != 0) {
                 throw new RuntimeException("regex cannot contain any groups");
             }
 
-            _type = type;
-            _regex = regex;
+            Type = type;
+            Regex = regex;
         }
     }
 }

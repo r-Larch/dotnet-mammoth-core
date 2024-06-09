@@ -1,5 +1,5 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class DocumentReader__PartPaths {
+    internal class DocumentReaderPartPaths {
         private string _comments;
         private string _endnotes;
         private string _footnotes;
@@ -7,7 +7,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
         private string _numbering;
         private string _styles;
 
-        internal DocumentReader__PartPaths(string mainDocument, string comments, string endnotes, string footnotes, string numbering, string styles)
+        internal DocumentReaderPartPaths(string mainDocument, string comments, string endnotes, string footnotes, string numbering, string styles)
         {
             _mainDocument = mainDocument;
             _comments = comments;
@@ -17,32 +17,32 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
             _styles = styles;
         }
 
-        public string getMainDocument()
+        public string GetMainDocument()
         {
             return _mainDocument;
         }
 
-        public string getComments()
+        public string GetComments()
         {
             return _comments;
         }
 
-        public string getEndnotes()
+        public string GetEndnotes()
         {
             return _endnotes;
         }
 
-        public string getFootnotes()
+        public string GetFootnotes()
         {
             return _footnotes;
         }
 
-        public string getNumbering()
+        public string GetNumbering()
         {
             return _numbering;
         }
 
-        public string getStyles()
+        public string GetStyles()
         {
             return _styles;
         }

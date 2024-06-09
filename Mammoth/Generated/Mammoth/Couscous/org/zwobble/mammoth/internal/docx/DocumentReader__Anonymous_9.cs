@@ -4,8 +4,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class DocumentReader__Anonymous_9 : Function<List<Note>, Notes> {
-        public Notes apply(List<Note> arg0)
+    internal class DocumentReaderAnonymous9 : IFunction<IList<Note>, Notes> {
+        public Notes Apply(IList<Note> arg0)
         {
             return new Notes(arg0);
         }

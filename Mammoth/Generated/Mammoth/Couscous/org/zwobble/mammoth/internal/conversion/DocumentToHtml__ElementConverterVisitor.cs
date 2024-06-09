@@ -7,157 +7,157 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__ElementConverterVisitor : DocumentElementVisitor<List<HtmlNode>, DocumentToHtml__Context> {
-        private DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+    internal class DocumentToHtmlElementConverterVisitor : IDocumentElementVisitor<IList<IHtmlNode>, DocumentToHtmlContext> {
+        private DocumentToHtml _thisOrgZwobbleMammothInternalConversionDocumentToHtml;
 
-        internal DocumentToHtml__ElementConverterVisitor(DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)
+        internal DocumentToHtmlElementConverterVisitor(DocumentToHtml thisOrgZwobbleMammothInternalConversionDocumentToHtml)
         {
-            _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml = this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+            _thisOrgZwobbleMammothInternalConversionDocumentToHtml = thisOrgZwobbleMammothInternalConversionDocumentToHtml;
         }
 
-        public List<HtmlNode> visit(Paragraph paragraph, DocumentToHtml__Context context)
+        public IList<IHtmlNode> Visit(Paragraph paragraph, DocumentToHtmlContext context)
         {
-            Supplier<List<HtmlNode>> children = new DocumentToHtml__Anonymous_5(_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, paragraph, context);
-            var mapping = (((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getParagraphHtmlPath(paragraph)).orElseGet(new DocumentToHtml__Anonymous_6(paragraph, _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml));
-            return (mapping.wrap(children)).get();
+            ISupplier<IList<IHtmlNode>> children = new DocumentToHtmlAnonymous5(_thisOrgZwobbleMammothInternalConversionDocumentToHtml, paragraph, context);
+            var mapping = (((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).StyleMap).GetParagraphHtmlPath(paragraph)).OrElseGet(new DocumentToHtmlAnonymous6(paragraph, _thisOrgZwobbleMammothInternalConversionDocumentToHtml));
+            return (mapping.Wrap(children)).Get();
         }
 
-        public List<HtmlNode> visit(Run run, DocumentToHtml__Context context)
+        public IList<IHtmlNode> Visit(Run run, DocumentToHtmlContext context)
         {
-            Supplier<List<HtmlNode>> nodes = new DocumentToHtml__Anonymous_7(_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, run, context);
-            if (run.isSmallCaps()) {
-                nodes = ((((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getSmallCaps()).orElse(HtmlPath_static._EMPTY)).wrap(nodes);
+            ISupplier<IList<IHtmlNode>> nodes = new DocumentToHtmlAnonymous7(_thisOrgZwobbleMammothInternalConversionDocumentToHtml, run, context);
+            if (run.IsSmallCaps()) {
+                nodes = ((((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).StyleMap).GetSmallCaps()).OrElse(HtmlPathStatic.Empty)).Wrap(nodes);
             }
 
-            if (run.isStrikethrough()) {
-                nodes = ((((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getStrikethrough()).orElse(HtmlPath_static.collapsibleElement("s"))).wrap(nodes);
+            if (run.IsStrikethrough()) {
+                nodes = ((((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).StyleMap).GetStrikethrough()).OrElse(HtmlPathStatic.CollapsibleElement("s"))).Wrap(nodes);
             }
 
-            if (run.isUnderline()) {
-                nodes = ((((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getUnderline()).orElse(HtmlPath_static._EMPTY)).wrap(nodes);
+            if (run.IsUnderline()) {
+                nodes = ((((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).StyleMap).GetUnderline()).OrElse(HtmlPathStatic.Empty)).Wrap(nodes);
             }
 
-            if (run.getVerticalAlignment() == VerticalAlignment._SUBSCRIPT) {
-                nodes = (HtmlPath_static.collapsibleElement("sub")).wrap(nodes);
+            if (run.GetVerticalAlignment() == VerticalAlignment.Subscript) {
+                nodes = (HtmlPathStatic.CollapsibleElement("sub")).Wrap(nodes);
             }
 
-            if (run.getVerticalAlignment() == VerticalAlignment._SUPERSCRIPT) {
-                nodes = (HtmlPath_static.collapsibleElement("sup")).wrap(nodes);
+            if (run.GetVerticalAlignment() == VerticalAlignment.Superscript) {
+                nodes = (HtmlPathStatic.CollapsibleElement("sup")).Wrap(nodes);
             }
 
-            if (run.isItalic()) {
-                nodes = ((((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getItalic()).orElse(HtmlPath_static.collapsibleElement("em"))).wrap(nodes);
+            if (run.IsItalic()) {
+                nodes = ((((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).StyleMap).GetItalic()).OrElse(HtmlPathStatic.CollapsibleElement("em"))).Wrap(nodes);
             }
 
-            if (run.isBold()) {
-                nodes = ((((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getBold()).orElse(HtmlPath_static.collapsibleElement("strong"))).wrap(nodes);
+            if (run.IsBold()) {
+                nodes = ((((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).StyleMap).GetBold()).OrElse(HtmlPathStatic.CollapsibleElement("strong"))).Wrap(nodes);
             }
 
-            var mapping = (((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getRunHtmlPath(run)).orElseGet(new DocumentToHtml__Anonymous_8(run, _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml));
-            return (mapping.wrap(nodes)).get();
+            var mapping = (((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).StyleMap).GetRunHtmlPath(run)).OrElseGet(new DocumentToHtmlAnonymous8(run, _thisOrgZwobbleMammothInternalConversionDocumentToHtml));
+            return (mapping.Wrap(nodes)).Get();
         }
 
-        public List<HtmlNode> visit(Text text, DocumentToHtml__Context context)
+        public IList<IHtmlNode> Visit(Text text, DocumentToHtmlContext context)
         {
-            if ((text.getValue()).isEmpty()) {
-                return Lists.list<HtmlNode>();
+            if ((text.GetValue()).IsEmpty()) {
+                return Lists.List<IHtmlNode>();
             }
 
-            return Lists.list(Html.text(text.getValue()));
+            return Lists.List(Html.Text(text.GetValue()));
         }
 
-        public List<HtmlNode> visit(Tab tab, DocumentToHtml__Context context)
+        public IList<IHtmlNode> Visit(Tab tab, DocumentToHtmlContext context)
         {
-            return Lists.list(Html.text("\t"));
+            return Lists.List(Html.Text("\t"));
         }
 
-        public List<HtmlNode> visit(Break breakElement, DocumentToHtml__Context context)
+        public IList<IHtmlNode> Visit(Break breakElement, DocumentToHtmlContext context)
         {
-            var mapping = (((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getBreakHtmlPath(breakElement)).orElseGet(new DocumentToHtml__Anonymous_9(breakElement));
-            return (mapping.wrap(new DocumentToHtml__Anonymous_10())).get();
+            var mapping = (((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).StyleMap).GetBreakHtmlPath(breakElement)).OrElseGet(new DocumentToHtmlAnonymous9(breakElement));
+            return (mapping.Wrap(new DocumentToHtmlAnonymous10())).Get();
         }
 
-        public List<HtmlNode> visit(Table table, DocumentToHtml__Context context)
+        public IList<IHtmlNode> Visit(Table table, DocumentToHtmlContext context)
         {
-            var mapping = (((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getTableHtmlPath(table)).orElse(HtmlPath_static.element("table"));
-            return (mapping.wrap(new DocumentToHtml__Anonymous_11(this, table, context))).get();
+            var mapping = (((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).StyleMap).GetTableHtmlPath(table)).OrElse(HtmlPathStatic.Element("table"));
+            return (mapping.Wrap(new DocumentToHtmlAnonymous11(this, table, context))).Get();
         }
 
-        public List<HtmlNode> visit(TableRow tableRow, DocumentToHtml__Context context)
+        public IList<IHtmlNode> Visit(TableRow tableRow, DocumentToHtmlContext context)
         {
-            return Lists.list(Html.element("tr", (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertChildrenToHtml(tableRow, context)));
+            return Lists.List(Html.Element("tr", (_thisOrgZwobbleMammothInternalConversionDocumentToHtml).ConvertChildrenToHtml(tableRow, context)));
         }
 
-        public List<HtmlNode> visit(TableCell tableCell, DocumentToHtml__Context context)
+        public IList<IHtmlNode> Visit(TableCell tableCell, DocumentToHtmlContext context)
         {
-            var tagName = context._isHeader ? "th" : "td";
-            Map<string, string> attributes = new HashMap<string, string>();
-            if (tableCell.getColspan() != 1) {
-                attributes.put("colspan", (tableCell.getColspan()).ToString());
+            var tagName = context.IsHeader ? "th" : "td";
+            IMap<string, string> attributes = new HashMap<string, string>();
+            if (tableCell.GetColspan() != 1) {
+                attributes.Put("colspan", (tableCell.GetColspan()).ToString());
             }
 
-            if (tableCell.getRowspan() != 1) {
-                attributes.put("rowspan", (tableCell.getRowspan()).ToString());
+            if (tableCell.GetRowspan() != 1) {
+                attributes.Put("rowspan", (tableCell.GetRowspan()).ToString());
             }
 
-            return Lists.list(Html.element(tagName, attributes, Lists.cons(Html._FORCE_WRITE, (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertChildrenToHtml(tableCell, context))));
+            return Lists.List(Html.Element(tagName, attributes, Lists.Cons(Html.ForceWrite, (_thisOrgZwobbleMammothInternalConversionDocumentToHtml).ConvertChildrenToHtml(tableCell, context))));
         }
 
-        public List<HtmlNode> visit(Hyperlink hyperlink, DocumentToHtml__Context context)
+        public IList<IHtmlNode> Visit(Hyperlink hyperlink, DocumentToHtmlContext context)
         {
-            var attributes = Maps.mutableMap("href", generateHref(hyperlink));
-            (hyperlink.getTargetFrame()).ifPresent(new DocumentToHtml__Anonymous_14(attributes));
-            return Lists.list(Html.collapsibleElement("a", attributes, (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertChildrenToHtml(hyperlink, context)));
+            var attributes = Maps.MutableMap("href", GenerateHref(hyperlink));
+            (hyperlink.GetTargetFrame()).IfPresent(new DocumentToHtmlAnonymous14(attributes));
+            return Lists.List(Html.CollapsibleElement("a", attributes, (_thisOrgZwobbleMammothInternalConversionDocumentToHtml).ConvertChildrenToHtml(hyperlink, context)));
         }
 
-        public List<HtmlNode> visit(Bookmark bookmark, DocumentToHtml__Context context)
+        public IList<IHtmlNode> Visit(Bookmark bookmark, DocumentToHtmlContext context)
         {
-            return Lists.list(Html.element("a", Maps.map("id", (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).generateId(bookmark.getName())), Lists.list(Html._FORCE_WRITE)));
+            return Lists.List(Html.Element("a", Maps.Map("id", (_thisOrgZwobbleMammothInternalConversionDocumentToHtml).GenerateId(bookmark.GetName())), Lists.List(Html.ForceWrite)));
         }
 
-        public List<HtmlNode> visit(NoteReference noteReference, DocumentToHtml__Context context)
+        public IList<IHtmlNode> Visit(NoteReference noteReference, DocumentToHtmlContext context)
         {
-            ((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._noteReferences).add(noteReference);
-            var noteAnchor = (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).generateNoteHtmlId(noteReference.getNoteType(), noteReference.getNoteId());
-            var noteReferenceAnchor = (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).generateNoteRefHtmlId(noteReference.getNoteType(), noteReference.getNoteId());
-            return Lists.list(Html.element("sup", Lists.list(Html.element("a", Maps.map("href", "#" + noteAnchor, "id", noteReferenceAnchor), Lists.list(Html.text(("[" + ((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._noteReferences).size()) + "]"))))));
+            ((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).NoteReferences).Add(noteReference);
+            var noteAnchor = (_thisOrgZwobbleMammothInternalConversionDocumentToHtml).GenerateNoteHtmlId(noteReference.GetNoteType(), noteReference.GetNoteId());
+            var noteReferenceAnchor = (_thisOrgZwobbleMammothInternalConversionDocumentToHtml).GenerateNoteRefHtmlId(noteReference.GetNoteType(), noteReference.GetNoteId());
+            return Lists.List(Html.Element("sup", Lists.List(Html.Element("a", Maps.Map("href", "#" + noteAnchor, "id", noteReferenceAnchor), Lists.List(Html.Text(("[" + ((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).NoteReferences).Size()) + "]"))))));
         }
 
-        public List<HtmlNode> visit(CommentReference commentReference, DocumentToHtml__Context context)
+        public IList<IHtmlNode> Visit(CommentReference commentReference, DocumentToHtmlContext context)
         {
-            return (((((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getCommentReference()).orElse(HtmlPath_static._IGNORE)).wrap(new DocumentToHtml__Anonymous_16(commentReference, _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml))).get();
+            return (((((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).StyleMap).GetCommentReference()).OrElse(HtmlPathStatic.Ignore)).Wrap(new DocumentToHtmlAnonymous16(commentReference, _thisOrgZwobbleMammothInternalConversionDocumentToHtml))).Get();
         }
 
-        public List<HtmlNode> visit(Image image, DocumentToHtml__Context context)
+        public IList<IHtmlNode> Visit(Image image, DocumentToHtmlContext context)
         {
-            return ((image.getContentType()).map(new DocumentToHtml__Anonymous_19(_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, image))).orElse(Lists.list<HtmlNode>());
+            return ((image.GetContentType()).Map(new DocumentToHtmlAnonymous19(_thisOrgZwobbleMammothInternalConversionDocumentToHtml, image))).OrElse(Lists.List<IHtmlNode>());
         }
 
-        public List<HtmlNode> generateTableChildren(Table table, DocumentToHtml__Context context)
+        public IList<IHtmlNode> GenerateTableChildren(Table table, DocumentToHtmlContext context)
         {
-            var bodyIndex = (Iterables.findIndex(table.getChildren(), new DocumentToHtml__Anonymous_12(this))).orElse((table.getChildren()).size());
+            var bodyIndex = (Iterables.FindIndex(table.GetChildren(), new DocumentToHtmlAnonymous12(this))).OrElse((table.GetChildren()).Size());
             if (bodyIndex == 0) {
-                return (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertToHtml(table.getChildren(), context.isHeader(false));
+                return (_thisOrgZwobbleMammothInternalConversionDocumentToHtml).ConvertToHtml(table.GetChildren(), context.CreateIsHeader(false));
             }
 
-            var headRows = (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertToHtml((table.getChildren()).subList(0, bodyIndex), context.isHeader(true));
-            var bodyRows = (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertToHtml((table.getChildren()).subList(bodyIndex, (table.getChildren()).size()), context.isHeader(false));
-            return Lists.list(Html.element("thead", headRows), Html.element("tbody", bodyRows));
+            var headRows = (_thisOrgZwobbleMammothInternalConversionDocumentToHtml).ConvertToHtml((table.GetChildren()).SubList(0, bodyIndex), context.CreateIsHeader(true));
+            var bodyRows = (_thisOrgZwobbleMammothInternalConversionDocumentToHtml).ConvertToHtml((table.GetChildren()).SubList(bodyIndex, (table.GetChildren()).Size()), context.CreateIsHeader(false));
+            return Lists.List(Html.Element("thead", headRows), Html.Element("tbody", bodyRows));
         }
 
-        public bool isHeader(DocumentElement child)
+        public bool IsHeader(IDocumentElement child)
         {
-            return ((Casts.tryCast<TableRow>(typeof(TableRow), child)).map(new DocumentToHtml__Anonymous_13())).orElse(false);
+            return ((Casts.TryCast<TableRow>(typeof(TableRow), child)).Map(new DocumentToHtmlAnonymous13())).OrElse(false);
         }
 
-        public string generateHref(Hyperlink hyperlink)
+        public string GenerateHref(Hyperlink hyperlink)
         {
-            if ((hyperlink.getHref()).isPresent()) {
-                return (hyperlink.getHref()).get();
+            if ((hyperlink.GetHref()).IsPresent()) {
+                return (hyperlink.GetHref()).Get();
             }
 
-            if ((hyperlink.getAnchor()).isPresent()) {
-                return "#" + (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).generateId((hyperlink.getAnchor()).get());
+            if ((hyperlink.GetAnchor()).IsPresent()) {
+                return "#" + (_thisOrgZwobbleMammothInternalConversionDocumentToHtml).GenerateId((hyperlink.GetAnchor()).Get());
             }
 
             return "";

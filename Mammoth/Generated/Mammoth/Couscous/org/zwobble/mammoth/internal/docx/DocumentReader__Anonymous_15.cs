@@ -6,19 +6,19 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class DocumentReader__Anonymous_15 : SupplierWithException<Optional<XmlElement>, IOException> {
+    internal class DocumentReaderAnonymous15 : ISupplierWithException<IOptional<XmlElement>, IoException> {
         private string _name;
-        private Archive _zipFile;
+        private IArchive _zipFile;
 
-        internal DocumentReader__Anonymous_15(Archive zipFile, string name)
+        internal DocumentReaderAnonymous15(IArchive zipFile, string name)
         {
             _zipFile = zipFile;
             _name = name;
         }
 
-        public Optional<XmlElement> get()
+        public IOptional<XmlElement> Get()
         {
-            return ((_zipFile).tryGetInputStream(_name)).map(new DocumentReader__Anonymous_14());
+            return ((_zipFile).TryGetInputStream(_name)).Map(new DocumentReaderAnonymous14());
         }
     }
 }

@@ -3,15 +3,15 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
-    internal class XmlElement__Anonymous_0 : Supplier<RuntimeException> {
+    internal class XmlElementAnonymous0 : ISupplier<RuntimeException> {
         private string _name;
 
-        internal XmlElement__Anonymous_0(string name)
+        internal XmlElementAnonymous0(string name)
         {
             _name = name;
         }
 
-        public RuntimeException get()
+        public RuntimeException Get()
         {
             return new RuntimeException(("Element has no '" + _name) + "' attribute");
         }

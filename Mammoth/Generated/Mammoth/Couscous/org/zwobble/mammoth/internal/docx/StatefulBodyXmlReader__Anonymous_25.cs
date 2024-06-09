@@ -3,21 +3,21 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_25 : Function<string, ReadResult> {
+    internal class StatefulBodyXmlReaderAnonymous25 : IFunction<string, ReadResult> {
         private XmlElement _element;
-        private StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        private StatefulBodyXmlReader _thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader;
 
-        internal StatefulBodyXmlReader__Anonymous_25(XmlElement element, StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader)
+        internal StatefulBodyXmlReaderAnonymous25(XmlElement element, StatefulBodyXmlReader thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader)
         {
             _element = element;
-            _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+            _thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader = thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader;
         }
 
-        public ReadResult apply(string relationshipId)
+        public ReadResult Apply(string relationshipId)
         {
-            var title = (_element).getAttributeOrNone("o:title");
-            var imagePath = (_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).relationshipIdToDocxPath(relationshipId);
-            return (_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).readImage(imagePath, title, new StatefulBodyXmlReader__Anonymous_24(_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader, imagePath));
+            var title = (_element).GetAttributeOrNone("o:title");
+            var imagePath = (_thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader).RelationshipIdToDocxPath(relationshipId);
+            return (_thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader).ReadImage(imagePath, title, new StatefulBodyXmlReaderAnonymous24(_thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader, imagePath));
         }
     }
 }

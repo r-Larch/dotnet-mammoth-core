@@ -6,49 +6,49 @@ using Mammoth.Couscous.java.util.function;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
     internal static class Lists {
-        internal static List<T> list<T>(params T[] values)
+        internal static IList<T> List<T>(params T[] values)
         {
             return ToJava.ListToList(values);
         }
 
-        internal static List<T> toList<T>(Iterable<T> iterable)
+        internal static IList<T> ToList<T>(ITerable<T> iterable)
         {
             return ToJava.ListToList(FromJava.IterableToEnumerable(iterable).ToList());
         }
 
-        internal static List<T> eagerFilter<T>(Iterable<T> iterable, Predicate<T> function)
+        internal static IList<T> EagerFilter<T>(ITerable<T> iterable, IPredicate<T> function)
         {
             var result = FromJava.IterableToEnumerable(iterable)
-                .Where(function.test)
+                .Where(function.Test)
                 .ToList();
             return ToJava.ListToList(result);
         }
 
-        internal static List<U> eagerMap<T, U>(Iterable<T> iterable, Function<T, U> function)
+        internal static IList<TU> EagerMap<T, TU>(ITerable<T> iterable, IFunction<T, TU> function)
         {
             var result = FromJava.IterableToEnumerable(iterable)
-                .Select(function.apply)
+                .Select(function.Apply)
                 .ToList();
             return ToJava.ListToList(result);
         }
 
-        internal static List<U> eagerMapWithIndex<T, U>(Iterable<T> iterable, BiFunction<int, T, U> function)
+        internal static IList<TU> EagerMapWithIndex<T, TU>(ITerable<T> iterable, IBiFunction<int, T, TU> function)
         {
             var result = FromJava.IterableToEnumerable(iterable)
-                .Select((value, index) => function.apply(index, value))
+                .Select((value, index) => function.Apply(index, value))
                 .ToList();
             return ToJava.ListToList(result);
         }
 
-        internal static List<U> eagerFlatMap<T, U>(Iterable<T> iterable, Function<T, Iterable<U>> function)
+        internal static IList<TU> EagerFlatMap<T, TU>(ITerable<T> iterable, IFunction<T, ITerable<TU>> function)
         {
             var result = FromJava.IterableToEnumerable(iterable)
-                .SelectMany(element => FromJava.IterableToEnumerable(function.apply(element)))
+                .SelectMany(element => FromJava.IterableToEnumerable(function.Apply(element)))
                 .ToList();
             return ToJava.ListToList(result);
         }
 
-        internal static List<T> cons<T>(T head, Iterable<T> tail)
+        internal static IList<T> Cons<T>(T head, ITerable<T> tail)
         {
             var result = new[] { head }
                 .Concat(FromJava.IterableToEnumerable(tail))
@@ -56,7 +56,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
             return ToJava.ListToList(result);
         }
 
-        internal static List<T> eagerConcat<T>(Iterable<T> first, Iterable<T> second)
+        internal static IList<T> EagerConcat<T>(ITerable<T> first, ITerable<T> second)
         {
             var result = FromJava.IterableToEnumerable(first)
                 .Concat(FromJava.IterableToEnumerable(second))
@@ -64,7 +64,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
             return ToJava.ListToList(result);
         }
 
-        internal static List<T> eagerConcat<T>(Iterable<T> first, Iterable<T> second, Iterable<T> third)
+        internal static IList<T> EagerConcat<T>(ITerable<T> first, ITerable<T> second, ITerable<T> third)
         {
             var result = FromJava.IterableToEnumerable(first)
                 .Concat(FromJava.IterableToEnumerable(second))
@@ -73,70 +73,70 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
             return ToJava.ListToList(result);
         }
 
-        internal static List<T> orderedBy<T, R>(Iterable<T> iterable, Function<T, R> getKey)
+        internal static IList<T> OrderedBy<T, TR>(ITerable<T> iterable, IFunction<T, TR> getKey)
         {
             var result = FromJava.IterableToEnumerable(iterable)
-                .OrderBy(getKey.apply)
+                .OrderBy(getKey.Apply)
                 .ToList();
             return ToJava.ListToList(result);
         }
 
-        internal static Optional<T> tryGetFirst<T>(List<T> list)
+        internal static IOptional<T> TryGetFirst<T>(IList<T> list)
         {
-            if (list.isEmpty()) {
+            if (list.IsEmpty()) {
                 return None<T>.Instance;
             }
 
-            return new Some<T>(list.get(0));
+            return new Some<T>(list.Get(0));
         }
 
-        internal static Optional<T> tryGetLast<T>(List<T> list)
+        internal static IOptional<T> TryGetLast<T>(IList<T> list)
         {
-            if (list.isEmpty()) {
+            if (list.IsEmpty()) {
                 return None<T>.Instance;
             }
 
-            return new Some<T>(list.get(list.size() - 1));
+            return new Some<T>(list.Get(list.Size() - 1));
         }
 
-        internal static Iterable<T> reversed<T>(List<T> list)
+        internal static ITerable<T> Reversed<T>(IList<T> list)
         {
             return new ReversedList<T>(list);
         }
 
-        private class ReversedList<T> : Iterable<T> {
-            private readonly List<T> _list;
+        private class ReversedList<T> : ITerable<T> {
+            private readonly IList<T> _list;
 
-            internal ReversedList(List<T> list)
+            internal ReversedList(IList<T> list)
             {
                 _list = list;
             }
 
-            public Iterator<T> iterator()
+            public ITerator<T> Iterator()
             {
                 return new ReverseIterator<T>(_list);
             }
         }
 
-        private class ReverseIterator<T> : Iterator<T> {
-            private readonly List<T> _list;
+        private class ReverseIterator<T> : ITerator<T> {
+            private readonly IList<T> _list;
             private int _nextIndex;
 
-            internal ReverseIterator(List<T> list)
+            internal ReverseIterator(IList<T> list)
             {
                 _list = list;
-                _nextIndex = _list.size() - 1;
+                _nextIndex = _list.Size() - 1;
             }
 
-            public bool hasNext()
+            public bool HasNext()
             {
                 return _nextIndex >= 0;
             }
 
-            public T next()
+            public T Next()
             {
-                if (hasNext()) {
-                    return _list.get(_nextIndex--);
+                if (HasNext()) {
+                    return _list.Get(_nextIndex--);
                 }
 
                 throw new NoSuchElementException();

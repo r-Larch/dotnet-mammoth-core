@@ -5,21 +5,21 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_11 : Supplier<List<HtmlNode>> {
-        private DocumentToHtml__Context _context;
+    internal class DocumentToHtmlAnonymous11 : ISupplier<IList<IHtmlNode>> {
+        private DocumentToHtmlContext _context;
         private Table _table;
-        private DocumentToHtml__ElementConverterVisitor _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml__ElementConverterVisitor;
+        private DocumentToHtmlElementConverterVisitor _thisOrgZwobbleMammothInternalConversionDocumentToHtmlElementConverterVisitor;
 
-        internal DocumentToHtml__Anonymous_11(DocumentToHtml__ElementConverterVisitor this_org__zwobble__mammoth__internal__conversion__DocumentToHtml__ElementConverterVisitor, Table table, DocumentToHtml__Context context)
+        internal DocumentToHtmlAnonymous11(DocumentToHtmlElementConverterVisitor thisOrgZwobbleMammothInternalConversionDocumentToHtmlElementConverterVisitor, Table table, DocumentToHtmlContext context)
         {
-            _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml__ElementConverterVisitor = this_org__zwobble__mammoth__internal__conversion__DocumentToHtml__ElementConverterVisitor;
+            _thisOrgZwobbleMammothInternalConversionDocumentToHtmlElementConverterVisitor = thisOrgZwobbleMammothInternalConversionDocumentToHtmlElementConverterVisitor;
             _table = table;
             _context = context;
         }
 
-        public List<HtmlNode> get()
+        public IList<IHtmlNode> Get()
         {
-            return (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml__ElementConverterVisitor).generateTableChildren(_table, _context);
+            return (_thisOrgZwobbleMammothInternalConversionDocumentToHtmlElementConverterVisitor).GenerateTableChildren(_table, _context);
         }
     }
 }

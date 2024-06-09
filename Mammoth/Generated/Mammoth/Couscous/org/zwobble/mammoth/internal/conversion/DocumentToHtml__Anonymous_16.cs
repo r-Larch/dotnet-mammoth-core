@@ -6,23 +6,23 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_16 : Supplier<List<HtmlNode>> {
+    internal class DocumentToHtmlAnonymous16 : ISupplier<IList<IHtmlNode>> {
         private CommentReference _commentReference;
-        private DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+        private DocumentToHtml _thisOrgZwobbleMammothInternalConversionDocumentToHtml;
 
-        internal DocumentToHtml__Anonymous_16(CommentReference commentReference, DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)
+        internal DocumentToHtmlAnonymous16(CommentReference commentReference, DocumentToHtml thisOrgZwobbleMammothInternalConversionDocumentToHtml)
         {
             _commentReference = commentReference;
-            _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml = this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+            _thisOrgZwobbleMammothInternalConversionDocumentToHtml = thisOrgZwobbleMammothInternalConversionDocumentToHtml;
         }
 
-        public List<HtmlNode> get()
+        public IList<IHtmlNode> Get()
         {
-            var commentId = (_commentReference).getCommentId();
-            var comment = (Maps.lookup((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._comments, commentId)).orElseThrow(new DocumentToHtml__Anonymous_15(commentId));
-            var label = (("[" + (comment.getAuthorInitials()).orElse("")) + (((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._referencedComments).size() + 1)) + "]";
-            ((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._referencedComments).add(new DocumentToHtml__ReferencedComment(label, comment));
-            return Lists.list(Html.element("a", Maps.map("href", "#" + (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).generateReferentHtmlId("comment", commentId), "id", (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).generateReferenceHtmlId("comment", commentId)), Lists.list(Html.text(label))));
+            var commentId = (_commentReference).GetCommentId();
+            var comment = (Maps.Lookup((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).Comments, commentId)).OrElseThrow(new DocumentToHtmlAnonymous15(commentId));
+            var label = (("[" + (comment.GetAuthorInitials()).OrElse("")) + (((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).ReferencedComments).Size() + 1)) + "]";
+            ((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).ReferencedComments).Add(new DocumentToHtmlReferencedComment(label, comment));
+            return Lists.List(Html.Element("a", Maps.Map("href", "#" + (_thisOrgZwobbleMammothInternalConversionDocumentToHtml).GenerateReferentHtmlId("comment", commentId), "id", (_thisOrgZwobbleMammothInternalConversionDocumentToHtml).GenerateReferenceHtmlId("comment", commentId)), Lists.List(Html.Text(label))));
         }
     }
 }

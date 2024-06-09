@@ -4,27 +4,27 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
     internal class XmlNodes {
-        public static XmlElement element(string name)
+        public static XmlElement Element(string name)
         {
-            return element(name, Lists.list<XmlNode>());
+            return Element(name, Lists.List<IXmlNode>());
         }
 
-        public static XmlElement element(string name, Map<string, string> attributes)
+        public static XmlElement Element(string name, IMap<string, string> attributes)
         {
-            return element(name, attributes, Lists.list<XmlNode>());
+            return Element(name, attributes, Lists.List<IXmlNode>());
         }
 
-        public static XmlElement element(string name, List<XmlNode> children)
+        public static XmlElement Element(string name, IList<IXmlNode> children)
         {
-            return element(name, Maps.map<string, string>(), children);
+            return Element(name, Maps.Map<string, string>(), children);
         }
 
-        public static XmlElement element(string name, Map<string, string> attributes, List<XmlNode> children)
+        public static XmlElement Element(string name, IMap<string, string> attributes, IList<IXmlNode> children)
         {
             return new XmlElement(name, attributes, children);
         }
 
-        public static XmlTextNode text(string value)
+        public static XmlTextNode Text(string value)
         {
             return new XmlTextNode(value);
         }

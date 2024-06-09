@@ -1,5 +1,5 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal interface StringMatcher {
-        bool matches(string value);
+    internal interface IStringMatcher {
+        bool Matches(string value);
     }
 }

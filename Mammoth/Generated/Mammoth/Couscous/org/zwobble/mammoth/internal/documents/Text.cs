@@ -1,5 +1,5 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class Text : DocumentElement {
+    internal class Text : IDocumentElement {
         private string _value;
 
         internal Text(string value)
@@ -7,12 +7,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
             _value = value;
         }
 
-        public T accept<T, U>(DocumentElementVisitor<T, U> visitor, U context)
+        public T Accept<T, TU>(IDocumentElementVisitor<T, TU> visitor, TU context)
         {
-            return visitor.visit(this, context);
+            return visitor.Visit(this, context);
         }
 
-        public string getValue()
+        public string GetValue()
         {
             return _value;
         }

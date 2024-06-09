@@ -6,7 +6,7 @@ using File = Mammoth.Couscous.java.io.File;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.archives {
-    internal class ZippedArchive : Archive {
+    internal class ZippedArchive : IArchive {
         private readonly ZipArchive _zipFile;
 
         internal ZippedArchive(File file)
@@ -19,22 +19,22 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.archives {
             _zipFile = new ZipArchive(stream);
         }
 
-        public Optional<InputStream> tryGetInputStream(string name)
+        public IOptional<INputStream> TryGetInputStream(string name)
         {
             var entry = _zipFile.GetEntry(name);
             if (entry == null) {
-                return Optional.empty<InputStream>();
+                return Optional.Empty<INputStream>();
             }
 
-            return Optional.of(ToJava.StreamToInputStream(entry.Open()));
+            return Optional.Of(ToJava.StreamToInputStream(entry.Open()));
         }
 
-        public bool exists(string name)
+        public bool Exists(string name)
         {
             return _zipFile.GetEntry(name) != null;
         }
 
-        public void close()
+        public void Close()
         {
             _zipFile.Dispose();
         }

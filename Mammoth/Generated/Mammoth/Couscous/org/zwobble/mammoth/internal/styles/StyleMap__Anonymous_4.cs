@@ -3,17 +3,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StyleMap__Anonymous_4 : Predicate<StyleMapping<Table>> {
+    internal class StyleMapAnonymous4 : IPredicate<StyleMapping<Table>> {
         private Table _table;
 
-        internal StyleMap__Anonymous_4(Table table)
+        internal StyleMapAnonymous4(Table table)
         {
             _table = table;
         }
 
-        public bool test(StyleMapping<Table> styleMapping)
+        public bool Test(StyleMapping<Table> styleMapping)
         {
-            return styleMapping.matches(_table);
+            return styleMapping.Matches(_table);
         }
     }
 }

@@ -1,6 +1,6 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
-    internal interface XmlNode {
-        string innerText();
-        T accept<T>(XmlNodeVisitor<T> visitor);
+    internal interface IXmlNode {
+        string InnerText();
+        T Accept<T>(IXmlNodeVisitor<T> visitor);
     }
 }

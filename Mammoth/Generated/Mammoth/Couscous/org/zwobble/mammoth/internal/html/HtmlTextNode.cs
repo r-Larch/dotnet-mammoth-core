@@ -1,5 +1,5 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
-    internal class HtmlTextNode : HtmlNode {
+    internal class HtmlTextNode : IHtmlNode {
         private string _value;
 
         internal HtmlTextNode(string value)
@@ -7,17 +7,17 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
             _value = value;
         }
 
-        public void accept(HtmlNode__Visitor visitor)
+        public void Accept(IHtmlNodeVisitor visitor)
         {
-            visitor.visit(this);
+            visitor.Visit(this);
         }
 
-        public T accept<T>(HtmlNode__Mapper<T> visitor)
+        public T Accept<T>(IHtmlNodeMapper<T> visitor)
         {
-            return visitor.visit(this);
+            return visitor.Visit(this);
         }
 
-        public string getValue()
+        public string GetValue()
         {
             return _value;
         }

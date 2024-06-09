@@ -3,10 +3,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class RelationshipsXml__Anonymous_0 : Function<XmlElement, Relationship> {
-        public Relationship apply(XmlElement arg0)
+    internal class RelationshipsXmlAnonymous0 : IFunction<XmlElement, Relationship> {
+        public Relationship Apply(XmlElement arg0)
         {
-            return RelationshipsXml.readRelationship(arg0);
+            return RelationshipsXml.ReadRelationship(arg0);
         }
     }
 }

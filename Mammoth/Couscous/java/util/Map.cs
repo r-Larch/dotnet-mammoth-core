@@ -3,22 +3,22 @@ using System.Collections.Generic;
 
 
 namespace Mammoth.Couscous.java.util {
-    internal interface Map {
+    internal interface IMap {
         IDictionary AsUntypedDictionary();
     }
 
-    internal interface Map<K, V> : Map {
-        void put(K key, V value);
-        bool containsKey(K key);
-        Set<Map__Entry<K, V>> entrySet();
-        Collection<V> values();
+    internal interface IMap<TK, TV> : IMap {
+        void Put(TK key, TV value);
+        bool ContainsKey(TK key);
+        ISet<IMapEntry<TK, TV>> EntrySet();
+        ICollection<TV> Values();
 
-        Optional<V> _lookup(K key);
-        IDictionary<K, V> AsDictionary();
+        IOptional<TV> _lookup(TK key);
+        IDictionary<TK, TV> AsDictionary();
     }
 
-    internal interface Map__Entry<K, V> {
-        K getKey();
-        V getValue();
+    internal interface IMapEntry<TK, TV> {
+        TK GetKey();
+        TV GetValue();
     }
 }

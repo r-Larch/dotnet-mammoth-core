@@ -5,21 +5,21 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class CommentXmlReader__Anonymous_1 : Function<List<DocumentElement>, Comment> {
+    internal class CommentXmlReaderAnonymous1 : IFunction<IList<IDocumentElement>, Comment> {
         private string _commentId;
         private XmlElement _element;
-        private CommentXmlReader _this_org__zwobble__mammoth__internal__docx__CommentXmlReader;
+        private CommentXmlReader _thisOrgZwobbleMammothInternalDocxCommentXmlReader;
 
-        internal CommentXmlReader__Anonymous_1(string commentId, CommentXmlReader this_org__zwobble__mammoth__internal__docx__CommentXmlReader, XmlElement element)
+        internal CommentXmlReaderAnonymous1(string commentId, CommentXmlReader thisOrgZwobbleMammothInternalDocxCommentXmlReader, XmlElement element)
         {
             _commentId = commentId;
-            _this_org__zwobble__mammoth__internal__docx__CommentXmlReader = this_org__zwobble__mammoth__internal__docx__CommentXmlReader;
+            _thisOrgZwobbleMammothInternalDocxCommentXmlReader = thisOrgZwobbleMammothInternalDocxCommentXmlReader;
             _element = element;
         }
 
-        public Comment apply(List<DocumentElement> children)
+        public Comment Apply(IList<IDocumentElement> children)
         {
-            return new Comment(_commentId, children, (_this_org__zwobble__mammoth__internal__docx__CommentXmlReader).readOptionalAttribute(_element, "w:author"), (_this_org__zwobble__mammoth__internal__docx__CommentXmlReader).readOptionalAttribute(_element, "w:initials"));
+            return new Comment(_commentId, children, (_thisOrgZwobbleMammothInternalDocxCommentXmlReader).ReadOptionalAttribute(_element, "w:author"), (_thisOrgZwobbleMammothInternalDocxCommentXmlReader).ReadOptionalAttribute(_element, "w:initials"));
         }
     }
 }

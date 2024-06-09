@@ -2,17 +2,17 @@ using Mammoth.Couscous.java.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class Run : DocumentElement, HasChildren {
-        private List<DocumentElement> _children;
+    internal class Run : IDocumentElement, IHasChildren {
+        private IList<IDocumentElement> _children;
         private bool _isBold;
         private bool _isItalic;
         private bool _isSmallCaps;
         private bool _isStrikethrough;
         private bool _isUnderline;
-        private Optional<Style> _style;
+        private IOptional<Style> _style;
         private VerticalAlignment _verticalAlignment;
 
-        internal Run(bool isBold, bool isItalic, bool isUnderline, bool isStrikethrough, bool isSmallCaps, VerticalAlignment verticalAlignment, Optional<Style> style, List<DocumentElement> children)
+        internal Run(bool isBold, bool isItalic, bool isUnderline, bool isStrikethrough, bool isSmallCaps, VerticalAlignment verticalAlignment, IOptional<Style> style, IList<IDocumentElement> children)
         {
             _isBold = isBold;
             _isItalic = isItalic;
@@ -24,47 +24,47 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
             _children = children;
         }
 
-        public T accept<T, U>(DocumentElementVisitor<T, U> visitor, U context)
+        public T Accept<T, TU>(IDocumentElementVisitor<T, TU> visitor, TU context)
         {
-            return visitor.visit(this, context);
+            return visitor.Visit(this, context);
         }
 
-        public List<DocumentElement> getChildren()
+        public IList<IDocumentElement> GetChildren()
         {
             return _children;
         }
 
-        public bool isBold()
+        public bool IsBold()
         {
             return _isBold;
         }
 
-        public bool isItalic()
+        public bool IsItalic()
         {
             return _isItalic;
         }
 
-        public bool isUnderline()
+        public bool IsUnderline()
         {
             return _isUnderline;
         }
 
-        public bool isStrikethrough()
+        public bool IsStrikethrough()
         {
             return _isStrikethrough;
         }
 
-        public bool isSmallCaps()
+        public bool IsSmallCaps()
         {
             return _isSmallCaps;
         }
 
-        public VerticalAlignment getVerticalAlignment()
+        public VerticalAlignment GetVerticalAlignment()
         {
             return _verticalAlignment;
         }
 
-        public Optional<Style> getStyle()
+        public IOptional<Style> GetStyle()
         {
             return _style;
         }

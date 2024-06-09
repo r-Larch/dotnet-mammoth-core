@@ -2,16 +2,16 @@
 
 
 namespace Mammoth.Couscous.java.io {
-    internal class IOException : Exception {
-        internal IOException()
+    internal class IoException : Exception {
+        internal IoException()
         {
         }
 
-        internal IOException(string message) : base(message)
+        internal IoException(string message) : base(message)
         {
         }
 
-        internal string getMessage()
+        internal string GetMessage()
         {
             return Message;
         }

@@ -3,10 +3,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_3 : Function<XmlElement, bool> {
-        public bool apply(XmlElement child)
+    internal class StatefulBodyXmlReaderAnonymous3 : IFunction<XmlElement, bool> {
+        public bool Apply(XmlElement child)
         {
-            return ((child.getAttributeOrNone("w:val")).map(new StatefulBodyXmlReader__Anonymous_2())).orElse(true);
+            return ((child.GetAttributeOrNone("w:val")).Map(new StatefulBodyXmlReaderAnonymous2())).OrElse(true);
         }
     }
 }

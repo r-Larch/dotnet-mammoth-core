@@ -7,8 +7,8 @@ namespace Mammoth {
     internal static class SimpleResult {
         internal static IResult<T> ToResult<T>(this InternalResult<T> result)
         {
-            var warnings = new HashSet<string>(FromJava.IterableToEnumerable(result.getWarnings()));
-            return new SimpleResult<T>(result.getValue(), warnings);
+            var warnings = new HashSet<string>(FromJava.IterableToEnumerable(result.GetWarnings()));
+            return new SimpleResult<T>(result.GetValue(), warnings);
         }
     }
 

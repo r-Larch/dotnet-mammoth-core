@@ -3,10 +3,10 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
-    internal class Html__Anonymous_1 : Function<HtmlNode, Iterable<HtmlNode>> {
-        public Iterable<HtmlNode> apply(HtmlNode node)
+    internal class HtmlAnonymous1 : IFunction<IHtmlNode, ITerable<IHtmlNode>> {
+        public ITerable<IHtmlNode> Apply(IHtmlNode node)
         {
-            return Html.stripEmpty(node);
+            return Html.StripEmpty(node);
         }
     }
 }

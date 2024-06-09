@@ -3,17 +3,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StylesXml__Anonymous_0 : Predicate<XmlElement> {
+    internal class StylesXmlAnonymous0 : IPredicate<XmlElement> {
         private string _styleType;
 
-        internal StylesXml__Anonymous_0(string styleType)
+        internal StylesXmlAnonymous0(string styleType)
         {
             _styleType = styleType;
         }
 
-        public bool test(XmlElement styleElement)
+        public bool Test(XmlElement styleElement)
         {
-            return (styleElement.getAttribute("w:type")).Equals(_styleType);
+            return (styleElement.GetAttribute("w:type")).Equals(_styleType);
         }
     }
 }

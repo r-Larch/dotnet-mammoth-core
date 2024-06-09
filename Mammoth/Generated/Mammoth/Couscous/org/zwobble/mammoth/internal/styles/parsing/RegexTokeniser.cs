@@ -6,9 +6,9 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal static class RegexTokeniser {
-        public static RegexTokeniser__TokenRule<T> rule<T>(T type, string regex)
+        public static RegexTokeniserTokenRule<T> Rule<T>(T type, string regex)
         {
-            return new RegexTokeniser__TokenRule<T>(type, Pattern.compile(regex));
+            return new RegexTokeniserTokenRule<T>(type, Pattern.Compile(regex));
         }
     }
 }
@@ -16,26 +16,26 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class RegexTokeniser<T> {
         private Pattern _pattern;
-        private List<T> _rules;
+        private IList<T> _rules;
 
-        internal RegexTokeniser(T unknown, List<RegexTokeniser__TokenRule<T>> rules)
+        internal RegexTokeniser(T unknown, IList<RegexTokeniserTokenRule<T>> rules)
         {
-            List<RegexTokeniser__TokenRule<T>> allRules = new ArrayList<RegexTokeniser__TokenRule<T>>(rules);
-            allRules.add(RegexTokeniser.rule(unknown, "."));
-            _pattern = Pattern.compile(String.join("|", Iterables.lazyMap(allRules, new RegexTokeniser__Anonymous_0<T>())));
-            _rules = Lists.eagerMap(allRules, new RegexTokeniser__Anonymous_1<T>());
+            IList<RegexTokeniserTokenRule<T>> allRules = new ArrayList<RegexTokeniserTokenRule<T>>(rules);
+            allRules.Add(RegexTokeniser.Rule(unknown, "."));
+            _pattern = Pattern.Compile(String.Join("|", Iterables.LazyMap(allRules, new RegexTokeniserAnonymous0<T>())));
+            _rules = Lists.EagerMap(allRules, new RegexTokeniserAnonymous1<T>());
         }
 
-        public List<Token<T>> tokenise(string value)
+        public IList<Token<T>> Tokenise(string value)
         {
-            var matcher = (_pattern).matcher(value);
-            List<Token<T>> tokens = new ArrayList<Token<T>>();
-            while (matcher.lookingAt()) {
-                var groupIndex = Iterables.tryFind(Iterables.intRange(0, (_rules).size()), new RegexTokeniser__Anonymous_2(matcher));
-                if (groupIndex.isPresent()) {
-                    var tokenType = (_rules).get(groupIndex.get());
-                    tokens.add(new Token<T>(matcher.regionStart(), tokenType, matcher.group()));
-                    matcher.region(matcher.end(), value.Length);
+            var matcher = (_pattern).Matcher(value);
+            IList<Token<T>> tokens = new ArrayList<Token<T>>();
+            while (matcher.LookingAt()) {
+                var groupIndex = Iterables.TryFind(Iterables.IntRange(0, (_rules).Size()), new RegexTokeniserAnonymous2(matcher));
+                if (groupIndex.IsPresent()) {
+                    var tokenType = (_rules).Get(groupIndex.Get());
+                    tokens.Add(new Token<T>(matcher.RegionStart(), tokenType, matcher.Group()));
+                    matcher.Region(matcher.End(), value.Length);
                 }
                 else {
                     throw new RuntimeException("Could not find group");

@@ -5,10 +5,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class DocumentReader__Anonymous_8 : BiFunction<List<Note>, List<Note>, List<Note>> {
-        public List<Note> apply(List<Note> arg0, List<Note> arg1)
+    internal class DocumentReaderAnonymous8 : IBiFunction<IList<Note>, IList<Note>, IList<Note>> {
+        public IList<Note> Apply(IList<Note> arg0, IList<Note> arg1)
         {
-            return Lists.eagerConcat(arg0, arg1);
+            return Lists.EagerConcat(arg0, arg1);
         }
     }
 }

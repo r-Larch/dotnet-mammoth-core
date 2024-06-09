@@ -5,17 +5,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class Numbering__Anonymous_0 : Function<Map<string, NumberingLevel>, Optional<NumberingLevel>> {
+    internal class NumberingAnonymous0 : IFunction<IMap<string, NumberingLevel>, IOptional<NumberingLevel>> {
         private string _level;
 
-        internal Numbering__Anonymous_0(string level)
+        internal NumberingAnonymous0(string level)
         {
             _level = level;
         }
 
-        public Optional<NumberingLevel> apply(Map<string, NumberingLevel> levels)
+        public IOptional<NumberingLevel> Apply(IMap<string, NumberingLevel> levels)
         {
-            return Maps.lookup(levels, _level);
+            return Maps.Lookup(levels, _level);
         }
     }
 }

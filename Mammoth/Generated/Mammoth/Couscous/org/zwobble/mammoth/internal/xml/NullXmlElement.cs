@@ -3,37 +3,37 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
-    internal class NullXmlElement : XmlElementLike {
-        public static XmlElementLike _INSTANCE;
+    internal class NullXmlElement : IXmlElementLike {
+        public static IXmlElementLike Instance;
 
         static NullXmlElement()
         {
-            _INSTANCE = new NullXmlElement();
+            Instance = new NullXmlElement();
         }
 
-        public bool hasChild(string name)
+        public bool HasChild(string name)
         {
             return false;
         }
 
-        public Optional<XmlElement> findChild(string name)
+        public IOptional<XmlElement> FindChild(string name)
         {
-            return Optional.empty<XmlElement>();
+            return Optional.Empty<XmlElement>();
         }
 
-        public XmlElementLike findChildOrEmpty(string name)
+        public IXmlElementLike FindChildOrEmpty(string name)
         {
             return this;
         }
 
-        public Optional<string> getAttributeOrNone(string name)
+        public IOptional<string> GetAttributeOrNone(string name)
         {
-            return Optional.empty<string>();
+            return Optional.Empty<string>();
         }
 
-        public List<XmlNode> getChildren()
+        public IList<IXmlNode> GetChildren()
         {
-            return Lists.list<XmlNode>();
+            return Lists.List<IXmlNode>();
         }
     }
 }

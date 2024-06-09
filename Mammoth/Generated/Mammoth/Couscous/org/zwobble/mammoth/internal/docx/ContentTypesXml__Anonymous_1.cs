@@ -4,10 +4,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class ContentTypesXml__Anonymous_1 : Function<XmlElement, Map__Entry<string, string>> {
-        public Map__Entry<string, string> apply(XmlElement arg0)
+    internal class ContentTypesXmlAnonymous1 : IFunction<XmlElement, IMapEntry<string, string>> {
+        public IMapEntry<string, string> Apply(XmlElement arg0)
         {
-            return ContentTypesXml.readOverride(arg0);
+            return ContentTypesXml.ReadOverride(arg0);
         }
     }
 }

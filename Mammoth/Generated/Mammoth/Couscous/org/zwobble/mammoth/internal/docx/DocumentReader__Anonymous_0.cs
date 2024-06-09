@@ -6,19 +6,19 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class DocumentReader__Anonymous_0 : BiFunction<XmlElement, BodyXmlReader, InternalResult<Document>> {
-        private List<Comment> _comments;
+    internal class DocumentReaderAnonymous0 : IBiFunction<XmlElement, BodyXmlReader, InternalResult<Document>> {
+        private IList<Comment> _comments;
         private Notes _notes;
 
-        internal DocumentReader__Anonymous_0(Notes notes, List<Comment> comments)
+        internal DocumentReaderAnonymous0(Notes notes, IList<Comment> comments)
         {
             _notes = notes;
             _comments = comments;
         }
 
-        public InternalResult<Document> apply(XmlElement element, BodyXmlReader bodyReader)
+        public InternalResult<Document> Apply(XmlElement element, BodyXmlReader bodyReader)
         {
-            return (new DocumentXmlReader(bodyReader, _notes, _comments)).readElement(element);
+            return (new DocumentXmlReader(bodyReader, _notes, _comments)).ReadElement(element);
         }
     }
 }

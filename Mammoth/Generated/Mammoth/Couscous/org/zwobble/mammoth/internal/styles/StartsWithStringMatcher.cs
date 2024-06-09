@@ -2,7 +2,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StartsWithStringMatcher : StringMatcher {
+    internal class StartsWithStringMatcher : IStringMatcher {
         private string _prefix;
 
         internal StartsWithStringMatcher(string prefix)
@@ -10,9 +10,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
             _prefix = prefix;
         }
 
-        public bool matches(string value)
+        public bool Matches(string value)
         {
-            return Strings.startsWithIgnoreCase(value, _prefix);
+            return Strings.StartsWithIgnoreCase(value, _prefix);
         }
     }
 }

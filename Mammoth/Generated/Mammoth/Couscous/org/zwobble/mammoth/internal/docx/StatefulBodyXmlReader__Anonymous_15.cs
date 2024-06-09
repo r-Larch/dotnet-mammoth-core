@@ -4,15 +4,15 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_15 : Function<List<DocumentElement>, DocumentElement> {
+    internal class StatefulBodyXmlReaderAnonymous15 : IFunction<IList<IDocumentElement>, IDocumentElement> {
         private bool _isHeader;
 
-        internal StatefulBodyXmlReader__Anonymous_15(bool isHeader)
+        internal StatefulBodyXmlReaderAnonymous15(bool isHeader)
         {
             _isHeader = isHeader;
         }
 
-        public DocumentElement apply(List<DocumentElement> children)
+        public IDocumentElement Apply(IList<IDocumentElement> children)
         {
             return new TableRow(children, _isHeader);
         }

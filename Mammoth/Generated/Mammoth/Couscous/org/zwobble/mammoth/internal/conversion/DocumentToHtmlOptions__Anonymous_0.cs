@@ -4,17 +4,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtmlOptions__Anonymous_0 : SupplierWithException<InputStream, IOException> {
-        private Image _image;
+    internal class DocumentToHtmlOptionsAnonymous0 : ISupplierWithException<INputStream, IoException> {
+        private IMage _image;
 
-        internal DocumentToHtmlOptions__Anonymous_0(Image image)
+        internal DocumentToHtmlOptionsAnonymous0(IMage image)
         {
             _image = image;
         }
 
-        public InputStream get()
+        public INputStream Get()
         {
-            return (_image).getInputStream();
+            return (_image).GetInputStream();
         }
     }
 }

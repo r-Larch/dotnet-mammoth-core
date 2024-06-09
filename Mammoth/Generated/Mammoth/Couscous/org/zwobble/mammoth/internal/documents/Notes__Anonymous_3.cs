@@ -4,17 +4,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class Notes__Anonymous_3 : Function<Map<string, Note>, Optional<Note>> {
+    internal class NotesAnonymous3 : IFunction<IMap<string, Note>, IOptional<Note>> {
         private string _noteId;
 
-        internal Notes__Anonymous_3(string noteId)
+        internal NotesAnonymous3(string noteId)
         {
             _noteId = noteId;
         }
 
-        public Optional<Note> apply(Map<string, Note> notesOfType)
+        public IOptional<Note> Apply(IMap<string, Note> notesOfType)
         {
-            return Maps.lookup(notesOfType, _noteId);
+            return Maps.Lookup(notesOfType, _noteId);
         }
     }
 }

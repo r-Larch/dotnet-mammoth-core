@@ -16,22 +16,22 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
             _value = value;
         }
 
-        public int getCharacterIndex()
+        public int GetCharacterIndex()
         {
             return _characterIndex;
         }
 
-        public T getTokenType()
+        public T GetTokenType()
         {
             return _tokenType;
         }
 
-        public string getValue()
+        public string GetValue()
         {
             return _value;
         }
 
-        public string toString()
+        public override string ToString()
         {
             return ((("Token(tokenType=" + _tokenType) + ", value=") + _value) + ")";
         }

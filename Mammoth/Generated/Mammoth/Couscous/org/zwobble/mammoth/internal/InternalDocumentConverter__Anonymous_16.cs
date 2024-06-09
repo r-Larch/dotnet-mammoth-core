@@ -3,10 +3,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_16 : Function<DocumentElement, string> {
-        public string apply(DocumentElement node)
+    internal class InternalDocumentConverterAnonymous16 : IFunction<IDocumentElement, string> {
+        public string Apply(IDocumentElement node)
         {
-            return InternalDocumentConverter.extractRawText(node);
+            return InternalDocumentConverter.ExtractRawText(node);
         }
     }
 }

@@ -4,19 +4,19 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_27 : Function<XmlElement, ReadResult> {
-        private Optional<string> _altText;
-        private StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+    internal class StatefulBodyXmlReaderAnonymous27 : IFunction<XmlElement, ReadResult> {
+        private IOptional<string> _altText;
+        private StatefulBodyXmlReader _thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader;
 
-        internal StatefulBodyXmlReader__Anonymous_27(StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader, Optional<string> altText)
+        internal StatefulBodyXmlReaderAnonymous27(StatefulBodyXmlReader thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader, IOptional<string> altText)
         {
-            _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+            _thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader = thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader;
             _altText = altText;
         }
 
-        public ReadResult apply(XmlElement blip)
+        public ReadResult Apply(XmlElement blip)
         {
-            return (_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).readBlip(blip, _altText);
+            return (_thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader).ReadBlip(blip, _altText);
         }
     }
 }

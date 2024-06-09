@@ -5,19 +5,19 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class NotesXmlReader__Anonymous_3 : Function<List<DocumentElement>, Note> {
+    internal class NotesXmlReaderAnonymous3 : IFunction<IList<IDocumentElement>, Note> {
         private XmlElement _element;
-        private NotesXmlReader _this_org__zwobble__mammoth__internal__docx__NotesXmlReader;
+        private NotesXmlReader _thisOrgZwobbleMammothInternalDocxNotesXmlReader;
 
-        internal NotesXmlReader__Anonymous_3(NotesXmlReader this_org__zwobble__mammoth__internal__docx__NotesXmlReader, XmlElement element)
+        internal NotesXmlReaderAnonymous3(NotesXmlReader thisOrgZwobbleMammothInternalDocxNotesXmlReader, XmlElement element)
         {
-            _this_org__zwobble__mammoth__internal__docx__NotesXmlReader = this_org__zwobble__mammoth__internal__docx__NotesXmlReader;
+            _thisOrgZwobbleMammothInternalDocxNotesXmlReader = thisOrgZwobbleMammothInternalDocxNotesXmlReader;
             _element = element;
         }
 
-        public Note apply(List<DocumentElement> children)
+        public Note Apply(IList<IDocumentElement> children)
         {
-            return new Note((_this_org__zwobble__mammoth__internal__docx__NotesXmlReader)._noteType, (_element).getAttribute("w:id"), children);
+            return new Note((_thisOrgZwobbleMammothInternalDocxNotesXmlReader).NoteType, (_element).GetAttribute("w:id"), children);
         }
     }
 }

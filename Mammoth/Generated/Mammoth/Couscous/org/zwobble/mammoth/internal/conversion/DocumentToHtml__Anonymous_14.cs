@@ -3,17 +3,17 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_14 : Consumer<string> {
-        private Map<string, string> _attributes;
+    internal class DocumentToHtmlAnonymous14 : IConsumer<string> {
+        private IMap<string, string> _attributes;
 
-        internal DocumentToHtml__Anonymous_14(Map<string, string> attributes)
+        internal DocumentToHtmlAnonymous14(IMap<string, string> attributes)
         {
             _attributes = attributes;
         }
 
-        public void accept(string targetFrame)
+        public void Accept(string targetFrame)
         {
-            (_attributes).put("target", targetFrame);
+            (_attributes).Put("target", targetFrame);
         }
     }
 }

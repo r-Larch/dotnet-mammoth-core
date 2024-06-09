@@ -2,27 +2,27 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class BreakMatcher : DocumentElementMatcher<Break> {
-        public static BreakMatcher _LINE_BREAK;
-        public static BreakMatcher _PAGE_BREAK;
-        public static BreakMatcher _COLUMN_BREAK;
-        private Break__Type _breakType;
+    internal class BreakMatcher : IDocumentElementMatcher<Break> {
+        public static BreakMatcher LineBreak;
+        public static BreakMatcher PageBreak;
+        public static BreakMatcher ColumnBreak;
+        private BreakType _breakType;
 
         static BreakMatcher()
         {
-            _LINE_BREAK = new BreakMatcher(Break__Type._LINE);
-            _PAGE_BREAK = new BreakMatcher(Break__Type._PAGE);
-            _COLUMN_BREAK = new BreakMatcher(Break__Type._COLUMN);
+            LineBreak = new BreakMatcher(BreakType.Line);
+            PageBreak = new BreakMatcher(BreakType.Page);
+            ColumnBreak = new BreakMatcher(BreakType.Column);
         }
 
-        internal BreakMatcher(Break__Type breakType)
+        internal BreakMatcher(BreakType breakType)
         {
             _breakType = breakType;
         }
 
-        public bool matches(Break element)
+        public bool Matches(Break element)
         {
-            return (element.getType()).equals(_breakType);
+            return (element.Type) == (_breakType);
         }
     }
 }

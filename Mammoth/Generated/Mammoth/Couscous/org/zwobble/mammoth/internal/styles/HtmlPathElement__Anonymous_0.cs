@@ -4,19 +4,19 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class HtmlPathElement__Anonymous_0 : Supplier<List<HtmlNode>> {
-        private Supplier<List<HtmlNode>> _generateNodes;
-        private HtmlPathElement _this_org__zwobble__mammoth__internal__styles__HtmlPathElement;
+    internal class HtmlPathElementAnonymous0 : ISupplier<IList<IHtmlNode>> {
+        private ISupplier<IList<IHtmlNode>> _generateNodes;
+        private HtmlPathElement _thisOrgZwobbleMammothInternalStylesHtmlPathElement;
 
-        internal HtmlPathElement__Anonymous_0(HtmlPathElement this_org__zwobble__mammoth__internal__styles__HtmlPathElement, Supplier<List<HtmlNode>> generateNodes)
+        internal HtmlPathElementAnonymous0(HtmlPathElement thisOrgZwobbleMammothInternalStylesHtmlPathElement, ISupplier<IList<IHtmlNode>> generateNodes)
         {
-            _this_org__zwobble__mammoth__internal__styles__HtmlPathElement = this_org__zwobble__mammoth__internal__styles__HtmlPathElement;
+            _thisOrgZwobbleMammothInternalStylesHtmlPathElement = thisOrgZwobbleMammothInternalStylesHtmlPathElement;
             _generateNodes = generateNodes;
         }
 
-        public List<HtmlNode> get()
+        public IList<IHtmlNode> Get()
         {
-            return (_this_org__zwobble__mammoth__internal__styles__HtmlPathElement).wrapNodes((_generateNodes).get());
+            return (_thisOrgZwobbleMammothInternalStylesHtmlPathElement).WrapNodes((_generateNodes).Get());
         }
     }
 }

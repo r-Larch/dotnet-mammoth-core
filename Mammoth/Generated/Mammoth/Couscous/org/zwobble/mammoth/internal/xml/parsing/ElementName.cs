@@ -9,12 +9,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
             _localName = localName;
         }
 
-        public string getUri()
+        public string GetUri()
         {
             return _uri;
         }
 
-        public string getLocalName()
+        public string GetLocalName()
         {
             return _localName;
         }

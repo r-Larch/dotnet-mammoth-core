@@ -5,14 +5,14 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class DocumentReader__PartWithBodyReader {
+    internal class DocumentReaderPartWithBodyReader {
         private ContentTypes _contentTypes;
-        private FileReader _fileReader;
+        private IFileReader _fileReader;
         private Numbering _numbering;
         private Styles _styles;
-        private Archive _zipFile;
+        private IArchive _zipFile;
 
-        internal DocumentReader__PartWithBodyReader(Archive zipFile, ContentTypes contentTypes, FileReader fileReader, Numbering numbering, Styles styles)
+        internal DocumentReaderPartWithBodyReader(IArchive zipFile, ContentTypes contentTypes, IFileReader fileReader, Numbering numbering, Styles styles)
         {
             _zipFile = zipFile;
             _contentTypes = contentTypes;
@@ -21,15 +21,15 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
             _styles = styles;
         }
 
-        public T readPart<T>(string name, BiFunction<XmlElement, BodyXmlReader, T> readPart, Optional<T> defaultValue)
+        public T ReadPart<T>(string name, IBiFunction<XmlElement, BodyXmlReader, T> readPart, IOptional<T> defaultValue)
         {
-            var relationships = DocumentReader.readRelationships(_zipFile, DocumentReader.findRelationshipsPathFor(name));
+            var relationships = DocumentReader.ReadRelationships(_zipFile, DocumentReader.FindRelationshipsPathFor(name));
             var bodyReader = new BodyXmlReader(_styles, _numbering, relationships, _contentTypes, _zipFile, _fileReader);
-            if (defaultValue.isPresent()) {
-                return ((DocumentReader.tryParseOfficeXml(_zipFile, name)).map(new DocumentReader__Anonymous_17<T>(readPart, bodyReader))).orElse(defaultValue.get());
+            if (defaultValue.IsPresent()) {
+                return ((DocumentReader.TryParseOfficeXml(_zipFile, name)).Map(new DocumentReaderAnonymous17<T>(readPart, bodyReader))).OrElse(defaultValue.Get());
             }
 
-            return readPart.apply(DocumentReader.parseOfficeXml(_zipFile, name), bodyReader);
+            return readPart.Apply(DocumentReader.ParseOfficeXml(_zipFile, name), bodyReader);
         }
     }
 }

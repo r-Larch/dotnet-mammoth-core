@@ -1,5 +1,5 @@
 ﻿namespace Mammoth.Couscous.java.io {
-    internal interface Closeable {
-        void close();
+    internal interface ICloseable {
+        void Close();
     }
 }

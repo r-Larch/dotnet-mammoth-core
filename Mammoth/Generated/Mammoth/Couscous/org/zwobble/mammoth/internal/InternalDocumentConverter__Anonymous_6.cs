@@ -7,17 +7,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.results;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_6 : Function<Document, InternalResult<List<HtmlNode>>> {
+    internal class InternalDocumentConverterAnonymous6 : IFunction<Document, InternalResult<IList<IHtmlNode>>> {
         private DocumentToHtmlOptions _conversionOptions;
 
-        internal InternalDocumentConverter__Anonymous_6(DocumentToHtmlOptions conversionOptions)
+        internal InternalDocumentConverterAnonymous6(DocumentToHtmlOptions conversionOptions)
         {
             _conversionOptions = conversionOptions;
         }
 
-        public InternalResult<List<HtmlNode>> apply(Document nodes)
+        public InternalResult<IList<IHtmlNode>> Apply(Document nodes)
         {
-            return DocumentToHtml.convertToHtml(nodes, _conversionOptions);
+            return DocumentToHtml.ConvertToHtml(nodes, _conversionOptions);
         }
     }
 }

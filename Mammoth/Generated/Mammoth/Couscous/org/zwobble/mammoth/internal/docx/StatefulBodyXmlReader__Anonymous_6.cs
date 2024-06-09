@@ -4,17 +4,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_6 : BiFunction<Optional<Style>, List<DocumentElement>, DocumentElement> {
+    internal class StatefulBodyXmlReaderAnonymous6 : IBiFunction<IOptional<Style>, IList<IDocumentElement>, IDocumentElement> {
         private ParagraphIndent _indent;
-        private Optional<NumberingLevel> _numbering;
+        private IOptional<NumberingLevel> _numbering;
 
-        internal StatefulBodyXmlReader__Anonymous_6(Optional<NumberingLevel> numbering, ParagraphIndent indent)
+        internal StatefulBodyXmlReaderAnonymous6(IOptional<NumberingLevel> numbering, ParagraphIndent indent)
         {
             _numbering = numbering;
             _indent = indent;
         }
 
-        public DocumentElement apply(Optional<Style> style, List<DocumentElement> children)
+        public IDocumentElement Apply(IOptional<Style> style, IList<IDocumentElement> children)
         {
             return new Paragraph(style, _numbering, _indent, children);
         }

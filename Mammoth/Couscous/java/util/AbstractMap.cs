@@ -5,19 +5,19 @@ using System.Linq;
 
 
 namespace Mammoth.Couscous.java.util {
-    internal abstract class AbstractMap<TKey, TValue> : Map<TKey, TValue> {
-        public abstract void put(TKey key, TValue value);
-        public abstract bool containsKey(TKey key);
-        public abstract Set<Map__Entry<TKey, TValue>> entrySet();
-        public abstract Collection<TValue> values();
+    internal abstract class AbstractMap<TKey, TValue> : IMap<TKey, TValue> {
+        public abstract void Put(TKey key, TValue value);
+        public abstract bool ContainsKey(TKey key);
+        public abstract ISet<IMapEntry<TKey, TValue>> EntrySet();
+        public abstract ICollection<TValue> Values();
 
-        public abstract Optional<TValue> _lookup(TKey key);
+        public abstract IOptional<TValue> _lookup(TKey key);
         public abstract IDictionary<TKey, TValue> AsDictionary();
         public abstract IDictionary AsUntypedDictionary();
 
         public override bool Equals(object other)
         {
-            var otherMap = other as Map;
+            var otherMap = other as IMap;
             if (otherMap == null) {
                 return false;
             }
@@ -25,7 +25,7 @@ namespace Mammoth.Couscous.java.util {
             return Equals(otherMap);
         }
 
-        public bool Equals(Map other)
+        public bool Equals(IMap other)
         {
             var first = AsUntypedDictionary();
             var second = other.AsUntypedDictionary();

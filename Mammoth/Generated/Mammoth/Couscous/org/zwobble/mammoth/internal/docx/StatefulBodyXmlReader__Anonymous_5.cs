@@ -3,17 +3,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_5 : Function<XmlElement, ReadResult> {
-        private StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+    internal class StatefulBodyXmlReaderAnonymous5 : IFunction<XmlElement, ReadResult> {
+        private StatefulBodyXmlReader _thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader;
 
-        internal StatefulBodyXmlReader__Anonymous_5(StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader)
+        internal StatefulBodyXmlReaderAnonymous5(StatefulBodyXmlReader thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader)
         {
-            _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+            _thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader = thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader;
         }
 
-        public ReadResult apply(XmlElement arg0)
+        public ReadResult Apply(XmlElement arg0)
         {
-            return (_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).readElement(arg0);
+            return (_thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader).ReadElement(arg0);
         }
     }
 }

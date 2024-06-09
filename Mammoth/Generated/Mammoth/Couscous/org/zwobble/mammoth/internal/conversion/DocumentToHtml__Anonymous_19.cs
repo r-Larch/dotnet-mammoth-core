@@ -7,26 +7,26 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_19 : Function<string, List<HtmlNode>> {
+    internal class DocumentToHtmlAnonymous19 : IFunction<string, IList<IHtmlNode>> {
         private Image _image;
-        private DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+        private DocumentToHtml _thisOrgZwobbleMammothInternalConversionDocumentToHtml;
 
-        internal DocumentToHtml__Anonymous_19(DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, Image image)
+        internal DocumentToHtmlAnonymous19(DocumentToHtml thisOrgZwobbleMammothInternalConversionDocumentToHtml, Image image)
         {
-            _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml = this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+            _thisOrgZwobbleMammothInternalConversionDocumentToHtml = thisOrgZwobbleMammothInternalConversionDocumentToHtml;
             _image = image;
         }
 
-        public List<HtmlNode> apply(string contentType)
+        public IList<IHtmlNode> Apply(string contentType)
         {
             try {
-                Map<string, string> attributes = new HashMap<string, string>(((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._imageConverter).convert(new DocumentToHtml__Anonymous_17(_image, contentType)));
-                ((_image).getAltText()).ifPresent(new DocumentToHtml__Anonymous_18(attributes));
-                return Lists.list(Html.element("img", attributes));
+                IMap<string, string> attributes = new HashMap<string, string>(((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).ImageConverter).Convert(new DocumentToHtmlAnonymous17(_image, contentType)));
+                ((_image).GetAltText()).IfPresent(new DocumentToHtmlAnonymous18(attributes));
+                return Lists.List(Html.Element("img", attributes));
             }
-            catch (IOException exception) {
-                ((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._warnings).add(exception.getMessage());
-                return Lists.list<HtmlNode>();
+            catch (IoException exception) {
+                ((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).Warnings).Add(exception.GetMessage());
+                return Lists.List<IHtmlNode>();
             }
         }
     }

@@ -2,10 +2,10 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_1 : Function<StatefulBodyXmlReader__HyperlinkComplexField, string> {
-        public string apply(StatefulBodyXmlReader__HyperlinkComplexField field)
+    internal class StatefulBodyXmlReaderAnonymous1 : IFunction<StatefulBodyXmlReaderHyperlinkComplexField, string> {
+        public string Apply(StatefulBodyXmlReaderHyperlinkComplexField field)
         {
-            return field._href;
+            return field.Href;
         }
     }
 }

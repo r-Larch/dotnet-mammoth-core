@@ -5,19 +5,19 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_4 : Function<DocumentElement, Iterable<HtmlNode>> {
-        private DocumentToHtml__Context _context;
-        private DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+    internal class DocumentToHtmlAnonymous4 : IFunction<IDocumentElement, ITerable<IHtmlNode>> {
+        private DocumentToHtmlContext _context;
+        private DocumentToHtml _thisOrgZwobbleMammothInternalConversionDocumentToHtml;
 
-        internal DocumentToHtml__Anonymous_4(DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, DocumentToHtml__Context context)
+        internal DocumentToHtmlAnonymous4(DocumentToHtml thisOrgZwobbleMammothInternalConversionDocumentToHtml, DocumentToHtmlContext context)
         {
-            _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml = this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+            _thisOrgZwobbleMammothInternalConversionDocumentToHtml = thisOrgZwobbleMammothInternalConversionDocumentToHtml;
             _context = context;
         }
 
-        public Iterable<HtmlNode> apply(DocumentElement element)
+        public ITerable<IHtmlNode> Apply(IDocumentElement element)
         {
-            return (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertToHtml(element, _context);
+            return (_thisOrgZwobbleMammothInternalConversionDocumentToHtml).ConvertToHtml(element, _context);
         }
     }
 }

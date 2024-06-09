@@ -3,21 +3,21 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.archives;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class DocumentReader__Anonymous_2 : Function<string, string> {
-        private Archive _archive;
+    internal class DocumentReaderAnonymous2 : IFunction<string, string> {
+        private IArchive _archive;
         private string _documentFilename;
         private Relationships _documentRelationships;
 
-        internal DocumentReader__Anonymous_2(Archive archive, Relationships documentRelationships, string documentFilename)
+        internal DocumentReaderAnonymous2(IArchive archive, Relationships documentRelationships, string documentFilename)
         {
             _archive = archive;
             _documentRelationships = documentRelationships;
             _documentFilename = documentFilename;
         }
 
-        public string apply(string name)
+        public string Apply(string name)
         {
-            return DocumentReader.findPartPath(_archive, _documentRelationships, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/" + name, (ZipPaths.splitPath(_documentFilename)).getDirname(), ("word/" + name) + ".xml");
+            return DocumentReader.FindPartPath(_archive, _documentRelationships, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/" + name, (ZipPaths.SplitPath(_documentFilename)).GetDirname(), ("word/" + name) + ".xml");
         }
     }
 }

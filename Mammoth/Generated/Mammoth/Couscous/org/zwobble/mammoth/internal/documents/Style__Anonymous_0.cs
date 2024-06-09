@@ -2,15 +2,15 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class Style__Anonymous_0 : Function<string, string> {
+    internal class StyleAnonymous0 : IFunction<string, string> {
         private string _styleIdDescription;
 
-        internal Style__Anonymous_0(string styleIdDescription)
+        internal StyleAnonymous0(string styleIdDescription)
         {
             _styleIdDescription = styleIdDescription;
         }
 
-        public string apply(string name)
+        public string Apply(string name)
         {
             return ((name + " (") + _styleIdDescription) + ")";
         }

@@ -4,21 +4,21 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.styles;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_9 : Supplier<HtmlPath> {
+    internal class DocumentToHtmlAnonymous9 : ISupplier<IHtmlPath> {
         private Break _breakElement;
 
-        internal DocumentToHtml__Anonymous_9(Break breakElement)
+        internal DocumentToHtmlAnonymous9(Break breakElement)
         {
             _breakElement = breakElement;
         }
 
-        public HtmlPath get()
+        public IHtmlPath Get()
         {
-            if ((_breakElement).getType() == Break__Type._LINE) {
-                return HtmlPath_static.element("br");
+            if ((_breakElement).Type == BreakType.Line) {
+                return HtmlPathStatic.Element("br");
             }
 
-            return HtmlPath_static._EMPTY;
+            return HtmlPathStatic.Empty;
         }
     }
 }

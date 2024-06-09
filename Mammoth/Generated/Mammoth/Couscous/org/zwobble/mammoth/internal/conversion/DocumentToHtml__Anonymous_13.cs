@@ -3,10 +3,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_13 : Function<TableRow, bool> {
-        public bool apply(TableRow arg0)
+    internal class DocumentToHtmlAnonymous13 : IFunction<TableRow, bool> {
+        public bool Apply(TableRow arg0)
         {
-            return arg0.isHeader();
+            return arg0.IsHeader();
         }
     }
 }

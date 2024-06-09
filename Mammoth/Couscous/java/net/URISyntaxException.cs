@@ -2,8 +2,8 @@ using System;
 
 
 namespace Mammoth.Couscous.java.net {
-    internal class URISyntaxException : Exception {
-        internal URISyntaxException(string message) : base(message)
+    internal class UriSyntaxException : Exception {
+        internal UriSyntaxException(string message) : base(message)
         {
         }
     }

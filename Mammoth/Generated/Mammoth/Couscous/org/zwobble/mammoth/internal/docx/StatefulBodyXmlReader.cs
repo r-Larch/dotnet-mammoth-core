@@ -11,77 +11,77 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader {
-        private static Set<string> _IMAGE_TYPES_SUPPORTED_BY_BROWSERS;
-        private Queue<StatefulBodyXmlReader__ComplexField> _complexFieldStack;
+        private static ISet<string> _imageTypesSupportedByBrowsers;
+        private IQueue<IStatefulBodyXmlReaderComplexField> _complexFieldStack;
         private ContentTypes _contentTypes;
         private StringBuilder _currentInstrText;
-        public Archive _file;
-        public FileReader _fileReader;
-        public Numbering _numbering;
+        public IArchive File;
+        public IFileReader FileReader;
+        public Numbering Numbering;
         private Relationships _relationships;
-        public Styles _styles;
+        public Styles Styles;
 
         static StatefulBodyXmlReader()
         {
-            _IMAGE_TYPES_SUPPORTED_BY_BROWSERS = Sets.set(new[] { "image/png", "image/gif", "image/jpeg", "image/svg+xml", "image/tiff" });
+            _imageTypesSupportedByBrowsers = Sets.Set(new[] { "image/png", "image/gif", "image/jpeg", "image/svg+xml", "image/tiff" });
         }
 
-        internal StatefulBodyXmlReader(Styles styles, Numbering numbering, Relationships relationships, ContentTypes contentTypes, Archive file, FileReader fileReader)
+        internal StatefulBodyXmlReader(Styles styles, Numbering numbering, Relationships relationships, ContentTypes contentTypes, IArchive file, IFileReader fileReader)
         {
-            _styles = styles;
-            _numbering = numbering;
+            Styles = styles;
+            Numbering = numbering;
             _relationships = relationships;
             _contentTypes = contentTypes;
-            _file = file;
-            _fileReader = fileReader;
+            File = file;
+            FileReader = fileReader;
             _currentInstrText = new StringBuilder();
-            _complexFieldStack = Queues.stack<StatefulBodyXmlReader__ComplexField>();
+            _complexFieldStack = Queues.Stack<IStatefulBodyXmlReaderComplexField>();
         }
 
-        public ReadResult readElement(XmlElement element)
+        public ReadResult ReadElement(XmlElement element)
         {
-            switch (element.getName()) {
+            switch (element.GetName()) {
                 case "w:t":
-                    return ReadResult.success(new Text(element.innerText()));
+                    return ReadResult.Success(new Text(element.InnerText()));
                 case "w:r":
-                    return readRun(element);
+                    return ReadRun(element);
                 case "w:p":
-                    return readParagraph(element);
+                    return ReadParagraph(element);
                 case "w:fldChar":
-                    return readFieldChar(element);
+                    return ReadFieldChar(element);
                 case "w:instrText":
-                    return readInstrText(element);
+                    return ReadInstrText(element);
                 case "w:tab":
-                    return ReadResult.success(Tab._TAB);
+                    return ReadResult.Success(Tab.Instance);
                 case "w:noBreakHyphen":
-                    return ReadResult.success(new Text("‑"));
+                    return ReadResult.Success(new Text("‑"));
                 case "w:br":
-                    return readBreak(element);
+                    return ReadBreak(element);
                 case "w:tbl":
-                    return readTable(element);
+                    return ReadTable(element);
                 case "w:tr":
-                    return readTableRow(element);
+                    return ReadTableRow(element);
                 case "w:tc":
-                    return readTableCell(element);
+                    return ReadTableCell(element);
                 case "w:hyperlink":
-                    return readHyperlink(element);
+                    return ReadHyperlink(element);
                 case "w:bookmarkStart":
-                    return readBookmark(element);
+                    return ReadBookmark(element);
                 case "w:footnoteReference":
-                    return readNoteReference(NoteType._FOOTNOTE, element);
+                    return ReadNoteReference(NoteType.Footnote, element);
                 case "w:endnoteReference":
-                    return readNoteReference(NoteType._ENDNOTE, element);
+                    return ReadNoteReference(NoteType.Endnote, element);
                 case "w:commentReference":
-                    return readCommentReference(element);
+                    return ReadCommentReference(element);
                 case "w:pict":
-                    return readPict(element);
+                    return ReadPict(element);
                 case "v:imagedata":
-                    return readImagedata(element);
+                    return ReadImagedata(element);
                 case "wp:inline":
                 case "wp:anchor":
-                    return readInline(element);
+                    return ReadInline(element);
                 case "w:sdt":
-                    return readSdt(element);
+                    return ReadSdt(element);
                 case "w:ins":
                 case "w:object":
                 case "w:smartTag":
@@ -91,7 +91,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                 case "v:shape":
                 case "v:textbox":
                 case "w:txbxContent":
-                    return readElements(element.getChildren());
+                    return ReadElements(element.GetChildren());
                 case "office-word:wrap":
                 case "v:shadow":
                 case "v:shapetype":
@@ -111,372 +111,372 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                 case "w:tblGrid":
                 case "w:trPr":
                 case "w:tcPr":
-                    return ReadResult._EMPTY_SUCCESS;
+                    return ReadResult.EmptySuccess;
                 default:
-                    var warning = "An unrecognised element was ignored: " + element.getName();
-                    return ReadResult.emptyWithWarning(warning);
+                    var warning = "An unrecognised element was ignored: " + element.GetName();
+                    return ReadResult.EmptyWithWarning(warning);
             }
         }
 
-        public ReadResult readRun(XmlElement element)
+        public ReadResult ReadRun(XmlElement element)
         {
-            var properties = element.findChildOrEmpty("w:rPr");
-            return ReadResult.map(readRunStyle(properties), readElements(element.getChildren()), new StatefulBodyXmlReader__Anonymous_0(this, properties));
+            var properties = element.FindChildOrEmpty("w:rPr");
+            return ReadResult.Map(ReadRunStyle(properties), ReadElements(element.GetChildren()), new StatefulBodyXmlReaderAnonymous0(this, properties));
         }
 
-        public Optional<string> currentHyperlinkHref()
+        public IOptional<string> CurrentHyperlinkHref()
         {
-            return (Iterables.tryGetLast(Iterables.lazyFilter<StatefulBodyXmlReader__ComplexField, StatefulBodyXmlReader__HyperlinkComplexField>(_complexFieldStack, typeof(StatefulBodyXmlReader__HyperlinkComplexField)))).map(new StatefulBodyXmlReader__Anonymous_1());
+            return (Iterables.TryGetLast(Iterables.LazyFilter<IStatefulBodyXmlReaderComplexField, StatefulBodyXmlReaderHyperlinkComplexField>(_complexFieldStack, typeof(StatefulBodyXmlReaderHyperlinkComplexField)))).Map(new StatefulBodyXmlReaderAnonymous1());
         }
 
-        public bool isBold(XmlElementLike properties)
+        public bool IsBold(IXmlElementLike properties)
         {
-            return readBooleanElement(properties, "w:b");
+            return ReadBooleanElement(properties, "w:b");
         }
 
-        public bool isItalic(XmlElementLike properties)
+        public bool IsItalic(IXmlElementLike properties)
         {
-            return readBooleanElement(properties, "w:i");
+            return ReadBooleanElement(properties, "w:i");
         }
 
-        public bool isUnderline(XmlElementLike properties)
+        public bool IsUnderline(IXmlElementLike properties)
         {
-            return readBooleanElement(properties, "w:u");
+            return ReadBooleanElement(properties, "w:u");
         }
 
-        public bool isStrikethrough(XmlElementLike properties)
+        public bool IsStrikethrough(IXmlElementLike properties)
         {
-            return readBooleanElement(properties, "w:strike");
+            return ReadBooleanElement(properties, "w:strike");
         }
 
-        public bool isSmallCaps(XmlElementLike properties)
+        public bool IsSmallCaps(IXmlElementLike properties)
         {
-            return readBooleanElement(properties, "w:smallCaps");
+            return ReadBooleanElement(properties, "w:smallCaps");
         }
 
-        public bool readBooleanElement(XmlElementLike properties, string tagName)
+        public bool ReadBooleanElement(IXmlElementLike properties, string tagName)
         {
-            return ((properties.findChild(tagName)).map(new StatefulBodyXmlReader__Anonymous_3())).orElse(false);
+            return ((properties.FindChild(tagName)).Map(new StatefulBodyXmlReaderAnonymous3())).OrElse(false);
         }
 
-        public VerticalAlignment readVerticalAlignment(XmlElementLike properties)
+        public VerticalAlignment ReadVerticalAlignment(IXmlElementLike properties)
         {
-            var verticalAlignment = (readVal(properties, "w:vertAlign")).orElse("");
+            var verticalAlignment = (ReadVal(properties, "w:vertAlign")).OrElse("");
             switch (verticalAlignment) {
                 case "superscript":
-                    return VerticalAlignment._SUPERSCRIPT;
+                    return VerticalAlignment.Superscript;
                 case "subscript":
-                    return VerticalAlignment._SUBSCRIPT;
+                    return VerticalAlignment.Subscript;
                 default:
-                    return VerticalAlignment._BASELINE;
+                    return VerticalAlignment.Baseline;
             }
         }
 
-        public InternalResult<Optional<Style>> readRunStyle(XmlElementLike properties)
+        public InternalResult<IOptional<Style>> ReadRunStyle(IXmlElementLike properties)
         {
-            return readStyle(properties, "w:rStyle", "Run", new StatefulBodyXmlReader__Anonymous_4(this));
+            return ReadStyle(properties, "w:rStyle", "Run", new StatefulBodyXmlReaderAnonymous4(this));
         }
 
-        public ReadResult readElements(Iterable<XmlNode> nodes)
+        public ReadResult ReadElements(ITerable<IXmlNode> nodes)
         {
-            return ReadResult.flatMap(Iterables.lazyFilter<XmlNode, XmlElement>(nodes, typeof(XmlElement)), new StatefulBodyXmlReader__Anonymous_5(this));
+            return ReadResult.FlatMap(Iterables.LazyFilter<IXmlNode, XmlElement>(nodes, typeof(XmlElement)), new StatefulBodyXmlReaderAnonymous5(this));
         }
 
-        public ReadResult readParagraph(XmlElement element)
+        public ReadResult ReadParagraph(XmlElement element)
         {
-            var properties = element.findChildOrEmpty("w:pPr");
-            var numbering = readNumbering(properties);
-            var indent = readParagraphIndent(properties);
-            return (ReadResult.map(readParagraphStyle(properties), readElements(element.getChildren()), new StatefulBodyXmlReader__Anonymous_6(numbering, indent))).appendExtra();
+            var properties = element.FindChildOrEmpty("w:pPr");
+            var numbering = ReadNumbering(properties);
+            var indent = ReadParagraphIndent(properties);
+            return (ReadResult.Map(ReadParagraphStyle(properties), ReadElements(element.GetChildren()), new StatefulBodyXmlReaderAnonymous6(numbering, indent))).AppendExtra();
         }
 
-        public ReadResult readFieldChar(XmlElement element)
+        public ReadResult ReadFieldChar(XmlElement element)
         {
-            var type = (element.getAttributeOrNone("w:fldCharType")).orElse("");
+            var type = (element.GetAttributeOrNone("w:fldCharType")).OrElse("");
             if (type.Equals("begin")) {
-                (_complexFieldStack).add(StatefulBodyXmlReader__ComplexField_static._UNKNOWN);
-                (_currentInstrText).setLength(0);
+                (_complexFieldStack).Add(StatefulBodyXmlReaderComplexFieldStatic.Unknown);
+                (_currentInstrText).SetLength(0);
             }
             else if (type.Equals("end")) {
-                (_complexFieldStack).remove();
+                (_complexFieldStack).Remove();
             }
             else if (type.Equals("separate")) {
-                var instrText = (_currentInstrText).toString();
-                var complexField = ((parseHyperlinkFieldCode(instrText)).map(new StatefulBodyXmlReader__Anonymous_7())).orElse(StatefulBodyXmlReader__ComplexField_static._UNKNOWN);
-                (_complexFieldStack).remove();
-                (_complexFieldStack).add(complexField);
+                var instrText = (_currentInstrText).ToString();
+                var complexField = ((ParseHyperlinkFieldCode(instrText)).Map(new StatefulBodyXmlReaderAnonymous7())).OrElse(StatefulBodyXmlReaderComplexFieldStatic.Unknown);
+                (_complexFieldStack).Remove();
+                (_complexFieldStack).Add(complexField);
             }
 
-            return ReadResult._EMPTY_SUCCESS;
+            return ReadResult.EmptySuccess;
         }
 
-        public ReadResult readInstrText(XmlElement element)
+        public ReadResult ReadInstrText(XmlElement element)
         {
-            (_currentInstrText).append(element.innerText());
-            return ReadResult._EMPTY_SUCCESS;
+            (_currentInstrText).Append(element.InnerText());
+            return ReadResult.EmptySuccess;
         }
 
-        public Optional<string> parseHyperlinkFieldCode(string instrText)
+        public IOptional<string> ParseHyperlinkFieldCode(string instrText)
         {
-            var pattern = Pattern.compile("\\s*HYPERLINK \"(.*)\"");
-            var matcher = pattern.matcher(instrText);
-            if (matcher.lookingAt()) {
-                return Optional.of(matcher.group(1));
+            var pattern = Pattern.Compile("\\s*HYPERLINK \"(.*)\"");
+            var matcher = pattern.Matcher(instrText);
+            if (matcher.LookingAt()) {
+                return Optional.Of(matcher.Group(1));
             }
 
-            return Optional.empty<string>();
+            return Optional.Empty<string>();
         }
 
-        public InternalResult<Optional<Style>> readParagraphStyle(XmlElementLike properties)
+        public InternalResult<IOptional<Style>> ReadParagraphStyle(IXmlElementLike properties)
         {
-            return readStyle(properties, "w:pStyle", "Paragraph", new StatefulBodyXmlReader__Anonymous_8(this));
+            return ReadStyle(properties, "w:pStyle", "Paragraph", new StatefulBodyXmlReaderAnonymous8(this));
         }
 
-        public InternalResult<Optional<Style>> readStyle(XmlElementLike properties, string styleTagName, string styleType, Function<string, Optional<Style>> findStyleById)
+        public InternalResult<IOptional<Style>> ReadStyle(IXmlElementLike properties, string styleTagName, string styleType, IFunction<string, IOptional<Style>> findStyleById)
         {
-            return ((readVal(properties, styleTagName)).map(new StatefulBodyXmlReader__Anonymous_9(this, styleType, findStyleById))).orElse(InternalResult.empty());
+            return ((ReadVal(properties, styleTagName)).Map(new StatefulBodyXmlReaderAnonymous9(this, styleType, findStyleById))).OrElse(InternalResult.Empty());
         }
 
-        public InternalResult<Optional<Style>> findStyleById(string styleType, string styleId, Function<string, Optional<Style>> findStyleById)
+        public InternalResult<IOptional<Style>> FindStyleById(string styleType, string styleId, IFunction<string, IOptional<Style>> findStyleById)
         {
-            var style = findStyleById.apply(styleId);
-            if (style.isPresent()) {
-                return InternalResult.success(style);
+            var style = findStyleById.Apply(styleId);
+            if (style.IsPresent()) {
+                return InternalResult.Success(style);
             }
 
-            return new InternalResult<Optional<Style>>(Optional.of(new Style(styleId, Optional.empty<string>())), Lists.list(((styleType + " style with ID ") + styleId) + " was referenced but not defined in the document"));
+            return new InternalResult<IOptional<Style>>(Optional.Of(new Style(styleId, Optional.Empty<string>())), Lists.List(((styleType + " style with ID ") + styleId) + " was referenced but not defined in the document"));
         }
 
-        public Optional<NumberingLevel> readNumbering(XmlElementLike properties)
+        public IOptional<NumberingLevel> ReadNumbering(IXmlElementLike properties)
         {
-            var numberingProperties = properties.findChildOrEmpty("w:numPr");
-            return Optionals.flatMap(readVal(numberingProperties, "w:numId"), readVal(numberingProperties, "w:ilvl"), new StatefulBodyXmlReader__Anonymous_10(this));
+            var numberingProperties = properties.FindChildOrEmpty("w:numPr");
+            return Optionals.FlatMap(ReadVal(numberingProperties, "w:numId"), ReadVal(numberingProperties, "w:ilvl"), new StatefulBodyXmlReaderAnonymous10(this));
         }
 
-        public ParagraphIndent readParagraphIndent(XmlElementLike properties)
+        public ParagraphIndent ReadParagraphIndent(IXmlElementLike properties)
         {
-            var indent = properties.findChildOrEmpty("w:ind");
-            return new ParagraphIndent(Optionals.first(indent.getAttributeOrNone("w:start"), indent.getAttributeOrNone("w:left")), Optionals.first(indent.getAttributeOrNone("w:end"), indent.getAttributeOrNone("w:right")), indent.getAttributeOrNone("w:firstLine"), indent.getAttributeOrNone("w:hanging"));
+            var indent = properties.FindChildOrEmpty("w:ind");
+            return new ParagraphIndent(Optionals.First(indent.GetAttributeOrNone("w:start"), indent.GetAttributeOrNone("w:left")), Optionals.First(indent.GetAttributeOrNone("w:end"), indent.GetAttributeOrNone("w:right")), indent.GetAttributeOrNone("w:firstLine"), indent.GetAttributeOrNone("w:hanging"));
         }
 
-        public ReadResult readBreak(XmlElement element)
+        public ReadResult ReadBreak(XmlElement element)
         {
-            var breakType = (element.getAttributeOrNone("w:type")).orElse("textWrapping");
+            var breakType = (element.GetAttributeOrNone("w:type")).OrElse("textWrapping");
             switch (breakType) {
                 case "textWrapping":
-                    return ReadResult.success(Break._LINE_BREAK);
+                    return ReadResult.Success(Break.LineBreak);
                 case "page":
-                    return ReadResult.success(Break._PAGE_BREAK);
+                    return ReadResult.Success(Break.PageBreak);
                 case "column":
-                    return ReadResult.success(Break._COLUMN_BREAK);
+                    return ReadResult.Success(Break.ColumnBreak);
                 default:
-                    return ReadResult.emptyWithWarning("Unsupported break type: " + breakType);
+                    return ReadResult.EmptyWithWarning("Unsupported break type: " + breakType);
             }
         }
 
-        public ReadResult readTable(XmlElement element)
+        public ReadResult ReadTable(XmlElement element)
         {
-            var properties = element.findChildOrEmpty("w:tblPr");
-            return ReadResult.map(readTableStyle(properties), (readElements(element.getChildren())).flatMap(new StatefulBodyXmlReader__Anonymous_11(this)), new StatefulBodyXmlReader__Anonymous_12());
+            var properties = element.FindChildOrEmpty("w:tblPr");
+            return ReadResult.Map(ReadTableStyle(properties), (ReadElements(element.GetChildren())).FlatMap(new StatefulBodyXmlReaderAnonymous11(this)), new StatefulBodyXmlReaderAnonymous12());
         }
 
-        public InternalResult<Optional<Style>> readTableStyle(XmlElementLike properties)
+        public InternalResult<IOptional<Style>> ReadTableStyle(IXmlElementLike properties)
         {
-            return readStyle(properties, "w:tblStyle", "Table", new StatefulBodyXmlReader__Anonymous_13(this));
+            return ReadStyle(properties, "w:tblStyle", "Table", new StatefulBodyXmlReaderAnonymous13(this));
         }
 
-        public ReadResult calculateRowspans(List<DocumentElement> rows)
+        public ReadResult CalculateRowspans(IList<IDocumentElement> rows)
         {
-            var error = checkTableRows(rows);
-            if (error.isPresent()) {
-                return ReadResult.withWarning(rows, error.get());
+            var error = CheckTableRows(rows);
+            if (error.IsPresent()) {
+                return ReadResult.WithWarning(rows, error.Get());
             }
 
-            Map<Map__Entry<int, int>, int> rowspans = new HashMap<Map__Entry<int, int>, int>();
-            Set<Map__Entry<int, int>> merged = new HashSet<Map__Entry<int, int>>();
-            Map<int, Map__Entry<int, int>> lastCellForColumn = new HashMap<int, Map__Entry<int, int>>();
+            IMap<IMapEntry<int, int>, int> rowspans = new HashMap<IMapEntry<int, int>, int>();
+            ISet<IMapEntry<int, int>> merged = new HashSet<IMapEntry<int, int>>();
+            IMap<int, IMapEntry<int, int>> lastCellForColumn = new HashMap<int, IMapEntry<int, int>>();
             {
                 var rowIndex = 0;
-                while (rowIndex < rows.size()) {
-                    var row = (TableRow) rows.get(rowIndex);
+                while (rowIndex < rows.Size()) {
+                    var row = (TableRow) rows.Get(rowIndex);
                     var columnIndex = 0;
                     {
                         var cellIndex = 0;
-                        while (cellIndex < (row.getChildren()).size()) {
-                            var cell = (StatefulBodyXmlReader__UnmergedTableCell) (row.getChildren()).get(cellIndex);
-                            var spanningCell = Maps.lookup(lastCellForColumn, columnIndex);
-                            var position = Maps.entry(rowIndex, cellIndex);
-                            if (cell._vmerge && spanningCell.isPresent()) {
-                                rowspans.put(spanningCell.get(), (Maps.lookup(rowspans, spanningCell.get())).get() + 1);
-                                merged.add(position);
+                        while (cellIndex < (row.GetChildren()).Size()) {
+                            var cell = (StatefulBodyXmlReaderUnmergedTableCell) (row.GetChildren()).Get(cellIndex);
+                            var spanningCell = Maps.Lookup(lastCellForColumn, columnIndex);
+                            var position = Maps.Entry(rowIndex, cellIndex);
+                            if (cell.Vmerge && spanningCell.IsPresent()) {
+                                rowspans.Put(spanningCell.Get(), (Maps.Lookup(rowspans, spanningCell.Get())).Get() + 1);
+                                merged.Add(position);
                             }
                             else {
-                                lastCellForColumn.put(columnIndex, position);
-                                rowspans.put(position, 1);
+                                lastCellForColumn.Put(columnIndex, position);
+                                rowspans.Put(position, 1);
                             }
 
-                            columnIndex = columnIndex + cell._colspan;
+                            columnIndex = columnIndex + cell.Colspan;
                             cellIndex = cellIndex + 1;
                         }
                     }
                     rowIndex = rowIndex + 1;
                 }
             }
-            return ReadResult.success(Lists.eagerMapWithIndex(rows, new StatefulBodyXmlReader__Anonymous_14(merged, rowspans)));
+            return ReadResult.Success(Lists.EagerMapWithIndex(rows, new StatefulBodyXmlReaderAnonymous14(merged, rowspans)));
         }
 
-        public Optional<string> checkTableRows(List<DocumentElement> rows)
+        public IOptional<string> CheckTableRows(IList<IDocumentElement> rows)
         {
             {
-                var _couscous_desugar_foreach_to_for2 = rows.iterator();
-                while (_couscous_desugar_foreach_to_for2.hasNext()) {
-                    var rowElement = _couscous_desugar_foreach_to_for2.next();
-                    var row = Casts.tryCast<TableRow>(typeof(TableRow), rowElement);
-                    if (!row.isPresent()) {
-                        return Optional.of("unexpected non-row element in table, cell merging may be incorrect");
+                var couscousDesugarForeachToFor2 = rows.Iterator();
+                while (couscousDesugarForeachToFor2.HasNext()) {
+                    var rowElement = couscousDesugarForeachToFor2.Next();
+                    var row = Casts.TryCast<TableRow>(typeof(TableRow), rowElement);
+                    if (!row.IsPresent()) {
+                        return Optional.Of("unexpected non-row element in table, cell merging may be incorrect");
                     }
 
                     {
-                        var _couscous_desugar_foreach_to_for1 = ((row.get()).getChildren()).iterator();
-                        while (_couscous_desugar_foreach_to_for1.hasNext()) {
-                            var cell = _couscous_desugar_foreach_to_for1.next();
-                            if (!(cell is StatefulBodyXmlReader__UnmergedTableCell)) {
-                                return Optional.of("unexpected non-cell element in table row, cell merging may be incorrect");
+                        var couscousDesugarForeachToFor1 = ((row.Get()).GetChildren()).Iterator();
+                        while (couscousDesugarForeachToFor1.HasNext()) {
+                            var cell = couscousDesugarForeachToFor1.Next();
+                            if (!(cell is StatefulBodyXmlReaderUnmergedTableCell)) {
+                                return Optional.Of("unexpected non-cell element in table row, cell merging may be incorrect");
                             }
                         }
                     }
                 }
             }
-            return Optional.empty<string>();
+            return Optional.Empty<string>();
         }
 
-        public ReadResult readTableRow(XmlElement element)
+        public ReadResult ReadTableRow(XmlElement element)
         {
-            var properties = element.findChildOrEmpty("w:trPr");
-            var isHeader = properties.hasChild("w:tblHeader");
-            return (readElements(element.getChildren())).map(new StatefulBodyXmlReader__Anonymous_15(isHeader));
+            var properties = element.FindChildOrEmpty("w:trPr");
+            var isHeader = properties.HasChild("w:tblHeader");
+            return (ReadElements(element.GetChildren())).Map(new StatefulBodyXmlReaderAnonymous15(isHeader));
         }
 
-        public ReadResult readTableCell(XmlElement element)
+        public ReadResult ReadTableCell(XmlElement element)
         {
-            var properties = element.findChildOrEmpty("w:tcPr");
-            var gridSpan = (properties.findChildOrEmpty("w:gridSpan")).getAttributeOrNone("w:val");
-            var colspan = (gridSpan.map(new StatefulBodyXmlReader__Anonymous_16())).orElse(1);
-            return (readElements(element.getChildren())).map(new StatefulBodyXmlReader__Anonymous_17(this, properties, colspan));
+            var properties = element.FindChildOrEmpty("w:tcPr");
+            var gridSpan = (properties.FindChildOrEmpty("w:gridSpan")).GetAttributeOrNone("w:val");
+            var colspan = (gridSpan.Map(new StatefulBodyXmlReaderAnonymous16())).OrElse(1);
+            return (ReadElements(element.GetChildren())).Map(new StatefulBodyXmlReaderAnonymous17(this, properties, colspan));
         }
 
-        public bool readVmerge(XmlElementLike properties)
+        public bool ReadVmerge(IXmlElementLike properties)
         {
-            return ((properties.findChild("w:vMerge")).map(new StatefulBodyXmlReader__Anonymous_19())).orElse(false);
+            return ((properties.FindChild("w:vMerge")).Map(new StatefulBodyXmlReaderAnonymous19())).OrElse(false);
         }
 
-        public ReadResult readHyperlink(XmlElement element)
+        public ReadResult ReadHyperlink(XmlElement element)
         {
-            var relationshipId = element.getAttributeOrNone("r:id");
-            var anchor = element.getAttributeOrNone("w:anchor");
-            var targetFrame = (element.getAttributeOrNone("w:tgtFrame")).filter(new StatefulBodyXmlReader__Anonymous_20());
-            var childrenResult = readElements(element.getChildren());
-            if (relationshipId.isPresent()) {
-                var targetHref = (_relationships).findTargetByRelationshipId(relationshipId.get());
-                var href = (anchor.map(new StatefulBodyXmlReader__Anonymous_21(targetHref, anchor))).orElse(targetHref);
-                return childrenResult.map(new StatefulBodyXmlReader__Anonymous_22(href, targetFrame));
+            var relationshipId = element.GetAttributeOrNone("r:id");
+            var anchor = element.GetAttributeOrNone("w:anchor");
+            var targetFrame = (element.GetAttributeOrNone("w:tgtFrame")).Filter(new StatefulBodyXmlReaderAnonymous20());
+            var childrenResult = ReadElements(element.GetChildren());
+            if (relationshipId.IsPresent()) {
+                var targetHref = (_relationships).FindTargetByRelationshipId(relationshipId.Get());
+                var href = (anchor.Map(new StatefulBodyXmlReaderAnonymous21(targetHref, anchor))).OrElse(targetHref);
+                return childrenResult.Map(new StatefulBodyXmlReaderAnonymous22(href, targetFrame));
             }
 
-            if (anchor.isPresent()) {
-                return childrenResult.map(new StatefulBodyXmlReader__Anonymous_23(anchor, targetFrame));
+            if (anchor.IsPresent()) {
+                return childrenResult.Map(new StatefulBodyXmlReaderAnonymous23(anchor, targetFrame));
             }
 
             return childrenResult;
         }
 
-        public ReadResult readBookmark(XmlElement element)
+        public ReadResult ReadBookmark(XmlElement element)
         {
-            var name = element.getAttribute("w:name");
+            var name = element.GetAttribute("w:name");
             if (name.Equals("_GoBack")) {
-                return ReadResult._EMPTY_SUCCESS;
+                return ReadResult.EmptySuccess;
             }
 
-            return ReadResult.success(new Bookmark(name));
+            return ReadResult.Success(new Bookmark(name));
         }
 
-        public ReadResult readNoteReference(NoteType noteType, XmlElement element)
+        public ReadResult ReadNoteReference(NoteType noteType, XmlElement element)
         {
-            var noteId = element.getAttribute("w:id");
-            return ReadResult.success(new NoteReference(noteType, noteId));
+            var noteId = element.GetAttribute("w:id");
+            return ReadResult.Success(new NoteReference(noteType, noteId));
         }
 
-        public ReadResult readCommentReference(XmlElement element)
+        public ReadResult ReadCommentReference(XmlElement element)
         {
-            var commentId = element.getAttribute("w:id");
-            return ReadResult.success(new CommentReference(commentId));
+            var commentId = element.GetAttribute("w:id");
+            return ReadResult.Success(new CommentReference(commentId));
         }
 
-        public ReadResult readPict(XmlElement element)
+        public ReadResult ReadPict(XmlElement element)
         {
-            return (readElements(element.getChildren())).toExtra();
+            return (ReadElements(element.GetChildren())).ToExtra();
         }
 
-        public ReadResult readImagedata(XmlElement element)
+        public ReadResult ReadImagedata(XmlElement element)
         {
-            return ((element.getAttributeOrNone("r:id")).map(new StatefulBodyXmlReader__Anonymous_25(element, this))).orElse(ReadResult.emptyWithWarning("A v:imagedata element without a relationship ID was ignored"));
+            return ((element.GetAttributeOrNone("r:id")).Map(new StatefulBodyXmlReaderAnonymous25(element, this))).OrElse(ReadResult.EmptyWithWarning("A v:imagedata element without a relationship ID was ignored"));
         }
 
-        public ReadResult readInline(XmlElement element)
+        public ReadResult ReadInline(XmlElement element)
         {
-            var properties = element.findChildOrEmpty("wp:docPr");
-            var altText = Optionals.first((properties.getAttributeOrNone("descr")).filter(new StatefulBodyXmlReader__Anonymous_26()), properties.getAttributeOrNone("title"));
-            var blips = ((((element.findChildren("a:graphic")).findChildren("a:graphicData")).findChildren("pic:pic")).findChildren("pic:blipFill")).findChildren("a:blip");
-            return readBlips(blips, altText);
+            var properties = element.FindChildOrEmpty("wp:docPr");
+            var altText = Optionals.First((properties.GetAttributeOrNone("descr")).Filter(new StatefulBodyXmlReaderAnonymous26()), properties.GetAttributeOrNone("title"));
+            var blips = ((((element.FindChildren("a:graphic")).FindChildren("a:graphicData")).FindChildren("pic:pic")).FindChildren("pic:blipFill")).FindChildren("a:blip");
+            return ReadBlips(blips, altText);
         }
 
-        public ReadResult readBlips(XmlElementList blips, Optional<string> altText)
+        public ReadResult ReadBlips(XmlElementList blips, IOptional<string> altText)
         {
-            return ReadResult.flatMap(blips, new StatefulBodyXmlReader__Anonymous_27(this, altText));
+            return ReadResult.FlatMap(blips, new StatefulBodyXmlReaderAnonymous27(this, altText));
         }
 
-        public ReadResult readBlip(XmlElement blip, Optional<string> altText)
+        public ReadResult ReadBlip(XmlElement blip, IOptional<string> altText)
         {
-            var embedRelationshipId = blip.getAttributeOrNone("r:embed");
-            var linkRelationshipId = blip.getAttributeOrNone("r:link");
-            if (embedRelationshipId.isPresent()) {
-                var imagePath = relationshipIdToDocxPath(embedRelationshipId.get());
-                return readImage(imagePath, altText, new StatefulBodyXmlReader__Anonymous_28(this, imagePath));
+            var embedRelationshipId = blip.GetAttributeOrNone("r:embed");
+            var linkRelationshipId = blip.GetAttributeOrNone("r:link");
+            if (embedRelationshipId.IsPresent()) {
+                var imagePath = RelationshipIdToDocxPath(embedRelationshipId.Get());
+                return ReadImage(imagePath, altText, new StatefulBodyXmlReaderAnonymous28(this, imagePath));
             }
 
-            if (linkRelationshipId.isPresent()) {
-                var imagePath = (_relationships).findTargetByRelationshipId(linkRelationshipId.get());
-                return readImage(imagePath, altText, new StatefulBodyXmlReader__Anonymous_29(this, imagePath));
+            if (linkRelationshipId.IsPresent()) {
+                var imagePath = (_relationships).FindTargetByRelationshipId(linkRelationshipId.Get());
+                return ReadImage(imagePath, altText, new StatefulBodyXmlReaderAnonymous29(this, imagePath));
             }
 
-            return ReadResult._EMPTY_SUCCESS;
+            return ReadResult.EmptySuccess;
         }
 
-        public ReadResult readImage(string imagePath, Optional<string> altText, InputStreamSupplier open)
+        public ReadResult ReadImage(string imagePath, IOptional<string> altText, INputStreamSupplier open)
         {
-            var contentType = (_contentTypes).findContentType(imagePath);
+            var contentType = (_contentTypes).FindContentType(imagePath);
             var image = new Image(altText, contentType, open);
-            var contentTypeString = contentType.orElse("(unknown)");
-            if ((_IMAGE_TYPES_SUPPORTED_BY_BROWSERS).contains(contentTypeString)) {
-                return ReadResult.success(image);
+            var contentTypeString = contentType.OrElse("(unknown)");
+            if ((_imageTypesSupportedByBrowsers).Contains(contentTypeString)) {
+                return ReadResult.Success(image);
             }
 
-            return ReadResult.withWarning(image, ("Image of type " + contentTypeString) + " is unlikely to display in web browsers");
+            return ReadResult.WithWarning(image, ("Image of type " + contentTypeString) + " is unlikely to display in web browsers");
         }
 
-        public ReadResult readSdt(XmlElement element)
+        public ReadResult ReadSdt(XmlElement element)
         {
-            return readElements((element.findChildOrEmpty("w:sdtContent")).getChildren());
+            return ReadElements((element.FindChildOrEmpty("w:sdtContent")).GetChildren());
         }
 
-        public string relationshipIdToDocxPath(string relationshipId)
+        public string RelationshipIdToDocxPath(string relationshipId)
         {
-            var target = (_relationships).findTargetByRelationshipId(relationshipId);
-            return Uris.uriToZipEntryName("word", target);
+            var target = (_relationships).FindTargetByRelationshipId(relationshipId);
+            return Uris.UriToZipEntryName("word", target);
         }
 
-        public Optional<string> readVal(XmlElementLike element, string name)
+        public IOptional<string> ReadVal(IXmlElementLike element, string name)
         {
-            return (element.findChildOrEmpty(name)).getAttributeOrNone("w:val");
+            return (element.FindChildOrEmpty(name)).GetAttributeOrNone("w:val");
         }
     }
 }

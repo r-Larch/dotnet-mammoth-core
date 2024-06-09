@@ -4,29 +4,29 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class Relationships {
-        public static Relationships _EMPTY;
-        private Map<string, string> _targetsByRelationshipId;
-        private Map<string, List<string>> _targetsByType;
+        public static Relationships Empty;
+        private IMap<string, string> _targetsByRelationshipId;
+        private IMap<string, IList<string>> _targetsByType;
 
         static Relationships()
         {
-            _EMPTY = new Relationships(Lists.list<Relationship>());
+            Empty = new Relationships(Lists.List<Relationship>());
         }
 
-        internal Relationships(List<Relationship> relationships)
+        internal Relationships(IList<Relationship> relationships)
         {
-            _targetsByRelationshipId = Maps.toMap(relationships, new Relationships__Anonymous_0());
-            _targetsByType = Maps.toMultiMap(relationships, new Relationships__Anonymous_1());
+            _targetsByRelationshipId = Maps.ToMap(relationships, new RelationshipsAnonymous0());
+            _targetsByType = Maps.ToMultiMap(relationships, new RelationshipsAnonymous1());
         }
 
-        public string findTargetByRelationshipId(string relationshipId)
+        public string FindTargetByRelationshipId(string relationshipId)
         {
-            return (Maps.lookup(_targetsByRelationshipId, relationshipId)).orElseThrow(new Relationships__Anonymous_2(relationshipId));
+            return (Maps.Lookup(_targetsByRelationshipId, relationshipId)).OrElseThrow(new RelationshipsAnonymous2(relationshipId));
         }
 
-        public List<string> findTargetsByType(string type)
+        public IList<string> FindTargetsByType(string type)
         {
-            return (Maps.lookup(_targetsByType, type)).orElse(Lists.list<string>());
+            return (Maps.Lookup(_targetsByType, type)).OrElse(Lists.List<string>());
         }
     }
 }

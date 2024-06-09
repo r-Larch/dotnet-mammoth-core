@@ -4,20 +4,20 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class OfficeXml__Anonymous_1 : XmlNodeVisitor<List<XmlNode>> {
-        public List<XmlNode> visit(XmlElement element)
+    internal class OfficeXmlAnonymous1 : IXmlNodeVisitor<IList<IXmlNode>> {
+        public IList<IXmlNode> Visit(XmlElement element)
         {
-            if ((element.getName()).Equals("mc:AlternateContent")) {
-                return (element.findChildOrEmpty("mc:Fallback")).getChildren();
+            if ((element.GetName()).Equals("mc:AlternateContent")) {
+                return (element.FindChildOrEmpty("mc:Fallback")).GetChildren();
             }
 
-            var collapsedElement = new XmlElement(element.getName(), element.getAttributes(), Lists.eagerFlatMap(element.getChildren(), new OfficeXml__Anonymous_0()));
-            return Lists.list<XmlNode>(collapsedElement);
+            var collapsedElement = new XmlElement(element.GetName(), element.GetAttributes(), Lists.EagerFlatMap(element.GetChildren(), new OfficeXmlAnonymous0()));
+            return Lists.List<IXmlNode>(collapsedElement);
         }
 
-        public List<XmlNode> visit(XmlTextNode textNode)
+        public IList<IXmlNode> Visit(XmlTextNode textNode)
         {
-            return Lists.list<XmlNode>(textNode);
+            return Lists.List<IXmlNode>(textNode);
         }
     }
 }

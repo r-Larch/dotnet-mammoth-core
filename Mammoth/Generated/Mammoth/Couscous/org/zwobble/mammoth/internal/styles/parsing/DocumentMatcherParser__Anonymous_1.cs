@@ -2,17 +2,17 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
-    internal class DocumentMatcherParser__Anonymous_1 : BiConsumer<StyleMapBuilder, HtmlPath> {
+    internal class DocumentMatcherParserAnonymous1 : IBiConsumer<StyleMapBuilder, IHtmlPath> {
         private RunMatcher _run;
 
-        internal DocumentMatcherParser__Anonymous_1(RunMatcher run)
+        internal DocumentMatcherParserAnonymous1(RunMatcher run)
         {
             _run = run;
         }
 
-        public void accept(StyleMapBuilder builder, HtmlPath path)
+        public void Accept(StyleMapBuilder builder, IHtmlPath path)
         {
-            builder.mapRun(_run, path);
+            builder.MapRun(_run, path);
         }
     }
 }

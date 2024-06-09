@@ -2,11 +2,11 @@ using Mammoth.Couscous.java.lang;
 
 
 namespace Mammoth.Couscous.java.util {
-    internal interface Collection<T> : Iterable<T> {
-        bool isEmpty();
-        int size();
-        bool contains(object value);
+    internal interface ICollection<T> : ITerable<T> {
+        bool IsEmpty();
+        int Size();
+        bool Contains(object value);
 
-        void add(T value);
+        void Add(T value);
     }
 }

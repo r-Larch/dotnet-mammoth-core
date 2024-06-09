@@ -5,10 +5,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class Ignore__Anonymous_0 : Supplier<List<HtmlNode>> {
-        public List<HtmlNode> get()
+    internal class IgnoreAnonymous0 : ISupplier<IList<IHtmlNode>> {
+        public IList<IHtmlNode> Get()
         {
-            return Lists.list<HtmlNode>();
+            return Lists.List<IHtmlNode>();
         }
     }
 }

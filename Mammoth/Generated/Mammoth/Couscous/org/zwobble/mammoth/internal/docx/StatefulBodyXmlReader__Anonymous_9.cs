@@ -5,21 +5,21 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.results;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_9 : Function<string, InternalResult<Optional<Style>>> {
-        private Function<string, Optional<Style>> _findStyleById;
+    internal class StatefulBodyXmlReaderAnonymous9 : IFunction<string, InternalResult<IOptional<Style>>> {
+        private IFunction<string, IOptional<Style>> _findStyleById;
         private string _styleType;
-        private StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        private StatefulBodyXmlReader _thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader;
 
-        internal StatefulBodyXmlReader__Anonymous_9(StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader, string styleType, Function<string, Optional<Style>> findStyleById)
+        internal StatefulBodyXmlReaderAnonymous9(StatefulBodyXmlReader thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader, string styleType, IFunction<string, IOptional<Style>> findStyleById)
         {
-            _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+            _thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader = thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader;
             _styleType = styleType;
             _findStyleById = findStyleById;
         }
 
-        public InternalResult<Optional<Style>> apply(string styleId)
+        public InternalResult<IOptional<Style>> Apply(string styleId)
         {
-            return (_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).findStyleById(_styleType, styleId, _findStyleById);
+            return (_thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader).FindStyleById(_styleType, styleId, _findStyleById);
         }
     }
 }

@@ -1,10 +1,10 @@
 namespace Mammoth.Couscous.java.util {
-    internal interface Deque<T> {
-        int size();
-        T getFirst();
-        T getLast();
+    internal interface IDeque<T> {
+        int Size();
+        T GetFirst();
+        T GetLast();
 
-        void add(T value);
-        T removeLast();
+        void Add(T value);
+        T RemoveLast();
     }
 }

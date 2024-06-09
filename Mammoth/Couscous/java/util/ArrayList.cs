@@ -4,43 +4,43 @@ using Mammoth.Couscous.java.lang;
 
 
 namespace Mammoth.Couscous.java.util {
-    internal class ArrayList<T> : List<T> {
-        private readonly IList<T> _list;
+    internal class ArrayList<T> : IList<T> {
+        private readonly System.Collections.Generic.IList<T> _list;
 
         internal ArrayList() : this(new System.Collections.Generic.List<T>())
         {
         }
 
-        internal ArrayList(IList<T> list)
+        internal ArrayList(System.Collections.Generic.IList<T> list)
         {
             _list = list;
         }
 
-        internal ArrayList(List<T> list) : this(new System.Collections.Generic.List<T>(FromJava.IterableToEnumerable(list)))
+        internal ArrayList(IList<T> list) : this(new System.Collections.Generic.List<T>(FromJava.IterableToEnumerable(list)))
         {
         }
 
-        public Iterator<T> iterator()
+        public ITerator<T> Iterator()
         {
             return ToJava.EnumeratorToIterator(_list.GetEnumerator());
         }
 
-        public bool isEmpty()
+        public bool IsEmpty()
         {
             return _list.Count == 0;
         }
 
-        public int size()
+        public int Size()
         {
             return _list.Count;
         }
 
-        public bool contains(object value)
+        public bool Contains(object value)
         {
             return value is T && _list.Contains((T) value);
         }
 
-        public T get(int index)
+        public T Get(int index)
         {
             if (index < 0 || index >= _list.Count) {
                 throw new IndexOutOfBoundsException();
@@ -49,7 +49,7 @@ namespace Mammoth.Couscous.java.util {
             return _list[index];
         }
 
-        public List<T> subList(int fromIndex, int toIndex)
+        public IList<T> SubList(int fromIndex, int toIndex)
         {
             var list = _list as System.Collections.Generic.List<T>;
             if (list == null) {
@@ -59,24 +59,24 @@ namespace Mammoth.Couscous.java.util {
             return new ArrayList<T>(list.GetRange(fromIndex, toIndex - fromIndex));
         }
 
-        public void add(T value)
+        public void Add(T value)
         {
             _list.Add(value);
         }
 
-        public T remove(int index)
+        public T Remove(int index)
         {
             var value = _list[index];
             _list.RemoveAt(index);
             return value;
         }
 
-        public void set(int index, T value)
+        public void Set(int index, T value)
         {
             _list[index] = value;
         }
 
-        public void clear()
+        public void Clear()
         {
             _list.Clear();
         }

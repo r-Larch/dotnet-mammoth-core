@@ -2,39 +2,39 @@ using System.Collections.Generic;
 
 
 namespace Mammoth.Couscous.java.util {
-    internal class HashSet<T> : Set<T> {
-        private readonly ISet<T> _set;
+    internal class HashSet<T> : ISet<T> {
+        private readonly System.Collections.Generic.ISet<T> _set;
 
         internal HashSet() : this(new System.Collections.Generic.HashSet<T>())
         {
         }
 
-        internal HashSet(ISet<T> set)
+        internal HashSet(System.Collections.Generic.ISet<T> set)
         {
             _set = set;
         }
 
-        public Iterator<T> iterator()
+        public ITerator<T> Iterator()
         {
             return ToJava.EnumeratorToIterator(_set.GetEnumerator());
         }
 
-        public bool isEmpty()
+        public bool IsEmpty()
         {
             return _set.Count == 0;
         }
 
-        public int size()
+        public int Size()
         {
             return _set.Count;
         }
 
-        public bool contains(object value)
+        public bool Contains(object value)
         {
             return value is T && _set.Contains((T) value);
         }
 
-        public void add(T value)
+        public void Add(T value)
         {
             _set.Add(value);
         }

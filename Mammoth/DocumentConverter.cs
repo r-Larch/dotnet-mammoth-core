@@ -11,103 +11,99 @@ using File = Mammoth.Couscous.java.io.File;
 
 namespace Mammoth {
     public class DocumentConverter {
-        private readonly DocumentToHtmlOptions options;
+        private readonly DocumentToHtmlOptions _options;
 
-        public DocumentConverter() : this(DocumentToHtmlOptions._DEFAULT)
+        public DocumentConverter() : this(DocumentToHtmlOptions.Default)
         {
         }
 
         private DocumentConverter(DocumentToHtmlOptions options)
         {
-            this.options = options;
+            this._options = options;
         }
 
         public DocumentConverter IdPrefix(string idPrefix)
         {
-            return new DocumentConverter(options.idPrefix(idPrefix));
+            return new DocumentConverter(_options.IdPrefix(idPrefix));
         }
 
         public DocumentConverter PreserveEmptyParagraphs()
         {
-            return new DocumentConverter(options.preserveEmptyParagraphs());
+            return new DocumentConverter(_options.PreserveEmptyParagraphs());
         }
 
         public DocumentConverter AddStyleMap(string styleMap)
         {
-            return new DocumentConverter(options.addStyleMap(styleMap));
+            return new DocumentConverter(_options.AddStyleMap(styleMap));
         }
 
         public DocumentConverter DisableDefaultStyleMap()
         {
-            return new DocumentConverter(options.disableDefaultStyleMap());
+            return new DocumentConverter(_options.DisableDefaultStyleMap());
         }
 
         public DocumentConverter DisableEmbeddedStyleMap()
         {
-            return new DocumentConverter(options.disableEmbeddedStyleMap());
+            return new DocumentConverter(_options.DisableEmbeddedStyleMap());
         }
 
         public DocumentConverter ImageConverter(Func<IImage, IDictionary<string, string>> imageConverter)
         {
-            return new DocumentConverter(options.imageConverter(new ImageConverterShim(imageConverter)));
+            return new DocumentConverter(_options.ImageConverter(new ImageConverterShim(imageConverter)));
         }
 
         public IResult<string> ConvertToHtml(Stream stream)
         {
-            return new InternalDocumentConverter(options)
-                .convertToHtml(ToJava.StreamToInputStream(stream))
-                .ToResult();
+            return SimpleResult.ToResult(new InternalDocumentConverter(_options)
+                    .ConvertToHtml(ToJava.StreamToInputStream(stream)));
         }
 
         public IResult<string> ConvertToHtml(string path)
         {
-            return new InternalDocumentConverter(options)
-                .convertToHtml(new File(path))
-                .ToResult();
+            return SimpleResult.ToResult(new InternalDocumentConverter(_options)
+                    .ConvertToHtml(new File(path)));
         }
 
         public IResult<string> ExtractRawText(Stream stream)
         {
-            return new InternalDocumentConverter(options)
-                .extractRawText(ToJava.StreamToInputStream(stream))
-                .ToResult();
+            return SimpleResult.ToResult(new InternalDocumentConverter(_options)
+                    .ExtractRawText(ToJava.StreamToInputStream(stream)));
         }
 
         public IResult<string> ExtractRawText(string path)
         {
-            return new InternalDocumentConverter(options)
-                .extractRawText(new File(path))
-                .ToResult();
+            return SimpleResult.ToResult(new InternalDocumentConverter(_options)
+                    .ExtractRawText(new File(path)));
         }
 
-        internal class ImageConverterShim : ImageConverter__ImgElement {
-            private readonly Func<IImage, IDictionary<string, string>> func;
+        internal class ImageConverterShim : IMageConverterImgElement {
+            private readonly Func<IImage, IDictionary<string, string>> _func;
 
             internal ImageConverterShim(Func<IImage, IDictionary<string, string>> func)
             {
-                this.func = func;
+                this._func = func;
             }
 
-            public Map<string, string> convert(Couscous.org.zwobble.mammoth.images.Image image)
+            public IMap<string, string> Convert(Couscous.org.zwobble.mammoth.images.IMage image)
             {
-                return ToJava.DictionaryToMap(func(new Image(image)));
+                return ToJava.DictionaryToMap(_func(new Image(image)));
             }
         }
 
         internal class Image : IImage {
-            private readonly Couscous.org.zwobble.mammoth.images.Image image;
+            private readonly Couscous.org.zwobble.mammoth.images.IMage _image;
 
-            internal Image(Couscous.org.zwobble.mammoth.images.Image image)
+            internal Image(Couscous.org.zwobble.mammoth.images.IMage image)
             {
-                this.image = image;
+                this._image = image;
             }
 
-            public string AltText => image.getAltText().orElse(null);
-            public string ContentType => image.getContentType();
+            public string AltText => _image.GetAltText().OrElse(null);
+            public string ContentType => _image.GetContentType();
 
             public Stream GetStream()
             {
-                return image.getInputStream().Stream;
+                return _image.GetInputStream().Stream;
             }
         }
     }

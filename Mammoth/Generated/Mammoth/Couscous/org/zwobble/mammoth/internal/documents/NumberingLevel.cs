@@ -9,22 +9,22 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
             _isOrdered = isOrdered;
         }
 
-        public static NumberingLevel ordered(string levelIndex)
+        public static NumberingLevel Ordered(string levelIndex)
         {
             return new NumberingLevel(levelIndex, true);
         }
 
-        public static NumberingLevel unordered(string levelIndex)
+        public static NumberingLevel Unordered(string levelIndex)
         {
             return new NumberingLevel(levelIndex, false);
         }
 
-        public string getLevelIndex()
+        public string GetLevelIndex()
         {
             return _levelIndex;
         }
 
-        public bool isOrdered()
+        public bool IsOrdered()
         {
             return _isOrdered;
         }

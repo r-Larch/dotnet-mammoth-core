@@ -3,29 +3,29 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Style {
-        private Optional<string> _name;
+        private IOptional<string> _name;
         private string _styleId;
 
-        internal Style(string styleId, Optional<string> name)
+        internal Style(string styleId, IOptional<string> name)
         {
             _styleId = styleId;
             _name = name;
         }
 
-        public string getStyleId()
+        public string GetStyleId()
         {
             return _styleId;
         }
 
-        public Optional<string> getName()
+        public IOptional<string> GetName()
         {
             return _name;
         }
 
-        public string describe()
+        public string Describe()
         {
             var styleIdDescription = "Style ID: " + _styleId;
-            return ((_name).map(new Style__Anonymous_0(styleIdDescription))).orElse(styleIdDescription);
+            return ((_name).Map(new StyleAnonymous0(styleIdDescription))).OrElse(styleIdDescription);
         }
     }
 }

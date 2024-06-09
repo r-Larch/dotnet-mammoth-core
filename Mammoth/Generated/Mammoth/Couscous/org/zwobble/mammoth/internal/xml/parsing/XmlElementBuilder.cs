@@ -3,25 +3,25 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
     internal class XmlElementBuilder {
-        private Map<string, string> _attributes;
-        private List<XmlNode> _children;
+        private IMap<string, string> _attributes;
+        private IList<IXmlNode> _children;
         private string _name;
 
-        internal XmlElementBuilder(string name, Map<string, string> attributes)
+        internal XmlElementBuilder(string name, IMap<string, string> attributes)
         {
             _name = name;
             _attributes = attributes;
-            _children = new ArrayList<XmlNode>();
+            _children = new ArrayList<IXmlNode>();
         }
 
-        public XmlElement build()
+        public XmlElement Build()
         {
             return new XmlElement(_name, _attributes, _children);
         }
 
-        public void addChild(XmlNode node)
+        public void AddChild(IXmlNode node)
         {
-            (_children).add(node);
+            (_children).Add(node);
         }
     }
 }

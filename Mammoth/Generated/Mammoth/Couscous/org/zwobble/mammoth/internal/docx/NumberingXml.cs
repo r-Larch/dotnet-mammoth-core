@@ -6,46 +6,46 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class NumberingXml {
-        public static Numbering readNumberingXmlElement(XmlElement element)
+        public static Numbering ReadNumberingXmlElement(XmlElement element)
         {
-            var abstractNums = readAbstractNums(element.findChildren("w:abstractNum"));
-            return new Numbering(readNums(element.findChildren("w:num"), abstractNums));
+            var abstractNums = ReadAbstractNums(element.FindChildren("w:abstractNum"));
+            return new Numbering(ReadNums(element.FindChildren("w:num"), abstractNums));
         }
 
-        public static Map<string, Map<string, NumberingLevel>> readAbstractNums(XmlElementList children)
+        public static IMap<string, IMap<string, NumberingLevel>> ReadAbstractNums(XmlElementList children)
         {
-            return Maps.toMap(children, new NumberingXml__Anonymous_0());
+            return Maps.ToMap(children, new NumberingXmlAnonymous0());
         }
 
-        public static Map__Entry<string, Map<string, NumberingLevel>> readAbstractNum(XmlElement element)
+        public static IMapEntry<string, IMap<string, NumberingLevel>> ReadAbstractNum(XmlElement element)
         {
-            var abstractNumId = element.getAttribute("w:abstractNumId");
-            return Maps.entry(abstractNumId, readAbstractNumLevels(element));
+            var abstractNumId = element.GetAttribute("w:abstractNumId");
+            return Maps.Entry(abstractNumId, ReadAbstractNumLevels(element));
         }
 
-        public static Map<string, NumberingLevel> readAbstractNumLevels(XmlElement element)
+        public static IMap<string, NumberingLevel> ReadAbstractNumLevels(XmlElement element)
         {
-            return Maps.toMap(element.findChildren("w:lvl"), new NumberingXml__Anonymous_1());
+            return Maps.ToMap(element.FindChildren("w:lvl"), new NumberingXmlAnonymous1());
         }
 
-        public static Map__Entry<string, NumberingLevel> readAbstractNumLevel(XmlElement element)
+        public static IMapEntry<string, NumberingLevel> ReadAbstractNumLevel(XmlElement element)
         {
-            var levelIndex = element.getAttribute("w:ilvl");
-            var numFmt = (element.findChildOrEmpty("w:numFmt")).getAttributeOrNone("w:val");
-            var isOrdered = !numFmt.equals(Optional.of("bullet"));
-            return Maps.entry(levelIndex, new NumberingLevel(levelIndex, isOrdered));
+            var levelIndex = element.GetAttribute("w:ilvl");
+            var numFmt = (element.FindChildOrEmpty("w:numFmt")).GetAttributeOrNone("w:val");
+            var isOrdered = !numFmt.Equals(Optional.Of("bullet"));
+            return Maps.Entry(levelIndex, new NumberingLevel(levelIndex, isOrdered));
         }
 
-        public static Map<string, Map<string, NumberingLevel>> readNums(XmlElementList numElements, Map<string, Map<string, NumberingLevel>> abstractNums)
+        public static IMap<string, IMap<string, NumberingLevel>> ReadNums(XmlElementList numElements, IMap<string, IMap<string, NumberingLevel>> abstractNums)
         {
-            return Maps.toMap(numElements, new NumberingXml__Anonymous_2(abstractNums));
+            return Maps.ToMap(numElements, new NumberingXmlAnonymous2(abstractNums));
         }
 
-        public static Map__Entry<string, Map<string, NumberingLevel>> readNum(XmlElement numElement, Map<string, Map<string, NumberingLevel>> abstractNums)
+        public static IMapEntry<string, IMap<string, NumberingLevel>> ReadNum(XmlElement numElement, IMap<string, IMap<string, NumberingLevel>> abstractNums)
         {
-            var numId = numElement.getAttribute("w:numId");
-            var abstractNumId = ((numElement.findChild("w:abstractNumId")).get()).getAttribute("w:val");
-            return Maps.entry(numId, (Maps.lookup(abstractNums, abstractNumId)).get());
+            var numId = numElement.GetAttribute("w:numId");
+            var abstractNumId = ((numElement.FindChild("w:abstractNumId")).Get()).GetAttribute("w:val");
+            return Maps.Entry(numId, (Maps.Lookup(abstractNums, abstractNumId)).Get());
         }
     }
 }

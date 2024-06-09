@@ -13,14 +13,14 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
             _tag = tag;
         }
 
-        public Supplier<List<HtmlNode>> wrap(Supplier<List<HtmlNode>> generateNodes)
+        public ISupplier<IList<IHtmlNode>> Wrap(ISupplier<IList<IHtmlNode>> generateNodes)
         {
-            return new HtmlPathElement__Anonymous_0(this, generateNodes);
+            return new HtmlPathElementAnonymous0(this, generateNodes);
         }
 
-        public List<HtmlNode> wrapNodes(List<HtmlNode> nodes)
+        public IList<IHtmlNode> WrapNodes(IList<IHtmlNode> nodes)
         {
-            return Lists.list<HtmlNode>(new HtmlElement(_tag, nodes));
+            return Lists.List<IHtmlNode>(new HtmlElement(_tag, nodes));
         }
     }
 }

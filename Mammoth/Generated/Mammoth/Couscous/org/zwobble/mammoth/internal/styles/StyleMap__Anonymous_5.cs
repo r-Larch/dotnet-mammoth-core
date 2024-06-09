@@ -3,10 +3,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StyleMap__Anonymous_5 : Function<StyleMapping<Table>, HtmlPath> {
-        public HtmlPath apply(StyleMapping<Table> arg0)
+    internal class StyleMapAnonymous5 : IFunction<StyleMapping<Table>, IHtmlPath> {
+        public IHtmlPath Apply(StyleMapping<Table> arg0)
         {
-            return arg0.getHtmlPath();
+            return arg0.GetHtmlPath();
         }
     }
 }

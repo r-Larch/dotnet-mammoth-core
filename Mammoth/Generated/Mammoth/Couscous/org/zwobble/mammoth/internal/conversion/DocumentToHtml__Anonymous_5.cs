@@ -6,22 +6,22 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_5 : Supplier<List<HtmlNode>> {
-        private DocumentToHtml__Context _context;
+    internal class DocumentToHtmlAnonymous5 : ISupplier<IList<IHtmlNode>> {
+        private DocumentToHtmlContext _context;
         private Paragraph _paragraph;
-        private DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+        private DocumentToHtml _thisOrgZwobbleMammothInternalConversionDocumentToHtml;
 
-        internal DocumentToHtml__Anonymous_5(DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, Paragraph paragraph, DocumentToHtml__Context context)
+        internal DocumentToHtmlAnonymous5(DocumentToHtml thisOrgZwobbleMammothInternalConversionDocumentToHtml, Paragraph paragraph, DocumentToHtmlContext context)
         {
-            _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml = this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+            _thisOrgZwobbleMammothInternalConversionDocumentToHtml = thisOrgZwobbleMammothInternalConversionDocumentToHtml;
             _paragraph = paragraph;
             _context = context;
         }
 
-        public List<HtmlNode> get()
+        public IList<IHtmlNode> Get()
         {
-            var content = (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertChildrenToHtml(_paragraph, _context);
-            return (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._preserveEmptyParagraphs ? Lists.cons(Html._FORCE_WRITE, content) : content;
+            var content = (_thisOrgZwobbleMammothInternalConversionDocumentToHtml).ConvertChildrenToHtml(_paragraph, _context);
+            return (_thisOrgZwobbleMammothInternalConversionDocumentToHtml).PreserveEmptyParagraphs ? Lists.Cons(Html.ForceWrite, content) : content;
         }
     }
 }

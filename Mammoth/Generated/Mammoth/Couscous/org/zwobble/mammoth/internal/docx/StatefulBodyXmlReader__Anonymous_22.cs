@@ -4,19 +4,19 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_22 : Function<List<DocumentElement>, DocumentElement> {
+    internal class StatefulBodyXmlReaderAnonymous22 : IFunction<IList<IDocumentElement>, IDocumentElement> {
         private string _href;
-        private Optional<string> _targetFrame;
+        private IOptional<string> _targetFrame;
 
-        internal StatefulBodyXmlReader__Anonymous_22(string href, Optional<string> targetFrame)
+        internal StatefulBodyXmlReaderAnonymous22(string href, IOptional<string> targetFrame)
         {
             _href = href;
             _targetFrame = targetFrame;
         }
 
-        public DocumentElement apply(List<DocumentElement> children)
+        public IDocumentElement Apply(IList<IDocumentElement> children)
         {
-            return Hyperlink.href(_href, _targetFrame, children);
+            return Hyperlink.Href(_href, _targetFrame, children);
         }
     }
 }

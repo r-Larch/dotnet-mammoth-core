@@ -7,134 +7,134 @@ using Mammoth.Couscous.java.util.function;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
     internal static class Maps {
-        internal static Map<K, V> map<K, V>()
+        internal static IMap<TK, TV> Map<TK, TV>()
         {
-            return ToJava.DictionaryToMap(new Dictionary<K, V>());
+            return ToJava.DictionaryToMap(new Dictionary<TK, TV>());
         }
 
-        internal static Map<K, V> map<K, V>(K key1, V value1)
+        internal static IMap<TK, TV> Map<TK, TV>(TK key1, TV value1)
         {
-            return ToJava.DictionaryToMap(new Dictionary<K, V> {
+            return ToJava.DictionaryToMap(new Dictionary<TK, TV> {
                 { key1, value1 }
             });
         }
 
-        internal static Map<K, V> map<K, V>(K key1, V value1, K key2, V value2)
+        internal static IMap<TK, TV> Map<TK, TV>(TK key1, TV value1, TK key2, TV value2)
         {
-            return ToJava.DictionaryToMap(new Dictionary<K, V> {
+            return ToJava.DictionaryToMap(new Dictionary<TK, TV> {
                 { key1, value1 },
                 { key2, value2 }
             });
         }
 
-        internal static Map<K, V> map<K, V>(K key1, V value1, K key2, V value2, K key3, V value3)
+        internal static IMap<TK, TV> Map<TK, TV>(TK key1, TV value1, TK key2, TV value2, TK key3, TV value3)
         {
-            return ToJava.DictionaryToMap(new Dictionary<K, V> {
+            return ToJava.DictionaryToMap(new Dictionary<TK, TV> {
                 { key1, value1 },
                 { key2, value2 },
                 { key3, value3 }
             });
         }
 
-        internal static Map<K, V> toMap<T, K, V>(Iterable<T> iterable, Function<T, Map__Entry<K, V>> function)
+        internal static IMap<TK, TV> ToMap<T, TK, TV>(ITerable<T> iterable, IFunction<T, IMapEntry<TK, TV>> function)
         {
             var dictionary = FromJava.IterableToEnumerable(iterable)
-                .Select(function.apply)
-                .ToDictionary(entry => entry.getKey(), entry => entry.getValue());
+                .Select(function.Apply)
+                .ToDictionary(entry => entry.GetKey(), entry => entry.GetValue());
             return ToJava.DictionaryToMap(dictionary);
         }
 
-        internal static Map<K, T> toMapWithKey<T, K>(Iterable<T> iterable, Function<T, K> function)
+        internal static IMap<TK, T> ToMapWithKey<T, TK>(ITerable<T> iterable, IFunction<T, TK> function)
         {
             var dictionary = FromJava.IterableToEnumerable(iterable)
-                .ToDictionary(function.apply);
+                .ToDictionary(function.Apply);
             return ToJava.DictionaryToMap(dictionary);
         }
 
-        internal static Map<K, java.util.List<T>> toMultiMapWithKey<T, K>(Iterable<T> iterable, Function<T, K> function)
+        internal static IMap<TK, java.util.IList<T>> ToMultiMapWithKey<T, TK>(ITerable<T> iterable, IFunction<T, TK> function)
         {
             var dictionary = FromJava.IterableToEnumerable(iterable)
-                .GroupBy(value => function.apply(value))
+                .GroupBy(value => function.Apply(value))
                 .ToDictionary(
                     grouping => grouping.Key,
                     grouping => ToJava.ListToList(grouping.ToList()));
             return ToJava.DictionaryToMap(dictionary);
         }
 
-        internal static Map<K, java.util.List<V>> toMultiMap<T, K, V>(Iterable<T> iterable, Function<T, Map__Entry<K, V>> function)
+        internal static IMap<TK, java.util.IList<TV>> ToMultiMap<T, TK, TV>(ITerable<T> iterable, IFunction<T, IMapEntry<TK, TV>> function)
         {
             var dictionary = FromJava.IterableToEnumerable(iterable)
-                .Select(element => function.apply(element))
-                .GroupBy(entry => entry.getKey())
+                .Select(element => function.Apply(element))
+                .GroupBy(entry => entry.GetKey())
                 .ToDictionary(
                     grouping => grouping.Key,
-                    grouping => ToJava.ListToList(grouping.Select(entry => entry.getValue()).ToList()));
+                    grouping => ToJava.ListToList(grouping.Select(entry => entry.GetValue()).ToList()));
             return ToJava.DictionaryToMap(dictionary);
         }
 
-        internal static Optional<V> lookup<K, V>(Map<K, V> map, K key)
+        internal static IOptional<TV> Lookup<TK, TV>(IMap<TK, TV> map, TK key)
         {
             return map._lookup(key);
         }
 
-        internal static Map<K2, V> eagerMapKeys<K1, K2, V>(Map<K1, V> map, Function<K1, K2> function)
+        internal static IMap<TK2, TV> EagerMapKeys<TK1, TK2, TV>(IMap<TK1, TV> map, IFunction<TK1, TK2> function)
         {
             var dictionary = FromJava.MapToDictionary(map)
                 .ToDictionary(
-                    entry => function.apply(entry.Key),
+                    entry => function.Apply(entry.Key),
                     entry => entry.Value);
             return ToJava.DictionaryToMap(dictionary);
         }
 
-        internal static Map<K, V2> eagerMapValues<K, V1, V2>(Map<K, V1> map, Function<V1, V2> function)
+        internal static IMap<TK, TV2> EagerMapValues<TK, TV1, TV2>(IMap<TK, TV1> map, IFunction<TV1, TV2> function)
         {
             var dictionary = FromJava.MapToDictionary(map)
                 .ToDictionary(
                     entry => entry.Key,
-                    entry => function.apply(entry.Value));
+                    entry => function.Apply(entry.Value));
             return ToJava.DictionaryToMap(dictionary);
         }
 
-        internal static Map__Entry<K, V> entry<K, V>(K key, V value)
+        internal static IMapEntry<TK, TV> Entry<TK, TV>(TK key, TV value)
         {
-            return new Entry<K, V>(key, value);
+            return new MapEntry<TK, TV>(key, value);
         }
 
-        internal static Builder<K, V> builder<K, V>()
+        internal static MapBuilder<TK, TV> Builder<TK, TV>()
         {
-            return new Builder<K, V>();
+            return new MapBuilder<TK, TV>();
         }
 
-        internal static Map<K, V> mutableMap<K, V>(K key1, V value1)
+        internal static IMap<TK, TV> MutableMap<TK, TV>(TK key1, TV value1)
         {
-            var map = new HashMap<K, V>();
-            map.put(key1, value1);
+            var map = new HashMap<TK, TV>();
+            map.Put(key1, value1);
             return map;
         }
 
-        private class Entry<K, V> : Map__Entry<K, V> {
-            private readonly K _key;
-            private readonly V _value;
+        private class MapEntry<TK, TV> : IMapEntry<TK, TV> {
+            private readonly TK _key;
+            private readonly TV _value;
 
-            internal Entry(K key, V value)
+            internal MapEntry(TK key, TV value)
             {
                 _key = key;
                 _value = value;
             }
 
-            public K getKey()
+            public TK GetKey()
             {
                 return _key;
             }
 
-            public V getValue()
+            public TV GetValue()
             {
                 return _value;
             }
 
             public override bool Equals(object otherObj)
             {
-                var other = otherObj as Entry<K, V>;
+                var other = otherObj as MapEntry<TK, TV>;
                 if (other == null) {
                     return false;
                 }
@@ -152,16 +152,16 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
             }
         }
 
-        internal class Builder<K, V> {
-            private readonly Dictionary<K, V> _values = new();
+        internal class MapBuilder<TK, TV> {
+            private readonly Dictionary<TK, TV> _values = new();
 
-            public Builder<K, V> put(K key, V value)
+            public MapBuilder<TK, TV> Put(TK key, TV value)
             {
                 _values[key] = value;
                 return this;
             }
 
-            public Map<K, V> build()
+            public IMap<TK, TV> Build()
             {
                 return ToJava.DictionaryToMap(_values);
             }

@@ -3,35 +3,35 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class TableMatcher : DocumentElementMatcher<Table> {
-        public static TableMatcher _ANY;
-        private Optional<string> _styleId;
-        private Optional<StringMatcher> _styleName;
+    internal class TableMatcher : IDocumentElementMatcher<Table> {
+        public static TableMatcher Any;
+        private IOptional<string> _styleId;
+        private IOptional<IStringMatcher> _styleName;
 
         static TableMatcher()
         {
-            _ANY = new TableMatcher(Optional.empty<string>(), Optional.empty<StringMatcher>());
+            Any = new TableMatcher(Optional.Empty<string>(), Optional.Empty<IStringMatcher>());
         }
 
-        internal TableMatcher(Optional<string> styleId, Optional<StringMatcher> styleName)
+        internal TableMatcher(IOptional<string> styleId, IOptional<IStringMatcher> styleName)
         {
             _styleId = styleId;
             _styleName = styleName;
         }
 
-        public bool matches(Table table)
+        public bool Matches(Table table)
         {
-            return DocumentElementMatching.matchesStyle(_styleId, _styleName, table.getStyle());
+            return DocumentElementMatching.MatchesStyle(_styleId, _styleName, table.GetStyle());
         }
 
-        public static TableMatcher styleId(string styleId)
+        public static TableMatcher StyleId(string styleId)
         {
-            return new TableMatcher(Optional.of(styleId), Optional.empty<StringMatcher>());
+            return new TableMatcher(Optional.Of(styleId), Optional.Empty<IStringMatcher>());
         }
 
-        public static TableMatcher styleName(string styleName)
+        public static TableMatcher StyleName(string styleName)
         {
-            return new TableMatcher(Optional.empty<string>(), Optional.of<StringMatcher>(new EqualToStringMatcher(styleName)));
+            return new TableMatcher(Optional.Empty<string>(), Optional.Of<IStringMatcher>(new EqualToStringMatcher(styleName)));
         }
     }
 }

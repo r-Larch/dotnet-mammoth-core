@@ -5,17 +5,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class NumberingXml__Anonymous_2 : Function<XmlElement, Map__Entry<string, Map<string, NumberingLevel>>> {
-        private Map<string, Map<string, NumberingLevel>> _abstractNums;
+    internal class NumberingXmlAnonymous2 : IFunction<XmlElement, IMapEntry<string, IMap<string, NumberingLevel>>> {
+        private IMap<string, IMap<string, NumberingLevel>> _abstractNums;
 
-        internal NumberingXml__Anonymous_2(Map<string, Map<string, NumberingLevel>> abstractNums)
+        internal NumberingXmlAnonymous2(IMap<string, IMap<string, NumberingLevel>> abstractNums)
         {
             _abstractNums = abstractNums;
         }
 
-        public Map__Entry<string, Map<string, NumberingLevel>> apply(XmlElement numElement)
+        public IMapEntry<string, IMap<string, NumberingLevel>> Apply(XmlElement numElement)
         {
-            return NumberingXml.readNum(numElement, _abstractNums);
+            return NumberingXml.ReadNum(numElement, _abstractNums);
         }
     }
 }

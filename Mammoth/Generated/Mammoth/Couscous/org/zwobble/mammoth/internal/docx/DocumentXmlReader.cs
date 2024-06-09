@@ -7,20 +7,20 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class DocumentXmlReader {
         private BodyXmlReader _bodyReader;
-        public List<Comment> _comments;
-        public Notes _notes;
+        public IList<Comment> Comments;
+        public Notes Notes;
 
-        internal DocumentXmlReader(BodyXmlReader bodyReader, Notes notes, List<Comment> comments)
+        internal DocumentXmlReader(BodyXmlReader bodyReader, Notes notes, IList<Comment> comments)
         {
             _bodyReader = bodyReader;
-            _notes = notes;
-            _comments = comments;
+            Notes = notes;
+            Comments = comments;
         }
 
-        public InternalResult<Document> readElement(XmlElement element)
+        public InternalResult<Document> ReadElement(XmlElement element)
         {
-            var body = element.findChildOrEmpty("w:body");
-            return (((_bodyReader).readElements(body.getChildren())).toResult()).map(new DocumentXmlReader__Anonymous_0(this));
+            var body = element.FindChildOrEmpty("w:body");
+            return (((_bodyReader).ReadElements(body.GetChildren())).ToResult()).Map(new DocumentXmlReaderAnonymous0(this));
         }
     }
 }

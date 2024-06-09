@@ -11,93 +11,93 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class DocumentReader {
-        public static InternalResult<Document> readDocument(Optional<Path> path, Archive zipFile)
+        public static InternalResult<Document> ReadDocument(IOptional<Path> path, IArchive zipFile)
         {
-            var partPaths = findPartPaths(zipFile);
-            var styles = readStyles(zipFile, partPaths);
-            var numbering = readNumbering(zipFile, partPaths);
-            var contentTypes = readContentTypes(zipFile);
-            FileReader fileReader = new PathRelativeFileReader(path);
-            var partReader = new DocumentReader__PartWithBodyReader(zipFile, contentTypes, fileReader, numbering, styles);
-            return InternalResult.flatMap(readNotes(partReader, partPaths), readComments(partReader, partPaths), new DocumentReader__Anonymous_1(partReader, partPaths));
+            var partPaths = FindPartPaths(zipFile);
+            var styles = ReadStyles(zipFile, partPaths);
+            var numbering = ReadNumbering(zipFile, partPaths);
+            var contentTypes = ReadContentTypes(zipFile);
+            IFileReader fileReader = new PathRelativeFileReader(path);
+            var partReader = new DocumentReaderPartWithBodyReader(zipFile, contentTypes, fileReader, numbering, styles);
+            return InternalResult.FlatMap(ReadNotes(partReader, partPaths), ReadComments(partReader, partPaths), new DocumentReaderAnonymous1(partReader, partPaths));
         }
 
-        public static DocumentReader__PartPaths findPartPaths(Archive archive)
+        public static DocumentReaderPartPaths FindPartPaths(IArchive archive)
         {
-            var packageRelationships = readPackageRelationships(archive);
-            var documentFilename = findDocumentFilename(archive, packageRelationships);
-            var documentRelationships = readRelationships(archive, findRelationshipsPathFor(documentFilename));
-            Function<string, string> find = new DocumentReader__Anonymous_2(archive, documentRelationships, documentFilename);
-            return new DocumentReader__PartPaths(documentFilename, find.apply("comments"), find.apply("endnotes"), find.apply("footnotes"), find.apply("numbering"), find.apply("styles"));
+            var packageRelationships = ReadPackageRelationships(archive);
+            var documentFilename = FindDocumentFilename(archive, packageRelationships);
+            var documentRelationships = ReadRelationships(archive, FindRelationshipsPathFor(documentFilename));
+            IFunction<string, string> find = new DocumentReaderAnonymous2(archive, documentRelationships, documentFilename);
+            return new DocumentReaderPartPaths(documentFilename, find.Apply("comments"), find.Apply("endnotes"), find.Apply("footnotes"), find.Apply("numbering"), find.Apply("styles"));
         }
 
-        public static Relationships readPackageRelationships(Archive archive)
+        public static Relationships ReadPackageRelationships(IArchive archive)
         {
-            return readRelationships(archive, "_rels/.rels");
+            return ReadRelationships(archive, "_rels/.rels");
         }
 
-        public static string findDocumentFilename(Archive archive, Relationships packageRelationships)
+        public static string FindDocumentFilename(IArchive archive, Relationships packageRelationships)
         {
             var officeDocumentType = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument";
-            var mainDocumentPath = findPartPath(archive, packageRelationships, officeDocumentType, "", "word/document.xml");
-            if (archive.exists(mainDocumentPath)) {
+            var mainDocumentPath = FindPartPath(archive, packageRelationships, officeDocumentType, "", "word/document.xml");
+            if (archive.Exists(mainDocumentPath)) {
                 return mainDocumentPath;
             }
 
-            throw new PassThroughException(new IOException("Could not find main document part. Are you sure this is a valid .docx file?"));
+            throw new PassThroughException(new IoException("Could not find main document part. Are you sure this is a valid .docx file?"));
         }
 
-        public static string findPartPath(Archive archive, Relationships relationships, string relationshipType, string basePath, string fallbackPath)
+        public static string FindPartPath(IArchive archive, Relationships relationships, string relationshipType, string basePath, string fallbackPath)
         {
-            var targets = Lists.eagerMap(relationships.findTargetsByType(relationshipType), new DocumentReader__Anonymous_3(basePath));
-            var validTargets = Lists.eagerFilter(targets, new DocumentReader__Anonymous_4(archive));
-            return (Lists.tryGetFirst(validTargets)).orElse(fallbackPath);
+            var targets = Lists.EagerMap(relationships.FindTargetsByType(relationshipType), new DocumentReaderAnonymous3(basePath));
+            var validTargets = Lists.EagerFilter(targets, new DocumentReaderAnonymous4(archive));
+            return (Lists.TryGetFirst(validTargets)).OrElse(fallbackPath);
         }
 
-        public static InternalResult<List<Comment>> readComments(DocumentReader__PartWithBodyReader partReader, DocumentReader__PartPaths partPaths)
+        public static InternalResult<IList<Comment>> ReadComments(DocumentReaderPartWithBodyReader partReader, DocumentReaderPartPaths partPaths)
         {
-            return partReader.readPart(partPaths.getComments(), new DocumentReader__Anonymous_5(), Optional.of(InternalResult.success(Lists.list<Comment>())));
+            return partReader.ReadPart(partPaths.GetComments(), new DocumentReaderAnonymous5(), Optional.Of(InternalResult.Success(Lists.List<Comment>())));
         }
 
-        public static InternalResult<Notes> readNotes(DocumentReader__PartWithBodyReader partReader, DocumentReader__PartPaths partPaths)
+        public static InternalResult<Notes> ReadNotes(DocumentReaderPartWithBodyReader partReader, DocumentReaderPartPaths partPaths)
         {
-            return (InternalResult.map(partReader.readPart(partPaths.getFootnotes(), new DocumentReader__Anonymous_6(), Optional.of(InternalResult.success(Lists.list<Note>()))), partReader.readPart(partPaths.getEndnotes(), new DocumentReader__Anonymous_7(), Optional.of(InternalResult.success(Lists.list<Note>()))), new DocumentReader__Anonymous_8())).map(new DocumentReader__Anonymous_9());
+            return (InternalResult.Map(partReader.ReadPart(partPaths.GetFootnotes(), new DocumentReaderAnonymous6(), Optional.Of(InternalResult.Success(Lists.List<Note>()))), partReader.ReadPart(partPaths.GetEndnotes(), new DocumentReaderAnonymous7(), Optional.Of(InternalResult.Success(Lists.List<Note>()))), new DocumentReaderAnonymous8())).Map(new DocumentReaderAnonymous9());
         }
 
-        public static Styles readStyles(Archive file, DocumentReader__PartPaths partPaths)
+        public static Styles ReadStyles(IArchive file, DocumentReaderPartPaths partPaths)
         {
-            return ((tryParseOfficeXml(file, partPaths.getStyles())).map(new DocumentReader__Anonymous_10())).orElse(Styles._EMPTY);
+            return ((TryParseOfficeXml(file, partPaths.GetStyles())).Map(new DocumentReaderAnonymous10())).OrElse(Styles.Empty);
         }
 
-        public static Numbering readNumbering(Archive file, DocumentReader__PartPaths partPaths)
+        public static Numbering ReadNumbering(IArchive file, DocumentReaderPartPaths partPaths)
         {
-            return ((tryParseOfficeXml(file, partPaths.getNumbering())).map(new DocumentReader__Anonymous_11())).orElse(Numbering._EMPTY);
+            return ((TryParseOfficeXml(file, partPaths.GetNumbering())).Map(new DocumentReaderAnonymous11())).OrElse(Numbering.Empty);
         }
 
-        public static ContentTypes readContentTypes(Archive file)
+        public static ContentTypes ReadContentTypes(IArchive file)
         {
-            return ((tryParseOfficeXml(file, "[Content_Types].xml")).map(new DocumentReader__Anonymous_12())).orElse(ContentTypes._DEFAULT);
+            return ((TryParseOfficeXml(file, "[Content_Types].xml")).Map(new DocumentReaderAnonymous12())).OrElse(ContentTypes.Default);
         }
 
-        public static Relationships readRelationships(Archive zipFile, string name)
+        public static Relationships ReadRelationships(IArchive zipFile, string name)
         {
-            return ((tryParseOfficeXml(zipFile, name)).map(new DocumentReader__Anonymous_13())).orElse(Relationships._EMPTY);
+            return ((TryParseOfficeXml(zipFile, name)).Map(new DocumentReaderAnonymous13())).OrElse(Relationships.Empty);
         }
 
-        public static string findRelationshipsPathFor(string name)
+        public static string FindRelationshipsPathFor(string name)
         {
-            var parts = ZipPaths.splitPath(name);
-            return ZipPaths.joinPath(new[] { parts.getDirname(), "_rels", parts.getBasename() + ".rels" });
+            var parts = ZipPaths.SplitPath(name);
+            return ZipPaths.JoinPath(new[] { parts.GetDirname(), "_rels", parts.GetBasename() + ".rels" });
         }
 
-        public static Optional<XmlElement> tryParseOfficeXml(Archive zipFile, string name)
+        public static IOptional<XmlElement> TryParseOfficeXml(IArchive zipFile, string name)
         {
-            return PassThroughException.wrap(new DocumentReader__Anonymous_15(zipFile, name));
+            return PassThroughException.Wrap(new DocumentReaderAnonymous15(zipFile, name));
         }
 
-        public static XmlElement parseOfficeXml(Archive zipFile, string name)
+        public static XmlElement ParseOfficeXml(IArchive zipFile, string name)
         {
-            return (tryParseOfficeXml(zipFile, name)).orElseThrow(new DocumentReader__Anonymous_16(name));
+            return (TryParseOfficeXml(zipFile, name)).OrElseThrow(new DocumentReaderAnonymous16(name));
         }
     }
 }

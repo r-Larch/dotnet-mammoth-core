@@ -4,10 +4,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class DocumentElementMatching__Anonymous_2 : Function<Style, Optional<string>> {
-        public Optional<string> apply(Style arg0)
+    internal class DocumentElementMatchingAnonymous2 : IFunction<Style, IOptional<string>> {
+        public IOptional<string> Apply(Style arg0)
         {
-            return arg0.getName();
+            return arg0.GetName();
         }
     }
 }

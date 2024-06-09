@@ -4,35 +4,35 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class ContentTypes {
-        public static ContentTypes _DEFAULT;
-        private static Map<string, string> _imageExtensions;
-        private Map<string, string> _extensionDefaults;
-        private Map<string, string> _overrides;
+        public static ContentTypes Default;
+        private static IMap<string, string> _imageExtensions;
+        private IMap<string, string> _extensionDefaults;
+        private IMap<string, string> _overrides;
 
         static ContentTypes()
         {
-            _DEFAULT = new ContentTypes(Maps.map<string, string>(), Maps.map<string, string>());
-            _imageExtensions = ((((((((Maps.builder<string, string>()).put("png", "png")).put("gif", "gif")).put("jpeg", "jpeg")).put("jpg", "jpeg")).put("bmp", "bmp")).put("tif", "tiff")).put("tiff", "tiff")).build();
+            Default = new ContentTypes(Maps.Map<string, string>(), Maps.Map<string, string>());
+            _imageExtensions = ((((((((Maps.Builder<string, string>()).Put("png", "png")).Put("gif", "gif")).Put("jpeg", "jpeg")).Put("jpg", "jpeg")).Put("bmp", "bmp")).Put("tif", "tiff")).Put("tiff", "tiff")).Build();
         }
 
-        internal ContentTypes(Map<string, string> extensionDefaults, Map<string, string> overrides)
+        internal ContentTypes(IMap<string, string> extensionDefaults, IMap<string, string> overrides)
         {
             _extensionDefaults = extensionDefaults;
             _overrides = overrides;
         }
 
-        public Optional<string> findContentType(string path)
+        public IOptional<string> FindContentType(string path)
         {
-            if ((_overrides).containsKey(path)) {
-                return Maps.lookup(_overrides, path);
+            if ((_overrides).ContainsKey(path)) {
+                return Maps.Lookup(_overrides, path);
             }
 
-            var extension = Paths.getExtension(path);
-            if ((_extensionDefaults).containsKey(extension)) {
-                return Maps.lookup(_extensionDefaults, extension);
+            var extension = Paths.GetExtension(path);
+            if ((_extensionDefaults).ContainsKey(extension)) {
+                return Maps.Lookup(_extensionDefaults, extension);
             }
 
-            return (Maps.lookup(_imageExtensions, extension.ToLower())).map(new ContentTypes__Anonymous_0());
+            return (Maps.Lookup(_imageExtensions, extension.ToLower())).Map(new ContentTypesAnonymous0());
         }
     }
 }

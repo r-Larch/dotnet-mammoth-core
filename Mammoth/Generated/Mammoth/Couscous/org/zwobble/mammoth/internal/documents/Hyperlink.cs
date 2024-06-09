@@ -2,13 +2,13 @@ using Mammoth.Couscous.java.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class Hyperlink : DocumentElement, HasChildren {
-        private Optional<string> _anchor;
-        private List<DocumentElement> _children;
-        private Optional<string> _href;
-        private Optional<string> _targetFrame;
+    internal class Hyperlink : IDocumentElement, IHasChildren {
+        private IOptional<string> _anchor;
+        private IList<IDocumentElement> _children;
+        private IOptional<string> _href;
+        private IOptional<string> _targetFrame;
 
-        internal Hyperlink(Optional<string> href, Optional<string> anchor, Optional<string> targetFrame, List<DocumentElement> children)
+        internal Hyperlink(IOptional<string> href, IOptional<string> anchor, IOptional<string> targetFrame, IList<IDocumentElement> children)
         {
             _href = href;
             _anchor = anchor;
@@ -16,37 +16,37 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
             _children = children;
         }
 
-        public T accept<T, U>(DocumentElementVisitor<T, U> visitor, U context)
+        public T Accept<T, TU>(IDocumentElementVisitor<T, TU> visitor, TU context)
         {
-            return visitor.visit(this, context);
+            return visitor.Visit(this, context);
         }
 
-        public List<DocumentElement> getChildren()
+        public IList<IDocumentElement> GetChildren()
         {
             return _children;
         }
 
-        public static Hyperlink href(string href, Optional<string> targetFrame, List<DocumentElement> children)
+        public static Hyperlink Href(string href, IOptional<string> targetFrame, IList<IDocumentElement> children)
         {
-            return new Hyperlink(Optional.of(href), Optional.empty<string>(), targetFrame, children);
+            return new Hyperlink(Optional.Of(href), Optional.Empty<string>(), targetFrame, children);
         }
 
-        public static Hyperlink anchor(string anchor, Optional<string> targetFrame, List<DocumentElement> children)
+        public static Hyperlink Anchor(string anchor, IOptional<string> targetFrame, IList<IDocumentElement> children)
         {
-            return new Hyperlink(Optional.empty<string>(), Optional.of(anchor), targetFrame, children);
+            return new Hyperlink(Optional.Empty<string>(), Optional.Of(anchor), targetFrame, children);
         }
 
-        public Optional<string> getHref()
+        public IOptional<string> GetHref()
         {
             return _href;
         }
 
-        public Optional<string> getAnchor()
+        public IOptional<string> GetAnchor()
         {
             return _anchor;
         }
 
-        public Optional<string> getTargetFrame()
+        public IOptional<string> GetTargetFrame()
         {
             return _targetFrame;
         }

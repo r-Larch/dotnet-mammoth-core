@@ -8,45 +8,45 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class NotesXmlReader {
         private BodyXmlReader _bodyReader;
-        public NoteType _noteType;
+        public NoteType NoteType;
         private string _tagName;
 
         internal NotesXmlReader(BodyXmlReader bodyReader, string tagName, NoteType noteType)
         {
             _bodyReader = bodyReader;
             _tagName = tagName;
-            _noteType = noteType;
+            NoteType = noteType;
         }
 
-        public static NotesXmlReader footnote(BodyXmlReader bodyReader)
+        public static NotesXmlReader Footnote(BodyXmlReader bodyReader)
         {
-            return new NotesXmlReader(bodyReader, "footnote", NoteType._FOOTNOTE);
+            return new NotesXmlReader(bodyReader, "footnote", NoteType.Footnote);
         }
 
-        public static NotesXmlReader endnote(BodyXmlReader bodyReader)
+        public static NotesXmlReader Endnote(BodyXmlReader bodyReader)
         {
-            return new NotesXmlReader(bodyReader, "endnote", NoteType._ENDNOTE);
+            return new NotesXmlReader(bodyReader, "endnote", NoteType.Endnote);
         }
 
-        public InternalResult<List<Note>> readElement(XmlElement element)
+        public InternalResult<IList<Note>> ReadElement(XmlElement element)
         {
-            var elements = Iterables.lazyFilter(element.findChildren("w:" + _tagName), new NotesXmlReader__Anonymous_0(this));
-            return InternalResult.flatMap(elements, new NotesXmlReader__Anonymous_1(this));
+            var elements = Iterables.LazyFilter(element.FindChildren("w:" + _tagName), new NotesXmlReaderAnonymous0(this));
+            return InternalResult.FlatMap(elements, new NotesXmlReaderAnonymous1(this));
         }
 
-        public bool isNoteElement(XmlElement element)
+        public bool IsNoteElement(XmlElement element)
         {
-            return ((element.getAttributeOrNone("w:type")).map(new NotesXmlReader__Anonymous_2(this))).orElse(true);
+            return ((element.GetAttributeOrNone("w:type")).Map(new NotesXmlReaderAnonymous2(this))).OrElse(true);
         }
 
-        public bool isSeparatorType(string type)
+        public bool IsSeparatorType(string type)
         {
             return (type.Equals("continuationSeparator")) || (type.Equals("separator"));
         }
 
-        public InternalResult<Note> readNoteElement(XmlElement element)
+        public InternalResult<Note> ReadNoteElement(XmlElement element)
         {
-            return (((_bodyReader).readElements(element.getChildren())).toResult()).map(new NotesXmlReader__Anonymous_3(this, element));
+            return (((_bodyReader).ReadElements(element.GetChildren())).ToResult()).Map(new NotesXmlReaderAnonymous3(this, element));
         }
     }
 }

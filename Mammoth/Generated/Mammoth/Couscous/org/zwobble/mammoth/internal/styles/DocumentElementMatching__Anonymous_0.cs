@@ -3,10 +3,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class DocumentElementMatching__Anonymous_0 : Function<Style, string> {
-        public string apply(Style arg0)
+    internal class DocumentElementMatchingAnonymous0 : IFunction<Style, string> {
+        public string Apply(Style arg0)
         {
-            return arg0.getStyleId();
+            return arg0.GetStyleId();
         }
     }
 }

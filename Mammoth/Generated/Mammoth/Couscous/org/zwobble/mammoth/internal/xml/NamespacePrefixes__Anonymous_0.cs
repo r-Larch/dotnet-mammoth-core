@@ -3,17 +3,17 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
-    internal class NamespacePrefixes__Anonymous_0 : Predicate<NamespacePrefix> {
-        private Optional<string> _prefix;
+    internal class NamespacePrefixesAnonymous0 : IPredicate<NamespacePrefix> {
+        private IOptional<string> _prefix;
 
-        internal NamespacePrefixes__Anonymous_0(Optional<string> prefix)
+        internal NamespacePrefixesAnonymous0(IOptional<string> prefix)
         {
             _prefix = prefix;
         }
 
-        public bool test(NamespacePrefix @namespace)
+        public bool Test(NamespacePrefix @namespace)
         {
-            return (@namespace.getPrefix()).equals(_prefix);
+            return @namespace.GetPrefix().Equals(_prefix);
         }
     }
 }

@@ -1,5 +1,5 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class Bookmark : DocumentElement {
+    internal class Bookmark : IDocumentElement {
         private string _name;
 
         internal Bookmark(string name)
@@ -7,12 +7,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
             _name = name;
         }
 
-        public T accept<T, U>(DocumentElementVisitor<T, U> visitor, U context)
+        public T Accept<T, TU>(IDocumentElementVisitor<T, TU> visitor, TU context)
         {
-            return visitor.visit(this, context);
+            return visitor.Visit(this, context);
         }
 
-        public string getName()
+        public string GetName()
         {
             return _name;
         }

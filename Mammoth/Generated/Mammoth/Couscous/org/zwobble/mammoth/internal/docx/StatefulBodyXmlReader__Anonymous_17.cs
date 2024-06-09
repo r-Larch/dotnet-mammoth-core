@@ -5,21 +5,21 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_17 : Function<List<DocumentElement>, DocumentElement> {
+    internal class StatefulBodyXmlReaderAnonymous17 : IFunction<IList<IDocumentElement>, IDocumentElement> {
         private int _colspan;
-        private XmlElementLike _properties;
-        private StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        private IXmlElementLike _properties;
+        private StatefulBodyXmlReader _thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader;
 
-        internal StatefulBodyXmlReader__Anonymous_17(StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader, XmlElementLike properties, int colspan)
+        internal StatefulBodyXmlReaderAnonymous17(StatefulBodyXmlReader thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader, IXmlElementLike properties, int colspan)
         {
-            _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+            _thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader = thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader;
             _properties = properties;
             _colspan = colspan;
         }
 
-        public DocumentElement apply(List<DocumentElement> children)
+        public IDocumentElement Apply(IList<IDocumentElement> children)
         {
-            return new StatefulBodyXmlReader__UnmergedTableCell((_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).readVmerge(_properties), _colspan, children);
+            return new StatefulBodyXmlReaderUnmergedTableCell((_thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader).ReadVmerge(_properties), _colspan, children);
         }
     }
 }

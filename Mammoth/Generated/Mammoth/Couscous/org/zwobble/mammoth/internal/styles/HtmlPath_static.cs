@@ -4,51 +4,51 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class HtmlPath_static {
-        public static HtmlPath _EMPTY;
-        public static HtmlPath _IGNORE;
+    internal class HtmlPathStatic {
+        public static IHtmlPath Empty;
+        public static IHtmlPath Ignore;
 
-        static HtmlPath_static()
+        static HtmlPathStatic()
         {
-            _EMPTY = new HtmlPathElements(Lists.list<HtmlPathElement>());
-            _IGNORE = Ignore._INSTANCE;
+            Empty = new HtmlPathElements(Lists.List<HtmlPathElement>());
+            Ignore = styles.Ignore.Instance;
         }
 
-        public static HtmlPath elements(HtmlPathElement[] elements)
+        public static IHtmlPath Elements(HtmlPathElement[] elements)
         {
-            return new HtmlPathElements(Arrays.asList(elements));
+            return new HtmlPathElements(Arrays.AsList(elements));
         }
 
-        public static HtmlPath element(string tagName)
+        public static IHtmlPath Element(string tagName)
         {
-            return element(tagName, Maps.map<string, string>());
+            return Element(tagName, Maps.Map<string, string>());
         }
 
-        public static HtmlPath element(string tagName, Map<string, string> attributes)
+        public static IHtmlPath Element(string tagName, IMap<string, string> attributes)
         {
-            var tag = new HtmlTag(Lists.list(tagName), attributes, false, "");
-            return new HtmlPathElements(Lists.list(new HtmlPathElement(tag)));
+            var tag = new HtmlTag(Lists.List(tagName), attributes, false, "");
+            return new HtmlPathElements(Lists.List(new HtmlPathElement(tag)));
         }
 
-        public static HtmlPath collapsibleElement(string tagName)
+        public static IHtmlPath CollapsibleElement(string tagName)
         {
-            return collapsibleElement(tagName, Maps.map<string, string>());
+            return CollapsibleElement(tagName, Maps.Map<string, string>());
         }
 
-        public static HtmlPath collapsibleElement(List<string> tagNames)
+        public static IHtmlPath CollapsibleElement(IList<string> tagNames)
         {
-            return collapsibleElement(tagNames, Maps.map<string, string>());
+            return CollapsibleElement(tagNames, Maps.Map<string, string>());
         }
 
-        public static HtmlPath collapsibleElement(string tagName, Map<string, string> attributes)
+        public static IHtmlPath CollapsibleElement(string tagName, IMap<string, string> attributes)
         {
-            return collapsibleElement(Lists.list(tagName), attributes);
+            return CollapsibleElement(Lists.List(tagName), attributes);
         }
 
-        public static HtmlPath collapsibleElement(List<string> tagNames, Map<string, string> attributes)
+        public static IHtmlPath CollapsibleElement(IList<string> tagNames, IMap<string, string> attributes)
         {
             var tag = new HtmlTag(tagNames, attributes, true, "");
-            return new HtmlPathElements(Lists.list(new HtmlPathElement(tag)));
+            return new HtmlPathElements(Lists.List(new HtmlPathElement(tag)));
         }
     }
 }

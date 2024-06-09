@@ -2,10 +2,10 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_26 : Predicate<string> {
-        public bool test(string description)
+    internal class StatefulBodyXmlReaderAnonymous26 : IPredicate<string> {
+        public bool Test(string description)
         {
-            return !(description.trim()).isEmpty();
+            return !(JavaStringExtensions.Trim(description)).IsEmpty();
         }
     }
 }

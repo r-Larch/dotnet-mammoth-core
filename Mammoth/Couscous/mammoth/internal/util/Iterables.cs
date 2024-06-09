@@ -7,49 +7,49 @@ using Mammoth.Couscous.java.util.function;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
     internal static class Iterables {
-        internal static Optional<T> getFirst<T>(Iterable<T> iterable)
+        internal static IOptional<T> GetFirst<T>(ITerable<T> iterable)
         {
-            var iterator = iterable.iterator();
-            if (iterator.hasNext()) {
-                return Optional.of(iterator.next());
+            var iterator = iterable.Iterator();
+            if (iterator.HasNext()) {
+                return Optional.Of(iterator.Next());
             }
 
-            return Optional.empty<T>();
+            return Optional.Empty<T>();
         }
 
-        internal static T getFirst<T>(Iterable<T> iterable, T defaultValue)
+        internal static T GetFirst<T>(ITerable<T> iterable, T defaultValue)
         {
-            var iterator = iterable.iterator();
-            if (iterator.hasNext()) {
-                return iterator.next();
+            var iterator = iterable.Iterator();
+            if (iterator.HasNext()) {
+                return iterator.Next();
             }
 
             return defaultValue;
         }
 
-        internal static Optional<T> tryGetLast<T>(Iterable<T> iterable) where T : class
+        internal static IOptional<T> TryGetLast<T>(ITerable<T> iterable) where T : class
         {
             var hasElement = false;
             T last = null;
-            var iterator = iterable.iterator();
-            while (iterator.hasNext()) {
+            var iterator = iterable.Iterator();
+            while (iterator.HasNext()) {
                 hasElement = true;
-                last = iterator.next();
+                last = iterator.Next();
             }
 
             if (hasElement) {
-                return Optional.of(last);
+                return Optional.Of(last);
             }
 
-            return Optional.empty<T>();
+            return Optional.Empty<T>();
         }
 
-        internal static Optional<T> tryFind<T>(Iterable<T> iterable, java.util.function.Predicate<T> predicate)
+        internal static IOptional<T> TryFind<T>(ITerable<T> iterable, java.util.function.IPredicate<T> predicate)
         {
-            var iterator = iterable.iterator();
-            while (iterator.hasNext()) {
-                var value = iterator.next();
-                if (predicate.test(value)) {
+            var iterator = iterable.Iterator();
+            while (iterator.HasNext()) {
+                var value = iterator.Next();
+                if (predicate.Test(value)) {
                     return new Some<T>(value);
                 }
             }
@@ -57,13 +57,13 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
             return None<T>.Instance;
         }
 
-        internal static OptionalInt findIndex<T>(Iterable<T> iterable, java.util.function.Predicate<T> predicate)
+        internal static IOptionalInt FindIndex<T>(ITerable<T> iterable, java.util.function.IPredicate<T> predicate)
         {
-            var iterator = iterable.iterator();
+            var iterator = iterable.Iterator();
             var index = 0;
-            while (iterator.hasNext()) {
-                var value = iterator.next();
-                if (predicate.test(value)) {
+            while (iterator.HasNext()) {
+                var value = iterator.Next();
+                if (predicate.Test(value)) {
                     return new SomeInt(index);
                 }
 
@@ -73,61 +73,61 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
             return NoneInt.Instance;
         }
 
-        internal static Iterable<T> lazyFilter<T>(Iterable<T> iterable, java.util.function.Predicate<T> predicate)
+        internal static ITerable<T> LazyFilter<T>(ITerable<T> iterable, java.util.function.IPredicate<T> predicate)
         {
-            var enumerable = FromJava.IterableToEnumerable(iterable).Where(predicate.test);
+            var enumerable = FromJava.IterableToEnumerable(iterable).Where(predicate.Test);
             return ToJava.EnumerableToIterable(enumerable);
         }
 
-        internal static Iterable<U> lazyFilter<T, U>(Iterable<T> iterable, Type type)
+        internal static ITerable<TU> LazyFilter<T, TU>(ITerable<T> iterable, Type type)
         {
-            var enumerable = FromJava.IterableToEnumerable(iterable).OfType<U>();
+            var enumerable = FromJava.IterableToEnumerable(iterable).OfType<TU>();
             return ToJava.EnumerableToIterable(enumerable);
         }
 
-        internal static Iterable<U> lazyMap<T, U>(Iterable<T> iterable, Function<T, U> function)
-        {
-            var enumerable = FromJava.IterableToEnumerable(iterable)
-                .Select(function.apply);
-            return ToJava.EnumerableToIterable(enumerable);
-        }
-
-        internal static Iterable<U> lazyFlatMap<T, U>(Iterable<T> iterable, Function<T, Iterable<U>> function)
+        internal static ITerable<TU> LazyMap<T, TU>(ITerable<T> iterable, IFunction<T, TU> function)
         {
             var enumerable = FromJava.IterableToEnumerable(iterable)
-                .SelectMany(element => FromJava.IterableToEnumerable(function.apply(element)));
+                .Select(function.Apply);
             return ToJava.EnumerableToIterable(enumerable);
         }
 
-        internal static Iterable<T> lazyConcat<T>(Iterable<T> first, Iterable<T> second)
+        internal static ITerable<TU> LazyFlatMap<T, TU>(ITerable<T> iterable, IFunction<T, ITerable<TU>> function)
+        {
+            var enumerable = FromJava.IterableToEnumerable(iterable)
+                .SelectMany(element => FromJava.IterableToEnumerable(function.Apply(element)));
+            return ToJava.EnumerableToIterable(enumerable);
+        }
+
+        internal static ITerable<T> LazyConcat<T>(ITerable<T> first, ITerable<T> second)
         {
             var enumerable = FromJava.IterableToEnumerable(first)
                 .Concat(FromJava.IterableToEnumerable(second));
             return ToJava.EnumerableToIterable(enumerable);
         }
 
-        internal static Iterable<int> intRange(int start, int end)
+        internal static ITerable<int> IntRange(int start, int end)
         {
-            return new IntRange(start, end);
+            return new IntRangeGenerator(start, end);
         }
 
-        private class IntRange : Iterable<int> {
+        private class IntRangeGenerator : ITerable<int> {
             private readonly int _end;
             private readonly int _start;
 
-            internal IntRange(int start, int end)
+            internal IntRangeGenerator(int start, int end)
             {
                 _start = start;
                 _end = end;
             }
 
-            public Iterator<int> iterator()
+            public ITerator<int> Iterator()
             {
                 return new IntRangeIterator(_start, _end);
             }
         }
 
-        private class IntRangeIterator : Iterator<int> {
+        private class IntRangeIterator : ITerator<int> {
             private readonly int _end;
             private int _next;
 
@@ -137,12 +137,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
                 _end = end;
             }
 
-            public bool hasNext()
+            public bool HasNext()
             {
                 return _next < _end;
             }
 
-            public int next()
+            public int Next()
             {
                 return _next++;
             }

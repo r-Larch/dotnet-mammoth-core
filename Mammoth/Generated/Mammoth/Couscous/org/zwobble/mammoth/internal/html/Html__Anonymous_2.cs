@@ -3,29 +3,29 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
-    internal class Html__Anonymous_2 : HtmlNode__Mapper<List<HtmlNode>> {
-        public List<HtmlNode> visit(HtmlElement element)
+    internal class HtmlAnonymous2 : IHtmlNodeMapper<IList<IHtmlNode>> {
+        public IList<IHtmlNode> Visit(HtmlElement element)
         {
-            var children = Html.stripEmpty(element.getChildren());
-            if (children.isEmpty() && !element.isVoid()) {
-                return Lists.list<HtmlNode>();
+            var children = Html.StripEmpty(element.GetChildren());
+            if (children.IsEmpty() && !element.IsVoid()) {
+                return Lists.List<IHtmlNode>();
             }
 
-            return Lists.list<HtmlNode>(new HtmlElement(element.getTag(), children));
+            return Lists.List<IHtmlNode>(new HtmlElement(element.GetTag(), children));
         }
 
-        public List<HtmlNode> visit(HtmlTextNode node)
+        public IList<IHtmlNode> Visit(HtmlTextNode node)
         {
-            if ((node.getValue()).isEmpty()) {
-                return Lists.list<HtmlNode>();
+            if ((node.GetValue()).IsEmpty()) {
+                return Lists.List<IHtmlNode>();
             }
 
-            return Lists.list<HtmlNode>(node);
+            return Lists.List<IHtmlNode>(node);
         }
 
-        public List<HtmlNode> visit(HtmlForceWrite forceWrite)
+        public IList<IHtmlNode> Visit(HtmlForceWrite forceWrite)
         {
-            return Lists.list<HtmlNode>(forceWrite);
+            return Lists.List<IHtmlNode>(forceWrite);
         }
     }
 }

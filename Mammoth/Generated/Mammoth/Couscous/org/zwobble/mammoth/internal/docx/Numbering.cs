@@ -5,22 +5,22 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class Numbering {
-        public static Numbering _EMPTY;
-        private Map<string, Map<string, NumberingLevel>> _numbering;
+        public static Numbering Empty;
+        private IMap<string, IMap<string, NumberingLevel>> _numbering;
 
         static Numbering()
         {
-            _EMPTY = new Numbering(Maps.map<string, Map<string, NumberingLevel>>());
+            Empty = new Numbering(Maps.Map<string, IMap<string, NumberingLevel>>());
         }
 
-        internal Numbering(Map<string, Map<string, NumberingLevel>> numbering)
+        internal Numbering(IMap<string, IMap<string, NumberingLevel>> numbering)
         {
             _numbering = numbering;
         }
 
-        public Optional<NumberingLevel> findLevel(string numId, string level)
+        public IOptional<NumberingLevel> FindLevel(string numId, string level)
         {
-            return (Maps.lookup(_numbering, numId)).flatMap(new Numbering__Anonymous_0(level));
+            return (Maps.Lookup(_numbering, numId)).FlatMap(new NumberingAnonymous0(level));
         }
     }
 }

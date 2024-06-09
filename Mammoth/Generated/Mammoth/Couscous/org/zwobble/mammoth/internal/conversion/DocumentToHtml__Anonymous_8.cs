@@ -4,23 +4,23 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.styles;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_8 : Supplier<HtmlPath> {
+    internal class DocumentToHtmlAnonymous8 : ISupplier<IHtmlPath> {
         private Run _run;
-        private DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+        private DocumentToHtml _thisOrgZwobbleMammothInternalConversionDocumentToHtml;
 
-        internal DocumentToHtml__Anonymous_8(Run run, DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)
+        internal DocumentToHtmlAnonymous8(Run run, DocumentToHtml thisOrgZwobbleMammothInternalConversionDocumentToHtml)
         {
             _run = run;
-            _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml = this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+            _thisOrgZwobbleMammothInternalConversionDocumentToHtml = thisOrgZwobbleMammothInternalConversionDocumentToHtml;
         }
 
-        public HtmlPath get()
+        public IHtmlPath Get()
         {
-            if (((_run).getStyle()).isPresent()) {
-                ((_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._warnings).add("Unrecognised run style: " + (((_run).getStyle()).get()).describe());
+            if (((_run).GetStyle()).IsPresent()) {
+                ((_thisOrgZwobbleMammothInternalConversionDocumentToHtml).Warnings).Add("Unrecognised run style: " + (((_run).GetStyle()).Get()).Describe());
             }
 
-            return HtmlPath_static._EMPTY;
+            return HtmlPathStatic.Empty;
         }
     }
 }

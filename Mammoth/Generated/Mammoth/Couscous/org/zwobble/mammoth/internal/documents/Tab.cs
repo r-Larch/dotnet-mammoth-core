@@ -1,15 +1,15 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class Tab : DocumentElement {
-        public static Tab _TAB;
+    internal class Tab : IDocumentElement {
+        public static Tab Instance;
 
         static Tab()
         {
-            _TAB = new Tab();
+            Instance = new Tab();
         }
 
-        public T accept<T, U>(DocumentElementVisitor<T, U> visitor, U context)
+        public T Accept<T, TU>(IDocumentElementVisitor<T, TU> visitor, TU context)
         {
-            return visitor.visit(this, context);
+            return visitor.Visit(this, context);
         }
     }
 }

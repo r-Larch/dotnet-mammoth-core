@@ -8,83 +8,83 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class ReadResult {
-        public static ReadResult _EMPTY_SUCCESS;
-        public List<DocumentElement> _elements;
-        public List<DocumentElement> _extra;
-        public Iterable<string> _warnings;
+        public static ReadResult EmptySuccess;
+        public IList<IDocumentElement> Elements;
+        public IList<IDocumentElement> Extra;
+        public ITerable<string> Warnings;
 
         static ReadResult()
         {
-            _EMPTY_SUCCESS = success(Lists.list<DocumentElement>());
+            EmptySuccess = Success(Lists.List<IDocumentElement>());
         }
 
-        internal ReadResult(List<DocumentElement> elements, List<DocumentElement> extra, Iterable<string> warnings)
+        internal ReadResult(IList<IDocumentElement> elements, IList<IDocumentElement> extra, ITerable<string> warnings)
         {
-            _elements = elements;
-            _extra = extra;
-            _warnings = warnings;
+            Elements = elements;
+            Extra = extra;
+            Warnings = warnings;
         }
 
-        public static ReadResult flatMap<T>(Iterable<T> iterable, Function<T, ReadResult> function)
+        public static ReadResult FlatMap<T>(ITerable<T> iterable, IFunction<T, ReadResult> function)
         {
-            var results = Lists.eagerMap(iterable, function);
-            return new ReadResult(Lists.eagerFlatMap(results, new ReadResult__Anonymous_0()), Lists.eagerFlatMap(results, new ReadResult__Anonymous_1()), Iterables.lazyFlatMap(results, new ReadResult__Anonymous_2()));
+            var results = Lists.EagerMap(iterable, function);
+            return new ReadResult(Lists.EagerFlatMap(results, new ReadResultAnonymous0()), Lists.EagerFlatMap(results, new ReadResultAnonymous1()), Iterables.LazyFlatMap(results, new ReadResultAnonymous2()));
         }
 
-        public static ReadResult map<T>(InternalResult<T> first, ReadResult second, BiFunction<T, List<DocumentElement>, DocumentElement> function)
+        public static ReadResult Map<T>(InternalResult<T> first, ReadResult second, IBiFunction<T, IList<IDocumentElement>, IDocumentElement> function)
         {
-            return new ReadResult(Lists.list(function.apply(first.getValue(), second._elements)), second._extra, Iterables.lazyConcat(first.getWarnings(), second._warnings));
+            return new ReadResult(Lists.List(function.Apply(first.GetValue(), second.Elements)), second.Extra, Iterables.LazyConcat(first.GetWarnings(), second.Warnings));
         }
 
-        public static ReadResult success(DocumentElement element)
+        public static ReadResult Success(IDocumentElement element)
         {
-            return success(Lists.list(element));
+            return Success(Lists.List(element));
         }
 
-        public static ReadResult success(List<DocumentElement> elements)
+        public static ReadResult Success(IList<IDocumentElement> elements)
         {
-            return new ReadResult(elements, Lists.list<DocumentElement>(), Lists.list<string>());
+            return new ReadResult(elements, Lists.List<IDocumentElement>(), Lists.List<string>());
         }
 
-        public static ReadResult emptyWithWarning(string warning)
+        public static ReadResult EmptyWithWarning(string warning)
         {
-            return withWarning(Lists.list<DocumentElement>(), warning);
+            return WithWarning(Lists.List<IDocumentElement>(), warning);
         }
 
-        public static ReadResult withWarning(DocumentElement element, string warning)
+        public static ReadResult WithWarning(IDocumentElement element, string warning)
         {
-            return withWarning(Lists.list(element), warning);
+            return WithWarning(Lists.List(element), warning);
         }
 
-        public static ReadResult withWarning(List<DocumentElement> elements, string warning)
+        public static ReadResult WithWarning(IList<IDocumentElement> elements, string warning)
         {
-            return new ReadResult(elements, Lists.list<DocumentElement>(), Lists.list(warning));
+            return new ReadResult(elements, Lists.List<IDocumentElement>(), Lists.List(warning));
         }
 
-        public ReadResult map(Function<List<DocumentElement>, DocumentElement> function)
+        public ReadResult Map(IFunction<IList<IDocumentElement>, IDocumentElement> function)
         {
-            return new ReadResult(Lists.list(function.apply(_elements)), _extra, _warnings);
+            return new ReadResult(Lists.List(function.Apply(Elements)), Extra, Warnings);
         }
 
-        public ReadResult flatMap(Function<List<DocumentElement>, ReadResult> function)
+        public ReadResult FlatMap(IFunction<IList<IDocumentElement>, ReadResult> function)
         {
-            var result = function.apply(_elements);
-            return new ReadResult(result._elements, Lists.eagerConcat(_extra, result._extra), Iterables.lazyConcat(_warnings, result._warnings));
+            var result = function.Apply(Elements);
+            return new ReadResult(result.Elements, Lists.EagerConcat(Extra, result.Extra), Iterables.LazyConcat(Warnings, result.Warnings));
         }
 
-        public ReadResult toExtra()
+        public ReadResult ToExtra()
         {
-            return new ReadResult(Lists.list<DocumentElement>(), Lists.eagerConcat(_extra, _elements), _warnings);
+            return new ReadResult(Lists.List<IDocumentElement>(), Lists.EagerConcat(Extra, Elements), Warnings);
         }
 
-        public ReadResult appendExtra()
+        public ReadResult AppendExtra()
         {
-            return new ReadResult(Lists.eagerConcat(_elements, _extra), Lists.list<DocumentElement>(), _warnings);
+            return new ReadResult(Lists.EagerConcat(Elements, Extra), Lists.List<IDocumentElement>(), Warnings);
         }
 
-        public InternalResult<List<DocumentElement>> toResult()
+        public InternalResult<IList<IDocumentElement>> ToResult()
         {
-            return new InternalResult<List<DocumentElement>>(_elements, _warnings);
+            return new InternalResult<IList<IDocumentElement>>(Elements, Warnings);
         }
     }
 }

@@ -1,5 +1,5 @@
 namespace Mammoth.Couscous.java.util.function {
-    internal interface BiFunction<T1, T2, U> {
-        U apply(T1 first, T2 second);
+    internal interface IBiFunction<T1, T2, TU> {
+        TU Apply(T1 first, T2 second);
     }
 }

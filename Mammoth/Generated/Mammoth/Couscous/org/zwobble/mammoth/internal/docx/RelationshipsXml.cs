@@ -4,16 +4,16 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class RelationshipsXml {
-        public static Relationships readRelationshipsXmlElement(XmlElement element)
+        public static Relationships ReadRelationshipsXmlElement(XmlElement element)
         {
-            return new Relationships(Lists.eagerMap(element.findChildren("relationships:Relationship"), new RelationshipsXml__Anonymous_0()));
+            return new Relationships(Lists.EagerMap(element.FindChildren("relationships:Relationship"), new RelationshipsXmlAnonymous0()));
         }
 
-        public static Relationship readRelationship(XmlElement element)
+        public static Relationship ReadRelationship(XmlElement element)
         {
-            var relationshipId = element.getAttribute("Id");
-            var target = element.getAttribute("Target");
-            var type = element.getAttribute("Type");
+            var relationshipId = element.GetAttribute("Id");
+            var target = element.GetAttribute("Target");
+            var type = element.GetAttribute("Type");
             return new Relationship(relationshipId, target, type);
         }
     }

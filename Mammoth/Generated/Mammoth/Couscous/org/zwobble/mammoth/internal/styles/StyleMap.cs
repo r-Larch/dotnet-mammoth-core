@@ -5,24 +5,24 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class StyleMap {
-        public static StyleMap _EMPTY;
-        private Optional<HtmlPath> _bold;
-        private List<StyleMapping<Break>> _breakStyles;
-        private Optional<HtmlPath> _commentReference;
-        private Optional<HtmlPath> _italic;
-        private List<StyleMapping<Paragraph>> _paragraphStyles;
-        private List<StyleMapping<Run>> _runStyles;
-        private Optional<HtmlPath> _smallCaps;
-        private Optional<HtmlPath> _strikethrough;
-        private List<StyleMapping<Table>> _tableStyles;
-        private Optional<HtmlPath> _underline;
+        public static StyleMap Empty;
+        private IOptional<IHtmlPath> _bold;
+        private IList<StyleMapping<Break>> _breakStyles;
+        private IOptional<IHtmlPath> _commentReference;
+        private IOptional<IHtmlPath> _italic;
+        private IList<StyleMapping<Paragraph>> _paragraphStyles;
+        private IList<StyleMapping<Run>> _runStyles;
+        private IOptional<IHtmlPath> _smallCaps;
+        private IOptional<IHtmlPath> _strikethrough;
+        private IList<StyleMapping<Table>> _tableStyles;
+        private IOptional<IHtmlPath> _underline;
 
         static StyleMap()
         {
-            _EMPTY = (new StyleMapBuilder()).build();
+            Empty = (new StyleMapBuilder()).Build();
         }
 
-        internal StyleMap(Optional<HtmlPath> bold, Optional<HtmlPath> italic, Optional<HtmlPath> underline, Optional<HtmlPath> strikethrough, Optional<HtmlPath> smallCaps, Optional<HtmlPath> commentReference, List<StyleMapping<Paragraph>> paragraphStyles, List<StyleMapping<Run>> runStyles, List<StyleMapping<Table>> tableStyles, List<StyleMapping<Break>> breakStyles)
+        internal StyleMap(IOptional<IHtmlPath> bold, IOptional<IHtmlPath> italic, IOptional<IHtmlPath> underline, IOptional<IHtmlPath> strikethrough, IOptional<IHtmlPath> smallCaps, IOptional<IHtmlPath> commentReference, IList<StyleMapping<Paragraph>> paragraphStyles, IList<StyleMapping<Run>> runStyles, IList<StyleMapping<Table>> tableStyles, IList<StyleMapping<Break>> breakStyles)
         {
             _bold = bold;
             _italic = italic;
@@ -36,69 +36,69 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
             _breakStyles = breakStyles;
         }
 
-        public static StyleMapBuilder builder()
+        public static StyleMapBuilder Builder()
         {
             return new StyleMapBuilder();
         }
 
-        public static StyleMap merge(StyleMap high, StyleMap low)
+        public static StyleMap Merge(StyleMap high, StyleMap low)
         {
-            return new StyleMap(Optionals.first(high._bold, low._bold), Optionals.first(high._italic, low._italic), Optionals.first(high._underline, low._underline), Optionals.first(high._strikethrough, low._strikethrough), Optionals.first(high._smallCaps, low._smallCaps), Optionals.first(high._commentReference, low._commentReference), Lists.eagerConcat(high._paragraphStyles, low._paragraphStyles), Lists.eagerConcat(high._runStyles, low._runStyles), Lists.eagerConcat(high._tableStyles, low._tableStyles), Lists.eagerConcat(high._breakStyles, low._breakStyles));
+            return new StyleMap(Optionals.First(high._bold, low._bold), Optionals.First(high._italic, low._italic), Optionals.First(high._underline, low._underline), Optionals.First(high._strikethrough, low._strikethrough), Optionals.First(high._smallCaps, low._smallCaps), Optionals.First(high._commentReference, low._commentReference), Lists.EagerConcat(high._paragraphStyles, low._paragraphStyles), Lists.EagerConcat(high._runStyles, low._runStyles), Lists.EagerConcat(high._tableStyles, low._tableStyles), Lists.EagerConcat(high._breakStyles, low._breakStyles));
         }
 
-        public StyleMap update(StyleMap styleMap)
+        public StyleMap Update(StyleMap styleMap)
         {
-            return merge(styleMap, this);
+            return Merge(styleMap, this);
         }
 
-        public Optional<HtmlPath> getBold()
+        public IOptional<IHtmlPath> GetBold()
         {
             return _bold;
         }
 
-        public Optional<HtmlPath> getItalic()
+        public IOptional<IHtmlPath> GetItalic()
         {
             return _italic;
         }
 
-        public Optional<HtmlPath> getUnderline()
+        public IOptional<IHtmlPath> GetUnderline()
         {
             return _underline;
         }
 
-        public Optional<HtmlPath> getStrikethrough()
+        public IOptional<IHtmlPath> GetStrikethrough()
         {
             return _strikethrough;
         }
 
-        public Optional<HtmlPath> getSmallCaps()
+        public IOptional<IHtmlPath> GetSmallCaps()
         {
             return _smallCaps;
         }
 
-        public Optional<HtmlPath> getCommentReference()
+        public IOptional<IHtmlPath> GetCommentReference()
         {
             return _commentReference;
         }
 
-        public Optional<HtmlPath> getParagraphHtmlPath(Paragraph paragraph)
+        public IOptional<IHtmlPath> GetParagraphHtmlPath(Paragraph paragraph)
         {
-            return (Iterables.tryFind(_paragraphStyles, new StyleMap__Anonymous_0(paragraph))).map(new StyleMap__Anonymous_1());
+            return (Iterables.TryFind(_paragraphStyles, new StyleMapAnonymous0(paragraph))).Map(new StyleMapAnonymous1());
         }
 
-        public Optional<HtmlPath> getRunHtmlPath(Run run)
+        public IOptional<IHtmlPath> GetRunHtmlPath(Run run)
         {
-            return (Iterables.tryFind(_runStyles, new StyleMap__Anonymous_2(run))).map(new StyleMap__Anonymous_3());
+            return (Iterables.TryFind(_runStyles, new StyleMapAnonymous2(run))).Map(new StyleMapAnonymous3());
         }
 
-        public Optional<HtmlPath> getTableHtmlPath(Table table)
+        public IOptional<IHtmlPath> GetTableHtmlPath(Table table)
         {
-            return (Iterables.tryFind(_tableStyles, new StyleMap__Anonymous_4(table))).map(new StyleMap__Anonymous_5());
+            return (Iterables.TryFind(_tableStyles, new StyleMapAnonymous4(table))).Map(new StyleMapAnonymous5());
         }
 
-        public Optional<HtmlPath> getBreakHtmlPath(Break breakElement)
+        public IOptional<IHtmlPath> GetBreakHtmlPath(Break breakElement)
         {
-            return (Iterables.tryFind(_breakStyles, new StyleMap__Anonymous_6(breakElement))).map(new StyleMap__Anonymous_7());
+            return (Iterables.TryFind(_breakStyles, new StyleMapAnonymous6(breakElement))).Map(new StyleMapAnonymous7());
         }
     }
 }

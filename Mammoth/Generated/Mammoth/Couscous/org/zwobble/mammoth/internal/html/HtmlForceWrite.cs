@@ -1,20 +1,20 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
-    internal class HtmlForceWrite : HtmlNode {
-        public static HtmlForceWrite _FORCE_WRITE;
+    internal class HtmlForceWrite : IHtmlNode {
+        public static HtmlForceWrite ForceWrite;
 
         static HtmlForceWrite()
         {
-            _FORCE_WRITE = new HtmlForceWrite();
+            ForceWrite = new HtmlForceWrite();
         }
 
-        public void accept(HtmlNode__Visitor visitor)
+        public void Accept(IHtmlNodeVisitor visitor)
         {
-            visitor.visit(this);
+            visitor.Visit(this);
         }
 
-        public T accept<T>(HtmlNode__Mapper<T> visitor)
+        public T Accept<T>(IHtmlNodeMapper<T> visitor)
         {
-            return visitor.visit(this);
+            return visitor.Visit(this);
         }
     }
 }

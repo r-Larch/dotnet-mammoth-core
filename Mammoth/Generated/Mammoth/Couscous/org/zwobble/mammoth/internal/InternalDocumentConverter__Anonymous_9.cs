@@ -4,10 +4,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_9 : Function<List<HtmlNode>, string> {
-        public string apply(List<HtmlNode> arg0)
+    internal class InternalDocumentConverterAnonymous9 : IFunction<IList<IHtmlNode>, string> {
+        public string Apply(IList<IHtmlNode> arg0)
         {
-            return Html.write(arg0);
+            return Html.Write(arg0);
         }
     }
 }

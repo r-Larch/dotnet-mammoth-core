@@ -3,15 +3,15 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.results {
-    internal static class InternalResult__Anonymous_1 {
+    internal static class InternalResultAnonymous1 {
     }
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.results {
-    internal class InternalResult__Anonymous_1<R> : Function<InternalResult<R>, Iterable<string>> {
-        public Iterable<string> apply(InternalResult<R> result)
+    internal class InternalResultAnonymous1<TR> : IFunction<InternalResult<TR>, ITerable<string>> {
+        public ITerable<string> Apply(InternalResult<TR> result)
         {
-            return result._warnings;
+            return result.Warnings;
         }
     }
 }

@@ -3,75 +3,75 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
-    internal class HtmlElement : HtmlNode {
-        private static Set<string> _VOID_TAG_NAMES;
-        private List<HtmlNode> _children;
+    internal class HtmlElement : IHtmlNode {
+        private static ISet<string> _voidTagNames;
+        private IList<IHtmlNode> _children;
         private HtmlTag _tag;
 
         static HtmlElement()
         {
-            _VOID_TAG_NAMES = Sets.set(new[] { "img", "br", "hr" });
+            _voidTagNames = Sets.Set(new[] { "img", "br", "hr" });
         }
 
-        internal HtmlElement(HtmlTag tag, List<HtmlNode> children)
+        internal HtmlElement(HtmlTag tag, IList<IHtmlNode> children)
         {
             _tag = tag;
             _children = children;
         }
 
-        public void accept(HtmlNode__Visitor visitor)
+        public void Accept(IHtmlNodeVisitor visitor)
         {
-            visitor.visit(this);
+            visitor.Visit(this);
         }
 
-        public T accept<T>(HtmlNode__Mapper<T> visitor)
+        public T Accept<T>(IHtmlNodeMapper<T> visitor)
         {
-            return visitor.visit(this);
+            return visitor.Visit(this);
         }
 
-        public HtmlTag getTag()
+        public HtmlTag GetTag()
         {
             return _tag;
         }
 
-        public List<string> getTagNames()
+        public IList<string> GetTagNames()
         {
-            return (_tag).getTagNames();
+            return (_tag).GetTagNames();
         }
 
-        public string getTagName()
+        public string GetTagName()
         {
-            return (getTagNames()).get(0);
+            return (GetTagNames()).Get(0);
         }
 
-        public Map<string, string> getAttributes()
+        public IMap<string, string> GetAttributes()
         {
-            return (_tag).getAttributes();
+            return (_tag).GetAttributes();
         }
 
-        public List<HtmlNode> getChildren()
+        public IList<IHtmlNode> GetChildren()
         {
             return _children;
         }
 
-        public bool isCollapsible()
+        public bool IsCollapsible()
         {
-            return (_tag).isCollapsible();
+            return (_tag).IsCollapsible();
         }
 
-        public string getSeparator()
+        public string GetSeparator()
         {
-            return (_tag).getSeparator();
+            return (_tag).GetSeparator();
         }
 
-        public bool isVoid()
+        public bool IsVoid()
         {
-            return (_children).isEmpty() && isVoidTag(getTagName());
+            return (_children).IsEmpty() && IsVoidTag(GetTagName());
         }
 
-        public static bool isVoidTag(string tagName)
+        public static bool IsVoidTag(string tagName)
         {
-            return (_VOID_TAG_NAMES).contains(tagName);
+            return (_voidTagNames).Contains(tagName);
         }
     }
 }

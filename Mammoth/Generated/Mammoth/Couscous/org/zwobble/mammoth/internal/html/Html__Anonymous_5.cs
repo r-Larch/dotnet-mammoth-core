@@ -2,20 +2,20 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
-    internal class Html__Anonymous_5 : BiFunction<HtmlElement, HtmlElement, bool> {
-        public bool apply(HtmlElement last, HtmlElement next)
+    internal class HtmlAnonymous5 : IBiFunction<HtmlElement, HtmlElement, bool> {
+        public bool Apply(HtmlElement last, HtmlElement next)
         {
-            if (next.isCollapsible() && Html.isMatch(last, next)) {
-                var separator = next.getSeparator();
-                if (!separator.isEmpty()) {
-                    (last.getChildren()).add(Html.text(separator));
+            if (next.IsCollapsible() && Html.IsMatch(last, next)) {
+                var separator = next.GetSeparator();
+                if (!separator.IsEmpty()) {
+                    (last.GetChildren()).Add(Html.Text(separator));
                 }
 
                 {
-                    var _couscous_desugar_foreach_to_for4 = (next.getChildren()).iterator();
-                    while (_couscous_desugar_foreach_to_for4.hasNext()) {
-                        var child = _couscous_desugar_foreach_to_for4.next();
-                        Html.collapsingAdd(last.getChildren(), child);
+                    var couscousDesugarForeachToFor4 = (next.GetChildren()).Iterator();
+                    while (couscousDesugarForeachToFor4.HasNext()) {
+                        var child = couscousDesugarForeachToFor4.Next();
+                        Html.CollapsingAdd(last.GetChildren(), child);
                     }
                 }
                 return true;

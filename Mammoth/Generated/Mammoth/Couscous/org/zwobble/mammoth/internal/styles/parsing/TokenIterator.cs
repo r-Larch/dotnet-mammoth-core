@@ -10,105 +10,105 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class TokenIterator<T> {
         private Token<T> _end;
         private int _index;
-        private List<Token<T>> _tokens;
+        private IList<Token<T>> _tokens;
 
-        internal TokenIterator(List<Token<T>> tokens, Token<T> end)
+        internal TokenIterator(IList<Token<T>> tokens, Token<T> end)
         {
             _tokens = tokens;
             _end = end;
             _index = 0;
         }
 
-        public bool isNext(int offset, T tokenType, string value)
+        public bool IsNext(int offset, T tokenType, string value)
         {
             var tokenIndex = _index + offset;
-            var token = getToken(tokenIndex);
-            return (token.getTokenType()).equals(tokenType) && ((token.getValue()).Equals(value));
+            var token = GetToken(tokenIndex);
+            return (token.GetTokenType()).Equals(tokenType) && ((token.GetValue()).Equals(value));
         }
 
-        public bool isNext(T tokenType, string value)
+        public bool IsNext(T tokenType, string value)
         {
-            return isNext(0, tokenType, value);
+            return IsNext(0, tokenType, value);
         }
 
-        public bool trySkip(T tokenType, string value)
+        public bool TrySkip(T tokenType, string value)
         {
-            if (isNext(tokenType, value)) {
-                skip();
+            if (IsNext(tokenType, value)) {
+                Skip();
                 return true;
             }
 
             return false;
         }
 
-        public T peekTokenType()
+        public T PeekTokenType()
         {
-            return (getToken(_index)).getTokenType();
+            return (GetToken(_index)).GetTokenType();
         }
 
-        public Token<T> next()
+        public Token<T> Next()
         {
-            var token = getToken(_index);
+            var token = GetToken(_index);
             _index = _index + 1;
             return token;
         }
 
-        public Token<T> next(T type)
+        public Token<T> Next(T type)
         {
-            var token = getToken(_index);
-            if ((token.getTokenType()).equals(type)) {
+            var token = GetToken(_index);
+            if ((token.GetTokenType()).Equals(type)) {
                 _index = _index + 1;
                 return token;
             }
 
-            throw unexpectedTokenType(type, token);
+            throw UnexpectedTokenType(type, token);
         }
 
-        public string nextValue(T type)
+        public string NextValue(T type)
         {
-            return (next(type)).getValue();
+            return (Next(type)).GetValue();
         }
 
-        public void skip()
+        public void Skip()
         {
             _index = _index + 1;
         }
 
-        public void skip(T tokenType)
+        public void Skip(T tokenType)
         {
-            var token = getToken(_index);
-            if (!(token.getTokenType()).equals(tokenType)) {
-                throw unexpectedTokenType(tokenType, token);
+            var token = GetToken(_index);
+            if (!(token.GetTokenType()).Equals(tokenType)) {
+                throw UnexpectedTokenType(tokenType, token);
             }
 
             _index = _index + 1;
         }
 
-        public void skip(T tokenType, string tokenValue)
+        public void Skip(T tokenType, string tokenValue)
         {
-            var token = getToken(_index);
-            if (!(token.getTokenType()).equals(tokenType)) {
-                throw unexpectedTokenType(tokenType, token);
+            var token = GetToken(_index);
+            if (!(token.GetTokenType()).Equals(tokenType)) {
+                throw UnexpectedTokenType(tokenType, token);
             }
 
-            var actualValue = token.getValue();
+            var actualValue = token.GetValue();
             if (!(actualValue.Equals(tokenValue))) {
-                throw LineParseException.lineParseException(token, (((("expected " + tokenType) + " token with value ") + tokenValue) + " but value was ") + actualValue);
+                throw LineParseException.Create(token, (((("expected " + tokenType) + " token with value ") + tokenValue) + " but value was ") + actualValue);
             }
 
             _index = _index + 1;
         }
 
-        public LineParseException unexpectedTokenType(T expected, Token<T> actual)
+        public LineParseException UnexpectedTokenType(T expected, Token<T> actual)
         {
-            return LineParseException.lineParseException(actual, (("expected token of type " + expected) + " but was of type ") + actual.getTokenType());
+            return LineParseException.Create(actual, (("expected token of type " + expected) + " but was of type ") + actual.GetTokenType());
         }
 
-        public bool tryParse(TokenIterator__Action action)
+        public bool TryParse(ITokenIteratorAction action)
         {
             var originalIndex = _index;
             try {
-                action.run();
+                action.Run();
                 return true;
             }
             catch (LineParseException exception) {
@@ -117,10 +117,10 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
             }
         }
 
-        public Token<T> getToken(int index)
+        public Token<T> GetToken(int index)
         {
-            if (index < (_tokens).size()) {
-                return (_tokens).get(index);
+            if (index < (_tokens).Size()) {
+                return (_tokens).Get(index);
             }
 
             return _end;

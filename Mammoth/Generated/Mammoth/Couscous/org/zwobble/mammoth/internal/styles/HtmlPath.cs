@@ -4,7 +4,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal interface HtmlPath {
-        Supplier<List<HtmlNode>> wrap(Supplier<List<HtmlNode>> generateNodes);
+    internal interface IHtmlPath {
+        ISupplier<IList<IHtmlNode>> Wrap(ISupplier<IList<IHtmlNode>> generateNodes);
     }
 }

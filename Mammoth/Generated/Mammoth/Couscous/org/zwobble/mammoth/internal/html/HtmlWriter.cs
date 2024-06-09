@@ -5,30 +5,30 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
     internal class HtmlWriter {
-        public static void write(HtmlNode node, StringBuilder builder)
+        public static void Write(IHtmlNode node, StringBuilder builder)
         {
-            node.accept(new HtmlWriter__Anonymous_1(builder));
+            node.Accept(new HtmlWriterAnonymous1(builder));
         }
 
-        public static void generateAttributes(Map<string, string> attributes, StringBuilder builder)
+        public static void GenerateAttributes(IMap<string, string> attributes, StringBuilder builder)
         {
             {
-                var _couscous_desugar_foreach_to_for5 = (Lists.orderedBy(attributes.entrySet(), new HtmlWriter__Anonymous_2())).iterator();
-                while (_couscous_desugar_foreach_to_for5.hasNext()) {
-                    var attribute = _couscous_desugar_foreach_to_for5.next();
-                    ((((builder.append(" ")).append(attribute.getKey())).append("=\"")).append(escapeAttributeValue(attribute.getValue()))).append("\"");
+                var couscousDesugarForeachToFor5 = (Lists.OrderedBy(attributes.EntrySet(), new HtmlWriterAnonymous2())).Iterator();
+                while (couscousDesugarForeachToFor5.HasNext()) {
+                    var attribute = couscousDesugarForeachToFor5.Next();
+                    ((((builder.Append(" ")).Append(attribute.GetKey())).Append("=\"")).Append(EscapeAttributeValue(attribute.GetValue()))).Append("\"");
                 }
             }
         }
 
-        public static string escapeText(string text)
+        public static string EscapeText(string text)
         {
-            return ((text.replace("&", "&amp;")).replace("<", "&lt;")).replace(">", "&gt;");
+            return JavaStringExtensions.Replace((JavaStringExtensions.Replace((JavaStringExtensions.Replace(text, "&", "&amp;")), "<", "&lt;")), ">", "&gt;");
         }
 
-        public static string escapeAttributeValue(string value)
+        public static string EscapeAttributeValue(string value)
         {
-            return (escapeText(value)).replace("\"", "&quot;");
+            return JavaStringExtensions.Replace((EscapeText(value)), "\"", "&quot;");
         }
     }
 }

@@ -1,5 +1,5 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class CommentReference : DocumentElement {
+    internal class CommentReference : IDocumentElement {
         private string _commentId;
 
         internal CommentReference(string commentId)
@@ -7,12 +7,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
             _commentId = commentId;
         }
 
-        public T accept<T, U>(DocumentElementVisitor<T, U> visitor, U context)
+        public T Accept<T, TU>(IDocumentElementVisitor<T, TU> visitor, TU context)
         {
-            return visitor.visit(this, context);
+            return visitor.Visit(this, context);
         }
 
-        public string getCommentId()
+        public string GetCommentId()
         {
             return _commentId;
         }

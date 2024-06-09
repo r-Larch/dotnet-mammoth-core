@@ -5,10 +5,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_10 : Supplier<List<HtmlNode>> {
-        public List<HtmlNode> get()
+    internal class DocumentToHtmlAnonymous10 : ISupplier<IList<IHtmlNode>> {
+        public IList<IHtmlNode> Get()
         {
-            return Lists.list<HtmlNode>();
+            return Lists.List<IHtmlNode>();
         }
     }
 }

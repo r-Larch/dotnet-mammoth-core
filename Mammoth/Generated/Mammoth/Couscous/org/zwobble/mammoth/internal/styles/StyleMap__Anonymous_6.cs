@@ -3,17 +3,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StyleMap__Anonymous_6 : Predicate<StyleMapping<Break>> {
+    internal class StyleMapAnonymous6 : IPredicate<StyleMapping<Break>> {
         private Break _breakElement;
 
-        internal StyleMap__Anonymous_6(Break breakElement)
+        internal StyleMapAnonymous6(Break breakElement)
         {
             _breakElement = breakElement;
         }
 
-        public bool test(StyleMapping<Break> styleMapping)
+        public bool Test(StyleMapping<Break> styleMapping)
         {
-            return styleMapping.matches(_breakElement);
+            return styleMapping.Matches(_breakElement);
         }
     }
 }

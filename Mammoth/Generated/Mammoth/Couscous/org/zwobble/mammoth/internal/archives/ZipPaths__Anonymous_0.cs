@@ -2,10 +2,10 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.archives {
-    internal class ZipPaths__Anonymous_0 : Predicate<string> {
-        public bool test(string path)
+    internal class ZipPathsAnonymous0 : IPredicate<string> {
+        public bool Test(string path)
         {
-            return !path.isEmpty();
+            return !path.IsEmpty();
         }
     }
 }

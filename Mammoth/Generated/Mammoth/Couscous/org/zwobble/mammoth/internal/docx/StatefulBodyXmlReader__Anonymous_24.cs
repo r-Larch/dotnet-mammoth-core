@@ -4,19 +4,19 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_24 : InputStreamSupplier {
+    internal class StatefulBodyXmlReaderAnonymous24 : INputStreamSupplier {
         private string _imagePath;
-        private StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        private StatefulBodyXmlReader _thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader;
 
-        internal StatefulBodyXmlReader__Anonymous_24(StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader, string imagePath)
+        internal StatefulBodyXmlReaderAnonymous24(StatefulBodyXmlReader thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader, string imagePath)
         {
-            _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+            _thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader = thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader;
             _imagePath = imagePath;
         }
 
-        public InputStream open()
+        public INputStream Open()
         {
-            return Archives.getInputStream((_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader)._file, _imagePath);
+            return Archives.GetInputStream((_thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader).File, _imagePath);
         }
     }
 }

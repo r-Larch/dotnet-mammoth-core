@@ -1,10 +1,10 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__HyperlinkComplexField : StatefulBodyXmlReader__ComplexField {
-        public string _href;
+    internal class StatefulBodyXmlReaderHyperlinkComplexField : IStatefulBodyXmlReaderComplexField {
+        public string Href;
 
-        internal StatefulBodyXmlReader__HyperlinkComplexField(string href)
+        internal StatefulBodyXmlReaderHyperlinkComplexField(string href)
         {
-            _href = href;
+            Href = href;
         }
     }
 }

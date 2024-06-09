@@ -2,27 +2,27 @@ using Mammoth.Couscous.java.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
-    internal class NamespacePrefixes__Builder {
-        private Map<string, NamespacePrefix> _uriToPrefix;
+    internal class NamespacePrefixesBuilder {
+        private IMap<string, NamespacePrefix> _uriToPrefix;
 
-        internal NamespacePrefixes__Builder()
+        internal NamespacePrefixesBuilder()
         {
             _uriToPrefix = new HashMap<string, NamespacePrefix>();
         }
 
-        public NamespacePrefixes__Builder put(string prefix, string uri)
+        public NamespacePrefixesBuilder Put(string prefix, string uri)
         {
-            (_uriToPrefix).put(uri, new NamespacePrefix(Optional.of(prefix), uri));
+            (_uriToPrefix).Put(uri, new NamespacePrefix(Optional.Of(prefix), uri));
             return this;
         }
 
-        public NamespacePrefixes__Builder defaultPrefix(string uri)
+        public NamespacePrefixesBuilder DefaultPrefix(string uri)
         {
-            (_uriToPrefix).put(uri, new NamespacePrefix(Optional.empty<string>(), uri));
+            (_uriToPrefix).Put(uri, new NamespacePrefix(Optional.Empty<string>(), uri));
             return this;
         }
 
-        public NamespacePrefixes build()
+        public NamespacePrefixes Build()
         {
             return new NamespacePrefixes(_uriToPrefix);
         }

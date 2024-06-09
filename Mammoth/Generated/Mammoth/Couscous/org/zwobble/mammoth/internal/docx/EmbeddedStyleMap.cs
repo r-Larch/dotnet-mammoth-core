@@ -7,65 +7,65 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class EmbeddedStyleMap {
-        private static string _STYLE_MAP_PATH;
-        private static string _ABSOLUTE_STYLE_MAP_PATH;
-        private static string _RELATIONSHIPS_PATH;
-        private static string _CONTENT_TYPES_PATH;
-        private static NamespacePrefixes _RELATIONSHIPS_NAMESPACES;
-        private static NamespacePrefixes _CONTENT_TYPES_NAMESPACES;
+        private static string _styleMapPath;
+        private static string _absoluteStyleMapPath;
+        private static string _relationshipsPath;
+        private static string _contentTypesPath;
+        private static NamespacePrefixes _relationshipsNamespaces;
+        private static NamespacePrefixes _contentTypesNamespaces;
 
         static EmbeddedStyleMap()
         {
-            _STYLE_MAP_PATH = "mammoth/style-map";
-            _ABSOLUTE_STYLE_MAP_PATH = "/" + _STYLE_MAP_PATH;
-            _RELATIONSHIPS_PATH = "word/_rels/document.xml.rels";
-            _CONTENT_TYPES_PATH = "[Content_Types].xml";
-            _RELATIONSHIPS_NAMESPACES = ((NamespacePrefixes.builder()).defaultPrefix("http://schemas.openxmlformats.org/package/2006/relationships")).build();
-            _CONTENT_TYPES_NAMESPACES = ((NamespacePrefixes.builder()).defaultPrefix("http://schemas.openxmlformats.org/package/2006/content-types")).build();
+            _styleMapPath = "mammoth/style-map";
+            _absoluteStyleMapPath = "/" + _styleMapPath;
+            _relationshipsPath = "word/_rels/document.xml.rels";
+            _contentTypesPath = "[Content_Types].xml";
+            _relationshipsNamespaces = ((NamespacePrefixes.Builder()).DefaultPrefix("http://schemas.openxmlformats.org/package/2006/relationships")).Build();
+            _contentTypesNamespaces = ((NamespacePrefixes.Builder()).DefaultPrefix("http://schemas.openxmlformats.org/package/2006/content-types")).Build();
         }
 
-        public static Optional<string> readStyleMap(Archive file)
+        public static IOptional<string> ReadStyleMap(IArchive file)
         {
-            return (file.tryGetInputStream(_STYLE_MAP_PATH)).map(new EmbeddedStyleMap__Anonymous_0());
+            return (file.TryGetInputStream(_styleMapPath)).Map(new EmbeddedStyleMapAnonymous0());
         }
 
-        public static void embedStyleMap(MutableArchive archive, string styleMap)
+        public static void EmbedStyleMap(IMutableArchive archive, string styleMap)
         {
-            archive.writeEntry(_STYLE_MAP_PATH, styleMap);
-            updateRelationships(archive);
-            updateContentTypes(archive);
+            archive.WriteEntry(_styleMapPath, styleMap);
+            UpdateRelationships(archive);
+            UpdateContentTypes(archive);
         }
 
-        public static void updateRelationships(MutableArchive archive)
+        public static void UpdateRelationships(IMutableArchive archive)
         {
-            var parser = new XmlParser(_RELATIONSHIPS_NAMESPACES);
-            var relationships = parser.parseStream(Archives.getInputStream(archive, _RELATIONSHIPS_PATH));
-            var relationship = XmlNodes.element("Relationship", Maps.map("Id", "rMammothStyleMap", "Type", "http://schemas.zwobble.org/mammoth/style-map", "Target", _ABSOLUTE_STYLE_MAP_PATH));
-            var updatedRelationships = updateOrAddElement(relationships, relationship, "Id");
-            archive.writeEntry(_RELATIONSHIPS_PATH, XmlWriter.toString(updatedRelationships, _RELATIONSHIPS_NAMESPACES));
+            var parser = new XmlParser(_relationshipsNamespaces);
+            var relationships = parser.ParseStream(Archives.GetInputStream(archive, _relationshipsPath));
+            var relationship = XmlNodes.Element("Relationship", Maps.Map("Id", "rMammothStyleMap", "Type", "http://schemas.zwobble.org/mammoth/style-map", "Target", _absoluteStyleMapPath));
+            var updatedRelationships = UpdateOrAddElement(relationships, relationship, "Id");
+            archive.WriteEntry(_relationshipsPath, XmlWriter.ToString(updatedRelationships, _relationshipsNamespaces));
         }
 
-        public static void updateContentTypes(MutableArchive archive)
+        public static void UpdateContentTypes(IMutableArchive archive)
         {
-            var parser = new XmlParser(_CONTENT_TYPES_NAMESPACES);
-            var contentTypes = parser.parseStream(Archives.getInputStream(archive, _CONTENT_TYPES_PATH));
-            var @override = XmlNodes.element("Override", Maps.map("PartName", _ABSOLUTE_STYLE_MAP_PATH, "ContentType", "text/prs.mammoth.style-map"));
-            var updatedRelationships = updateOrAddElement(contentTypes, @override, "PartName");
-            archive.writeEntry(_CONTENT_TYPES_PATH, XmlWriter.toString(updatedRelationships, _CONTENT_TYPES_NAMESPACES));
+            var parser = new XmlParser(_contentTypesNamespaces);
+            var contentTypes = parser.ParseStream(Archives.GetInputStream(archive, _contentTypesPath));
+            var @override = XmlNodes.Element("Override", Maps.Map("PartName", _absoluteStyleMapPath, "ContentType", "text/prs.mammoth.style-map"));
+            var updatedRelationships = UpdateOrAddElement(contentTypes, @override, "PartName");
+            archive.WriteEntry(_contentTypesPath, XmlWriter.ToString(updatedRelationships, _contentTypesNamespaces));
         }
 
-        public static XmlElement updateOrAddElement(XmlElement parent, XmlElement element, string identifyingAttribute)
+        public static XmlElement UpdateOrAddElement(XmlElement parent, XmlElement element, string identifyingAttribute)
         {
-            var index = Iterables.findIndex(parent.getChildren(), new EmbeddedStyleMap__Anonymous_2(element, identifyingAttribute));
-            List<XmlNode> children = new ArrayList<XmlNode>(parent.getChildren());
-            if (index.isPresent()) {
-                children.set(index.getAsInt(), element);
+            var index = Iterables.FindIndex(parent.GetChildren(), new EmbeddedStyleMapAnonymous2(element, identifyingAttribute));
+            IList<IXmlNode> children = new ArrayList<IXmlNode>(parent.GetChildren());
+            if (index.IsPresent()) {
+                children.Set(index.GetAsInt(), element);
             }
             else {
-                children.add(element);
+                children.Add(element);
             }
 
-            return new XmlElement(parent.getName(), parent.getAttributes(), children);
+            return new XmlElement(parent.GetName(), parent.GetAttributes(), children);
         }
     }
 }

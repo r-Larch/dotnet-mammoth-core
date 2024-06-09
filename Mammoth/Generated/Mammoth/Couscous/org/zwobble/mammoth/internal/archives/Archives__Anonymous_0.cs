@@ -3,17 +3,17 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.archives {
-    internal class Archives__Anonymous_0 : Supplier<IOException> {
+    internal class ArchivesAnonymous0 : ISupplier<IoException> {
         private string _name;
 
-        internal Archives__Anonymous_0(string name)
+        internal ArchivesAnonymous0(string name)
         {
             _name = name;
         }
 
-        public IOException get()
+        public IoException Get()
         {
-            return new IOException("Missing entry in file: " + _name);
+            return new IoException("Missing entry in file: " + _name);
         }
     }
 }

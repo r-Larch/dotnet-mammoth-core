@@ -4,81 +4,81 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
-    internal class XmlElement : XmlNode, XmlElementLike {
-        private Map<string, string> _attributes;
-        private List<XmlNode> _children;
+    internal class XmlElement : IXmlNode, IXmlElementLike {
+        private IMap<string, string> _attributes;
+        private IList<IXmlNode> _children;
         private string _name;
 
-        internal XmlElement(string name, Map<string, string> attributes, List<XmlNode> children)
+        internal XmlElement(string name, IMap<string, string> attributes, IList<IXmlNode> children)
         {
             _name = name;
             _attributes = attributes;
             _children = children;
         }
 
-        public Optional<string> getAttributeOrNone(string name)
+        public IOptional<string> GetAttributeOrNone(string name)
         {
-            return Maps.lookup(_attributes, name);
+            return Maps.Lookup(_attributes, name);
         }
 
-        public List<XmlNode> getChildren()
+        public IList<IXmlNode> GetChildren()
         {
             return _children;
         }
 
-        public Optional<XmlElement> findChild(string name)
+        public IOptional<XmlElement> FindChild(string name)
         {
-            return Iterables.getFirst(findChildrenIterable(name));
+            return Iterables.GetFirst(FindChildrenIterable(name));
         }
 
-        public bool hasChild(string name)
+        public bool HasChild(string name)
         {
-            return ((findChildrenIterable(name)).iterator()).hasNext();
+            return ((FindChildrenIterable(name)).Iterator()).HasNext();
         }
 
-        public XmlElementLike findChildOrEmpty(string name)
+        public IXmlElementLike FindChildOrEmpty(string name)
         {
-            return Iterables.getFirst(findChildrenIterable(name), NullXmlElement._INSTANCE);
+            return Iterables.GetFirst(FindChildrenIterable(name), NullXmlElement.Instance);
         }
 
-        public string innerText()
+        public string InnerText()
         {
-            return String.join("", Iterables.lazyMap(_children, new XmlElement__Anonymous_1()));
+            return String.Join("", Iterables.LazyMap(_children, new XmlElementAnonymous1()));
         }
 
-        public T accept<T>(XmlNodeVisitor<T> visitor)
+        public T Accept<T>(IXmlNodeVisitor<T> visitor)
         {
-            return visitor.visit(this);
+            return visitor.Visit(this);
         }
 
-        public string getName()
+        public string GetName()
         {
             return _name;
         }
 
-        public Map<string, string> getAttributes()
+        public IMap<string, string> GetAttributes()
         {
             return _attributes;
         }
 
-        public string getAttribute(string name)
+        public string GetAttribute(string name)
         {
-            return (getAttributeOrNone(name)).orElseThrow(new XmlElement__Anonymous_0(name));
+            return (GetAttributeOrNone(name)).OrElseThrow(new XmlElementAnonymous0(name));
         }
 
-        public string toString()
+        public override string ToString()
         {
             return ((((("XmlElement(name=" + _name) + ", attributes=") + _attributes) + ", children=") + _children) + ")";
         }
 
-        public XmlElementList findChildren(string name)
+        public XmlElementList FindChildren(string name)
         {
-            return new XmlElementList(Lists.toList(findChildrenIterable(name)));
+            return new XmlElementList(Lists.ToList(FindChildrenIterable(name)));
         }
 
-        public Iterable<XmlElement> findChildrenIterable(string name)
+        public ITerable<XmlElement> FindChildrenIterable(string name)
         {
-            return Iterables.lazyFilter(Iterables.lazyFilter<XmlNode, XmlElement>(_children, typeof(XmlElement)), new XmlElement__Anonymous_2(name));
+            return Iterables.LazyFilter(Iterables.LazyFilter<IXmlNode, XmlElement>(_children, typeof(XmlElement)), new XmlElementAnonymous2(name));
         }
     }
 }

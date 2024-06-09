@@ -2,34 +2,34 @@ using Mammoth.Couscous.java.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class TableCell : DocumentElement, HasChildren {
-        private List<DocumentElement> _children;
+    internal class TableCell : IDocumentElement, IHasChildren {
+        private IList<IDocumentElement> _children;
         private int _colspan;
         private int _rowspan;
 
-        internal TableCell(int rowspan, int colspan, List<DocumentElement> children)
+        internal TableCell(int rowspan, int colspan, IList<IDocumentElement> children)
         {
             _rowspan = rowspan;
             _children = children;
             _colspan = colspan;
         }
 
-        public T accept<T, U>(DocumentElementVisitor<T, U> visitor, U context)
+        public T Accept<T, TU>(IDocumentElementVisitor<T, TU> visitor, TU context)
         {
-            return visitor.visit(this, context);
+            return visitor.Visit(this, context);
         }
 
-        public List<DocumentElement> getChildren()
+        public IList<IDocumentElement> GetChildren()
         {
             return _children;
         }
 
-        public int getColspan()
+        public int GetColspan()
         {
             return _colspan;
         }
 
-        public int getRowspan()
+        public int GetRowspan()
         {
             return _rowspan;
         }

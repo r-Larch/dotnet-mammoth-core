@@ -18,31 +18,31 @@ namespace Mammoth.Couscous.java.util {
             _dictionary = dictionary;
         }
 
-        internal HashMap(Map<TKey, TValue> map) : this(new Dictionary<TKey, TValue>(map.AsDictionary()))
+        internal HashMap(IMap<TKey, TValue> map) : this(new Dictionary<TKey, TValue>(map.AsDictionary()))
         {
         }
 
-        public override void put(TKey key, TValue value)
+        public override void Put(TKey key, TValue value)
         {
             _dictionary[key] = value;
         }
 
-        public override bool containsKey(TKey key)
+        public override bool ContainsKey(TKey key)
         {
             return _dictionary.ContainsKey(key);
         }
 
-        public override Set<Map__Entry<TKey, TValue>> entrySet()
+        public override ISet<IMapEntry<TKey, TValue>> EntrySet()
         {
-            return new EntrySet(_dictionary);
+            return new EntrySetImpl(_dictionary);
         }
 
-        public override Collection<TValue> values()
+        public override ICollection<TValue> Values()
         {
             return ToJava.CollectionToCollection(_dictionary.Values);
         }
 
-        public override Optional<TValue> _lookup(TKey key)
+        public override IOptional<TValue> _lookup(TKey key)
         {
             if (_dictionary.ContainsKey(key)) {
                 return new Some<TValue>(_dictionary[key]);
@@ -61,35 +61,35 @@ namespace Mammoth.Couscous.java.util {
             return _dictionary;
         }
 
-        internal class EntrySet : Set<Map__Entry<TKey, TValue>> {
+        internal class EntrySetImpl : ISet<IMapEntry<TKey, TValue>> {
             private readonly IDictionary<TKey, TValue> _dictionary;
 
-            internal EntrySet(IDictionary<TKey, TValue> dictionary)
+            internal EntrySetImpl(IDictionary<TKey, TValue> dictionary)
             {
                 _dictionary = dictionary;
             }
 
-            public Iterator<Map__Entry<TKey, TValue>> iterator()
+            public ITerator<IMapEntry<TKey, TValue>> Iterator()
             {
-                return ToJava.EnumeratorToIterator(_dictionary.Select(entry => Maps.entry(entry.Key, entry.Value)).GetEnumerator());
+                return ToJava.EnumeratorToIterator(_dictionary.Select(entry => Maps.Entry(entry.Key, entry.Value)).GetEnumerator());
             }
 
-            public bool isEmpty()
+            public bool IsEmpty()
             {
                 return _dictionary.Count == 0;
             }
 
-            public int size()
+            public int Size()
             {
                 return _dictionary.Count;
             }
 
-            public bool contains(object value)
+            public bool Contains(object value)
             {
                 return value is TKey && _dictionary.ContainsKey((TKey) value);
             }
 
-            public void add(Map__Entry<TKey, TValue> value)
+            public void Add(IMapEntry<TKey, TValue> value)
             {
                 throw new UnsupportedOperationException();
             }

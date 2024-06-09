@@ -6,10 +6,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class DocumentReader__Anonymous_6 : BiFunction<XmlElement, BodyXmlReader, InternalResult<List<Note>>> {
-        public InternalResult<List<Note>> apply(XmlElement root, BodyXmlReader bodyReader)
+    internal class DocumentReaderAnonymous6 : IBiFunction<XmlElement, BodyXmlReader, InternalResult<IList<Note>>> {
+        public InternalResult<IList<Note>> Apply(XmlElement root, BodyXmlReader bodyReader)
         {
-            return (NotesXmlReader.footnote(bodyReader)).readElement(root);
+            return (NotesXmlReader.Footnote(bodyReader)).ReadElement(root);
         }
     }
 }

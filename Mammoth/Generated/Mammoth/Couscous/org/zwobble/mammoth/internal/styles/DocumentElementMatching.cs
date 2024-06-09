@@ -5,24 +5,24 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class DocumentElementMatching {
-        public static bool matchesStyle(Optional<string> styleId, Optional<StringMatcher> styleName, Optional<Style> style)
+        public static bool MatchesStyle(IOptional<string> styleId, IOptional<IStringMatcher> styleName, IOptional<Style> style)
         {
-            return matchesStyleId(styleId, style) && matchesStyleName(styleName, style);
+            return MatchesStyleId(styleId, style) && MatchesStyleName(styleName, style);
         }
 
-        public static bool matchesStyleId(Optional<string> styleId, Optional<Style> style)
+        public static bool MatchesStyleId(IOptional<string> styleId, IOptional<Style> style)
         {
-            return matches(styleId, style.map(new DocumentElementMatching__Anonymous_0()), new DocumentElementMatching__Anonymous_1());
+            return Matches(styleId, style.Map(new DocumentElementMatchingAnonymous0()), new DocumentElementMatchingAnonymous1());
         }
 
-        public static bool matchesStyleName(Optional<StringMatcher> styleName, Optional<Style> style)
+        public static bool MatchesStyleName(IOptional<IStringMatcher> styleName, IOptional<Style> style)
         {
-            return matches(styleName, style.flatMap(new DocumentElementMatching__Anonymous_2()), new DocumentElementMatching__Anonymous_3());
+            return Matches(styleName, style.FlatMap(new DocumentElementMatchingAnonymous2()), new DocumentElementMatchingAnonymous3());
         }
 
-        public static bool matches<T, U>(Optional<T> required, Optional<U> actual, BiPredicate<T, U> areEqual)
+        public static bool Matches<T, TU>(IOptional<T> required, IOptional<TU> actual, IBiPredicate<T, TU> areEqual)
         {
-            return (required.map(new DocumentElementMatching__Anonymous_5<T, U>(actual, areEqual))).orElse(true);
+            return (required.Map(new DocumentElementMatchingAnonymous5<T, TU>(actual, areEqual))).OrElse(true);
         }
     }
 }

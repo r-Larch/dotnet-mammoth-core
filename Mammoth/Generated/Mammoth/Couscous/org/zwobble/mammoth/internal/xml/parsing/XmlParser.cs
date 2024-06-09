@@ -3,30 +3,30 @@ using Mammoth.Couscous.java.io;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
     internal class XmlParser {
-        public NamespacePrefixes _namespaces;
+        public NamespacePrefixes Namespaces;
 
         internal XmlParser(NamespacePrefixes namespaces)
         {
-            _namespaces = namespaces;
+            Namespaces = namespaces;
         }
 
-        public XmlElement parseStream(InputStream inputStream)
+        public XmlElement ParseStream(INputStream inputStream)
         {
             var nodeGenerator = create_NodeGenerator();
-            SimpleSax.parseStream(inputStream, nodeGenerator);
-            return nodeGenerator.getRoot();
+            SimpleSax.ParseStream(inputStream, nodeGenerator);
+            return nodeGenerator.GetRoot();
         }
 
-        public XmlElement parseString(string value)
+        public XmlElement ParseString(string value)
         {
             var nodeGenerator = create_NodeGenerator();
-            SimpleSax.parseString(value, nodeGenerator);
-            return nodeGenerator.getRoot();
+            SimpleSax.ParseString(value, nodeGenerator);
+            return nodeGenerator.GetRoot();
         }
 
-        public XmlParser__NodeGenerator create_NodeGenerator()
+        public XmlParserNodeGenerator create_NodeGenerator()
         {
-            return new XmlParser__NodeGenerator(this);
+            return new XmlParserNodeGenerator(this);
         }
     }
 }

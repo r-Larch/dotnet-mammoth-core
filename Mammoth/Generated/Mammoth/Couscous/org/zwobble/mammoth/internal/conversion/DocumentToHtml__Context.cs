@@ -1,15 +1,15 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Context {
-        public bool _isHeader;
+    internal class DocumentToHtmlContext {
+        public bool IsHeader { get; }
 
-        internal DocumentToHtml__Context(bool isHeader)
+        internal DocumentToHtmlContext(bool isHeader)
         {
-            _isHeader = isHeader;
+            IsHeader = isHeader;
         }
 
-        public DocumentToHtml__Context isHeader(bool isHeader)
+        public DocumentToHtmlContext CreateIsHeader(bool isHeader)
         {
-            return new DocumentToHtml__Context(isHeader);
+            return new DocumentToHtmlContext(isHeader);
         }
     }
 }

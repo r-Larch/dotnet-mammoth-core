@@ -4,19 +4,19 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_3 : Function<DocumentToHtml__ReferencedComment, Iterable<HtmlNode>> {
-        private DocumentToHtml__Context _context;
-        private DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+    internal class DocumentToHtmlAnonymous3 : IFunction<DocumentToHtmlReferencedComment, ITerable<IHtmlNode>> {
+        private DocumentToHtmlContext _context;
+        private DocumentToHtml _thisOrgZwobbleMammothInternalConversionDocumentToHtml;
 
-        internal DocumentToHtml__Anonymous_3(DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, DocumentToHtml__Context context)
+        internal DocumentToHtmlAnonymous3(DocumentToHtml thisOrgZwobbleMammothInternalConversionDocumentToHtml, DocumentToHtmlContext context)
         {
-            _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml = this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+            _thisOrgZwobbleMammothInternalConversionDocumentToHtml = thisOrgZwobbleMammothInternalConversionDocumentToHtml;
             _context = context;
         }
 
-        public Iterable<HtmlNode> apply(DocumentToHtml__ReferencedComment comment)
+        public ITerable<IHtmlNode> Apply(DocumentToHtmlReferencedComment comment)
         {
-            return (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertToHtml(comment, _context);
+            return (_thisOrgZwobbleMammothInternalConversionDocumentToHtml).ConvertToHtml(comment, _context);
         }
     }
 }

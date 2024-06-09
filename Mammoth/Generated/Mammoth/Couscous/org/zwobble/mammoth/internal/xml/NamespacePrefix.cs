@@ -3,21 +3,21 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
     internal class NamespacePrefix {
-        private Optional<string> _prefix;
+        private IOptional<string> _prefix;
         private string _uri;
 
-        internal NamespacePrefix(Optional<string> prefix, string uri)
+        internal NamespacePrefix(IOptional<string> prefix, string uri)
         {
             _prefix = prefix;
             _uri = uri;
         }
 
-        public Optional<string> getPrefix()
+        public IOptional<string> GetPrefix()
         {
             return _prefix;
         }
 
-        public string getUri()
+        public string GetUri()
         {
             return _uri;
         }

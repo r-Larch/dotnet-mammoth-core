@@ -3,48 +3,48 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
-    internal class XmlParser__NodeGenerator : SimpleSaxHandler {
-        private Deque<XmlElementBuilder> _elementStack;
-        private XmlParser _this_org__zwobble__mammoth__internal__xml__parsing__XmlParser;
+    internal class XmlParserNodeGenerator : ISimpleSaxHandler {
+        private IDeque<XmlElementBuilder> _elementStack;
+        private XmlParser _thisOrgZwobbleMammothInternalXmlParsingXmlParser;
 
-        internal XmlParser__NodeGenerator(XmlParser this_org__zwobble__mammoth__internal__xml__parsing__XmlParser)
+        internal XmlParserNodeGenerator(XmlParser thisOrgZwobbleMammothInternalXmlParsingXmlParser)
         {
-            _this_org__zwobble__mammoth__internal__xml__parsing__XmlParser = this_org__zwobble__mammoth__internal__xml__parsing__XmlParser;
+            _thisOrgZwobbleMammothInternalXmlParsingXmlParser = thisOrgZwobbleMammothInternalXmlParsingXmlParser;
             _elementStack = new ArrayDeque<XmlElementBuilder>();
         }
 
-        public void startElement(ElementName name, Map<ElementName, string> attributes)
+        public void StartElement(ElementName name, IMap<ElementName, string> attributes)
         {
-            var simpleAttributes = Maps.eagerMapKeys(attributes, new XmlParser__Anonymous_0(this));
-            var element = new XmlElementBuilder(readName(name), simpleAttributes);
-            (_elementStack).add(element);
+            var simpleAttributes = Maps.EagerMapKeys(attributes, new XmlParserAnonymous0(this));
+            var element = new XmlElementBuilder(ReadName(name), simpleAttributes);
+            (_elementStack).Add(element);
         }
 
-        public void endElement()
+        public void EndElement()
         {
-            if ((_elementStack).size() > 1) {
-                var element = (_elementStack).removeLast();
-                ((_elementStack).getLast()).addChild(element.build());
+            if ((_elementStack).Size() > 1) {
+                var element = (_elementStack).RemoveLast();
+                ((_elementStack).GetLast()).AddChild(element.Build());
             }
         }
 
-        public void characters(string @string)
+        public void Characters(string @string)
         {
-            ((_elementStack).getLast()).addChild(new XmlTextNode(@string));
+            ((_elementStack).GetLast()).AddChild(new XmlTextNode(@string));
         }
 
-        public XmlElement getRoot()
+        public XmlElement GetRoot()
         {
-            return ((_elementStack).getFirst()).build();
+            return ((_elementStack).GetFirst()).Build();
         }
 
-        public string readName(ElementName name)
+        public string ReadName(ElementName name)
         {
-            if (Strings.isNullOrEmpty(name.getUri())) {
-                return name.getLocalName();
+            if (Strings.IsNullOrEmpty(name.GetUri())) {
+                return name.GetLocalName();
             }
 
-            return ((((_this_org__zwobble__mammoth__internal__xml__parsing__XmlParser)._namespaces).lookupUri(name.getUri())).map(new XmlParser__Anonymous_2(name))).orElseGet(new XmlParser__Anonymous_3(name));
+            return ((((_thisOrgZwobbleMammothInternalXmlParsingXmlParser).Namespaces).LookupUri(name.GetUri())).Map(new XmlParserAnonymous2(name))).OrElseGet(new XmlParserAnonymous3(name));
         }
     }
 }

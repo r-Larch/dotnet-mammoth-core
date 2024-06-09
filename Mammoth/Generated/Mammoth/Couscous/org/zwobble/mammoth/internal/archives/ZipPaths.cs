@@ -5,34 +5,34 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.archives {
     internal class ZipPaths {
-        public static ZipPaths__SplitPath splitPath(string path)
+        public static ZipPathsSplitPath SplitPath(string path)
         {
-            var index = path.lastIndexOf("/");
+            var index = JavaStringExtensions.LastIndexOf(path, "/");
             if (index == -1) {
-                return new ZipPaths__SplitPath("", path);
+                return new ZipPathsSplitPath("", path);
             }
 
             var dirname = path.Substring(0, index - 0);
             var basename = path.Substring(index + 1);
-            return new ZipPaths__SplitPath(dirname, basename);
+            return new ZipPathsSplitPath(dirname, basename);
         }
 
-        public static string joinPath(string[] paths)
+        public static string JoinPath(string[] paths)
         {
-            var nonEmptyPaths = Lists.eagerFilter(Arrays.asList(paths), new ZipPaths__Anonymous_0());
-            List<string> relevantPaths = new ArrayList<string>();
+            var nonEmptyPaths = Lists.EagerFilter(Arrays.AsList(paths), new ZipPathsAnonymous0());
+            IList<string> relevantPaths = new ArrayList<string>();
             {
-                var _couscous_desugar_foreach_to_for0 = nonEmptyPaths.iterator();
-                while (_couscous_desugar_foreach_to_for0.hasNext()) {
-                    var path = _couscous_desugar_foreach_to_for0.next();
-                    if (path.startsWith("/")) {
-                        relevantPaths.clear();
+                var couscousDesugarForeachToFor0 = nonEmptyPaths.Iterator();
+                while (couscousDesugarForeachToFor0.HasNext()) {
+                    var path = couscousDesugarForeachToFor0.Next();
+                    if (JavaStringExtensions.StartsWith(path, "/")) {
+                        relevantPaths.Clear();
                     }
 
-                    relevantPaths.add(path);
+                    relevantPaths.Add(path);
                 }
             }
-            return String.join("/", relevantPaths);
+            return String.Join("/", relevantPaths);
         }
     }
 }

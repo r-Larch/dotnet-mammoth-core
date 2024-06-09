@@ -5,21 +5,21 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class StyleMapping<T> {
-        private HtmlPath _htmlPath;
-        private DocumentElementMatcher<T> _matcher;
+        private IHtmlPath _htmlPath;
+        private IDocumentElementMatcher<T> _matcher;
 
-        internal StyleMapping(DocumentElementMatcher<T> matcher, HtmlPath htmlPath)
+        internal StyleMapping(IDocumentElementMatcher<T> matcher, IHtmlPath htmlPath)
         {
             _matcher = matcher;
             _htmlPath = htmlPath;
         }
 
-        public bool matches(T element)
+        public bool Matches(T element)
         {
-            return (_matcher).matches(element);
+            return (_matcher).Matches(element);
         }
 
-        public HtmlPath getHtmlPath()
+        public IHtmlPath GetHtmlPath()
         {
             return _htmlPath;
         }

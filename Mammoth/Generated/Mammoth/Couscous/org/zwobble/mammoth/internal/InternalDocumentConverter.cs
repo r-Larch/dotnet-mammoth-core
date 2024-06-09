@@ -13,85 +13,85 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
     internal class InternalDocumentConverter {
-        public DocumentToHtmlOptions _options;
+        public DocumentToHtmlOptions Options;
 
         internal InternalDocumentConverter(DocumentToHtmlOptions options)
         {
-            _options = options;
+            Options = options;
         }
 
-        public InternalResult<string> convertToHtml(InputStream stream)
+        public InternalResult<string> ConvertToHtml(INputStream stream)
         {
-            return PassThroughException.unwrap(new InternalDocumentConverter__Anonymous_1(stream, this));
+            return PassThroughException.Unwrap(new InternalDocumentConverterAnonymous1(stream, this));
         }
 
-        public InternalResult<string> convertToHtml(File file)
+        public InternalResult<string> ConvertToHtml(File file)
         {
-            return PassThroughException.unwrap(new InternalDocumentConverter__Anonymous_3(file, this));
+            return PassThroughException.Unwrap(new InternalDocumentConverterAnonymous3(file, this));
         }
 
-        public InternalResult<string> convertToHtml(Optional<Path> path, Archive zipFile)
+        public InternalResult<string> ConvertToHtml(IOptional<Path> path, IArchive zipFile)
         {
-            var styleMap = (readEmbeddedStyleMap(zipFile)).map(new InternalDocumentConverter__Anonymous_4());
-            var conversionOptions = (styleMap.map(new InternalDocumentConverter__Anonymous_5(this))).orElse(_options);
-            return ((((DocumentReader.readDocument(path, zipFile)).flatMap(new InternalDocumentConverter__Anonymous_6(conversionOptions))).map(new InternalDocumentConverter__Anonymous_7())).map(new InternalDocumentConverter__Anonymous_8())).map(new InternalDocumentConverter__Anonymous_9());
+            var styleMap = (ReadEmbeddedStyleMap(zipFile)).Map(new InternalDocumentConverterAnonymous4());
+            var conversionOptions = (styleMap.Map(new InternalDocumentConverterAnonymous5(this))).OrElse(Options);
+            return ((((DocumentReader.ReadDocument(path, zipFile)).FlatMap(new InternalDocumentConverterAnonymous6(conversionOptions))).Map(new InternalDocumentConverterAnonymous7())).Map(new InternalDocumentConverterAnonymous8())).Map(new InternalDocumentConverterAnonymous9());
         }
 
-        public Optional<string> readEmbeddedStyleMap(Archive zipFile)
+        public IOptional<string> ReadEmbeddedStyleMap(IArchive zipFile)
         {
-            return PassThroughException.wrap(new InternalDocumentConverter__Anonymous_10(zipFile));
+            return PassThroughException.Wrap(new InternalDocumentConverterAnonymous10(zipFile));
         }
 
-        public InternalResult<string> extractRawText(InputStream stream)
+        public InternalResult<string> ExtractRawText(INputStream stream)
         {
-            return PassThroughException.unwrap(new InternalDocumentConverter__Anonymous_12(stream, this));
+            return PassThroughException.Unwrap(new InternalDocumentConverterAnonymous12(stream, this));
         }
 
-        public InternalResult<string> extractRawText(File file)
+        public InternalResult<string> ExtractRawText(File file)
         {
-            return PassThroughException.unwrap(new InternalDocumentConverter__Anonymous_14(file, this));
+            return PassThroughException.Unwrap(new InternalDocumentConverterAnonymous14(file, this));
         }
 
-        public InternalResult<string> extractRawText(Optional<Path> path, Archive zipFile)
+        public InternalResult<string> ExtractRawText(IOptional<Path> path, IArchive zipFile)
         {
-            return (DocumentReader.readDocument(path, zipFile)).map(new InternalDocumentConverter__Anonymous_15());
+            return (DocumentReader.ReadDocument(path, zipFile)).Map(new InternalDocumentConverterAnonymous15());
         }
 
-        public static T withDocxFile<T>(File file, Function<Archive, T> function)
+        public static T WithDocxFile<T>(File file, IFunction<IArchive, T> function)
         {
-            Archive zipFile = new ZippedArchive(file);
+            IArchive zipFile = new ZippedArchive(file);
             try {
-                return function.apply(zipFile);
+                return function.Apply(zipFile);
             }
             finally {
-                zipFile.close();
+                zipFile.Close();
             }
         }
 
-        public static T withDocxFile<T>(InputStream stream, Function<Archive, T> function)
+        public static T WithDocxFile<T>(INputStream stream, IFunction<IArchive, T> function)
         {
-            var zipFile = InMemoryArchive.fromStream(stream);
+            var zipFile = InMemoryArchive.FromStream(stream);
             try {
-                return function.apply(zipFile);
+                return function.Apply(zipFile);
             }
             finally {
-                zipFile.close();
+                zipFile.Close();
             }
         }
 
-        public static string extractRawTextOfChildren(HasChildren parent)
+        public static string ExtractRawTextOfChildren(IHasChildren parent)
         {
-            return extractRawText(parent.getChildren());
+            return ExtractRawText(parent.GetChildren());
         }
 
-        public static string extractRawText(List<DocumentElement> nodes)
+        public static string ExtractRawText(IList<IDocumentElement> nodes)
         {
-            return String.join("", Iterables.lazyMap(nodes, new InternalDocumentConverter__Anonymous_16()));
+            return String.Join("", Iterables.LazyMap(nodes, new InternalDocumentConverterAnonymous16()));
         }
 
-        public static string extractRawText(DocumentElement node)
+        public static string ExtractRawText(IDocumentElement node)
         {
-            return ((Casts.tryCast<Text>(typeof(Text), node)).map(new InternalDocumentConverter__Anonymous_17())).orElseGet(new InternalDocumentConverter__Anonymous_20(node));
+            return ((Casts.TryCast<Text>(typeof(Text), node)).Map(new InternalDocumentConverterAnonymous17())).OrElseGet(new InternalDocumentConverterAnonymous20(node));
         }
     }
 }

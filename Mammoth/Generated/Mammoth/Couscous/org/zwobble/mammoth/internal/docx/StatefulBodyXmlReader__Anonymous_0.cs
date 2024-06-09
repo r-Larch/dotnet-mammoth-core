@@ -6,24 +6,24 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_0 : BiFunction<Optional<Style>, List<DocumentElement>, DocumentElement> {
-        private XmlElementLike _properties;
-        private StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+    internal class StatefulBodyXmlReaderAnonymous0 : IBiFunction<IOptional<Style>, IList<IDocumentElement>, IDocumentElement> {
+        private IXmlElementLike _properties;
+        private StatefulBodyXmlReader _thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader;
 
-        internal StatefulBodyXmlReader__Anonymous_0(StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader, XmlElementLike properties)
+        internal StatefulBodyXmlReaderAnonymous0(StatefulBodyXmlReader thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader, IXmlElementLike properties)
         {
-            _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+            _thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader = thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader;
             _properties = properties;
         }
 
-        public DocumentElement apply(Optional<Style> style, List<DocumentElement> children)
+        public IDocumentElement Apply(IOptional<Style> style, IList<IDocumentElement> children)
         {
-            var hyperlinkHref = (_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).currentHyperlinkHref();
-            if (hyperlinkHref.isPresent()) {
-                children = Lists.list<DocumentElement>(Hyperlink.href(hyperlinkHref.get(), Optional.empty<string>(), children));
+            var hyperlinkHref = (_thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader).CurrentHyperlinkHref();
+            if (hyperlinkHref.IsPresent()) {
+                children = Lists.List<IDocumentElement>(Hyperlink.Href(hyperlinkHref.Get(), Optional.Empty<string>(), children));
             }
 
-            return new Run((_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isBold(_properties), (_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isItalic(_properties), (_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isUnderline(_properties), (_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isStrikethrough(_properties), (_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isSmallCaps(_properties), (_this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).readVerticalAlignment(_properties), style, children);
+            return new Run((_thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader).IsBold(_properties), (_thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader).IsItalic(_properties), (_thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader).IsUnderline(_properties), (_thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader).IsStrikethrough(_properties), (_thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader).IsSmallCaps(_properties), (_thisOrgZwobbleMammothInternalDocxStatefulBodyXmlReader).ReadVerticalAlignment(_properties), style, children);
         }
     }
 }

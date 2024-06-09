@@ -4,17 +4,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.styles;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_5 : Function<StyleMap, DocumentToHtmlOptions> {
-        private InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+    internal class InternalDocumentConverterAnonymous5 : IFunction<StyleMap, DocumentToHtmlOptions> {
+        private InternalDocumentConverter _thisOrgZwobbleMammothInternalInternalDocumentConverter;
 
-        internal InternalDocumentConverter__Anonymous_5(InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter)
+        internal InternalDocumentConverterAnonymous5(InternalDocumentConverter thisOrgZwobbleMammothInternalInternalDocumentConverter)
         {
-            _this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+            _thisOrgZwobbleMammothInternalInternalDocumentConverter = thisOrgZwobbleMammothInternalInternalDocumentConverter;
         }
 
-        public DocumentToHtmlOptions apply(StyleMap arg0)
+        public DocumentToHtmlOptions Apply(StyleMap arg0)
         {
-            return ((_this_org__zwobble__mammoth__internal__InternalDocumentConverter)._options).addEmbeddedStyleMap(arg0);
+            return ((_thisOrgZwobbleMammothInternalInternalDocumentConverter).Options).AddEmbeddedStyleMap(arg0);
         }
     }
 }

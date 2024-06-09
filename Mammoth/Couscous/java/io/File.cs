@@ -10,7 +10,7 @@ namespace Mammoth.Couscous.java.io {
 
         public string Path { get; }
 
-        internal Path toPath()
+        internal Path ToPath()
         {
             return new Path(Path);
         }

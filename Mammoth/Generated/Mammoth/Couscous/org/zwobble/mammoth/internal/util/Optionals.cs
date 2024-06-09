@@ -4,40 +4,40 @@ using Mammoth.Couscous.java.util.function;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
     internal class Optionals {
-        public static Optional<T> first<T>(Optional<T> first, Optional<T> second)
+        public static IOptional<T> First<T>(IOptional<T> first, IOptional<T> second)
         {
-            if (first.isPresent()) {
+            if (first.IsPresent()) {
                 return first;
             }
 
             return second;
         }
 
-        public static Optional<R> flatMap<T1, T2, R>(Optional<T1> first, Optional<T2> second, BiFunction<T1, T2, Optional<R>> function)
+        public static IOptional<TR> FlatMap<T1, T2, TR>(IOptional<T1> first, IOptional<T2> second, IBiFunction<T1, T2, IOptional<TR>> function)
         {
-            if (first.isPresent() && second.isPresent()) {
-                return function.apply(first.get(), second.get());
+            if (first.IsPresent() && second.IsPresent()) {
+                return function.Apply(first.Get(), second.Get());
             }
 
-            return Optional.empty<R>();
+            return Optional.Empty<TR>();
         }
 
-        public static Optional<R> map<T1, T2, R>(Optional<T1> first, Optional<T2> second, BiFunction<T1, T2, R> function)
+        public static IOptional<TR> Map<T1, T2, TR>(IOptional<T1> first, IOptional<T2> second, IBiFunction<T1, T2, TR> function)
         {
-            if (first.isPresent() && second.isPresent()) {
-                return Optional.of(function.apply(first.get(), second.get()));
+            if (first.IsPresent() && second.IsPresent()) {
+                return Optional.Of(function.Apply(first.Get(), second.Get()));
             }
 
-            return Optional.empty<R>();
+            return Optional.Empty<TR>();
         }
 
-        public static Optional<R> map<R>(OptionalInt first, IntFunction<R> function)
+        public static IOptional<TR> Map<TR>(IOptionalInt first, INtFunction<TR> function)
         {
-            if (first.isPresent()) {
-                return Optional.of(function.apply(first.getAsInt()));
+            if (first.IsPresent()) {
+                return Optional.Of(function.Apply(first.GetAsInt()));
             }
 
-            return Optional.empty<R>();
+            return Optional.Empty<TR>();
         }
     }
 }

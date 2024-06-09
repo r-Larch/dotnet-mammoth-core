@@ -4,10 +4,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class Relationships__Anonymous_0 : Function<Relationship, Map__Entry<string, string>> {
-        public Map__Entry<string, string> apply(Relationship relationship)
+    internal class RelationshipsAnonymous0 : IFunction<Relationship, IMapEntry<string, string>> {
+        public IMapEntry<string, string> Apply(Relationship relationship)
         {
-            return Maps.entry(relationship.getRelationshipId(), relationship.getTarget());
+            return Maps.Entry(relationship.RelationshipId, relationship.Target);
         }
     }
 }

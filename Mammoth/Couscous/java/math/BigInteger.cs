@@ -1,6 +1,6 @@
 namespace Mammoth.Couscous.java.math {
     internal class BigInteger {
-        public static readonly BigInteger _ONE = new(1);
+        public static readonly BigInteger One = new(1);
 
         // TOOD: use proper BigInteger
         private readonly long _value;
@@ -15,12 +15,12 @@ namespace Mammoth.Couscous.java.math {
             _value = value;
         }
 
-        internal BigInteger subtract(BigInteger other)
+        internal BigInteger Subtract(BigInteger other)
         {
             return new BigInteger(_value - other._value);
         }
 
-        internal string toString()
+        public override string ToString()
         {
             return _value.ToString();
         }

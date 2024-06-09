@@ -3,62 +3,62 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class ParagraphMatcher : DocumentElementMatcher<Paragraph> {
-        public static ParagraphMatcher _ANY;
-        private Optional<NumberingLevel> _numbering;
-        private Optional<string> _styleId;
-        private Optional<StringMatcher> _styleName;
+    internal class ParagraphMatcher : IDocumentElementMatcher<Paragraph> {
+        public static ParagraphMatcher Any;
+        private IOptional<NumberingLevel> _numbering;
+        private IOptional<string> _styleId;
+        private IOptional<IStringMatcher> _styleName;
 
         static ParagraphMatcher()
         {
-            _ANY = new ParagraphMatcher(Optional.empty<string>(), Optional.empty<StringMatcher>(), Optional.empty<NumberingLevel>());
+            Any = new ParagraphMatcher(Optional.Empty<string>(), Optional.Empty<IStringMatcher>(), Optional.Empty<NumberingLevel>());
         }
 
-        internal ParagraphMatcher(Optional<string> styleId, Optional<StringMatcher> styleName, Optional<NumberingLevel> numbering)
+        internal ParagraphMatcher(IOptional<string> styleId, IOptional<IStringMatcher> styleName, IOptional<NumberingLevel> numbering)
         {
             _styleId = styleId;
             _styleName = styleName;
             _numbering = numbering;
         }
 
-        public bool matches(Paragraph paragraph)
+        public bool Matches(Paragraph paragraph)
         {
-            return matchesStyle(paragraph) && matchesNumbering(paragraph);
+            return MatchesStyle(paragraph) && MatchesNumbering(paragraph);
         }
 
-        public static ParagraphMatcher styleId(string styleId)
+        public static ParagraphMatcher StyleId(string styleId)
         {
-            return new ParagraphMatcher(Optional.of(styleId), Optional.empty<StringMatcher>(), Optional.empty<NumberingLevel>());
+            return new ParagraphMatcher(Optional.Of(styleId), Optional.Empty<IStringMatcher>(), Optional.Empty<NumberingLevel>());
         }
 
-        public static ParagraphMatcher styleName(string styleName)
+        public static ParagraphMatcher StyleName(string styleName)
         {
-            return ParagraphMatcher.styleName(new EqualToStringMatcher(styleName));
+            return ParagraphMatcher.StyleName(new EqualToStringMatcher(styleName));
         }
 
-        public static ParagraphMatcher styleName(StringMatcher styleName)
+        public static ParagraphMatcher StyleName(IStringMatcher styleName)
         {
-            return new ParagraphMatcher(Optional.empty<string>(), Optional.of(styleName), Optional.empty<NumberingLevel>());
+            return new ParagraphMatcher(Optional.Empty<string>(), Optional.Of(styleName), Optional.Empty<NumberingLevel>());
         }
 
-        public static ParagraphMatcher orderedList(string level)
+        public static ParagraphMatcher OrderedList(string level)
         {
-            return new ParagraphMatcher(Optional.empty<string>(), Optional.empty<StringMatcher>(), Optional.of(NumberingLevel.ordered(level)));
+            return new ParagraphMatcher(Optional.Empty<string>(), Optional.Empty<IStringMatcher>(), Optional.Of(NumberingLevel.Ordered(level)));
         }
 
-        public static ParagraphMatcher unorderedList(string level)
+        public static ParagraphMatcher UnorderedList(string level)
         {
-            return new ParagraphMatcher(Optional.empty<string>(), Optional.empty<StringMatcher>(), Optional.of(NumberingLevel.unordered(level)));
+            return new ParagraphMatcher(Optional.Empty<string>(), Optional.Empty<IStringMatcher>(), Optional.Of(NumberingLevel.Unordered(level)));
         }
 
-        public bool matchesStyle(Paragraph paragraph)
+        public bool MatchesStyle(Paragraph paragraph)
         {
-            return DocumentElementMatching.matchesStyle(_styleId, _styleName, paragraph.getStyle());
+            return DocumentElementMatching.MatchesStyle(_styleId, _styleName, paragraph.GetStyle());
         }
 
-        public bool matchesNumbering(Paragraph paragraph)
+        public bool MatchesNumbering(Paragraph paragraph)
         {
-            return DocumentElementMatching.matches(_numbering, paragraph.getNumbering(), new ParagraphMatcher__Anonymous_0());
+            return DocumentElementMatching.Matches(_numbering, paragraph.GetNumbering(), new ParagraphMatcherAnonymous0());
         }
     }
 }

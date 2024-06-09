@@ -2,15 +2,15 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
-    internal static class RegexTokeniser__Anonymous_1 {
+    internal static class RegexTokeniserAnonymous1 {
     }
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
-    internal class RegexTokeniser__Anonymous_1<T> : Function<RegexTokeniser__TokenRule<T>, T> {
-        public T apply(RegexTokeniser__TokenRule<T> rule)
+    internal class RegexTokeniserAnonymous1<T> : IFunction<RegexTokeniserTokenRule<T>, T> {
+        public T Apply(RegexTokeniserTokenRule<T> rule)
         {
-            return rule._type;
+            return rule.Type;
         }
     }
 }

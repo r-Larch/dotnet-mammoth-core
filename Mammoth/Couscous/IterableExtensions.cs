@@ -4,11 +4,11 @@ using Mammoth.Couscous.java.util.function;
 
 namespace Mammoth.Couscous {
     internal static class IterableExtensions {
-        public static void forEach<T>(this Iterable<T> iterable, Consumer<T> consumer)
+        public static void ForEach<T>(this ITerable<T> iterable, IConsumer<T> consumer)
         {
-            var iterator = iterable.iterator();
-            while (iterator.hasNext()) {
-                consumer.accept(iterator.next());
+            var iterator = iterable.Iterator();
+            while (iterator.HasNext()) {
+                consumer.Accept(iterator.Next());
             }
         }
     }

@@ -3,24 +3,24 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal static class DocumentElementMatching__Anonymous_5 {
+    internal static class DocumentElementMatchingAnonymous5 {
     }
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class DocumentElementMatching__Anonymous_5<T, U> : Function<T, bool> {
-        private Optional<U> _actual;
-        private BiPredicate<T, U> _areEqual;
+    internal class DocumentElementMatchingAnonymous5<T, TU> : IFunction<T, bool> {
+        private IOptional<TU> _actual;
+        private IBiPredicate<T, TU> _areEqual;
 
-        internal DocumentElementMatching__Anonymous_5(Optional<U> actual, BiPredicate<T, U> areEqual)
+        internal DocumentElementMatchingAnonymous5(IOptional<TU> actual, IBiPredicate<T, TU> areEqual)
         {
             _actual = actual;
             _areEqual = areEqual;
         }
 
-        public bool apply(T requiredValue)
+        public bool Apply(T requiredValue)
         {
-            return ((_actual).map(new DocumentElementMatching__Anonymous_4<U, T>(_areEqual, requiredValue))).orElse(false);
+            return ((_actual).Map(new DocumentElementMatchingAnonymous4<TU, T>(_areEqual, requiredValue))).OrElse(false);
         }
     }
 }

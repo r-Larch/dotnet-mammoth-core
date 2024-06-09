@@ -2,8 +2,8 @@ using Mammoth.Couscous.java.lang;
 
 
 namespace Mammoth.Couscous.java.util {
-    internal interface Queue<T> : Iterable<T> {
-        void add(T value);
-        T remove();
+    internal interface IQueue<T> : ITerable<T> {
+        void Add(T value);
+        T Remove();
     }
 }

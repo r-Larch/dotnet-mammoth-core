@@ -1,17 +1,17 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal interface DocumentElementVisitor<T, U> {
-        T visit(Paragraph paragraph, U context);
-        T visit(Run run, U context);
-        T visit(Text text, U context);
-        T visit(Tab tab, U context);
-        T visit(Break lineBreak, U context);
-        T visit(Table table, U context);
-        T visit(TableRow tableRow, U context);
-        T visit(TableCell tableCell, U context);
-        T visit(Hyperlink hyperlink, U context);
-        T visit(Bookmark bookmark, U context);
-        T visit(NoteReference noteReference, U context);
-        T visit(CommentReference commentReference, U context);
-        T visit(Image image, U context);
+    internal interface IDocumentElementVisitor<T, TU> {
+        T Visit(Paragraph paragraph, TU context);
+        T Visit(Run run, TU context);
+        T Visit(Text text, TU context);
+        T Visit(Tab tab, TU context);
+        T Visit(Break lineBreak, TU context);
+        T Visit(Table table, TU context);
+        T Visit(TableRow tableRow, TU context);
+        T Visit(TableCell tableCell, TU context);
+        T Visit(Hyperlink hyperlink, TU context);
+        T Visit(Bookmark bookmark, TU context);
+        T Visit(NoteReference noteReference, TU context);
+        T Visit(CommentReference commentReference, TU context);
+        T Visit(Image image, TU context);
     }
 }

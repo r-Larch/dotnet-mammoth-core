@@ -10,131 +10,131 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
     internal class DocumentToHtml {
-        private static DocumentToHtml__Context _INITIAL_CONTEXT;
-        public Map<string, Comment> _comments;
+        private static DocumentToHtmlContext _initialContext;
+        public IMap<string, Comment> Comments;
         private string _idPrefix;
-        public ImageConverter__ImgElement _imageConverter;
-        public List<NoteReference> _noteReferences;
-        public bool _preserveEmptyParagraphs;
-        public List<DocumentToHtml__ReferencedComment> _referencedComments;
-        public StyleMap _styleMap;
-        public Set<string> _warnings;
+        public IMageConverterImgElement ImageConverter;
+        public IList<NoteReference> NoteReferences;
+        public bool PreserveEmptyParagraphs;
+        public IList<DocumentToHtmlReferencedComment> ReferencedComments;
+        public StyleMap StyleMap;
+        public ISet<string> Warnings;
 
         static DocumentToHtml()
         {
-            _INITIAL_CONTEXT = new DocumentToHtml__Context(false);
+            _initialContext = new DocumentToHtmlContext(false);
         }
 
-        internal DocumentToHtml(DocumentToHtmlOptions options, List<Comment> comments)
+        internal DocumentToHtml(DocumentToHtmlOptions options, IList<Comment> comments)
         {
-            _noteReferences = new ArrayList<NoteReference>();
-            _referencedComments = new ArrayList<DocumentToHtml__ReferencedComment>();
-            _warnings = new HashSet<string>();
-            _idPrefix = options.idPrefix();
-            _preserveEmptyParagraphs = options.shouldPreserveEmptyParagraphs();
-            _styleMap = options.styleMap();
-            _imageConverter = options.imageConverter();
-            _comments = Maps.toMapWithKey(comments, new DocumentToHtml__Anonymous_0());
+            NoteReferences = new ArrayList<NoteReference>();
+            ReferencedComments = new ArrayList<DocumentToHtmlReferencedComment>();
+            Warnings = new HashSet<string>();
+            _idPrefix = options.IdPrefix();
+            PreserveEmptyParagraphs = options.ShouldPreserveEmptyParagraphs();
+            StyleMap = options.StyleMap();
+            ImageConverter = options.ImageConverter();
+            Comments = Maps.ToMapWithKey(comments, new DocumentToHtmlAnonymous0());
         }
 
-        public static InternalResult<List<HtmlNode>> convertToHtml(Document document, DocumentToHtmlOptions options)
+        public static InternalResult<IList<IHtmlNode>> ConvertToHtml(Document document, DocumentToHtmlOptions options)
         {
-            var documentConverter = new DocumentToHtml(options, document.getComments());
-            return new InternalResult<List<HtmlNode>>(documentConverter.convertToHtml(document, _INITIAL_CONTEXT), documentConverter._warnings);
+            var documentConverter = new DocumentToHtml(options, document.GetComments());
+            return new InternalResult<IList<IHtmlNode>>(documentConverter.ConvertToHtml(document, _initialContext), documentConverter.Warnings);
         }
 
-        public static List<Note> findNotes(Document document, Iterable<NoteReference> noteReferences)
+        public static IList<Note> FindNotes(Document document, ITerable<NoteReference> noteReferences)
         {
-            return Lists.eagerMap(noteReferences, new DocumentToHtml__Anonymous_1(document));
+            return Lists.EagerMap(noteReferences, new DocumentToHtmlAnonymous1(document));
         }
 
-        public static InternalResult<List<HtmlNode>> convertToHtml(DocumentElement element, DocumentToHtmlOptions options)
+        public static InternalResult<IList<IHtmlNode>> ConvertToHtml(IDocumentElement element, DocumentToHtmlOptions options)
         {
-            var documentConverter = new DocumentToHtml(options, Lists.list<Comment>());
-            return new InternalResult<List<HtmlNode>>(documentConverter.convertToHtml(element, _INITIAL_CONTEXT), documentConverter._warnings);
+            var documentConverter = new DocumentToHtml(options, Lists.List<Comment>());
+            return new InternalResult<IList<IHtmlNode>>(documentConverter.ConvertToHtml(element, _initialContext), documentConverter.Warnings);
         }
 
-        public List<HtmlNode> convertToHtml(Document document, DocumentToHtml__Context context)
+        public IList<IHtmlNode> ConvertToHtml(Document document, DocumentToHtmlContext context)
         {
-            var mainBody = convertChildrenToHtml(document, context);
-            var notes = findNotes(document, _noteReferences);
-            var noteNodes = notes.isEmpty() ? Lists.list<HtmlNode>() : Lists.list(Html.element("ol", Lists.eagerMap(notes, new DocumentToHtml__Anonymous_2(this, context))));
-            var commentNodes = (_referencedComments).isEmpty() ? Lists.list<HtmlNode>() : Lists.list(Html.element("dl", Lists.eagerFlatMap(_referencedComments, new DocumentToHtml__Anonymous_3(this, context))));
-            return Lists.eagerConcat(mainBody, noteNodes, commentNodes);
+            var mainBody = ConvertChildrenToHtml(document, context);
+            var notes = FindNotes(document, NoteReferences);
+            var noteNodes = notes.IsEmpty() ? Lists.List<IHtmlNode>() : Lists.List(Html.Element("ol", Lists.EagerMap(notes, new DocumentToHtmlAnonymous2(this, context))));
+            var commentNodes = (ReferencedComments).IsEmpty() ? Lists.List<IHtmlNode>() : Lists.List(Html.Element("dl", Lists.EagerFlatMap(ReferencedComments, new DocumentToHtmlAnonymous3(this, context))));
+            return Lists.EagerConcat(mainBody, noteNodes, commentNodes);
         }
 
-        public HtmlNode convertToHtml(Note note, DocumentToHtml__Context context)
+        public IHtmlNode ConvertToHtml(Note note, DocumentToHtmlContext context)
         {
-            var id = generateNoteHtmlId(note.getNoteType(), note.getId());
-            var referenceId = generateNoteRefHtmlId(note.getNoteType(), note.getId());
-            var noteBody = convertToHtml(note.getBody(), context);
-            var backLink = Html.collapsibleElement("p", Lists.list(Html.text(" "), Html.element("a", Maps.map("href", "#" + referenceId), Lists.list(Html.text("↑")))));
-            return Html.element("li", Maps.map("id", id), Lists.eagerConcat(noteBody, Lists.list(backLink)));
+            var id = GenerateNoteHtmlId(note.GetNoteType(), note.GetId());
+            var referenceId = GenerateNoteRefHtmlId(note.GetNoteType(), note.GetId());
+            var noteBody = ConvertToHtml(note.GetBody(), context);
+            var backLink = Html.CollapsibleElement("p", Lists.List(Html.Text(" "), Html.Element("a", Maps.Map("href", "#" + referenceId), Lists.List(Html.Text("↑")))));
+            return Html.Element("li", Maps.Map("id", id), Lists.EagerConcat(noteBody, Lists.List(backLink)));
         }
 
-        public List<HtmlNode> convertToHtml(DocumentToHtml__ReferencedComment referencedComment, DocumentToHtml__Context context)
+        public IList<IHtmlNode> ConvertToHtml(DocumentToHtmlReferencedComment referencedComment, DocumentToHtmlContext context)
         {
-            var commentId = (referencedComment._comment).getCommentId();
-            var body = convertToHtml((referencedComment._comment).getBody(), context);
-            var backLink = Html.collapsibleElement("p", Lists.list(Html.text(" "), Html.element("a", Maps.map("href", "#" + generateReferenceHtmlId("comment", commentId)), Lists.list(Html.text("↑")))));
-            return Lists.list(Html.element("dt", Maps.map("id", generateReferentHtmlId("comment", commentId)), Lists.list(Html.text("Comment " + referencedComment._label))), Html.element("dd", Lists.eagerConcat(body, Lists.list(backLink))));
+            var commentId = (referencedComment.Comment).GetCommentId();
+            var body = ConvertToHtml((referencedComment.Comment).GetBody(), context);
+            var backLink = Html.CollapsibleElement("p", Lists.List(Html.Text(" "), Html.Element("a", Maps.Map("href", "#" + GenerateReferenceHtmlId("comment", commentId)), Lists.List(Html.Text("↑")))));
+            return Lists.List(Html.Element("dt", Maps.Map("id", GenerateReferentHtmlId("comment", commentId)), Lists.List(Html.Text("Comment " + referencedComment.Label))), Html.Element("dd", Lists.EagerConcat(body, Lists.List(backLink))));
         }
 
-        public List<HtmlNode> convertToHtml(List<DocumentElement> elements, DocumentToHtml__Context context)
+        public IList<IHtmlNode> ConvertToHtml(IList<IDocumentElement> elements, DocumentToHtmlContext context)
         {
-            return Lists.eagerFlatMap(elements, new DocumentToHtml__Anonymous_4(this, context));
+            return Lists.EagerFlatMap(elements, new DocumentToHtmlAnonymous4(this, context));
         }
 
-        public List<HtmlNode> convertChildrenToHtml(HasChildren element, DocumentToHtml__Context context)
+        public IList<IHtmlNode> ConvertChildrenToHtml(IHasChildren element, DocumentToHtmlContext context)
         {
-            return convertToHtml(element.getChildren(), context);
+            return ConvertToHtml(element.GetChildren(), context);
         }
 
-        public List<HtmlNode> convertToHtml(DocumentElement element, DocumentToHtml__Context context)
+        public IList<IHtmlNode> ConvertToHtml(IDocumentElement element, DocumentToHtmlContext context)
         {
-            return element.accept(create_ElementConverterVisitor(), context);
+            return element.Accept(create_ElementConverterVisitor(), context);
         }
 
-        public string generateNoteHtmlId(NoteType noteType, string noteId)
+        public string GenerateNoteHtmlId(NoteType noteType, string noteId)
         {
-            return generateReferentHtmlId(noteTypeToIdFragment(noteType), noteId);
+            return GenerateReferentHtmlId(NoteTypeToIdFragment(noteType), noteId);
         }
 
-        public string generateNoteRefHtmlId(NoteType noteType, string noteId)
+        public string GenerateNoteRefHtmlId(NoteType noteType, string noteId)
         {
-            return generateReferenceHtmlId(noteTypeToIdFragment(noteType), noteId);
+            return GenerateReferenceHtmlId(NoteTypeToIdFragment(noteType), noteId);
         }
 
-        public string generateReferentHtmlId(string referenceType, string referenceId)
+        public string GenerateReferentHtmlId(string referenceType, string referenceId)
         {
-            return generateId((referenceType + "-") + referenceId);
+            return GenerateId((referenceType + "-") + referenceId);
         }
 
-        public string generateReferenceHtmlId(string referenceType, string referenceId)
+        public string GenerateReferenceHtmlId(string referenceType, string referenceId)
         {
-            return generateId((referenceType + "-ref-") + referenceId);
+            return GenerateId((referenceType + "-ref-") + referenceId);
         }
 
-        public string noteTypeToIdFragment(NoteType noteType)
+        public string NoteTypeToIdFragment(NoteType noteType)
         {
             switch (noteType) {
-                case NoteType._FOOTNOTE:
+                case NoteType.Footnote:
                     return "footnote";
-                case NoteType._ENDNOTE:
+                case NoteType.Endnote:
                     return "endnote";
                 default:
                     throw new UnsupportedOperationException();
             }
         }
 
-        public string generateId(string bookmarkName)
+        public string GenerateId(string bookmarkName)
         {
             return _idPrefix + bookmarkName;
         }
 
-        public DocumentToHtml__ElementConverterVisitor create_ElementConverterVisitor()
+        public DocumentToHtmlElementConverterVisitor create_ElementConverterVisitor()
         {
-            return new DocumentToHtml__ElementConverterVisitor(this);
+            return new DocumentToHtmlElementConverterVisitor(this);
         }
     }
 }

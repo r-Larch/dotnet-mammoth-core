@@ -3,17 +3,17 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
-    internal class Html__Anonymous_0 : Consumer<HtmlNode> {
+    internal class HtmlAnonymous0 : IConsumer<IHtmlNode> {
         private StringBuilder _builder;
 
-        internal Html__Anonymous_0(StringBuilder builder)
+        internal HtmlAnonymous0(StringBuilder builder)
         {
             _builder = builder;
         }
 
-        public void accept(HtmlNode node)
+        public void Accept(IHtmlNode node)
         {
-            HtmlWriter.write(node, _builder);
+            HtmlWriter.Write(node, _builder);
         }
     }
 }

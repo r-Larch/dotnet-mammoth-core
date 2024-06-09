@@ -1,5 +1,5 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal interface DocumentElement {
-        T accept<T, U>(DocumentElementVisitor<T, U> visitor, U context);
+    internal interface IDocumentElement {
+        T Accept<T, TU>(IDocumentElementVisitor<T, TU> visitor, TU context);
     }
 }

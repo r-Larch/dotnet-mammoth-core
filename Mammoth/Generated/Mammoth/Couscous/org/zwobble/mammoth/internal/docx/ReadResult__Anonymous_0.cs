@@ -4,10 +4,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class ReadResult__Anonymous_0 : Function<ReadResult, Iterable<DocumentElement>> {
-        public Iterable<DocumentElement> apply(ReadResult result)
+    internal class ReadResultAnonymous0 : IFunction<ReadResult, ITerable<IDocumentElement>> {
+        public ITerable<IDocumentElement> Apply(ReadResult result)
         {
-            return result._elements;
+            return result.Elements;
         }
     }
 }

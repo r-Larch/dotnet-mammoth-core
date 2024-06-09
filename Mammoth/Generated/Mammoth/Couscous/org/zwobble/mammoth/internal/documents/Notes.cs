@@ -4,22 +4,22 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Notes {
-        public static Notes _EMPTY;
-        private Map<NoteType, Map<string, Note>> _notes;
+        public static Notes Empty;
+        private IMap<NoteType, IMap<string, Note>> _notes;
 
         static Notes()
         {
-            _EMPTY = new Notes(Lists.list<Note>());
+            Empty = new Notes(Lists.List<Note>());
         }
 
-        internal Notes(List<Note> notes)
+        internal Notes(IList<Note> notes)
         {
-            _notes = Maps.eagerMapValues(Maps.toMultiMapWithKey(notes, new Notes__Anonymous_0()), new Notes__Anonymous_2());
+            _notes = Maps.EagerMapValues(Maps.ToMultiMapWithKey(notes, new NotesAnonymous0()), new NotesAnonymous2());
         }
 
-        public Optional<Note> findNote(NoteType noteType, string noteId)
+        public IOptional<Note> FindNote(NoteType noteType, string noteId)
         {
-            return (Maps.lookup(_notes, noteType)).flatMap(new Notes__Anonymous_3(noteId));
+            return (Maps.Lookup(_notes, noteType)).FlatMap(new NotesAnonymous3(noteId));
         }
     }
 }

@@ -2,17 +2,17 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
-    internal class XmlParser__Anonymous_0 : Function<ElementName, string> {
-        private XmlParser__NodeGenerator _this_org__zwobble__mammoth__internal__xml__parsing__XmlParser__NodeGenerator;
+    internal class XmlParserAnonymous0 : IFunction<ElementName, string> {
+        private XmlParserNodeGenerator _thisOrgZwobbleMammothInternalXmlParsingXmlParserNodeGenerator;
 
-        internal XmlParser__Anonymous_0(XmlParser__NodeGenerator this_org__zwobble__mammoth__internal__xml__parsing__XmlParser__NodeGenerator)
+        internal XmlParserAnonymous0(XmlParserNodeGenerator thisOrgZwobbleMammothInternalXmlParsingXmlParserNodeGenerator)
         {
-            _this_org__zwobble__mammoth__internal__xml__parsing__XmlParser__NodeGenerator = this_org__zwobble__mammoth__internal__xml__parsing__XmlParser__NodeGenerator;
+            _thisOrgZwobbleMammothInternalXmlParsingXmlParserNodeGenerator = thisOrgZwobbleMammothInternalXmlParsingXmlParserNodeGenerator;
         }
 
-        public string apply(ElementName arg0)
+        public string Apply(ElementName arg0)
         {
-            return (_this_org__zwobble__mammoth__internal__xml__parsing__XmlParser__NodeGenerator).readName(arg0);
+            return (_thisOrgZwobbleMammothInternalXmlParsingXmlParserNodeGenerator).ReadName(arg0);
         }
     }
 }

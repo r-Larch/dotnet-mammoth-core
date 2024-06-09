@@ -2,27 +2,27 @@ using Mammoth.Couscous.java.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class TableRow : DocumentElement, HasChildren {
-        private List<DocumentElement> _children;
+    internal class TableRow : IDocumentElement, IHasChildren {
+        private IList<IDocumentElement> _children;
         private bool _isHeader;
 
-        internal TableRow(List<DocumentElement> children, bool isHeader)
+        internal TableRow(IList<IDocumentElement> children, bool isHeader)
         {
             _children = children;
             _isHeader = isHeader;
         }
 
-        public T accept<T, U>(DocumentElementVisitor<T, U> visitor, U context)
+        public T Accept<T, TU>(IDocumentElementVisitor<T, TU> visitor, TU context)
         {
-            return visitor.visit(this, context);
+            return visitor.Visit(this, context);
         }
 
-        public List<DocumentElement> getChildren()
+        public IList<IDocumentElement> GetChildren()
         {
             return _children;
         }
 
-        public bool isHeader()
+        public bool IsHeader()
         {
             return _isHeader;
         }

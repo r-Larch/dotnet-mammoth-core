@@ -1,5 +1,5 @@
 namespace Mammoth.Couscous.java.util.function {
-    internal interface Consumer<T> {
-        void accept(T value);
+    internal interface IConsumer<T> {
+        void Accept(T value);
     }
 }

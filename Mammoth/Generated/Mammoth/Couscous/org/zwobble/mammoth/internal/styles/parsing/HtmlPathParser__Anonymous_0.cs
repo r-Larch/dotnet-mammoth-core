@@ -1,16 +1,16 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
-    internal class HtmlPathParser__Anonymous_0 : TokenIterator__Action {
+    internal class HtmlPathParserAnonymous0 : ITokenIteratorAction {
         private TokenIterator<TokenType> _tokens;
 
-        internal HtmlPathParser__Anonymous_0(TokenIterator<TokenType> tokens)
+        internal HtmlPathParserAnonymous0(TokenIterator<TokenType> tokens)
         {
             _tokens = tokens;
         }
 
-        public void run()
+        public void Run()
         {
-            (_tokens).skip(TokenType._SYMBOL, ":");
-            (_tokens).skip(TokenType._IDENTIFIER, "fresh");
+            (_tokens).Skip(TokenType.Symbol, ":");
+            (_tokens).Skip(TokenType.Identifier, "fresh");
         }
     }
 }

@@ -3,12 +3,12 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
     internal class HtmlTag {
-        private Map<string, string> _attributes;
+        private IMap<string, string> _attributes;
         private bool _isCollapsible;
         private string _separator;
-        private List<string> _tagNames;
+        private IList<string> _tagNames;
 
-        internal HtmlTag(List<string> tagNames, Map<string, string> attributes, bool isCollapsible, string separator)
+        internal HtmlTag(IList<string> tagNames, IMap<string, string> attributes, bool isCollapsible, string separator)
         {
             _tagNames = tagNames;
             _attributes = attributes;
@@ -16,22 +16,22 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
             _separator = separator;
         }
 
-        public List<string> getTagNames()
+        public IList<string> GetTagNames()
         {
             return _tagNames;
         }
 
-        public Map<string, string> getAttributes()
+        public IMap<string, string> GetAttributes()
         {
             return _attributes;
         }
 
-        public bool isCollapsible()
+        public bool IsCollapsible()
         {
             return _isCollapsible;
         }
 
-        public string getSeparator()
+        public string GetSeparator()
         {
             return _separator;
         }

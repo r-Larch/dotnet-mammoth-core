@@ -3,19 +3,19 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class EmbeddedStyleMap__Anonymous_1 : Function<XmlElement, bool> {
+    internal class EmbeddedStyleMapAnonymous1 : IFunction<XmlElement, bool> {
         private XmlElement _element;
         private string _identifyingAttribute;
 
-        internal EmbeddedStyleMap__Anonymous_1(XmlElement element, string identifyingAttribute)
+        internal EmbeddedStyleMapAnonymous1(XmlElement element, string identifyingAttribute)
         {
             _element = element;
             _identifyingAttribute = identifyingAttribute;
         }
 
-        public bool apply(XmlElement childElement)
+        public bool Apply(XmlElement childElement)
         {
-            return ((childElement.getName()).Equals((_element).getName())) && (childElement.getAttributeOrNone(_identifyingAttribute)).equals((_element).getAttributeOrNone(_identifyingAttribute));
+            return ((childElement.GetName()).Equals((_element).GetName())) && (childElement.GetAttributeOrNone(_identifyingAttribute)).Equals((_element).GetAttributeOrNone(_identifyingAttribute));
         }
     }
 }

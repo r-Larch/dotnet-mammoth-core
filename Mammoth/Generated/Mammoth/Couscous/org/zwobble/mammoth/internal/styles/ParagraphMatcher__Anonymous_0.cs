@@ -3,10 +3,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class ParagraphMatcher__Anonymous_0 : BiPredicate<NumberingLevel, NumberingLevel> {
-        public bool test(NumberingLevel first, NumberingLevel second)
+    internal class ParagraphMatcherAnonymous0 : IBiPredicate<NumberingLevel, NumberingLevel> {
+        public bool Test(NumberingLevel first, NumberingLevel second)
         {
-            return first.isOrdered() == second.isOrdered() && (first.getLevelIndex()).equalsIgnoreCase(second.getLevelIndex());
+            return first.IsOrdered() == second.IsOrdered() && (first.GetLevelIndex()).EqualsIgnoreCase(second.GetLevelIndex());
         }
     }
 }

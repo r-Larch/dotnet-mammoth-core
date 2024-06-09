@@ -5,10 +5,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class NumberingXml__Anonymous_0 : Function<XmlElement, Map__Entry<string, Map<string, NumberingLevel>>> {
-        public Map__Entry<string, Map<string, NumberingLevel>> apply(XmlElement arg0)
+    internal class NumberingXmlAnonymous0 : IFunction<XmlElement, IMapEntry<string, IMap<string, NumberingLevel>>> {
+        public IMapEntry<string, IMap<string, NumberingLevel>> Apply(XmlElement arg0)
         {
-            return NumberingXml.readAbstractNum(arg0);
+            return NumberingXml.ReadAbstractNum(arg0);
         }
     }
 }

@@ -3,27 +3,27 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.java.util {
-    internal interface Optional<T> {
-        bool isPresent();
-        Optional<U> map<U>(Function<T, U> function);
-        Optional<U> flatMap<U>(Function<T, Optional<U>> function);
-        Optional<T> filter(function.Predicate<T> predicate);
-        T orElse(T value);
-        T orElseGet(Supplier<T> supplier);
-        T orElseThrow<TException>(Supplier<TException> exceptionSupplier) where TException : Exception;
-        T get();
-        void ifPresent(Consumer<T> consumer);
+    internal interface IOptional<T> {
+        bool IsPresent();
+        IOptional<TU> Map<TU>(IFunction<T, TU> function);
+        IOptional<TU> FlatMap<TU>(IFunction<T, IOptional<TU>> function);
+        IOptional<T> Filter(function.IPredicate<T> predicate);
+        T OrElse(T value);
+        T OrElseGet(ISupplier<T> supplier);
+        T OrElseThrow<TException>(ISupplier<TException> exceptionSupplier) where TException : Exception;
+        T Get();
+        void IfPresent(IConsumer<T> consumer);
     }
 
-    internal interface None {
+    internal interface INone {
     }
 
-    internal struct None<T> : None, Optional<T> {
+    internal struct None<T> : INone, IOptional<T> {
         public static readonly None<T> Instance = new();
 
         public override bool Equals(object other)
         {
-            return other is None;
+            return other is INone;
         }
 
         public override int GetHashCode()
@@ -31,56 +31,56 @@ namespace Mammoth.Couscous.java.util {
             return 0;
         }
 
-        public bool isPresent()
+        public bool IsPresent()
         {
             return false;
         }
 
-        public Optional<U> map<U>(Function<T, U> function)
+        public IOptional<TU> Map<TU>(IFunction<T, TU> function)
         {
-            return new None<U>();
+            return new None<TU>();
         }
 
-        public Optional<U> flatMap<U>(Function<T, Optional<U>> function)
+        public IOptional<TU> FlatMap<TU>(IFunction<T, IOptional<TU>> function)
         {
-            return new None<U>();
+            return new None<TU>();
         }
 
-        public Optional<T> filter(function.Predicate<T> predicate)
+        public IOptional<T> Filter(function.IPredicate<T> predicate)
         {
             return this;
         }
 
-        public T orElse(T value)
+        public T OrElse(T value)
         {
             return value;
         }
 
-        public T orElseGet(Supplier<T> supplier)
+        public T OrElseGet(ISupplier<T> supplier)
         {
-            return supplier.get();
+            return supplier.Get();
         }
 
-        public T orElseThrow<TException>(Supplier<TException> exceptionSupplier) where TException : Exception
+        public T OrElseThrow<TException>(ISupplier<TException> exceptionSupplier) where TException : Exception
         {
-            throw exceptionSupplier.get();
+            throw exceptionSupplier.Get();
         }
 
-        public T get()
+        public T Get()
         {
             throw new NoSuchElementException();
         }
 
-        public void ifPresent(Consumer<T> consumer)
+        public void IfPresent(IConsumer<T> consumer)
         {
         }
     }
 
-    internal interface Some {
-        object getObject();
+    internal interface ISome {
+        object GetObject();
     }
 
-    internal struct Some<T> : Some, Optional<T> {
+    internal struct Some<T> : ISome, IOptional<T> {
         private readonly T _value;
 
         internal Some(T value)
@@ -90,12 +90,12 @@ namespace Mammoth.Couscous.java.util {
 
         public override bool Equals(object other)
         {
-            var otherSome = other as Some;
+            var otherSome = other as ISome;
             if (otherSome == null) {
                 return false;
             }
 
-            return _value.Equals(otherSome.getObject());
+            return _value.Equals(otherSome.GetObject());
         }
 
         public override int GetHashCode()
@@ -103,68 +103,68 @@ namespace Mammoth.Couscous.java.util {
             return _value.GetHashCode();
         }
 
-        public bool isPresent()
+        public bool IsPresent()
         {
             return true;
         }
 
-        public Optional<U> map<U>(Function<T, U> function)
+        public IOptional<TU> Map<TU>(IFunction<T, TU> function)
         {
-            return new Some<U>(function.apply(_value));
+            return new Some<TU>(function.Apply(_value));
         }
 
-        public Optional<U> flatMap<U>(Function<T, Optional<U>> function)
+        public IOptional<TU> FlatMap<TU>(IFunction<T, IOptional<TU>> function)
         {
-            return function.apply(_value);
+            return function.Apply(_value);
         }
 
-        public Optional<T> filter(function.Predicate<T> predicate)
+        public IOptional<T> Filter(function.IPredicate<T> predicate)
         {
-            if (predicate.test(_value)) {
+            if (predicate.Test(_value)) {
                 return this;
             }
 
             return None<T>.Instance;
         }
 
-        public T orElse(T value)
+        public T OrElse(T value)
         {
             return _value;
         }
 
-        public T orElseGet(Supplier<T> supplier)
+        public T OrElseGet(ISupplier<T> supplier)
         {
             return _value;
         }
 
-        public T orElseThrow<TException>(Supplier<TException> exceptionSupplier) where TException : Exception
+        public T OrElseThrow<TException>(ISupplier<TException> exceptionSupplier) where TException : Exception
         {
             return _value;
         }
 
-        public T get()
+        public T Get()
         {
             return _value;
         }
 
-        public object getObject()
+        public object GetObject()
         {
             return _value;
         }
 
-        public void ifPresent(Consumer<T> consumer)
+        public void IfPresent(IConsumer<T> consumer)
         {
-            consumer.accept(_value);
+            consumer.Accept(_value);
         }
     }
 
     internal static class Optional {
-        internal static Optional<T> empty<T>()
+        internal static IOptional<T> Empty<T>()
         {
             return None<T>.Instance;
         }
 
-        internal static Optional<T> of<T>(T value)
+        internal static IOptional<T> Of<T>(T value)
         {
             return new Some<T>(value);
         }

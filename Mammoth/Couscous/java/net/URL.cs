@@ -6,15 +6,15 @@ using File = System.IO.File;
 
 
 namespace Mammoth.Couscous.java.net {
-    internal class URL {
+    internal class Url {
         private readonly string _url;
 
-        internal URL(string url)
+        internal Url(string url)
         {
             _url = url;
         }
 
-        internal InputStream openStream()
+        internal INputStream OpenStream()
         {
             try {
                 using var client = new HttpClient();
@@ -31,7 +31,7 @@ namespace Mammoth.Couscous.java.net {
                 return ToJava.StreamToInputStream(File.OpenRead(_url));
             }
             catch (WebException exception) {
-                throw new IOException(exception.Message);
+                throw new IoException(exception.Message);
             }
         }
     }

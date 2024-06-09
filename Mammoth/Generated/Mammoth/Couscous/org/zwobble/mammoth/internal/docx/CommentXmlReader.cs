@@ -13,25 +13,25 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
             _bodyReader = bodyReader;
         }
 
-        public InternalResult<List<Comment>> readElement(XmlElement element)
+        public InternalResult<IList<Comment>> ReadElement(XmlElement element)
         {
-            return InternalResult.flatMap(element.findChildren("w:comment"), new CommentXmlReader__Anonymous_0(this));
+            return InternalResult.FlatMap(element.FindChildren("w:comment"), new CommentXmlReaderAnonymous0(this));
         }
 
-        public InternalResult<Comment> readCommentElement(XmlElement element)
+        public InternalResult<Comment> ReadCommentElement(XmlElement element)
         {
-            var commentId = element.getAttribute("w:id");
-            return (((_bodyReader).readElements(element.getChildren())).toResult()).map(new CommentXmlReader__Anonymous_1(commentId, this, element));
+            var commentId = element.GetAttribute("w:id");
+            return (((_bodyReader).ReadElements(element.GetChildren())).ToResult()).Map(new CommentXmlReaderAnonymous1(commentId, this, element));
         }
 
-        public Optional<string> readOptionalAttribute(XmlElement element, string name)
+        public IOptional<string> ReadOptionalAttribute(XmlElement element, string name)
         {
-            var value = ((element.getAttributeOrNone(name)).orElse("")).trim();
-            if (value.isEmpty()) {
-                return Optional.empty<string>();
+            var value = JavaStringExtensions.Trim(((element.GetAttributeOrNone(name)).OrElse("")));
+            if (value.IsEmpty()) {
+                return Optional.Empty<string>();
             }
 
-            return Optional.of(value);
+            return Optional.Of(value);
         }
     }
 }

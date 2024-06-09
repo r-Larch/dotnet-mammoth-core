@@ -4,10 +4,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class DocumentReader__Anonymous_14 : Function<InputStream, XmlElement> {
-        public XmlElement apply(InputStream arg0)
+    internal class DocumentReaderAnonymous14 : IFunction<INputStream, XmlElement> {
+        public XmlElement Apply(INputStream arg0)
         {
-            return OfficeXml.parseXml(arg0);
+            return OfficeXml.ParseXml(arg0);
         }
     }
 }

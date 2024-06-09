@@ -3,8 +3,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_19 : Function<Paragraph, string> {
-        public string apply(Paragraph paragraph)
+    internal class InternalDocumentConverterAnonymous19 : IFunction<Paragraph, string> {
+        public string Apply(Paragraph paragraph)
         {
             return "\n\n";
         }

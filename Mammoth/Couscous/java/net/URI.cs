@@ -3,47 +3,47 @@ using System.IO;
 
 
 namespace Mammoth.Couscous.java.net {
-    internal class URI {
-        private readonly Uri _uri;
+    internal class Uri {
+        private readonly System.Uri _uri;
 
-        internal URI(string uri)
+        internal Uri(string uri)
         {
             try {
-                _uri = new Uri(uri, UriKind.RelativeOrAbsolute);
+                _uri = new System.Uri(uri, UriKind.RelativeOrAbsolute);
             }
             catch (UriFormatException exception) {
-                throw new URISyntaxException(exception.Message);
+                throw new UriSyntaxException(exception.Message);
             }
         }
 
-        internal URI(Uri uri)
+        internal Uri(System.Uri uri)
         {
             _uri = uri;
         }
 
-        internal bool isAbsolute()
+        internal bool IsAbsolute()
         {
             return _uri.IsAbsoluteUri;
         }
 
-        internal URL toURL()
+        internal Url ToUrl()
         {
-            return new URL(_uri.ToString());
+            return new Url(_uri.ToString());
         }
 
-        internal URI resolve(string relativeUri)
+        internal Uri Resolve(string relativeUri)
         {
-            if (new URI(relativeUri).isAbsolute()) {
-                return new URI(relativeUri);
+            if (new Uri(relativeUri).IsAbsolute()) {
+                return new Uri(relativeUri);
             }
 
             if (_uri.IsAbsoluteUri) {
-                return new URI(new Uri(_uri, relativeUri));
+                return new Uri(new System.Uri(_uri, relativeUri));
             }
 
             var path = _uri.ToString();
             var basePath = Path.GetDirectoryName(path);
-            return new URI(Path.Combine(basePath, relativeUri));
+            return new Uri(Path.Combine(basePath, relativeUri));
         }
     }
 }

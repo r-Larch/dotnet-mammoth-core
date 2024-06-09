@@ -5,17 +5,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class NotesXmlReader__Anonymous_1 : Function<XmlElement, InternalResult<Note>> {
-        private NotesXmlReader _this_org__zwobble__mammoth__internal__docx__NotesXmlReader;
+    internal class NotesXmlReaderAnonymous1 : IFunction<XmlElement, InternalResult<Note>> {
+        private NotesXmlReader _thisOrgZwobbleMammothInternalDocxNotesXmlReader;
 
-        internal NotesXmlReader__Anonymous_1(NotesXmlReader this_org__zwobble__mammoth__internal__docx__NotesXmlReader)
+        internal NotesXmlReaderAnonymous1(NotesXmlReader thisOrgZwobbleMammothInternalDocxNotesXmlReader)
         {
-            _this_org__zwobble__mammoth__internal__docx__NotesXmlReader = this_org__zwobble__mammoth__internal__docx__NotesXmlReader;
+            _thisOrgZwobbleMammothInternalDocxNotesXmlReader = thisOrgZwobbleMammothInternalDocxNotesXmlReader;
         }
 
-        public InternalResult<Note> apply(XmlElement arg0)
+        public InternalResult<Note> Apply(XmlElement arg0)
         {
-            return (_this_org__zwobble__mammoth__internal__docx__NotesXmlReader).readNoteElement(arg0);
+            return (_thisOrgZwobbleMammothInternalDocxNotesXmlReader).ReadNoteElement(arg0);
         }
     }
 }

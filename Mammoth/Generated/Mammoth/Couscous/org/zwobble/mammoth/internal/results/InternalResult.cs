@@ -7,71 +7,71 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.results {
     internal static class InternalResult {
-        public static InternalResult<List<R>> flatMap<T, R>(Iterable<T> iterable, Function<T, InternalResult<R>> function)
+        public static InternalResult<IList<TR>> FlatMap<T, TR>(ITerable<T> iterable, IFunction<T, InternalResult<TR>> function)
         {
-            var results = Lists.eagerMap(iterable, function);
-            return new InternalResult<List<R>>(Lists.eagerMap(results, new InternalResult__Anonymous_0<R>()), Iterables.lazyFlatMap(results, new InternalResult__Anonymous_1<R>()));
+            var results = Lists.EagerMap(iterable, function);
+            return new InternalResult<IList<TR>>(Lists.EagerMap(results, new InternalResultAnonymous0<TR>()), Iterables.LazyFlatMap(results, new InternalResultAnonymous1<TR>()));
         }
 
-        public static InternalResult<R> flatMap<T1, T2, R>(InternalResult<T1> first, InternalResult<T2> second, BiFunction<T1, T2, InternalResult<R>> function)
+        public static InternalResult<TR> FlatMap<T1, T2, TR>(InternalResult<T1> first, InternalResult<T2> second, IBiFunction<T1, T2, InternalResult<TR>> function)
         {
-            var intermediateResult = function.apply(first._value, second._value);
-            return new InternalResult<R>(intermediateResult._value, Iterables.lazyConcat(Iterables.lazyConcat(first._warnings, second._warnings), intermediateResult._warnings));
+            var intermediateResult = function.Apply(first.Value, second.Value);
+            return new InternalResult<TR>(intermediateResult.Value, Iterables.LazyConcat(Iterables.LazyConcat(first.Warnings, second.Warnings), intermediateResult.Warnings));
         }
 
-        public static InternalResult<R> map<T1, T2, R>(InternalResult<T1> first, InternalResult<T2> second, BiFunction<T1, T2, R> function)
+        public static InternalResult<TR> Map<T1, T2, TR>(InternalResult<T1> first, InternalResult<T2> second, IBiFunction<T1, T2, TR> function)
         {
-            return new InternalResult<R>(function.apply(first._value, second._value), Iterables.lazyConcat(first._warnings, second._warnings));
+            return new InternalResult<TR>(function.Apply(first.Value, second.Value), Iterables.LazyConcat(first.Warnings, second.Warnings));
         }
 
-        public static InternalResult<Optional<Style>> empty()
+        public static InternalResult<IOptional<Style>> Empty()
         {
-            return new InternalResult<Optional<Style>>(Optional.empty<Style>(), Lists.list<string>());
+            return new InternalResult<IOptional<Style>>(Optional.Empty<Style>(), Lists.List<string>());
         }
 
-        public static InternalResult<T> success<T>(T value)
+        public static InternalResult<T> Success<T>(T value)
         {
-            return new InternalResult<T>(value, Lists.list<string>());
+            return new InternalResult<T>(value, Lists.List<string>());
         }
     }
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.results {
     internal class InternalResult<T> {
-        public T _value;
-        public Iterable<string> _warnings;
+        public T Value;
+        public ITerable<string> Warnings;
 
-        internal InternalResult(T value, Iterable<string> warnings)
+        internal InternalResult(T value, ITerable<string> warnings)
         {
-            _value = value;
-            _warnings = warnings;
+            Value = value;
+            Warnings = warnings;
         }
 
-        public T getValue()
+        public T GetValue()
         {
-            return _value;
+            return Value;
         }
 
-        public Iterable<string> getWarnings()
+        public ITerable<string> GetWarnings()
         {
-            return _warnings;
+            return Warnings;
         }
 
-        public InternalResult<R> map<R>(Function<T, R> function)
+        public InternalResult<TR> Map<TR>(IFunction<T, TR> function)
         {
-            return new InternalResult<R>(function.apply(_value), _warnings);
+            return new InternalResult<TR>(function.Apply(Value), Warnings);
         }
 
-        public InternalResult<R> flatMap<R>(Function<T, InternalResult<R>> function)
+        public InternalResult<TR> FlatMap<TR>(IFunction<T, InternalResult<TR>> function)
         {
-            var intermediateResult = function.apply(_value);
-            return new InternalResult<R>(intermediateResult._value, Iterables.lazyConcat(_warnings, intermediateResult._warnings));
+            var intermediateResult = function.Apply(Value);
+            return new InternalResult<TR>(intermediateResult.Value, Iterables.LazyConcat(Warnings, intermediateResult.Warnings));
         }
 
-        public Result<T> toResult()
+        public IResult<T> ToResult()
         {
-            var warnings = Sets.toSet(_warnings);
-            return new InternalResult__Anonymous_2<T>(this, warnings);
+            var warnings = Sets.ToSet(Warnings);
+            return new InternalResultAnonymous2<T>(this, warnings);
         }
     }
 }

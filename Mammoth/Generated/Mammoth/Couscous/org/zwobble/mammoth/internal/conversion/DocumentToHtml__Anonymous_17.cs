@@ -4,29 +4,29 @@ using Mammoth.Couscous.org.zwobble.mammoth.images;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_17 : Image {
+    internal class DocumentToHtmlAnonymous17 : IMage {
         private string _contentType;
         private documents.Image _image;
 
-        internal DocumentToHtml__Anonymous_17(documents.Image image, string contentType)
+        internal DocumentToHtmlAnonymous17(documents.Image image, string contentType)
         {
             _image = image;
             _contentType = contentType;
         }
 
-        public Optional<string> getAltText()
+        public IOptional<string> GetAltText()
         {
-            return (_image).getAltText();
+            return (_image).GetAltText();
         }
 
-        public string getContentType()
+        public string GetContentType()
         {
             return _contentType;
         }
 
-        public InputStream getInputStream()
+        public INputStream GetInputStream()
         {
-            return (_image).open();
+            return (_image).Open();
         }
     }
 }

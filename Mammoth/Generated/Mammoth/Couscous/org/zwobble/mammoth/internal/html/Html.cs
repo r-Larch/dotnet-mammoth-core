@@ -5,114 +5,114 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
     internal class Html {
-        public static HtmlNode _FORCE_WRITE;
+        public static IHtmlNode ForceWrite;
 
         static Html()
         {
-            _FORCE_WRITE = HtmlForceWrite._FORCE_WRITE;
+            ForceWrite = HtmlForceWrite.ForceWrite;
         }
 
-        public static string write(List<HtmlNode> nodes)
+        public static string Write(IList<IHtmlNode> nodes)
         {
             var builder = new StringBuilder();
-            nodes.forEach(new Html__Anonymous_0(builder));
-            return builder.toString();
+            nodes.ForEach(new HtmlAnonymous0(builder));
+            return builder.ToString();
         }
 
-        public static HtmlNode text(string value)
+        public static IHtmlNode Text(string value)
         {
             return new HtmlTextNode(value);
         }
 
-        public static HtmlNode element(string tagName)
+        public static IHtmlNode Element(string tagName)
         {
-            return element(tagName, Lists.list<HtmlNode>());
+            return Element(tagName, Lists.List<IHtmlNode>());
         }
 
-        public static HtmlNode element(string tagName, Map<string, string> attributes)
+        public static IHtmlNode Element(string tagName, IMap<string, string> attributes)
         {
-            return element(tagName, attributes, Lists.list<HtmlNode>());
+            return Element(tagName, attributes, Lists.List<IHtmlNode>());
         }
 
-        public static HtmlNode element(string tagName, List<HtmlNode> children)
+        public static IHtmlNode Element(string tagName, IList<IHtmlNode> children)
         {
-            return element(tagName, Maps.map<string, string>(), children);
+            return Element(tagName, Maps.Map<string, string>(), children);
         }
 
-        public static HtmlNode element(string tagName, Map<string, string> attributes, List<HtmlNode> children)
+        public static IHtmlNode Element(string tagName, IMap<string, string> attributes, IList<IHtmlNode> children)
         {
-            return new HtmlElement(new HtmlTag(Lists.list(tagName), attributes, false, ""), children);
+            return new HtmlElement(new HtmlTag(Lists.List(tagName), attributes, false, ""), children);
         }
 
-        public static HtmlNode collapsibleElement(string tagName)
+        public static IHtmlNode CollapsibleElement(string tagName)
         {
-            return collapsibleElement(Lists.list(tagName));
+            return CollapsibleElement(Lists.List(tagName));
         }
 
-        public static HtmlNode collapsibleElement(List<string> tagNames)
+        public static IHtmlNode CollapsibleElement(IList<string> tagNames)
         {
-            return collapsibleElement(tagNames, Maps.map<string, string>(), Lists.list<HtmlNode>());
+            return CollapsibleElement(tagNames, Maps.Map<string, string>(), Lists.List<IHtmlNode>());
         }
 
-        public static HtmlNode collapsibleElement(string tagName, List<HtmlNode> children)
+        public static IHtmlNode CollapsibleElement(string tagName, IList<IHtmlNode> children)
         {
-            return collapsibleElement(tagName, Maps.map<string, string>(), children);
+            return CollapsibleElement(tagName, Maps.Map<string, string>(), children);
         }
 
-        public static HtmlNode collapsibleElement(string tagName, Map<string, string> attributes, List<HtmlNode> children)
+        public static IHtmlNode CollapsibleElement(string tagName, IMap<string, string> attributes, IList<IHtmlNode> children)
         {
-            return collapsibleElement(Lists.list(tagName), attributes, children);
+            return CollapsibleElement(Lists.List(tagName), attributes, children);
         }
 
-        public static HtmlNode collapsibleElement(List<string> tagNames, Map<string, string> attributes, List<HtmlNode> children)
+        public static IHtmlNode CollapsibleElement(IList<string> tagNames, IMap<string, string> attributes, IList<IHtmlNode> children)
         {
             return new HtmlElement(new HtmlTag(tagNames, attributes, true, ""), children);
         }
 
-        public static List<HtmlNode> stripEmpty(List<HtmlNode> nodes)
+        public static IList<IHtmlNode> StripEmpty(IList<IHtmlNode> nodes)
         {
-            return Lists.eagerFlatMap(nodes, new Html__Anonymous_1());
+            return Lists.EagerFlatMap(nodes, new HtmlAnonymous1());
         }
 
-        public static List<HtmlNode> stripEmpty(HtmlNode node)
+        public static IList<IHtmlNode> StripEmpty(IHtmlNode node)
         {
-            return node.accept(new Html__Anonymous_2());
+            return node.Accept(new HtmlAnonymous2());
         }
 
-        public static List<HtmlNode> collapse(List<HtmlNode> nodes)
+        public static IList<IHtmlNode> Collapse(IList<IHtmlNode> nodes)
         {
-            List<HtmlNode> collapsed = new ArrayList<HtmlNode>();
+            IList<IHtmlNode> collapsed = new ArrayList<IHtmlNode>();
             {
-                var _couscous_desugar_foreach_to_for3 = nodes.iterator();
-                while (_couscous_desugar_foreach_to_for3.hasNext()) {
-                    var node = _couscous_desugar_foreach_to_for3.next();
-                    collapsingAdd(collapsed, node);
+                var couscousDesugarForeachToFor3 = nodes.Iterator();
+                while (couscousDesugarForeachToFor3.HasNext()) {
+                    var node = couscousDesugarForeachToFor3.Next();
+                    CollapsingAdd(collapsed, node);
                 }
             }
             return collapsed;
         }
 
-        public static void collapsingAdd(List<HtmlNode> collapsed, HtmlNode node)
+        public static void CollapsingAdd(IList<IHtmlNode> collapsed, IHtmlNode node)
         {
-            var collapsedNode = collapse(node);
-            if (!tryCollapse(collapsed, collapsedNode)) {
-                collapsed.add(collapsedNode);
+            var collapsedNode = Collapse(node);
+            if (!TryCollapse(collapsed, collapsedNode)) {
+                collapsed.Add(collapsedNode);
             }
         }
 
-        public static HtmlNode collapse(HtmlNode node)
+        public static IHtmlNode Collapse(IHtmlNode node)
         {
-            return node.accept(new Html__Anonymous_3());
+            return node.Accept(new HtmlAnonymous3());
         }
 
-        public static bool tryCollapse(List<HtmlNode> collapsed, HtmlNode node)
+        public static bool TryCollapse(IList<IHtmlNode> collapsed, IHtmlNode node)
         {
-            return (Optionals.map((Lists.tryGetLast(collapsed)).flatMap(new Html__Anonymous_4()), Casts.tryCast<HtmlElement>(typeof(HtmlElement), node), new Html__Anonymous_5())).orElse(false);
+            return (Optionals.Map((Lists.TryGetLast(collapsed)).FlatMap(new HtmlAnonymous4()), Casts.TryCast<HtmlElement>(typeof(HtmlElement), node), new HtmlAnonymous5())).OrElse(false);
         }
 
-        public static bool isMatch(HtmlElement first, HtmlElement second)
+        public static bool IsMatch(HtmlElement first, HtmlElement second)
         {
-            return (second.getTagNames()).contains(first.getTagName()) && (first.getAttributes()).equals(second.getAttributes());
+            return (second.GetTagNames()).Contains(first.GetTagName()) && (first.GetAttributes()).Equals(second.GetAttributes());
         }
     }
 }

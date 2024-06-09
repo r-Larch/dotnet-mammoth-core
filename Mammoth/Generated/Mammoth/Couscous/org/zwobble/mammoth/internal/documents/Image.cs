@@ -4,36 +4,36 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class Image : DocumentElement {
-        private Optional<string> _altText;
-        private Optional<string> _contentType;
-        private InputStreamSupplier _open;
+    internal class Image : IDocumentElement {
+        private IOptional<string> _altText;
+        private IOptional<string> _contentType;
+        private INputStreamSupplier _open;
 
-        internal Image(Optional<string> altText, Optional<string> contentType, InputStreamSupplier open)
+        internal Image(IOptional<string> altText, IOptional<string> contentType, INputStreamSupplier open)
         {
             _altText = altText;
             _contentType = contentType;
             _open = open;
         }
 
-        public T accept<T, U>(DocumentElementVisitor<T, U> visitor, U context)
+        public T Accept<T, TU>(IDocumentElementVisitor<T, TU> visitor, TU context)
         {
-            return visitor.visit(this, context);
+            return visitor.Visit(this, context);
         }
 
-        public Optional<string> getAltText()
+        public IOptional<string> GetAltText()
         {
             return _altText;
         }
 
-        public Optional<string> getContentType()
+        public IOptional<string> GetContentType()
         {
             return _contentType;
         }
 
-        public InputStream open()
+        public INputStream Open()
         {
-            return (_open).open();
+            return (_open).Open();
         }
     }
 }

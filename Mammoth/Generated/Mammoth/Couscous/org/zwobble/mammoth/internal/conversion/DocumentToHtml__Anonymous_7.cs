@@ -5,21 +5,21 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_7 : Supplier<List<HtmlNode>> {
-        private DocumentToHtml__Context _context;
+    internal class DocumentToHtmlAnonymous7 : ISupplier<IList<IHtmlNode>> {
+        private DocumentToHtmlContext _context;
         private Run _run;
-        private DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+        private DocumentToHtml _thisOrgZwobbleMammothInternalConversionDocumentToHtml;
 
-        internal DocumentToHtml__Anonymous_7(DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, Run run, DocumentToHtml__Context context)
+        internal DocumentToHtmlAnonymous7(DocumentToHtml thisOrgZwobbleMammothInternalConversionDocumentToHtml, Run run, DocumentToHtmlContext context)
         {
-            _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml = this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+            _thisOrgZwobbleMammothInternalConversionDocumentToHtml = thisOrgZwobbleMammothInternalConversionDocumentToHtml;
             _run = run;
             _context = context;
         }
 
-        public List<HtmlNode> get()
+        public IList<IHtmlNode> Get()
         {
-            return (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertChildrenToHtml(_run, _context);
+            return (_thisOrgZwobbleMammothInternalConversionDocumentToHtml).ConvertChildrenToHtml(_run, _context);
         }
     }
 }

@@ -4,17 +4,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class Ignore : HtmlPath {
-        public static HtmlPath _INSTANCE;
+    internal class Ignore : IHtmlPath {
+        public static IHtmlPath Instance;
 
         static Ignore()
         {
-            _INSTANCE = new Ignore();
+            Instance = new Ignore();
         }
 
-        public Supplier<List<HtmlNode>> wrap(Supplier<List<HtmlNode>> generateNodes)
+        public ISupplier<IList<IHtmlNode>> Wrap(ISupplier<IList<IHtmlNode>> generateNodes)
         {
-            return new Ignore__Anonymous_0();
+            return new IgnoreAnonymous0();
         }
     }
 }

@@ -5,19 +5,19 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.results;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class DocumentReader__Anonymous_1 : BiFunction<Notes, List<Comment>, InternalResult<Document>> {
-        private DocumentReader__PartPaths _partPaths;
-        private DocumentReader__PartWithBodyReader _partReader;
+    internal class DocumentReaderAnonymous1 : IBiFunction<Notes, IList<Comment>, InternalResult<Document>> {
+        private DocumentReaderPartPaths _partPaths;
+        private DocumentReaderPartWithBodyReader _partReader;
 
-        internal DocumentReader__Anonymous_1(DocumentReader__PartWithBodyReader partReader, DocumentReader__PartPaths partPaths)
+        internal DocumentReaderAnonymous1(DocumentReaderPartWithBodyReader partReader, DocumentReaderPartPaths partPaths)
         {
             _partReader = partReader;
             _partPaths = partPaths;
         }
 
-        public InternalResult<Document> apply(Notes notes, List<Comment> comments)
+        public InternalResult<Document> Apply(Notes notes, IList<Comment> comments)
         {
-            return (_partReader).readPart((_partPaths).getMainDocument(), new DocumentReader__Anonymous_0(notes, comments), Optional.empty<InternalResult<Document>>());
+            return (_partReader).ReadPart((_partPaths).GetMainDocument(), new DocumentReaderAnonymous0(notes, comments), Optional.Empty<InternalResult<Document>>());
         }
     }
 }

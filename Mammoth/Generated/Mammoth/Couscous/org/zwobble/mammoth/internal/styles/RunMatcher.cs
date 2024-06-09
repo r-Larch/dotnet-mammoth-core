@@ -3,35 +3,35 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class RunMatcher : DocumentElementMatcher<Run> {
-        public static RunMatcher _ANY;
-        private Optional<string> _styleId;
-        private Optional<StringMatcher> _styleName;
+    internal class RunMatcher : IDocumentElementMatcher<Run> {
+        public static RunMatcher Any;
+        private IOptional<string> _styleId;
+        private IOptional<IStringMatcher> _styleName;
 
         static RunMatcher()
         {
-            _ANY = new RunMatcher(Optional.empty<string>(), Optional.empty<StringMatcher>());
+            Any = new RunMatcher(Optional.Empty<string>(), Optional.Empty<IStringMatcher>());
         }
 
-        internal RunMatcher(Optional<string> styleId, Optional<StringMatcher> styleName)
+        internal RunMatcher(IOptional<string> styleId, IOptional<IStringMatcher> styleName)
         {
             _styleId = styleId;
             _styleName = styleName;
         }
 
-        public bool matches(Run run)
+        public bool Matches(Run run)
         {
-            return DocumentElementMatching.matchesStyle(_styleId, _styleName, run.getStyle());
+            return DocumentElementMatching.MatchesStyle(_styleId, _styleName, run.GetStyle());
         }
 
-        public static RunMatcher styleId(string styleId)
+        public static RunMatcher StyleId(string styleId)
         {
-            return new RunMatcher(Optional.of(styleId), Optional.empty<StringMatcher>());
+            return new RunMatcher(Optional.Of(styleId), Optional.Empty<IStringMatcher>());
         }
 
-        public static RunMatcher styleName(string styleName)
+        public static RunMatcher StyleName(string styleName)
         {
-            return new RunMatcher(Optional.empty<string>(), Optional.of<StringMatcher>(new EqualToStringMatcher(styleName)));
+            return new RunMatcher(Optional.Empty<string>(), Optional.Of<IStringMatcher>(new EqualToStringMatcher(styleName)));
         }
     }
 }

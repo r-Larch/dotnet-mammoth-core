@@ -6,17 +6,17 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.results;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_11 : Function<Archive, InternalResult<string>> {
-        private InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+    internal class InternalDocumentConverterAnonymous11 : IFunction<IArchive, InternalResult<string>> {
+        private InternalDocumentConverter _thisOrgZwobbleMammothInternalInternalDocumentConverter;
 
-        internal InternalDocumentConverter__Anonymous_11(InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter)
+        internal InternalDocumentConverterAnonymous11(InternalDocumentConverter thisOrgZwobbleMammothInternalInternalDocumentConverter)
         {
-            _this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+            _thisOrgZwobbleMammothInternalInternalDocumentConverter = thisOrgZwobbleMammothInternalInternalDocumentConverter;
         }
 
-        public InternalResult<string> apply(Archive zipFile)
+        public InternalResult<string> Apply(IArchive zipFile)
         {
-            return (_this_org__zwobble__mammoth__internal__InternalDocumentConverter).extractRawText(Optional.empty<Path>(), zipFile);
+            return (_thisOrgZwobbleMammothInternalInternalDocumentConverter).ExtractRawText(Optional.Empty<Path>(), zipFile);
         }
     }
 }

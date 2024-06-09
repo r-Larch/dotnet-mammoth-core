@@ -3,21 +3,21 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__UnmergedTableCell : DocumentElement {
-        public List<DocumentElement> _children;
-        public int _colspan;
-        public bool _vmerge;
+    internal class StatefulBodyXmlReaderUnmergedTableCell : IDocumentElement {
+        public IList<IDocumentElement> Children;
+        public int Colspan;
+        public bool Vmerge;
 
-        internal StatefulBodyXmlReader__UnmergedTableCell(bool vmerge, int colspan, List<DocumentElement> children)
+        internal StatefulBodyXmlReaderUnmergedTableCell(bool vmerge, int colspan, IList<IDocumentElement> children)
         {
-            _vmerge = vmerge;
-            _colspan = colspan;
-            _children = children;
+            Vmerge = vmerge;
+            Colspan = colspan;
+            Children = children;
         }
 
-        public T accept<T, U>(DocumentElementVisitor<T, U> visitor, U context)
+        public T Accept<T, TU>(IDocumentElementVisitor<T, TU> visitor, TU context)
         {
-            return visitor.visit(new TableCell(1, _colspan, _children), context);
+            return visitor.Visit(new TableCell(1, Colspan, Children), context);
         }
     }
 }

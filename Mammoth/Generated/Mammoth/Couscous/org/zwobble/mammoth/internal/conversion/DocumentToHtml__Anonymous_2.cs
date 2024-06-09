@@ -4,19 +4,19 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_2 : Function<Note, HtmlNode> {
-        private DocumentToHtml__Context _context;
-        private DocumentToHtml _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+    internal class DocumentToHtmlAnonymous2 : IFunction<Note, IHtmlNode> {
+        private DocumentToHtmlContext _context;
+        private DocumentToHtml _thisOrgZwobbleMammothInternalConversionDocumentToHtml;
 
-        internal DocumentToHtml__Anonymous_2(DocumentToHtml this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, DocumentToHtml__Context context)
+        internal DocumentToHtmlAnonymous2(DocumentToHtml thisOrgZwobbleMammothInternalConversionDocumentToHtml, DocumentToHtmlContext context)
         {
-            _this_org__zwobble__mammoth__internal__conversion__DocumentToHtml = this_org__zwobble__mammoth__internal__conversion__DocumentToHtml;
+            _thisOrgZwobbleMammothInternalConversionDocumentToHtml = thisOrgZwobbleMammothInternalConversionDocumentToHtml;
             _context = context;
         }
 
-        public HtmlNode apply(Note note)
+        public IHtmlNode Apply(Note note)
         {
-            return (_this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertToHtml(note, _context);
+            return (_thisOrgZwobbleMammothInternalConversionDocumentToHtml).ConvertToHtml(note, _context);
         }
     }
 }

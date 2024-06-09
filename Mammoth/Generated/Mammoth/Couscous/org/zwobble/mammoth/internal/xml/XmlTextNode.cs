@@ -1,5 +1,5 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
-    internal class XmlTextNode : XmlNode {
+    internal class XmlTextNode : IXmlNode {
         private string _value;
 
         internal XmlTextNode(string value)
@@ -7,22 +7,22 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
             _value = value;
         }
 
-        public string innerText()
+        public string InnerText()
         {
             return _value;
         }
 
-        public T accept<T>(XmlNodeVisitor<T> visitor)
+        public T Accept<T>(IXmlNodeVisitor<T> visitor)
         {
-            return visitor.visit(this);
+            return visitor.Visit(this);
         }
 
-        public string getValue()
+        public string GetValue()
         {
             return _value;
         }
 
-        public string toString()
+        public override string ToString()
         {
             return ("XmlTextNode(value=" + _value) + ")";
         }

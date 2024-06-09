@@ -1,17 +1,17 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class Uris {
-        public static string uriToZipEntryName(string @base, string uri)
+        public static string UriToZipEntryName(string @base, string uri)
         {
-            if (uri.startsWith("/")) {
+            if (JavaStringExtensions.StartsWith(uri, "/")) {
                 return uri.Substring(1);
             }
 
             return (@base + "/") + uri;
         }
 
-        public static string replaceFragment(string uri, string fragment)
+        public static string ReplaceFragment(string uri, string fragment)
         {
-            var hashIndex = uri.indexOf("#");
+            var hashIndex = JavaStringExtensions.IndexOf(uri, "#");
             if (hashIndex != -1) {
                 uri = (uri.Substring(0, hashIndex - 0));
             }

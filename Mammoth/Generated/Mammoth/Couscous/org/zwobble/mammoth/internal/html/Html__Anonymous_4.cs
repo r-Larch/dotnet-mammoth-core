@@ -4,10 +4,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
-    internal class Html__Anonymous_4 : Function<HtmlNode, Optional<HtmlElement>> {
-        public Optional<HtmlElement> apply(HtmlNode last)
+    internal class HtmlAnonymous4 : IFunction<IHtmlNode, IOptional<HtmlElement>> {
+        public IOptional<HtmlElement> Apply(IHtmlNode last)
         {
-            return Casts.tryCast<HtmlElement>(typeof(HtmlElement), last);
+            return Casts.TryCast<HtmlElement>(typeof(HtmlElement), last);
         }
     }
 }

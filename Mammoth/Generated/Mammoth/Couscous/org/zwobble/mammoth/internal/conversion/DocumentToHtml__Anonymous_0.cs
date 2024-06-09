@@ -3,10 +3,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml__Anonymous_0 : Function<Comment, string> {
-        public string apply(Comment arg0)
+    internal class DocumentToHtmlAnonymous0 : IFunction<Comment, string> {
+        public string Apply(Comment arg0)
         {
-            return arg0.getCommentId();
+            return arg0.GetCommentId();
         }
     }
 }

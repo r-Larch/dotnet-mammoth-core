@@ -3,10 +3,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class DocumentReader__Anonymous_10 : Function<XmlElement, Styles> {
-        public Styles apply(XmlElement arg0)
+    internal class DocumentReaderAnonymous10 : IFunction<XmlElement, Styles> {
+        public Styles Apply(XmlElement arg0)
         {
-            return StylesXml.readStylesXmlElement(arg0);
+            return StylesXml.ReadStylesXmlElement(arg0);
         }
     }
 }

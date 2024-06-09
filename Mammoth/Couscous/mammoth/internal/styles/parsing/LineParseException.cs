@@ -10,12 +10,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
             _characterIndex = characterIndex;
         }
 
-        internal static LineParseException lineParseException<T>(Token<T> token, string message)
+        internal static LineParseException Create<T>(Token<T> token, string message)
         {
-            return new LineParseException(token.getCharacterIndex(), message);
+            return new LineParseException(token.GetCharacterIndex(), message);
         }
 
-        internal int getCharacterIndex()
+        internal int GetCharacterIndex()
         {
             return _characterIndex;
         }

@@ -5,29 +5,29 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class ContentTypesXml {
-        public static ContentTypes readContentTypesXmlElement(XmlElement element)
+        public static ContentTypes ReadContentTypesXmlElement(XmlElement element)
         {
-            return new ContentTypes(readDefaults(element.findChildren("content-types:Default")), readOverrides(element.findChildren("content-types:Override")));
+            return new ContentTypes(ReadDefaults(element.FindChildren("content-types:Default")), ReadOverrides(element.FindChildren("content-types:Override")));
         }
 
-        public static Map<string, string> readDefaults(XmlElementList children)
+        public static IMap<string, string> ReadDefaults(XmlElementList children)
         {
-            return Maps.toMap(children, new ContentTypesXml__Anonymous_0());
+            return Maps.ToMap(children, new ContentTypesXmlAnonymous0());
         }
 
-        public static Map__Entry<string, string> readDefault(XmlElement element)
+        public static IMapEntry<string, string> ReadDefault(XmlElement element)
         {
-            return Maps.entry(element.getAttribute("Extension"), element.getAttribute("ContentType"));
+            return Maps.Entry(element.GetAttribute("Extension"), element.GetAttribute("ContentType"));
         }
 
-        public static Map<string, string> readOverrides(XmlElementList children)
+        public static IMap<string, string> ReadOverrides(XmlElementList children)
         {
-            return Maps.toMap(children, new ContentTypesXml__Anonymous_1());
+            return Maps.ToMap(children, new ContentTypesXmlAnonymous1());
         }
 
-        public static Map__Entry<string, string> readOverride(XmlElement element)
+        public static IMapEntry<string, string> ReadOverride(XmlElement element)
         {
-            return Maps.entry(Strings.trimLeft(element.getAttribute("PartName"), '/'), element.getAttribute("ContentType"));
+            return Maps.Entry(Strings.TrimLeft(element.GetAttribute("PartName"), '/'), element.GetAttribute("ContentType"));
         }
     }
 }

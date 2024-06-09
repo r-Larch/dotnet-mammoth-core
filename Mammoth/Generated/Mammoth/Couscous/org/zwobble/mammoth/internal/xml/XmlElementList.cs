@@ -4,22 +4,22 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
-    internal class XmlElementList : Iterable<XmlElement> {
-        private List<XmlElement> _elements;
+    internal class XmlElementList : ITerable<XmlElement> {
+        private IList<XmlElement> _elements;
 
-        internal XmlElementList(List<XmlElement> elements)
+        internal XmlElementList(IList<XmlElement> elements)
         {
             _elements = elements;
         }
 
-        public Iterator<XmlElement> iterator()
+        public ITerator<XmlElement> Iterator()
         {
-            return (_elements).iterator();
+            return (_elements).Iterator();
         }
 
-        public XmlElementList findChildren(string name)
+        public XmlElementList FindChildren(string name)
         {
-            return new XmlElementList(Lists.eagerFlatMap(_elements, new XmlElementList__Anonymous_0(name)));
+            return new XmlElementList(Lists.EagerFlatMap(_elements, new XmlElementListAnonymous0(name)));
         }
     }
 }

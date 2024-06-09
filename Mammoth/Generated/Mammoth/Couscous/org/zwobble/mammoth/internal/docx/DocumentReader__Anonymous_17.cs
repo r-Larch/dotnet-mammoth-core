@@ -3,24 +3,24 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal static class DocumentReader__Anonymous_17 {
+    internal static class DocumentReaderAnonymous17 {
     }
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class DocumentReader__Anonymous_17<T> : Function<XmlElement, T> {
+    internal class DocumentReaderAnonymous17<T> : IFunction<XmlElement, T> {
         private BodyXmlReader _bodyReader;
-        private BiFunction<XmlElement, BodyXmlReader, T> _readPart;
+        private IBiFunction<XmlElement, BodyXmlReader, T> _readPart;
 
-        internal DocumentReader__Anonymous_17(BiFunction<XmlElement, BodyXmlReader, T> readPart, BodyXmlReader bodyReader)
+        internal DocumentReaderAnonymous17(IBiFunction<XmlElement, BodyXmlReader, T> readPart, BodyXmlReader bodyReader)
         {
             _readPart = readPart;
             _bodyReader = bodyReader;
         }
 
-        public T apply(XmlElement root)
+        public T Apply(XmlElement root)
         {
-            return (_readPart).apply(root, _bodyReader);
+            return (_readPart).Apply(root, _bodyReader);
         }
     }
 }

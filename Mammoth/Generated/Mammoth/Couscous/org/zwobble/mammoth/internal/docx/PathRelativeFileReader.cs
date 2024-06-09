@@ -5,46 +5,46 @@ using Mammoth.Couscous.java.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class PathRelativeFileReader : FileReader {
-        private Optional<Path> _path;
+    internal class PathRelativeFileReader : IFileReader {
+        private IOptional<Path> _path;
 
-        internal PathRelativeFileReader(Optional<Path> path)
+        internal PathRelativeFileReader(IOptional<Path> path)
         {
             _path = path;
         }
 
-        public InputStream getInputStream(string uri)
+        public INputStream GetInputStream(string uri)
         {
             try {
-                var absoluteUri = asAbsoluteUri(uri);
-                if (absoluteUri.isPresent()) {
-                    return open(absoluteUri.get());
+                var absoluteUri = AsAbsoluteUri(uri);
+                if (absoluteUri.IsPresent()) {
+                    return Open(absoluteUri.Get());
                 }
 
-                if ((_path).isPresent()) {
-                    return open((((_path).get()).toUri()).resolve(uri));
+                if ((_path).IsPresent()) {
+                    return Open((((_path).Get()).ToUri()).Resolve(uri));
                 }
 
-                throw new IOException("path of document is unknown, but is required for relative URI");
+                throw new IoException("path of document is unknown, but is required for relative URI");
             }
-            catch (IOException exception) {
-                throw new IOException((("could not open external image '" + uri) + "': ") + exception.getMessage());
+            catch (IoException exception) {
+                throw new IoException((("could not open external image '" + uri) + "': ") + exception.GetMessage());
             }
         }
 
-        public static InputStream open(URI uri)
+        public static INputStream Open(Uri uri)
         {
-            return (uri.toURL()).openStream();
+            return (uri.ToUrl()).OpenStream();
         }
 
-        public static Optional<URI> asAbsoluteUri(string uriString)
+        public static IOptional<Uri> AsAbsoluteUri(string uriString)
         {
             try {
-                var uri = new URI(uriString);
-                return uri.isAbsolute() ? Optional.of(uri) : Optional.empty<URI>();
+                var uri = new Uri(uriString);
+                return uri.IsAbsolute() ? Optional.Of(uri) : Optional.Empty<Uri>();
             }
-            catch (URISyntaxException exception) {
-                return Optional.empty<URI>();
+            catch (UriSyntaxException exception) {
+                return Optional.Empty<Uri>();
             }
         }
     }

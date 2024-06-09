@@ -4,29 +4,29 @@ using Mammoth.Couscous.java.util.regex;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class EscapeSequences {
-        private static Pattern _PATTERN;
+        private static Pattern _pattern;
 
         static EscapeSequences()
         {
-            _PATTERN = Pattern.compile("\\\\(.)");
+            _pattern = Pattern.Compile("\\\\(.)");
         }
 
-        public static string decode(string value)
+        public static string Decode(string value)
         {
-            var matcher = (_PATTERN).matcher(value);
+            var matcher = (_pattern).Matcher(value);
             var decoded = new StringBuilder();
             var lastIndex = 0;
-            while (matcher.find()) {
-                decoded.append(value.Substring(lastIndex, matcher.start() - lastIndex));
-                decoded.append(escapeSequence(matcher.group(1)));
-                lastIndex = matcher.end();
+            while (matcher.Find()) {
+                decoded.Append(value.Substring(lastIndex, matcher.Start() - lastIndex));
+                decoded.Append(EscapeSequence(matcher.Group(1)));
+                lastIndex = matcher.End();
             }
 
-            decoded.append(value.Substring(lastIndex, (value.Length) - lastIndex));
-            return decoded.toString();
+            decoded.Append(value.Substring(lastIndex, (value.Length) - lastIndex));
+            return decoded.ToString();
         }
 
-        public static char escapeSequence(string code)
+        public static char EscapeSequence(string code)
         {
             switch (code) {
                 case "n":
@@ -36,7 +36,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
                 case "t":
                     return '\t';
                 default:
-                    return code.charAt(0);
+                    return code.CharAt(0);
             }
         }
     }

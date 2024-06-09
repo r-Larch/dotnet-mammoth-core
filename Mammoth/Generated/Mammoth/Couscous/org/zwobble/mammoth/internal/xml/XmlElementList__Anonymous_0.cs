@@ -3,17 +3,17 @@ using Mammoth.Couscous.java.util.function;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
-    internal class XmlElementList__Anonymous_0 : Function<XmlElement, Iterable<XmlElement>> {
+    internal class XmlElementListAnonymous0 : IFunction<XmlElement, ITerable<XmlElement>> {
         private string _name;
 
-        internal XmlElementList__Anonymous_0(string name)
+        internal XmlElementListAnonymous0(string name)
         {
             _name = name;
         }
 
-        public Iterable<XmlElement> apply(XmlElement element)
+        public ITerable<XmlElement> Apply(XmlElement element)
         {
-            return element.findChildren(_name);
+            return element.FindChildren(_name);
         }
     }
 }

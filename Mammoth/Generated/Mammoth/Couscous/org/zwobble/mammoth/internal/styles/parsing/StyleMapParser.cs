@@ -5,82 +5,82 @@ using Mammoth.Couscous.java.util.function;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class StyleMapParser {
-        public static StyleMap parse(string input)
+        public static StyleMap Parse(string input)
         {
-            return parseStyleMappings(Arrays.asList(input.split("\\r?\\n")));
+            return ParseStyleMappings(Arrays.AsList(JavaStringExtensions.Split(input, "\\r?\\n")));
         }
 
-        public static StyleMap parseStyleMappings(List<string> lines)
+        public static StyleMap ParseStyleMappings(IList<string> lines)
         {
-            var styleMap = StyleMap.builder();
+            var styleMap = StyleMap.Builder();
             {
                 var lineIndex = 0;
-                while (lineIndex < lines.size()) {
-                    var line = lines.get(lineIndex);
+                while (lineIndex < lines.Size()) {
+                    var line = lines.Get(lineIndex);
                     try {
-                        handleLine(styleMap, line);
+                        HandleLine(styleMap, line);
                     }
                     catch (LineParseException exception) {
-                        throw new ParseException(generateErrorMessage(line, lineIndex + 1, exception.getCharacterIndex(), exception.getMessage()));
+                        throw new ParseException(GenerateErrorMessage(line, lineIndex + 1, exception.GetCharacterIndex(), exception.Message));
                     }
 
                     lineIndex = lineIndex + 1;
                 }
             }
-            return styleMap.build();
+            return styleMap.Build();
         }
 
-        public static void handleLine(StyleMapBuilder styleMap, string line)
+        public static void HandleLine(StyleMapBuilder styleMap, string line)
         {
-            if (line.startsWith("#")) {
+            if (JavaStringExtensions.StartsWith(line, "#")) {
                 return;
             }
 
-            line = line.trim();
-            if (line.isEmpty()) {
+            line = JavaStringExtensions.Trim(line);
+            if (line.IsEmpty()) {
                 return;
             }
 
-            (parseStyleMapping(line)).accept(styleMap);
+            (ParseStyleMapping(line)).Accept(styleMap);
         }
 
-        public static Consumer<StyleMapBuilder> parseStyleMapping(string line)
+        public static IConsumer<StyleMapBuilder> ParseStyleMapping(string line)
         {
-            var tokens = StyleMappingTokeniser.tokenise(line);
-            var documentMatcher = DocumentMatcherParser.parse(tokens);
-            tokens.skip(TokenType._WHITESPACE);
-            tokens.skip(TokenType._SYMBOL, "=>");
-            var htmlPath = parseHtmlPath(tokens);
-            tokens.skip(TokenType._EOF);
-            return new StyleMapParser__Anonymous_0(documentMatcher, htmlPath);
+            var tokens = StyleMappingTokeniser.Tokenise(line);
+            var documentMatcher = DocumentMatcherParser.Parse(tokens);
+            tokens.Skip(TokenType.Whitespace);
+            tokens.Skip(TokenType.Symbol, "=>");
+            var htmlPath = ParseHtmlPath(tokens);
+            tokens.Skip(TokenType.Eof);
+            return new StyleMapParserAnonymous0(documentMatcher, htmlPath);
         }
 
-        public static HtmlPath parseHtmlPath(TokenIterator<TokenType> tokens)
+        public static IHtmlPath ParseHtmlPath(TokenIterator<TokenType> tokens)
         {
-            if (tokens.peekTokenType() == TokenType._EOF) {
-                return HtmlPath_static._EMPTY;
+            if (tokens.PeekTokenType() == TokenType.Eof) {
+                return HtmlPathStatic.Empty;
             }
 
-            tokens.skip(TokenType._WHITESPACE);
-            return HtmlPathParser.parse(tokens);
+            tokens.Skip(TokenType.Whitespace);
+            return HtmlPathParser.Parse(tokens);
         }
 
-        public static string generateErrorMessage(string line, int lineNumber, int characterIndex, string message)
+        public static string GenerateErrorMessage(string line, int lineNumber, int characterIndex, string message)
         {
-            return ((((((((("error reading style map at line " + lineNumber) + ", character ") + (characterIndex + 1)) + ": ") + message) + "\n\n") + line) + "\n") + repeatString(" ", characterIndex)) + "^";
+            return ((((((((("error reading style map at line " + lineNumber) + ", character ") + (characterIndex + 1)) + ": ") + message) + "\n\n") + line) + "\n") + RepeatString(" ", characterIndex)) + "^";
         }
 
-        public static string repeatString(string value, int times)
+        public static string RepeatString(string value, int times)
         {
             var builder = new StringBuilder();
             {
                 var i = 0;
                 while (i < times) {
-                    builder.append(value);
+                    builder.Append(value);
                     i = i + 1;
                 }
             }
-            return builder.toString();
+            return builder.ToString();
         }
     }
 }

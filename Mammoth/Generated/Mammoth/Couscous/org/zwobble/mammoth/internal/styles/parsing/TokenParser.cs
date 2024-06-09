@@ -3,29 +3,29 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class TokenParser {
-        public static Optional<string> parseClassName(TokenIterator<TokenType> tokens)
+        public static IOptional<string> ParseClassName(TokenIterator<TokenType> tokens)
         {
-            if (tokens.trySkip(TokenType._SYMBOL, ".")) {
-                return Optional.of(parseIdentifier(tokens));
+            if (tokens.TrySkip(TokenType.Symbol, ".")) {
+                return Optional.Of(ParseIdentifier(tokens));
             }
 
-            return Optional.empty<string>();
+            return Optional.Empty<string>();
         }
 
-        public static string parseIdentifier(TokenIterator<TokenType> tokens)
+        public static string ParseIdentifier(TokenIterator<TokenType> tokens)
         {
-            return EscapeSequences.decode(tokens.nextValue(TokenType._IDENTIFIER));
+            return EscapeSequences.Decode(tokens.NextValue(TokenType.Identifier));
         }
 
-        public static string parseString(TokenIterator<TokenType> tokens)
+        public static string ParseString(TokenIterator<TokenType> tokens)
         {
-            return parseStringToken(tokens.next(TokenType._STRING));
+            return ParseStringToken(tokens.Next(TokenType.String));
         }
 
-        public static string parseStringToken(Token<TokenType> token)
+        public static string ParseStringToken(Token<TokenType> token)
         {
-            var value = token.getValue();
-            return EscapeSequences.decode(value.Substring(1, ((value.Length) - 1) - 1));
+            var value = token.GetValue();
+            return EscapeSequences.Decode(value.Substring(1, ((value.Length) - 1) - 1));
         }
     }
 }

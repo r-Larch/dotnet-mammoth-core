@@ -4,10 +4,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_18 : Function<HasChildren, List<DocumentElement>> {
-        public List<DocumentElement> apply(HasChildren arg0)
+    internal class InternalDocumentConverterAnonymous18 : IFunction<IHasChildren, IList<IDocumentElement>> {
+        public IList<IDocumentElement> Apply(IHasChildren arg0)
         {
-            return arg0.getChildren();
+            return arg0.GetChildren();
         }
     }
 }

@@ -4,19 +4,19 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_3 : SupplierWithException<InternalResult<string>, IOException> {
+    internal class InternalDocumentConverterAnonymous3 : ISupplierWithException<InternalResult<string>, IoException> {
         private File _file;
-        private InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+        private InternalDocumentConverter _thisOrgZwobbleMammothInternalInternalDocumentConverter;
 
-        internal InternalDocumentConverter__Anonymous_3(File file, InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter)
+        internal InternalDocumentConverterAnonymous3(File file, InternalDocumentConverter thisOrgZwobbleMammothInternalInternalDocumentConverter)
         {
             _file = file;
-            _this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+            _thisOrgZwobbleMammothInternalInternalDocumentConverter = thisOrgZwobbleMammothInternalInternalDocumentConverter;
         }
 
-        public InternalResult<string> get()
+        public InternalResult<string> Get()
         {
-            return InternalDocumentConverter.withDocxFile(_file, new InternalDocumentConverter__Anonymous_2(_this_org__zwobble__mammoth__internal__InternalDocumentConverter, _file));
+            return InternalDocumentConverter.WithDocxFile(_file, new InternalDocumentConverterAnonymous2(_thisOrgZwobbleMammothInternalInternalDocumentConverter, _file));
         }
     }
 }

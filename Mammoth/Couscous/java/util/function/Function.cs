@@ -1,5 +1,5 @@
 namespace Mammoth.Couscous.java.util.function {
-    internal interface Function<T, U> {
-        U apply(T arg);
+    internal interface IFunction<T, TU> {
+        TU Apply(T arg);
     }
 }

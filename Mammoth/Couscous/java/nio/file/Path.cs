@@ -10,9 +10,9 @@ namespace Mammoth.Couscous.java.nio.file {
             _path = path;
         }
 
-        internal URI toUri()
+        internal Uri ToUri()
         {
-            return new URI(_path);
+            return new Uri(_path);
         }
     }
 }
