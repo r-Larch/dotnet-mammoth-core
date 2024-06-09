@@ -6,17 +6,17 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                 return uri.Substring(1);
             }
 
-            return (@base + "/") + uri;
+            return $"{@base}/{uri}";
         }
 
         public static string ReplaceFragment(string uri, string fragment)
         {
             var hashIndex = JavaStringExtensions.IndexOf(uri, "#");
             if (hashIndex != -1) {
-                uri = (uri.Substring(0, hashIndex - 0));
+                uri = uri.Substring(0, hashIndex - 0);
             }
 
-            return (uri + "#") + fragment;
+            return $"{uri}#{fragment}";
         }
     }
 }

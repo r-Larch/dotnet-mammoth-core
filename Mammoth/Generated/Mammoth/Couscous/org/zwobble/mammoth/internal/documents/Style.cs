@@ -2,30 +2,21 @@ using Mammoth.Couscous.java.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class Style {
-        private IOptional<string> _name;
-        private string _styleId;
-
-        internal Style(string styleId, IOptional<string> name)
-        {
-            _styleId = styleId;
-            _name = name;
-        }
-
+    internal class Style(string styleId, IOptional<string> name) {
         public string GetStyleId()
         {
-            return _styleId;
+            return styleId;
         }
 
         public IOptional<string> GetName()
         {
-            return _name;
+            return name;
         }
 
         public string Describe()
         {
-            var styleIdDescription = "Style ID: " + _styleId;
-            return ((_name).Map(new StyleAnonymous0(styleIdDescription))).OrElse(styleIdDescription);
+            var styleIdDescription = $"Style ID: {styleId}";
+            return name.Map(new StyleAnonymous0(styleIdDescription)).OrElse(styleIdDescription);
         }
     }
 }

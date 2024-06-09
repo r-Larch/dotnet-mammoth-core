@@ -6,7 +6,7 @@ using Mammoth.Couscous.java.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class PathRelativeFileReader : IFileReader {
-        private IOptional<Path> _path;
+        private readonly IOptional<Path> _path;
 
         internal PathRelativeFileReader(IOptional<Path> path)
         {
@@ -21,20 +21,20 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                     return Open(absoluteUri.Get());
                 }
 
-                if ((_path).IsPresent()) {
-                    return Open((((_path).Get()).ToUri()).Resolve(uri));
+                if (_path.IsPresent()) {
+                    return Open(_path.Get().ToUri().Resolve(uri));
                 }
 
                 throw new IoException("path of document is unknown, but is required for relative URI");
             }
             catch (IoException exception) {
-                throw new IoException((("could not open external image '" + uri) + "': ") + exception.GetMessage());
+                throw new IoException($"could not open external image '{uri}': {exception.GetMessage()}");
             }
         }
 
         public static INputStream Open(Uri uri)
         {
-            return (uri.ToUrl()).OpenStream();
+            return uri.ToUrl().OpenStream();
         }
 
         public static IOptional<Uri> AsAbsoluteUri(string uriString)

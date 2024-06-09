@@ -5,14 +5,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class HtmlPathStatic {
-        public static IHtmlPath Empty;
-        public static IHtmlPath Ignore;
-
-        static HtmlPathStatic()
-        {
-            Empty = new HtmlPathElements(Lists.List<HtmlPathElement>());
-            Ignore = styles.Ignore.Instance;
-        }
+        public static IHtmlPath Empty = new HtmlPathElements(Lists.List<HtmlPathElement>());
+        public static IHtmlPath Ignore = styles.Ignore.Instance;
 
         public static IHtmlPath Elements(HtmlPathElement[] elements)
         {

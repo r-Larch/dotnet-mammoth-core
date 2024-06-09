@@ -84,16 +84,16 @@ namespace Mammoth {
                 this._func = func;
             }
 
-            public IMap<string, string> Convert(Couscous.org.zwobble.mammoth.images.IMage image)
+            public IMap<string, string> Convert(Couscous.org.zwobble.mammoth.images.IImage image)
             {
                 return ToJava.DictionaryToMap(_func(new Image(image)));
             }
         }
 
         internal class Image : IImage {
-            private readonly Couscous.org.zwobble.mammoth.images.IMage _image;
+            private readonly Couscous.org.zwobble.mammoth.images.IImage _image;
 
-            internal Image(Couscous.org.zwobble.mammoth.images.IMage image)
+            internal Image(Couscous.org.zwobble.mammoth.images.IImage image)
             {
                 this._image = image;
             }

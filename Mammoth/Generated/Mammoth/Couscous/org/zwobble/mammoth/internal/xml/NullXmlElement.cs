@@ -4,12 +4,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
     internal class NullXmlElement : IXmlElementLike {
-        public static IXmlElementLike Instance;
-
-        static NullXmlElement()
-        {
-            Instance = new NullXmlElement();
-        }
+        public static IXmlElementLike Instance = new NullXmlElement();
 
         public bool HasChild(string name)
         {

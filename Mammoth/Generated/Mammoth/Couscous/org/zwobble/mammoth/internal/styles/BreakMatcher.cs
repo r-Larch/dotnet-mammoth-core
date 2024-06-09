@@ -3,17 +3,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class BreakMatcher : IDocumentElementMatcher<Break> {
-        public static BreakMatcher LineBreak;
-        public static BreakMatcher PageBreak;
-        public static BreakMatcher ColumnBreak;
-        private BreakType _breakType;
-
-        static BreakMatcher()
-        {
-            LineBreak = new BreakMatcher(BreakType.Line);
-            PageBreak = new BreakMatcher(BreakType.Page);
-            ColumnBreak = new BreakMatcher(BreakType.Column);
-        }
+        public static BreakMatcher LineBreak = new(BreakType.Line);
+        public static BreakMatcher PageBreak = new(BreakType.Page);
+        public static BreakMatcher ColumnBreak = new(BreakType.Column);
+        private readonly BreakType _breakType;
 
         internal BreakMatcher(BreakType breakType)
         {
@@ -22,7 +15,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
 
         public bool Matches(Break element)
         {
-            return (element.Type) == (_breakType);
+            return element.Type == _breakType;
         }
     }
 }

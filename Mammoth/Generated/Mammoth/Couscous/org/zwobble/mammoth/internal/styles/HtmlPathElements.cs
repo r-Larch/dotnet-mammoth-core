@@ -5,18 +5,11 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class HtmlPathElements : IHtmlPath {
-        private IList<HtmlPathElement> _elements;
-
-        internal HtmlPathElements(IList<HtmlPathElement> elements)
-        {
-            _elements = elements;
-        }
-
+    internal class HtmlPathElements(IList<HtmlPathElement> elements) : IHtmlPath {
         public ISupplier<IList<IHtmlNode>> Wrap(ISupplier<IList<IHtmlNode>> generateNodes)
         {
             {
-                var couscousDesugarForeachToFor6 = (Lists.Reversed(_elements)).Iterator();
+                var couscousDesugarForeachToFor6 = Lists.Reversed(elements).Iterator();
                 while (couscousDesugarForeachToFor6.HasNext()) {
                     var element = couscousDesugarForeachToFor6.Next();
                     generateNodes = element.Wrap(generateNodes);

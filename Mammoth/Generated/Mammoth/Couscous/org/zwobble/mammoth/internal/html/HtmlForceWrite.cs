@@ -1,11 +1,6 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
     internal class HtmlForceWrite : IHtmlNode {
-        public static HtmlForceWrite ForceWrite;
-
-        static HtmlForceWrite()
-        {
-            ForceWrite = new HtmlForceWrite();
-        }
+        public static HtmlForceWrite ForceWrite = new();
 
         public void Accept(IHtmlNodeVisitor visitor)
         {

@@ -11,14 +11,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
             return new RegexTokeniserTokenRule<T>(type, Pattern.Compile(regex));
         }
     }
-}
 
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class RegexTokeniser<T> {
-        private Pattern _pattern;
-        private IList<T> _rules;
+        private readonly Pattern _pattern;
+        private readonly IList<T> _rules;
 
-        internal RegexTokeniser(T unknown, IList<RegexTokeniserTokenRule<T>> rules)
+        public RegexTokeniser(T unknown, IList<RegexTokeniserTokenRule<T>> rules)
         {
             IList<RegexTokeniserTokenRule<T>> allRules = new ArrayList<RegexTokeniserTokenRule<T>>(rules);
             allRules.Add(RegexTokeniser.Rule(unknown, "."));
@@ -28,12 +26,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
 
         public IList<Token<T>> Tokenise(string value)
         {
-            var matcher = (_pattern).Matcher(value);
+            var matcher = _pattern.Matcher(value);
             IList<Token<T>> tokens = new ArrayList<Token<T>>();
             while (matcher.LookingAt()) {
-                var groupIndex = Iterables.TryFind(Iterables.IntRange(0, (_rules).Size()), new RegexTokeniserAnonymous2(matcher));
+                var groupIndex = Iterables.TryFind(Iterables.IntRange(0, _rules.Size()), new RegexTokeniserAnonymous2(matcher));
                 if (groupIndex.IsPresent()) {
-                    var tokenType = (_rules).Get(groupIndex.Get());
+                    var tokenType = _rules.Get(groupIndex.Get());
                     tokens.Add(new Token<T>(matcher.RegionStart(), tokenType, matcher.Group()));
                     matcher.Region(matcher.End(), value.Length);
                 }

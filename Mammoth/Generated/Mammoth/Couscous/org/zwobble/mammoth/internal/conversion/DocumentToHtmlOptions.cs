@@ -4,40 +4,26 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtmlOptions {
-        public static DocumentToHtmlOptions Default;
-        private bool _disableDefaultStyleMap;
-        private bool _disableEmbeddedStyleMap;
-        private StyleMap _embeddedStyleMap;
-        private string _idPrefix;
-        private IMageConverterImgElement _imageConverter;
-        private bool _preserveEmptyParagraphs;
-        private StyleMap _styleMap;
+    internal class DocumentToHtmlOptions(
+        string idPrefix,
+        bool preserveEmptyParagraphs,
+        StyleMap map,
+        StyleMap embeddedStyleMap,
+        bool disableDefaultStyleMap,
+        bool disableEmbeddedStyleMap,
+        IMageConverterImgElement imageConverter
+    ) {
+        public static DocumentToHtmlOptions Default = new("", false, styles.StyleMap.Empty, styles.StyleMap.Empty, false, false, new DocumentToHtmlOptionsAnonymous1());
 
-        static DocumentToHtmlOptions()
-        {
-            Default = new DocumentToHtmlOptions("", false, styles.StyleMap.Empty, styles.StyleMap.Empty, false, false, new DocumentToHtmlOptionsAnonymous1());
-        }
-
-        internal DocumentToHtmlOptions(string idPrefix, bool preserveEmptyParagraphs, StyleMap styleMap, StyleMap embeddedStyleMap, bool disableDefaultStyleMap, bool disableEmbeddedStyleMap, IMageConverterImgElement imageConverter)
-        {
-            _idPrefix = idPrefix;
-            _preserveEmptyParagraphs = preserveEmptyParagraphs;
-            _styleMap = styleMap;
-            _embeddedStyleMap = embeddedStyleMap;
-            _disableDefaultStyleMap = disableDefaultStyleMap;
-            _disableEmbeddedStyleMap = disableEmbeddedStyleMap;
-            _imageConverter = imageConverter;
-        }
 
         public DocumentToHtmlOptions IdPrefix(string prefix)
         {
-            return new DocumentToHtmlOptions(prefix, _preserveEmptyParagraphs, _styleMap, _embeddedStyleMap, _disableDefaultStyleMap, _disableEmbeddedStyleMap, _imageConverter);
+            return new DocumentToHtmlOptions(prefix, preserveEmptyParagraphs, map, embeddedStyleMap, disableDefaultStyleMap, disableEmbeddedStyleMap, imageConverter);
         }
 
         public DocumentToHtmlOptions PreserveEmptyParagraphs()
         {
-            return new DocumentToHtmlOptions(_idPrefix, true, _styleMap, _embeddedStyleMap, _disableDefaultStyleMap, _disableEmbeddedStyleMap, _imageConverter);
+            return new DocumentToHtmlOptions(idPrefix, true, map, embeddedStyleMap, disableDefaultStyleMap, disableEmbeddedStyleMap, imageConverter);
         }
 
         public DocumentToHtmlOptions AddStyleMap(string styleMap)
@@ -47,57 +33,57 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
 
         public DocumentToHtmlOptions AddStyleMap(StyleMap styleMap)
         {
-            return new DocumentToHtmlOptions(_idPrefix, _preserveEmptyParagraphs, (_styleMap).Update(styleMap), _embeddedStyleMap, _disableDefaultStyleMap, _disableEmbeddedStyleMap, _imageConverter);
+            return new DocumentToHtmlOptions(idPrefix, preserveEmptyParagraphs, map.Update(styleMap), embeddedStyleMap, disableDefaultStyleMap, disableEmbeddedStyleMap, imageConverter);
         }
 
         public DocumentToHtmlOptions DisableDefaultStyleMap()
         {
-            return new DocumentToHtmlOptions(_idPrefix, _preserveEmptyParagraphs, _styleMap, _embeddedStyleMap, true, _disableEmbeddedStyleMap, _imageConverter);
+            return new DocumentToHtmlOptions(idPrefix, preserveEmptyParagraphs, map, embeddedStyleMap, true, disableEmbeddedStyleMap, imageConverter);
         }
 
         public DocumentToHtmlOptions DisableEmbeddedStyleMap()
         {
-            return new DocumentToHtmlOptions(_idPrefix, _preserveEmptyParagraphs, _styleMap, _embeddedStyleMap, _disableDefaultStyleMap, true, _imageConverter);
+            return new DocumentToHtmlOptions(idPrefix, preserveEmptyParagraphs, map, embeddedStyleMap, disableDefaultStyleMap, true, imageConverter);
         }
 
         public DocumentToHtmlOptions AddEmbeddedStyleMap(StyleMap embeddedStyleMap)
         {
-            return new DocumentToHtmlOptions(_idPrefix, _preserveEmptyParagraphs, _styleMap, embeddedStyleMap, _disableDefaultStyleMap, _disableEmbeddedStyleMap, _imageConverter);
+            return new DocumentToHtmlOptions(idPrefix, preserveEmptyParagraphs, map, embeddedStyleMap, disableDefaultStyleMap, disableEmbeddedStyleMap, imageConverter);
         }
 
         public DocumentToHtmlOptions ImageConverter(IMageConverterImgElement imageConverter)
         {
-            return new DocumentToHtmlOptions(_idPrefix, _preserveEmptyParagraphs, _styleMap, _embeddedStyleMap, _disableDefaultStyleMap, _disableEmbeddedStyleMap, imageConverter);
+            return new DocumentToHtmlOptions(idPrefix, preserveEmptyParagraphs, map, embeddedStyleMap, disableDefaultStyleMap, disableEmbeddedStyleMap, imageConverter);
         }
 
         public string IdPrefix()
         {
-            return _idPrefix;
+            return idPrefix;
         }
 
         public bool ShouldPreserveEmptyParagraphs()
         {
-            return _preserveEmptyParagraphs;
+            return preserveEmptyParagraphs;
         }
 
         public StyleMap StyleMap()
         {
             var styleMap = styles.StyleMap.Empty;
-            if (!_disableDefaultStyleMap) {
+            if (!disableDefaultStyleMap) {
                 styleMap = styleMap.Update(DefaultStyles.DefaultStyleMap);
             }
 
-            if (!_disableEmbeddedStyleMap) {
-                styleMap = styleMap.Update(_embeddedStyleMap);
+            if (!disableEmbeddedStyleMap) {
+                styleMap = styleMap.Update(embeddedStyleMap);
             }
 
-            styleMap = styleMap.Update(_styleMap);
+            styleMap = styleMap.Update(map);
             return styleMap;
         }
 
         public IMageConverterImgElement ImageConverter()
         {
-            return _imageConverter;
+            return imageConverter;
         }
     }
 }

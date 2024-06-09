@@ -20,7 +20,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
         public static IMapEntry<string, Style> ReadStyle(XmlElement element)
         {
             var styleId = element.GetAttribute("w:styleId");
-            var styleName = (element.FindChildOrEmpty("w:name")).GetAttributeOrNone("w:val");
+            var styleName = element.FindChildOrEmpty("w:name").GetAttributeOrNone("w:val");
             return Maps.Entry(styleId, new Style(styleId, styleName));
         }
     }

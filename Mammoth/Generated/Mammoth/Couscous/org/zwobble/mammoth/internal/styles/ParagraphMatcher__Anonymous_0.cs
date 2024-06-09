@@ -6,7 +6,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class ParagraphMatcherAnonymous0 : IBiPredicate<NumberingLevel, NumberingLevel> {
         public bool Test(NumberingLevel first, NumberingLevel second)
         {
-            return first.IsOrdered() == second.IsOrdered() && (first.GetLevelIndex()).EqualsIgnoreCase(second.GetLevelIndex());
+            return first.IsOrdered() == second.IsOrdered() && first.GetLevelIndex().EqualsIgnoreCase(second.GetLevelIndex());
         }
     }
 }

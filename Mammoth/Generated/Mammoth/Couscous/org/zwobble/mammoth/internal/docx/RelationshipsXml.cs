@@ -1,3 +1,4 @@
+using Mammoth.Couscous.java.util.function;
 using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
@@ -15,6 +16,13 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
             var target = element.GetAttribute("Target");
             var type = element.GetAttribute("Type");
             return new Relationship(relationshipId, target, type);
+        }
+    }
+
+    internal class RelationshipsXmlAnonymous0 : IFunction<XmlElement, Relationship> {
+        public Relationship Apply(XmlElement arg0)
+        {
+            return RelationshipsXml.ReadRelationship(arg0);
         }
     }
 }

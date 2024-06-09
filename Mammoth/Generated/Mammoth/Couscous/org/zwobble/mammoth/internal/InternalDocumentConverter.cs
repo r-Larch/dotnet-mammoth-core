@@ -12,13 +12,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter {
-        public DocumentToHtmlOptions Options;
-
-        internal InternalDocumentConverter(DocumentToHtmlOptions options)
-        {
-            Options = options;
-        }
+    internal class InternalDocumentConverter(DocumentToHtmlOptions options) {
+        public DocumentToHtmlOptions Options = options;
 
         public InternalResult<string> ConvertToHtml(INputStream stream)
         {
@@ -32,9 +27,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
 
         public InternalResult<string> ConvertToHtml(IOptional<Path> path, IArchive zipFile)
         {
-            var styleMap = (ReadEmbeddedStyleMap(zipFile)).Map(new InternalDocumentConverterAnonymous4());
-            var conversionOptions = (styleMap.Map(new InternalDocumentConverterAnonymous5(this))).OrElse(Options);
-            return ((((DocumentReader.ReadDocument(path, zipFile)).FlatMap(new InternalDocumentConverterAnonymous6(conversionOptions))).Map(new InternalDocumentConverterAnonymous7())).Map(new InternalDocumentConverterAnonymous8())).Map(new InternalDocumentConverterAnonymous9());
+            var styleMap = ReadEmbeddedStyleMap(zipFile).Map(new InternalDocumentConverterAnonymous4());
+            var conversionOptions = styleMap.Map(new InternalDocumentConverterAnonymous5(this)).OrElse(Options);
+            return DocumentReader.ReadDocument(path, zipFile).FlatMap(new InternalDocumentConverterAnonymous6(conversionOptions)).Map(new InternalDocumentConverterAnonymous7()).Map(new InternalDocumentConverterAnonymous8()).Map(new InternalDocumentConverterAnonymous9());
         }
 
         public IOptional<string> ReadEmbeddedStyleMap(IArchive zipFile)
@@ -54,7 +49,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
 
         public InternalResult<string> ExtractRawText(IOptional<Path> path, IArchive zipFile)
         {
-            return (DocumentReader.ReadDocument(path, zipFile)).Map(new InternalDocumentConverterAnonymous15());
+            return DocumentReader.ReadDocument(path, zipFile).Map(new InternalDocumentConverterAnonymous15());
         }
 
         public static T WithDocxFile<T>(File file, IFunction<IArchive, T> function)
@@ -91,7 +86,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
 
         public static string ExtractRawText(IDocumentElement node)
         {
-            return ((Casts.TryCast<Text>(typeof(Text), node)).Map(new InternalDocumentConverterAnonymous17())).OrElseGet(new InternalDocumentConverterAnonymous20(node));
+            return Casts.TryCast<Text>(typeof(Text), node).Map(new InternalDocumentConverterAnonymous17()).OrElseGet(new InternalDocumentConverterAnonymous20(node));
         }
     }
 }

@@ -1,15 +1,8 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
-    internal class XmlTextNode : IXmlNode {
-        private string _value;
-
-        internal XmlTextNode(string value)
-        {
-            _value = value;
-        }
-
+    internal class XmlTextNode(string value) : IXmlNode {
         public string InnerText()
         {
-            return _value;
+            return value;
         }
 
         public T Accept<T>(IXmlNodeVisitor<T> visitor)
@@ -19,12 +12,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
 
         public string GetValue()
         {
-            return _value;
+            return value;
         }
 
         public override string ToString()
         {
-            return ("XmlTextNode(value=" + _value) + ")";
+            return $"XmlTextNode(value={value})";
         }
     }
 }

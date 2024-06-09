@@ -5,12 +5,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
     internal class Html {
-        public static IHtmlNode ForceWrite;
+        public static IHtmlNode ForceWrite = HtmlForceWrite.ForceWrite;
 
-        static Html()
-        {
-            ForceWrite = HtmlForceWrite.ForceWrite;
-        }
 
         public static string Write(IList<IHtmlNode> nodes)
         {
@@ -107,12 +103,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
 
         public static bool TryCollapse(IList<IHtmlNode> collapsed, IHtmlNode node)
         {
-            return (Optionals.Map((Lists.TryGetLast(collapsed)).FlatMap(new HtmlAnonymous4()), Casts.TryCast<HtmlElement>(typeof(HtmlElement), node), new HtmlAnonymous5())).OrElse(false);
+            return Optionals.Map(Lists.TryGetLast(collapsed).FlatMap(new HtmlAnonymous4()), Casts.TryCast<HtmlElement>(typeof(HtmlElement), node), new HtmlAnonymous5()).OrElse(false);
         }
 
         public static bool IsMatch(HtmlElement first, HtmlElement second)
         {
-            return (second.GetTagNames()).Contains(first.GetTagName()) && (first.GetAttributes()).Equals(second.GetAttributes());
+            return second.GetTagNames().Contains(first.GetTagName()) && first.GetAttributes().Equals(second.GetAttributes());
         }
     }
 }

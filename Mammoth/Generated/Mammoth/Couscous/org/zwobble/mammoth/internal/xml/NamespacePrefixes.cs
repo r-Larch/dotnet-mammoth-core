@@ -4,17 +4,10 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
-    internal class NamespacePrefixes : ITerable<NamespacePrefix> {
-        private IMap<string, NamespacePrefix> _uriToPrefix;
-
-        internal NamespacePrefixes(IMap<string, NamespacePrefix> uriToPrefix)
-        {
-            _uriToPrefix = uriToPrefix;
-        }
-
+    internal class NamespacePrefixes(IMap<string, NamespacePrefix> uriToPrefix) : ITerable<NamespacePrefix> {
         public ITerator<NamespacePrefix> Iterator()
         {
-            return ((_uriToPrefix).Values()).Iterator();
+            return uriToPrefix.Values().Iterator();
         }
 
         public static NamespacePrefixesBuilder Builder()
@@ -24,7 +17,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
 
         public IOptional<NamespacePrefix> LookupUri(string uri)
         {
-            return Maps.Lookup(_uriToPrefix, uri);
+            return Maps.Lookup(uriToPrefix, uri);
         }
 
         public IOptional<NamespacePrefix> LookupPrefix(string prefix)
@@ -39,7 +32,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
 
         public IOptional<NamespacePrefix> LookupPrefix(IOptional<string> prefix)
         {
-            return Iterables.TryFind((_uriToPrefix).Values(), new NamespacePrefixesAnonymous0(prefix));
+            return Iterables.TryFind(uriToPrefix.Values(), new NamespacePrefixesAnonymous0(prefix));
         }
     }
 }

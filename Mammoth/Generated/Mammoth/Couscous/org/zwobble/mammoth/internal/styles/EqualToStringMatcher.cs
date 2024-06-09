@@ -1,15 +1,8 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class EqualToStringMatcher : IStringMatcher {
-        private string _value;
-
-        internal EqualToStringMatcher(string value)
+    internal class EqualToStringMatcher(string value) : IStringMatcher {
+        public bool Matches(string value1)
         {
-            _value = value;
-        }
-
-        public bool Matches(string value)
-        {
-            return (_value).EqualsIgnoreCase(value);
+            return value.EqualsIgnoreCase(value1);
         }
     }
 }

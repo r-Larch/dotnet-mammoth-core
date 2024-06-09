@@ -4,37 +4,30 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StyleMap {
-        public static StyleMap Empty;
-        private IOptional<IHtmlPath> _bold;
-        private IList<StyleMapping<Break>> _breakStyles;
-        private IOptional<IHtmlPath> _commentReference;
-        private IOptional<IHtmlPath> _italic;
-        private IList<StyleMapping<Paragraph>> _paragraphStyles;
-        private IList<StyleMapping<Run>> _runStyles;
-        private IOptional<IHtmlPath> _smallCaps;
-        private IOptional<IHtmlPath> _strikethrough;
-        private IList<StyleMapping<Table>> _tableStyles;
-        private IOptional<IHtmlPath> _underline;
+    internal class StyleMap(
+        IOptional<IHtmlPath> bold,
+        IOptional<IHtmlPath> italic,
+        IOptional<IHtmlPath> underline,
+        IOptional<IHtmlPath> strikethrough,
+        IOptional<IHtmlPath> smallCaps,
+        IOptional<IHtmlPath> commentReference,
+        IList<StyleMapping<Paragraph>> paragraphStyles,
+        IList<StyleMapping<Run>> runStyles,
+        IList<StyleMapping<Table>> tableStyles,
+        IList<StyleMapping<Break>> breakStyles
+    ) {
+        public static StyleMap Empty = new StyleMapBuilder().Build();
+        private readonly IOptional<IHtmlPath> _bold = bold;
+        private readonly IList<StyleMapping<Break>> _breakStyles = breakStyles;
+        private readonly IOptional<IHtmlPath> _commentReference = commentReference;
+        private readonly IOptional<IHtmlPath> _italic = italic;
+        private readonly IList<StyleMapping<Paragraph>> _paragraphStyles = paragraphStyles;
+        private readonly IList<StyleMapping<Run>> _runStyles = runStyles;
+        private readonly IOptional<IHtmlPath> _smallCaps = smallCaps;
+        private readonly IOptional<IHtmlPath> _strikethrough = strikethrough;
+        private readonly IList<StyleMapping<Table>> _tableStyles = tableStyles;
+        private readonly IOptional<IHtmlPath> _underline = underline;
 
-        static StyleMap()
-        {
-            Empty = (new StyleMapBuilder()).Build();
-        }
-
-        internal StyleMap(IOptional<IHtmlPath> bold, IOptional<IHtmlPath> italic, IOptional<IHtmlPath> underline, IOptional<IHtmlPath> strikethrough, IOptional<IHtmlPath> smallCaps, IOptional<IHtmlPath> commentReference, IList<StyleMapping<Paragraph>> paragraphStyles, IList<StyleMapping<Run>> runStyles, IList<StyleMapping<Table>> tableStyles, IList<StyleMapping<Break>> breakStyles)
-        {
-            _bold = bold;
-            _italic = italic;
-            _underline = underline;
-            _strikethrough = strikethrough;
-            _smallCaps = smallCaps;
-            _commentReference = commentReference;
-            _paragraphStyles = paragraphStyles;
-            _runStyles = runStyles;
-            _tableStyles = tableStyles;
-            _breakStyles = breakStyles;
-        }
 
         public static StyleMapBuilder Builder()
         {
@@ -83,22 +76,22 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
 
         public IOptional<IHtmlPath> GetParagraphHtmlPath(Paragraph paragraph)
         {
-            return (Iterables.TryFind(_paragraphStyles, new StyleMapAnonymous0(paragraph))).Map(new StyleMapAnonymous1());
+            return Iterables.TryFind(_paragraphStyles, new StyleMapAnonymous0(paragraph)).Map(new StyleMapAnonymous1());
         }
 
         public IOptional<IHtmlPath> GetRunHtmlPath(Run run)
         {
-            return (Iterables.TryFind(_runStyles, new StyleMapAnonymous2(run))).Map(new StyleMapAnonymous3());
+            return Iterables.TryFind(_runStyles, new StyleMapAnonymous2(run)).Map(new StyleMapAnonymous3());
         }
 
         public IOptional<IHtmlPath> GetTableHtmlPath(Table table)
         {
-            return (Iterables.TryFind(_tableStyles, new StyleMapAnonymous4(table))).Map(new StyleMapAnonymous5());
+            return Iterables.TryFind(_tableStyles, new StyleMapAnonymous4(table)).Map(new StyleMapAnonymous5());
         }
 
         public IOptional<IHtmlPath> GetBreakHtmlPath(Break breakElement)
         {
-            return (Iterables.TryFind(_breakStyles, new StyleMapAnonymous6(breakElement))).Map(new StyleMapAnonymous7());
+            return Iterables.TryFind(_breakStyles, new StyleMapAnonymous6(breakElement)).Map(new StyleMapAnonymous7());
         }
     }
 }

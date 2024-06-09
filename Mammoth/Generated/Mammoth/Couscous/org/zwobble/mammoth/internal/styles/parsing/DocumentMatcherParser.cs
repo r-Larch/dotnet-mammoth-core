@@ -35,7 +35,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
                     var breakMatcher = ParseBreakMatcher(tokens);
                     return new DocumentMatcherParserAnonymous9(breakMatcher);
                 default:
-                    throw LineParseException.Create(identifier, "Unrecognised document element: " + identifier);
+                    throw LineParseException.Create(identifier, $"Unrecognised document element: {identifier}");
             }
         }
 
@@ -88,7 +88,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
                 return new StartsWithStringMatcher(TokenParser.ParseString(tokens));
             }
 
-            throw LineParseException.Create(tokens.Next(), "Expected string matcher but got token " + (tokens.Next()).GetValue());
+            throw LineParseException.Create(tokens.Next(), $"Expected string matcher but got token {tokens.Next().GetValue()}");
         }
 
         public static IOptional<NumberingLevel> ParseNumbering(TokenIterator<TokenType> tokens)
@@ -96,7 +96,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
             if (tokens.TrySkip(TokenType.Symbol, ":")) {
                 var isOrdered = ParseListType(tokens);
                 tokens.Skip(TokenType.Symbol, "(");
-                var level = ((new BigInteger(tokens.NextValue(TokenType.Integer))).Subtract(BigInteger.One)).ToString();
+                var level = new BigInteger(tokens.NextValue(TokenType.Integer)).Subtract(BigInteger.One).ToString();
                 tokens.Skip(TokenType.Symbol, ")");
                 return Optional.Of(new NumberingLevel(level, isOrdered));
             }
@@ -107,14 +107,11 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
         public static bool ParseListType(TokenIterator<TokenType> tokens)
         {
             var listType = tokens.Next(TokenType.Identifier);
-            switch (listType.GetValue()) {
-                case "ordered-list":
-                    return true;
-                case "unordered-list":
-                    return false;
-                default:
-                    throw LineParseException.Create(listType, "Unrecognised list type: " + listType);
-            }
+            return listType.GetValue() switch {
+                "ordered-list" => true,
+                "unordered-list" => false,
+                _ => throw LineParseException.Create(listType, $"Unrecognised list type: {listType}")
+            };
         }
 
         public static BreakMatcher ParseBreakMatcher(TokenIterator<TokenType> tokens)
@@ -125,16 +122,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
             var stringToken = tokens.Next(TokenType.String);
             tokens.Skip(TokenType.Symbol, "]");
             var typeName = TokenParser.ParseStringToken(stringToken);
-            switch (typeName) {
-                case "line":
-                    return BreakMatcher.LineBreak;
-                case "page":
-                    return BreakMatcher.PageBreak;
-                case "column":
-                    return BreakMatcher.ColumnBreak;
-                default:
-                    throw LineParseException.Create(stringToken, "Unrecognised break type: " + typeName);
-            }
+            return typeName switch {
+                "line" => BreakMatcher.LineBreak,
+                "page" => BreakMatcher.PageBreak,
+                "column" => BreakMatcher.ColumnBreak,
+                _ => throw LineParseException.Create(stringToken, $"Unrecognised break type: {typeName}")
+            };
         }
     }
 }

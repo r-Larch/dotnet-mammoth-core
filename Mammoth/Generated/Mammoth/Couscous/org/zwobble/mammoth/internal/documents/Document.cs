@@ -2,31 +2,20 @@ using Mammoth.Couscous.java.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class Document : IHasChildren {
-        private IList<IDocumentElement> _children;
-        private IList<Comment> _comments;
-        private Notes _notes;
-
-        internal Document(IList<IDocumentElement> children, Notes notes, IList<Comment> comments)
-        {
-            _children = children;
-            _notes = notes;
-            _comments = comments;
-        }
-
+    internal class Document(IList<IDocumentElement> children, Notes notes, IList<Comment> comments) : IHasChildren {
         public IList<IDocumentElement> GetChildren()
         {
-            return _children;
+            return children;
         }
 
         public Notes GetNotes()
         {
-            return _notes;
+            return notes;
         }
 
         public IList<Comment> GetComments()
         {
-            return _comments;
+            return comments;
         }
     }
 }

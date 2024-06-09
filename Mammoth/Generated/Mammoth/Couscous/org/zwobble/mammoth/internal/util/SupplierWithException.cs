@@ -1,5 +1,5 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
-    internal interface ISupplierWithException<T, TE> {
+    internal interface ISupplierWithException<out T, TE> {
         T Get();
     }
 }

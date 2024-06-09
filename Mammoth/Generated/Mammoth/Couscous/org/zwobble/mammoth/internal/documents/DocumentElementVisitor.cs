@@ -1,5 +1,5 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal interface IDocumentElementVisitor<T, TU> {
+    internal interface IDocumentElementVisitor<out T, in TU> {
         T Visit(Paragraph paragraph, TU context);
         T Visit(Run run, TU context);
         T Visit(Text text, TU context);

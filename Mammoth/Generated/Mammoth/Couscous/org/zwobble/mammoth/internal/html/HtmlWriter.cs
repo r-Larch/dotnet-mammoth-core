@@ -13,22 +13,22 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
         public static void GenerateAttributes(IMap<string, string> attributes, StringBuilder builder)
         {
             {
-                var couscousDesugarForeachToFor5 = (Lists.OrderedBy(attributes.EntrySet(), new HtmlWriterAnonymous2())).Iterator();
+                var couscousDesugarForeachToFor5 = Lists.OrderedBy(attributes.EntrySet(), new HtmlWriterAnonymous2()).Iterator();
                 while (couscousDesugarForeachToFor5.HasNext()) {
                     var attribute = couscousDesugarForeachToFor5.Next();
-                    ((((builder.Append(" ")).Append(attribute.GetKey())).Append("=\"")).Append(EscapeAttributeValue(attribute.GetValue()))).Append("\"");
+                    builder.Append(" ").Append(attribute.GetKey()).Append("=\"").Append(EscapeAttributeValue(attribute.GetValue())).Append("\"");
                 }
             }
         }
 
         public static string EscapeText(string text)
         {
-            return JavaStringExtensions.Replace((JavaStringExtensions.Replace((JavaStringExtensions.Replace(text, "&", "&amp;")), "<", "&lt;")), ">", "&gt;");
+            return JavaStringExtensions.Replace(JavaStringExtensions.Replace(JavaStringExtensions.Replace(text, "&", "&amp;"), "<", "&lt;"), ">", "&gt;");
         }
 
         public static string EscapeAttributeValue(string value)
         {
-            return JavaStringExtensions.Replace((EscapeText(value)), "\"", "&quot;");
+            return JavaStringExtensions.Replace(EscapeText(value), "\"", "&quot;");
         }
     }
 }

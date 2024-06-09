@@ -4,30 +4,16 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class StyleMapBuilder {
-        private IOptional<IHtmlPath> _bold;
-        private IList<StyleMapping<Break>> _breakStyles;
-        private IOptional<IHtmlPath> _commentReference;
-        private IOptional<IHtmlPath> _italic;
-        private IList<StyleMapping<Paragraph>> _paragraphStyles;
-        private IList<StyleMapping<Run>> _runStyles;
-        private IOptional<IHtmlPath> _smallCaps;
-        private IOptional<IHtmlPath> _strikethrough;
-        private IList<StyleMapping<Table>> _tableStyles;
-        private IOptional<IHtmlPath> _underline;
-
-        internal StyleMapBuilder()
-        {
-            _paragraphStyles = new ArrayList<StyleMapping<Paragraph>>();
-            _runStyles = new ArrayList<StyleMapping<Run>>();
-            _tableStyles = new ArrayList<StyleMapping<Table>>();
-            _breakStyles = new ArrayList<StyleMapping<Break>>();
-            _bold = Optional.Empty<IHtmlPath>();
-            _underline = Optional.Empty<IHtmlPath>();
-            _strikethrough = Optional.Empty<IHtmlPath>();
-            _smallCaps = Optional.Empty<IHtmlPath>();
-            _italic = Optional.Empty<IHtmlPath>();
-            _commentReference = Optional.Empty<IHtmlPath>();
-        }
+        private IOptional<IHtmlPath> _bold = Optional.Empty<IHtmlPath>();
+        private readonly IList<StyleMapping<Break>> _breakStyles = new ArrayList<StyleMapping<Break>>();
+        private IOptional<IHtmlPath> _commentReference = Optional.Empty<IHtmlPath>();
+        private IOptional<IHtmlPath> _italic = Optional.Empty<IHtmlPath>();
+        private readonly IList<StyleMapping<Paragraph>> _paragraphStyles = new ArrayList<StyleMapping<Paragraph>>();
+        private readonly IList<StyleMapping<Run>> _runStyles = new ArrayList<StyleMapping<Run>>();
+        private IOptional<IHtmlPath> _smallCaps = Optional.Empty<IHtmlPath>();
+        private IOptional<IHtmlPath> _strikethrough = Optional.Empty<IHtmlPath>();
+        private readonly IList<StyleMapping<Table>> _tableStyles = new ArrayList<StyleMapping<Table>>();
+        private IOptional<IHtmlPath> _underline = Optional.Empty<IHtmlPath>();
 
         public StyleMapBuilder Bold(IHtmlPath path)
         {
@@ -67,25 +53,25 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
 
         public StyleMapBuilder MapParagraph(ParagraphMatcher matcher, IHtmlPath path)
         {
-            (_paragraphStyles).Add(new StyleMapping<Paragraph>(matcher, path));
+            _paragraphStyles.Add(new StyleMapping<Paragraph>(matcher, path));
             return this;
         }
 
         public StyleMapBuilder MapRun(RunMatcher matcher, IHtmlPath path)
         {
-            (_runStyles).Add(new StyleMapping<Run>(matcher, path));
+            _runStyles.Add(new StyleMapping<Run>(matcher, path));
             return this;
         }
 
         public StyleMapBuilder MapTable(TableMatcher matcher, IHtmlPath path)
         {
-            (_tableStyles).Add(new StyleMapping<Table>(matcher, path));
+            _tableStyles.Add(new StyleMapping<Table>(matcher, path));
             return this;
         }
 
         public StyleMapBuilder MapBreak(BreakMatcher matcher, IHtmlPath path)
         {
-            (_breakStyles).Add(new StyleMapping<Break>(matcher, path));
+            _breakStyles.Add(new StyleMapping<Break>(matcher, path));
             return this;
         }
 

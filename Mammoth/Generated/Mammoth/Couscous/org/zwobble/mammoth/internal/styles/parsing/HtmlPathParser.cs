@@ -21,7 +21,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
             if (tokens.PeekTokenType() == TokenType.Identifier) {
                 var element = ParseElement(tokens);
                 elements.Add(element);
-                while ((tokens.PeekTokenType() == TokenType.Whitespace) && tokens.IsNext(1, TokenType.Symbol, ">")) {
+                while (tokens.PeekTokenType() == TokenType.Whitespace && tokens.IsNext(1, TokenType.Symbol, ">")) {
                     tokens.Skip(TokenType.Whitespace);
                     tokens.Skip(TokenType.Symbol, ">");
                     tokens.Skip(TokenType.Whitespace);

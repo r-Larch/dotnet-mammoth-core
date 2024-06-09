@@ -24,7 +24,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
                         throw new ParseException(GenerateErrorMessage(line, lineIndex + 1, exception.GetCharacterIndex(), exception.Message));
                     }
 
-                    lineIndex = lineIndex + 1;
+                    lineIndex += 1;
                 }
             }
             return styleMap.Build();
@@ -41,7 +41,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
                 return;
             }
 
-            (ParseStyleMapping(line)).Accept(styleMap);
+            ParseStyleMapping(line).Accept(styleMap);
         }
 
         public static IConsumer<StyleMapBuilder> ParseStyleMapping(string line)
@@ -67,7 +67,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
 
         public static string GenerateErrorMessage(string line, int lineNumber, int characterIndex, string message)
         {
-            return ((((((((("error reading style map at line " + lineNumber) + ", character ") + (characterIndex + 1)) + ": ") + message) + "\n\n") + line) + "\n") + RepeatString(" ", characterIndex)) + "^";
+            return $"error reading style map at line {lineNumber}, character {(characterIndex + 1)}: {message}\n\n{line}\n{RepeatString(" ", characterIndex)}^";
         }
 
         public static string RepeatString(string value, int times)
@@ -77,7 +77,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
                 var i = 0;
                 while (i < times) {
                     builder.Append(value);
-                    i = i + 1;
+                    i += 1;
                 }
             }
             return builder.ToString();

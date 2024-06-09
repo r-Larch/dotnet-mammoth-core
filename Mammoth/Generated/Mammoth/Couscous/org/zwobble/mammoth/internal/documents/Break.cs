@@ -1,21 +1,9 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class Break : IDocumentElement {
-        public static Break LineBreak;
-        public static Break PageBreak;
-        public static Break ColumnBreak;
-        public BreakType Type { get; }
-
-        static Break()
-        {
-            LineBreak = new Break(BreakType.Line);
-            PageBreak = new Break(BreakType.Page);
-            ColumnBreak = new Break(BreakType.Column);
-        }
-
-        internal Break(BreakType type)
-        {
-            Type = type;
-        }
+    internal class Break(BreakType type) : IDocumentElement {
+        public static Break LineBreak = new(BreakType.Line);
+        public static Break PageBreak = new(BreakType.Page);
+        public static Break ColumnBreak = new(BreakType.Column);
+        public BreakType Type { get; } = type;
 
         public T Accept<T, TU>(IDocumentElementVisitor<T, TU> visitor, TU context)
         {

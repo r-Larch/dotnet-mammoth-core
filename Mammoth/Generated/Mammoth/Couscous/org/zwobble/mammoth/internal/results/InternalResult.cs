@@ -34,9 +34,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.results {
             return new InternalResult<T>(value, Lists.List<string>());
         }
     }
-}
 
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.results {
     internal class InternalResult<T> {
         public T Value;
         public ITerable<string> Warnings;

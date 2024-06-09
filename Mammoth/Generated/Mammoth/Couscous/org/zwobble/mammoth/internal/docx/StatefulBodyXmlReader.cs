@@ -1,3 +1,4 @@
+using Mammoth.Couscous.java.io;
 using Mammoth.Couscous.java.lang;
 using Mammoth.Couscous.java.util;
 using Mammoth.Couscous.java.util.function;
@@ -10,33 +11,22 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader {
-        private static ISet<string> _imageTypesSupportedByBrowsers;
-        private IQueue<IStatefulBodyXmlReaderComplexField> _complexFieldStack;
-        private ContentTypes _contentTypes;
-        private StringBuilder _currentInstrText;
-        public IArchive File;
-        public IFileReader FileReader;
-        public Numbering Numbering;
-        private Relationships _relationships;
-        public Styles Styles;
+    internal class StatefulBodyXmlReader(
+        Styles styles,
+        Numbering numbering,
+        Relationships relationships,
+        ContentTypes contentTypes,
+        IArchive file,
+        IFileReader fileReader
+    ) {
+        private static readonly ISet<string> ImageTypesSupportedByBrowsers = Sets.Set(["image/png", "image/gif", "image/jpeg", "image/svg+xml", "image/tiff"]);
+        private readonly IQueue<IStatefulBodyXmlReaderComplexField> _complexFieldStack = Queues.Stack<IStatefulBodyXmlReaderComplexField>();
+        private readonly StringBuilder _currentInstrText = new();
+        public IArchive File = file;
+        public IFileReader FileReader = fileReader;
+        public Numbering Numbering = numbering;
+        public Styles Styles = styles;
 
-        static StatefulBodyXmlReader()
-        {
-            _imageTypesSupportedByBrowsers = Sets.Set(new[] { "image/png", "image/gif", "image/jpeg", "image/svg+xml", "image/tiff" });
-        }
-
-        internal StatefulBodyXmlReader(Styles styles, Numbering numbering, Relationships relationships, ContentTypes contentTypes, IArchive file, IFileReader fileReader)
-        {
-            Styles = styles;
-            Numbering = numbering;
-            _relationships = relationships;
-            _contentTypes = contentTypes;
-            File = file;
-            FileReader = fileReader;
-            _currentInstrText = new StringBuilder();
-            _complexFieldStack = Queues.Stack<IStatefulBodyXmlReaderComplexField>();
-        }
 
         public ReadResult ReadElement(XmlElement element)
         {
@@ -113,7 +103,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                 case "w:tcPr":
                     return ReadResult.EmptySuccess;
                 default:
-                    var warning = "An unrecognised element was ignored: " + element.GetName();
+                    var warning = $"An unrecognised element was ignored: {element.GetName()}";
                     return ReadResult.EmptyWithWarning(warning);
             }
         }
@@ -126,7 +116,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
         public IOptional<string> CurrentHyperlinkHref()
         {
-            return (Iterables.TryGetLast(Iterables.LazyFilter<IStatefulBodyXmlReaderComplexField, StatefulBodyXmlReaderHyperlinkComplexField>(_complexFieldStack, typeof(StatefulBodyXmlReaderHyperlinkComplexField)))).Map(new StatefulBodyXmlReaderAnonymous1());
+            return Iterables.TryGetLast(Iterables.LazyFilter<IStatefulBodyXmlReaderComplexField, StatefulBodyXmlReaderHyperlinkComplexField>(_complexFieldStack, typeof(StatefulBodyXmlReaderHyperlinkComplexField))).Map(new StatefulBodyXmlReaderAnonymous1());
         }
 
         public bool IsBold(IXmlElementLike properties)
@@ -156,20 +146,17 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
         public bool ReadBooleanElement(IXmlElementLike properties, string tagName)
         {
-            return ((properties.FindChild(tagName)).Map(new StatefulBodyXmlReaderAnonymous3())).OrElse(false);
+            return properties.FindChild(tagName).Map(new StatefulBodyXmlReaderAnonymous3()).OrElse(false);
         }
 
         public VerticalAlignment ReadVerticalAlignment(IXmlElementLike properties)
         {
-            var verticalAlignment = (ReadVal(properties, "w:vertAlign")).OrElse("");
-            switch (verticalAlignment) {
-                case "superscript":
-                    return VerticalAlignment.Superscript;
-                case "subscript":
-                    return VerticalAlignment.Subscript;
-                default:
-                    return VerticalAlignment.Baseline;
-            }
+            var verticalAlignment = ReadVal(properties, "w:vertAlign").OrElse("");
+            return verticalAlignment switch {
+                "superscript" => VerticalAlignment.Superscript,
+                "subscript" => VerticalAlignment.Subscript,
+                _ => VerticalAlignment.Baseline
+            };
         }
 
         public InternalResult<IOptional<Style>> ReadRunStyle(IXmlElementLike properties)
@@ -187,24 +174,24 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
             var properties = element.FindChildOrEmpty("w:pPr");
             var numbering = ReadNumbering(properties);
             var indent = ReadParagraphIndent(properties);
-            return (ReadResult.Map(ReadParagraphStyle(properties), ReadElements(element.GetChildren()), new StatefulBodyXmlReaderAnonymous6(numbering, indent))).AppendExtra();
+            return ReadResult.Map(ReadParagraphStyle(properties), ReadElements(element.GetChildren()), new StatefulBodyXmlReaderAnonymous6(numbering, indent)).AppendExtra();
         }
 
         public ReadResult ReadFieldChar(XmlElement element)
         {
-            var type = (element.GetAttributeOrNone("w:fldCharType")).OrElse("");
+            var type = element.GetAttributeOrNone("w:fldCharType").OrElse("");
             if (type.Equals("begin")) {
-                (_complexFieldStack).Add(StatefulBodyXmlReaderComplexFieldStatic.Unknown);
-                (_currentInstrText).SetLength(0);
+                _complexFieldStack.Add(StatefulBodyXmlReaderComplexFieldStatic.Unknown);
+                _currentInstrText.SetLength(0);
             }
             else if (type.Equals("end")) {
-                (_complexFieldStack).Remove();
+                _complexFieldStack.Remove();
             }
             else if (type.Equals("separate")) {
-                var instrText = (_currentInstrText).ToString();
-                var complexField = ((ParseHyperlinkFieldCode(instrText)).Map(new StatefulBodyXmlReaderAnonymous7())).OrElse(StatefulBodyXmlReaderComplexFieldStatic.Unknown);
-                (_complexFieldStack).Remove();
-                (_complexFieldStack).Add(complexField);
+                var instrText = _currentInstrText.ToString();
+                var complexField = ParseHyperlinkFieldCode(instrText).Map(new StatefulBodyXmlReaderAnonymous7()).OrElse(StatefulBodyXmlReaderComplexFieldStatic.Unknown);
+                _complexFieldStack.Remove();
+                _complexFieldStack.Add(complexField);
             }
 
             return ReadResult.EmptySuccess;
@@ -212,7 +199,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
         public ReadResult ReadInstrText(XmlElement element)
         {
-            (_currentInstrText).Append(element.InnerText());
+            _currentInstrText.Append(element.InnerText());
             return ReadResult.EmptySuccess;
         }
 
@@ -234,7 +221,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
         public InternalResult<IOptional<Style>> ReadStyle(IXmlElementLike properties, string styleTagName, string styleType, IFunction<string, IOptional<Style>> findStyleById)
         {
-            return ((ReadVal(properties, styleTagName)).Map(new StatefulBodyXmlReaderAnonymous9(this, styleType, findStyleById))).OrElse(InternalResult.Empty());
+            return ReadVal(properties, styleTagName).Map(new StatefulBodyXmlReaderAnonymous9(this, styleType, findStyleById)).OrElse(InternalResult.Empty());
         }
 
         public InternalResult<IOptional<Style>> FindStyleById(string styleType, string styleId, IFunction<string, IOptional<Style>> findStyleById)
@@ -244,7 +231,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                 return InternalResult.Success(style);
             }
 
-            return new InternalResult<IOptional<Style>>(Optional.Of(new Style(styleId, Optional.Empty<string>())), Lists.List(((styleType + " style with ID ") + styleId) + " was referenced but not defined in the document"));
+            return new InternalResult<IOptional<Style>>(Optional.Of(new Style(styleId, Optional.Empty<string>())), Lists.List($"{styleType} style with ID {styleId} was referenced but not defined in the document"));
         }
 
         public IOptional<NumberingLevel> ReadNumbering(IXmlElementLike properties)
@@ -261,23 +248,19 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
         public ReadResult ReadBreak(XmlElement element)
         {
-            var breakType = (element.GetAttributeOrNone("w:type")).OrElse("textWrapping");
-            switch (breakType) {
-                case "textWrapping":
-                    return ReadResult.Success(Break.LineBreak);
-                case "page":
-                    return ReadResult.Success(Break.PageBreak);
-                case "column":
-                    return ReadResult.Success(Break.ColumnBreak);
-                default:
-                    return ReadResult.EmptyWithWarning("Unsupported break type: " + breakType);
-            }
+            var breakType = element.GetAttributeOrNone("w:type").OrElse("textWrapping");
+            return breakType switch {
+                "textWrapping" => ReadResult.Success(Break.LineBreak),
+                "page" => ReadResult.Success(Break.PageBreak),
+                "column" => ReadResult.Success(Break.ColumnBreak),
+                _ => ReadResult.EmptyWithWarning($"Unsupported break type: {breakType}")
+            };
         }
 
         public ReadResult ReadTable(XmlElement element)
         {
             var properties = element.FindChildOrEmpty("w:tblPr");
-            return ReadResult.Map(ReadTableStyle(properties), (ReadElements(element.GetChildren())).FlatMap(new StatefulBodyXmlReaderAnonymous11(this)), new StatefulBodyXmlReaderAnonymous12());
+            return ReadResult.Map(ReadTableStyle(properties), ReadElements(element.GetChildren()).FlatMap(new StatefulBodyXmlReaderAnonymous11(this)), new StatefulBodyXmlReaderAnonymous12());
         }
 
         public InternalResult<IOptional<Style>> ReadTableStyle(IXmlElementLike properties)
@@ -302,12 +285,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                     var columnIndex = 0;
                     {
                         var cellIndex = 0;
-                        while (cellIndex < (row.GetChildren()).Size()) {
-                            var cell = (StatefulBodyXmlReaderUnmergedTableCell) (row.GetChildren()).Get(cellIndex);
+                        while (cellIndex < row.GetChildren().Size()) {
+                            var cell = (StatefulBodyXmlReaderUnmergedTableCell) row.GetChildren().Get(cellIndex);
                             var spanningCell = Maps.Lookup(lastCellForColumn, columnIndex);
                             var position = Maps.Entry(rowIndex, cellIndex);
                             if (cell.Vmerge && spanningCell.IsPresent()) {
-                                rowspans.Put(spanningCell.Get(), (Maps.Lookup(rowspans, spanningCell.Get())).Get() + 1);
+                                rowspans.Put(spanningCell.Get(), Maps.Lookup(rowspans, spanningCell.Get()).Get() + 1);
                                 merged.Add(position);
                             }
                             else {
@@ -315,11 +298,11 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                                 rowspans.Put(position, 1);
                             }
 
-                            columnIndex = columnIndex + cell.Colspan;
-                            cellIndex = cellIndex + 1;
+                            columnIndex += cell.Colspan;
+                            cellIndex += 1;
                         }
                     }
-                    rowIndex = rowIndex + 1;
+                    rowIndex += 1;
                 }
             }
             return ReadResult.Success(Lists.EagerMapWithIndex(rows, new StatefulBodyXmlReaderAnonymous14(merged, rowspans)));
@@ -337,7 +320,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                     }
 
                     {
-                        var couscousDesugarForeachToFor1 = ((row.Get()).GetChildren()).Iterator();
+                        var couscousDesugarForeachToFor1 = row.Get().GetChildren().Iterator();
                         while (couscousDesugarForeachToFor1.HasNext()) {
                             var cell = couscousDesugarForeachToFor1.Next();
                             if (!(cell is StatefulBodyXmlReaderUnmergedTableCell)) {
@@ -354,31 +337,31 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
         {
             var properties = element.FindChildOrEmpty("w:trPr");
             var isHeader = properties.HasChild("w:tblHeader");
-            return (ReadElements(element.GetChildren())).Map(new StatefulBodyXmlReaderAnonymous15(isHeader));
+            return ReadElements(element.GetChildren()).Map(new StatefulBodyXmlReaderAnonymous15(isHeader));
         }
 
         public ReadResult ReadTableCell(XmlElement element)
         {
             var properties = element.FindChildOrEmpty("w:tcPr");
-            var gridSpan = (properties.FindChildOrEmpty("w:gridSpan")).GetAttributeOrNone("w:val");
-            var colspan = (gridSpan.Map(new StatefulBodyXmlReaderAnonymous16())).OrElse(1);
-            return (ReadElements(element.GetChildren())).Map(new StatefulBodyXmlReaderAnonymous17(this, properties, colspan));
+            var gridSpan = properties.FindChildOrEmpty("w:gridSpan").GetAttributeOrNone("w:val");
+            var colspan = gridSpan.Map(new StatefulBodyXmlReaderAnonymous16()).OrElse(1);
+            return ReadElements(element.GetChildren()).Map(new StatefulBodyXmlReaderAnonymous17(this, properties, colspan));
         }
 
         public bool ReadVmerge(IXmlElementLike properties)
         {
-            return ((properties.FindChild("w:vMerge")).Map(new StatefulBodyXmlReaderAnonymous19())).OrElse(false);
+            return properties.FindChild("w:vMerge").Map(new StatefulBodyXmlReaderAnonymous19()).OrElse(false);
         }
 
         public ReadResult ReadHyperlink(XmlElement element)
         {
             var relationshipId = element.GetAttributeOrNone("r:id");
             var anchor = element.GetAttributeOrNone("w:anchor");
-            var targetFrame = (element.GetAttributeOrNone("w:tgtFrame")).Filter(new StatefulBodyXmlReaderAnonymous20());
+            var targetFrame = element.GetAttributeOrNone("w:tgtFrame").Filter(new StatefulBodyXmlReaderAnonymous20());
             var childrenResult = ReadElements(element.GetChildren());
             if (relationshipId.IsPresent()) {
-                var targetHref = (_relationships).FindTargetByRelationshipId(relationshipId.Get());
-                var href = (anchor.Map(new StatefulBodyXmlReaderAnonymous21(targetHref, anchor))).OrElse(targetHref);
+                var targetHref = relationships.FindTargetByRelationshipId(relationshipId.Get());
+                var href = anchor.Map(new StatefulBodyXmlReaderAnonymous21(targetHref, anchor)).OrElse(targetHref);
                 return childrenResult.Map(new StatefulBodyXmlReaderAnonymous22(href, targetFrame));
             }
 
@@ -413,19 +396,19 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
         public ReadResult ReadPict(XmlElement element)
         {
-            return (ReadElements(element.GetChildren())).ToExtra();
+            return ReadElements(element.GetChildren()).ToExtra();
         }
 
         public ReadResult ReadImagedata(XmlElement element)
         {
-            return ((element.GetAttributeOrNone("r:id")).Map(new StatefulBodyXmlReaderAnonymous25(element, this))).OrElse(ReadResult.EmptyWithWarning("A v:imagedata element without a relationship ID was ignored"));
+            return element.GetAttributeOrNone("r:id").Map(new StatefulBodyXmlReaderAnonymous25(element, this)).OrElse(ReadResult.EmptyWithWarning("A v:imagedata element without a relationship ID was ignored"));
         }
 
         public ReadResult ReadInline(XmlElement element)
         {
             var properties = element.FindChildOrEmpty("wp:docPr");
-            var altText = Optionals.First((properties.GetAttributeOrNone("descr")).Filter(new StatefulBodyXmlReaderAnonymous26()), properties.GetAttributeOrNone("title"));
-            var blips = ((((element.FindChildren("a:graphic")).FindChildren("a:graphicData")).FindChildren("pic:pic")).FindChildren("pic:blipFill")).FindChildren("a:blip");
+            var altText = Optionals.First(properties.GetAttributeOrNone("descr").Filter(new StatefulBodyXmlReaderAnonymous26()), properties.GetAttributeOrNone("title"));
+            var blips = element.FindChildren("a:graphic").FindChildren("a:graphicData").FindChildren("pic:pic").FindChildren("pic:blipFill").FindChildren("a:blip");
             return ReadBlips(blips, altText);
         }
 
@@ -444,39 +427,39 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
             }
 
             if (linkRelationshipId.IsPresent()) {
-                var imagePath = (_relationships).FindTargetByRelationshipId(linkRelationshipId.Get());
+                var imagePath = relationships.FindTargetByRelationshipId(linkRelationshipId.Get());
                 return ReadImage(imagePath, altText, new StatefulBodyXmlReaderAnonymous29(this, imagePath));
             }
 
             return ReadResult.EmptySuccess;
         }
 
-        public ReadResult ReadImage(string imagePath, IOptional<string> altText, INputStreamSupplier open)
+        public ReadResult ReadImage(string imagePath, IOptional<string> altText, IInputStreamSupplier open)
         {
-            var contentType = (_contentTypes).FindContentType(imagePath);
+            var contentType = contentTypes.FindContentType(imagePath);
             var image = new Image(altText, contentType, open);
             var contentTypeString = contentType.OrElse("(unknown)");
-            if ((_imageTypesSupportedByBrowsers).Contains(contentTypeString)) {
+            if (ImageTypesSupportedByBrowsers.Contains(contentTypeString)) {
                 return ReadResult.Success(image);
             }
 
-            return ReadResult.WithWarning(image, ("Image of type " + contentTypeString) + " is unlikely to display in web browsers");
+            return ReadResult.WithWarning(image, $"Image of type {contentTypeString} is unlikely to display in web browsers");
         }
 
         public ReadResult ReadSdt(XmlElement element)
         {
-            return ReadElements((element.FindChildOrEmpty("w:sdtContent")).GetChildren());
+            return ReadElements(element.FindChildOrEmpty("w:sdtContent").GetChildren());
         }
 
         public string RelationshipIdToDocxPath(string relationshipId)
         {
-            var target = (_relationships).FindTargetByRelationshipId(relationshipId);
+            var target = relationships.FindTargetByRelationshipId(relationshipId);
             return Uris.UriToZipEntryName("word", target);
         }
 
         public IOptional<string> ReadVal(IXmlElementLike element, string name)
         {
-            return (element.FindChildOrEmpty(name)).GetAttributeOrNone("w:val");
+            return element.FindChildOrEmpty(name).GetAttributeOrNone("w:val");
         }
     }
 }

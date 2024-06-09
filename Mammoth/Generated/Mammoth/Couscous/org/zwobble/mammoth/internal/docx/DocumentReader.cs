@@ -51,7 +51,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
         {
             var targets = Lists.EagerMap(relationships.FindTargetsByType(relationshipType), new DocumentReaderAnonymous3(basePath));
             var validTargets = Lists.EagerFilter(targets, new DocumentReaderAnonymous4(archive));
-            return (Lists.TryGetFirst(validTargets)).OrElse(fallbackPath);
+            return Lists.TryGetFirst(validTargets).OrElse(fallbackPath);
         }
 
         public static InternalResult<IList<Comment>> ReadComments(DocumentReaderPartWithBodyReader partReader, DocumentReaderPartPaths partPaths)
@@ -61,33 +61,33 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
         public static InternalResult<Notes> ReadNotes(DocumentReaderPartWithBodyReader partReader, DocumentReaderPartPaths partPaths)
         {
-            return (InternalResult.Map(partReader.ReadPart(partPaths.GetFootnotes(), new DocumentReaderAnonymous6(), Optional.Of(InternalResult.Success(Lists.List<Note>()))), partReader.ReadPart(partPaths.GetEndnotes(), new DocumentReaderAnonymous7(), Optional.Of(InternalResult.Success(Lists.List<Note>()))), new DocumentReaderAnonymous8())).Map(new DocumentReaderAnonymous9());
+            return InternalResult.Map(partReader.ReadPart(partPaths.GetFootnotes(), new DocumentReaderAnonymous6(), Optional.Of(InternalResult.Success(Lists.List<Note>()))), partReader.ReadPart(partPaths.GetEndnotes(), new DocumentReaderAnonymous7(), Optional.Of(InternalResult.Success(Lists.List<Note>()))), new DocumentReaderAnonymous8()).Map(new DocumentReaderAnonymous9());
         }
 
         public static Styles ReadStyles(IArchive file, DocumentReaderPartPaths partPaths)
         {
-            return ((TryParseOfficeXml(file, partPaths.GetStyles())).Map(new DocumentReaderAnonymous10())).OrElse(Styles.Empty);
+            return TryParseOfficeXml(file, partPaths.GetStyles()).Map(new DocumentReaderAnonymous10()).OrElse(Styles.Empty);
         }
 
         public static Numbering ReadNumbering(IArchive file, DocumentReaderPartPaths partPaths)
         {
-            return ((TryParseOfficeXml(file, partPaths.GetNumbering())).Map(new DocumentReaderAnonymous11())).OrElse(Numbering.Empty);
+            return TryParseOfficeXml(file, partPaths.GetNumbering()).Map(new DocumentReaderAnonymous11()).OrElse(Numbering.Empty);
         }
 
         public static ContentTypes ReadContentTypes(IArchive file)
         {
-            return ((TryParseOfficeXml(file, "[Content_Types].xml")).Map(new DocumentReaderAnonymous12())).OrElse(ContentTypes.Default);
+            return TryParseOfficeXml(file, "[Content_Types].xml").Map(new DocumentReaderAnonymous12()).OrElse(ContentTypes.Default);
         }
 
         public static Relationships ReadRelationships(IArchive zipFile, string name)
         {
-            return ((TryParseOfficeXml(zipFile, name)).Map(new DocumentReaderAnonymous13())).OrElse(Relationships.Empty);
+            return TryParseOfficeXml(zipFile, name).Map(new DocumentReaderAnonymous13()).OrElse(Relationships.Empty);
         }
 
         public static string FindRelationshipsPathFor(string name)
         {
             var parts = ZipPaths.SplitPath(name);
-            return ZipPaths.JoinPath(new[] { parts.GetDirname(), "_rels", parts.GetBasename() + ".rels" });
+            return ZipPaths.JoinPath([parts.GetDirname(), "_rels", $"{parts.GetBasename()}.rels"]);
         }
 
         public static IOptional<XmlElement> TryParseOfficeXml(IArchive zipFile, string name)
@@ -97,7 +97,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
         public static XmlElement ParseOfficeXml(IArchive zipFile, string name)
         {
-            return (TryParseOfficeXml(zipFile, name)).OrElseThrow(new DocumentReaderAnonymous16(name));
+            return TryParseOfficeXml(zipFile, name).OrElseThrow(new DocumentReaderAnonymous16(name));
         }
     }
 }

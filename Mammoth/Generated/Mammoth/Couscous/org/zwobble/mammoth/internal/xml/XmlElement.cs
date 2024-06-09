@@ -4,26 +4,15 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
-    internal class XmlElement : IXmlNode, IXmlElementLike {
-        private IMap<string, string> _attributes;
-        private IList<IXmlNode> _children;
-        private string _name;
-
-        internal XmlElement(string name, IMap<string, string> attributes, IList<IXmlNode> children)
-        {
-            _name = name;
-            _attributes = attributes;
-            _children = children;
-        }
-
+    internal class XmlElement(string name, IMap<string, string> attributes, IList<IXmlNode> children) : IXmlNode, IXmlElementLike {
         public IOptional<string> GetAttributeOrNone(string name)
         {
-            return Maps.Lookup(_attributes, name);
+            return Maps.Lookup(attributes, name);
         }
 
         public IList<IXmlNode> GetChildren()
         {
-            return _children;
+            return children;
         }
 
         public IOptional<XmlElement> FindChild(string name)
@@ -33,7 +22,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
 
         public bool HasChild(string name)
         {
-            return ((FindChildrenIterable(name)).Iterator()).HasNext();
+            return FindChildrenIterable(name).Iterator().HasNext();
         }
 
         public IXmlElementLike FindChildOrEmpty(string name)
@@ -43,7 +32,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
 
         public string InnerText()
         {
-            return String.Join("", Iterables.LazyMap(_children, new XmlElementAnonymous1()));
+            return String.Join("", Iterables.LazyMap(children, new XmlElementAnonymous1()));
         }
 
         public T Accept<T>(IXmlNodeVisitor<T> visitor)
@@ -53,22 +42,22 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
 
         public string GetName()
         {
-            return _name;
+            return name;
         }
 
         public IMap<string, string> GetAttributes()
         {
-            return _attributes;
+            return attributes;
         }
 
         public string GetAttribute(string name)
         {
-            return (GetAttributeOrNone(name)).OrElseThrow(new XmlElementAnonymous0(name));
+            return GetAttributeOrNone(name).OrElseThrow(new XmlElementAnonymous0(name));
         }
 
         public override string ToString()
         {
-            return ((((("XmlElement(name=" + _name) + ", attributes=") + _attributes) + ", children=") + _children) + ")";
+            return $"XmlElement(name={name}, attributes={attributes}, children={children})";
         }
 
         public XmlElementList FindChildren(string name)
@@ -78,7 +67,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml {
 
         public ITerable<XmlElement> FindChildrenIterable(string name)
         {
-            return Iterables.LazyFilter(Iterables.LazyFilter<IXmlNode, XmlElement>(_children, typeof(XmlElement)), new XmlElementAnonymous2(name));
+            return Iterables.LazyFilter(Iterables.LazyFilter<IXmlNode, XmlElement>(children, typeof(XmlElement)), new XmlElementAnonymous2(name));
         }
     }
 }

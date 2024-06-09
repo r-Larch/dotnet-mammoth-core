@@ -25,7 +25,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
         public static string ParseStringToken(Token<TokenType> token)
         {
             var value = token.GetValue();
-            return EscapeSequences.Decode(value.Substring(1, ((value.Length) - 1) - 1));
+            return EscapeSequences.Decode(value.Substring(1, value.Length - 1 - 1));
         }
     }
 }

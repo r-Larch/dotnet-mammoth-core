@@ -1,14 +1,5 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class NumberingLevel {
-        private bool _isOrdered;
-        private string _levelIndex;
-
-        internal NumberingLevel(string levelIndex, bool isOrdered)
-        {
-            _levelIndex = levelIndex;
-            _isOrdered = isOrdered;
-        }
-
+    internal class NumberingLevel(string levelIndex, bool isOrdered) {
         public static NumberingLevel Ordered(string levelIndex)
         {
             return new NumberingLevel(levelIndex, true);
@@ -21,12 +12,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
 
         public string GetLevelIndex()
         {
-            return _levelIndex;
+            return levelIndex;
         }
 
         public bool IsOrdered()
         {
-            return _isOrdered;
+            return isOrdered;
         }
     }
 }

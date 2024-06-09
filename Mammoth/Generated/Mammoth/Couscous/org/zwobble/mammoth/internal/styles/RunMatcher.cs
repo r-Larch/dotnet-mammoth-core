@@ -3,25 +3,12 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class RunMatcher : IDocumentElementMatcher<Run> {
-        public static RunMatcher Any;
-        private IOptional<string> _styleId;
-        private IOptional<IStringMatcher> _styleName;
-
-        static RunMatcher()
-        {
-            Any = new RunMatcher(Optional.Empty<string>(), Optional.Empty<IStringMatcher>());
-        }
-
-        internal RunMatcher(IOptional<string> styleId, IOptional<IStringMatcher> styleName)
-        {
-            _styleId = styleId;
-            _styleName = styleName;
-        }
+    internal class RunMatcher(IOptional<string> styleId, IOptional<IStringMatcher> styleName) : IDocumentElementMatcher<Run> {
+        public static RunMatcher Any = new(Optional.Empty<string>(), Optional.Empty<IStringMatcher>());
 
         public bool Matches(Run run)
         {
-            return DocumentElementMatching.MatchesStyle(_styleId, _styleName, run.GetStyle());
+            return DocumentElementMatching.MatchesStyle(styleId, styleName, run.GetStyle());
         }
 
         public static RunMatcher StyleId(string styleId)

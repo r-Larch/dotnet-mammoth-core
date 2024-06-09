@@ -1,14 +1,5 @@
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class NoteReference : IDocumentElement {
-        private string _noteId;
-        private NoteType _noteType;
-
-        internal NoteReference(NoteType noteType, string noteId)
-        {
-            _noteType = noteType;
-            _noteId = noteId;
-        }
-
+    internal class NoteReference(NoteType noteType, string noteId) : IDocumentElement {
         public T Accept<T, TU>(IDocumentElementVisitor<T, TU> visitor, TU context)
         {
             return visitor.Visit(this, context);
@@ -26,12 +17,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
 
         public NoteType GetNoteType()
         {
-            return _noteType;
+            return noteType;
         }
 
         public string GetNoteId()
         {
-            return _noteId;
+            return noteId;
         }
     }
 }

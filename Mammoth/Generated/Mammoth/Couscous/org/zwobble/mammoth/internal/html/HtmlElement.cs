@@ -3,21 +3,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
-    internal class HtmlElement : IHtmlNode {
-        private static ISet<string> _voidTagNames;
-        private IList<IHtmlNode> _children;
-        private HtmlTag _tag;
-
-        static HtmlElement()
-        {
-            _voidTagNames = Sets.Set(new[] { "img", "br", "hr" });
-        }
-
-        internal HtmlElement(HtmlTag tag, IList<IHtmlNode> children)
-        {
-            _tag = tag;
-            _children = children;
-        }
+    internal class HtmlElement(HtmlTag tag, IList<IHtmlNode> children) : IHtmlNode {
+        private static readonly ISet<string> VoidTagNames = Sets.Set(["img", "br", "hr"]);
 
         public void Accept(IHtmlNodeVisitor visitor)
         {
@@ -31,47 +18,47 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
 
         public HtmlTag GetTag()
         {
-            return _tag;
+            return tag;
         }
 
         public IList<string> GetTagNames()
         {
-            return (_tag).GetTagNames();
+            return tag.GetTagNames();
         }
 
         public string GetTagName()
         {
-            return (GetTagNames()).Get(0);
+            return GetTagNames().Get(0);
         }
 
         public IMap<string, string> GetAttributes()
         {
-            return (_tag).GetAttributes();
+            return tag.GetAttributes();
         }
 
         public IList<IHtmlNode> GetChildren()
         {
-            return _children;
+            return children;
         }
 
         public bool IsCollapsible()
         {
-            return (_tag).IsCollapsible();
+            return tag.IsCollapsible();
         }
 
         public string GetSeparator()
         {
-            return (_tag).GetSeparator();
+            return tag.GetSeparator();
         }
 
         public bool IsVoid()
         {
-            return (_children).IsEmpty() && IsVoidTag(GetTagName());
+            return children.IsEmpty() && IsVoidTag(GetTagName());
         }
 
         public static bool IsVoidTag(string tagName)
         {
-            return (_voidTagNames).Contains(tagName);
+            return VoidTagNames.Contains(tagName);
         }
     }
 }

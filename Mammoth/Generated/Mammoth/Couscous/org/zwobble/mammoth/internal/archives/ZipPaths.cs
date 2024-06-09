@@ -1,5 +1,6 @@
 using Mammoth.Couscous.java.lang;
 using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
 using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
@@ -12,8 +13,8 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.archives {
                 return new ZipPathsSplitPath("", path);
             }
 
-            var dirname = path.Substring(0, index - 0);
-            var basename = path.Substring(index + 1);
+            var dirname = path[..(index - 0)];
+            var basename = path[(index + 1)..];
             return new ZipPathsSplitPath(dirname, basename);
         }
 
@@ -33,6 +34,25 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.archives {
                 }
             }
             return String.Join("/", relevantPaths);
+        }
+    }
+
+    internal class ZipPathsAnonymous0 : IPredicate<string> {
+        public bool Test(string path)
+        {
+            return !path.IsEmpty();
+        }
+    }
+
+    internal class ZipPathsSplitPath(string dirname, string basename) {
+        public string GetDirname()
+        {
+            return dirname;
+        }
+
+        public string GetBasename()
+        {
+            return basename;
         }
     }
 }

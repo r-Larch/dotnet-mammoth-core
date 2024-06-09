@@ -2,20 +2,8 @@ using Mammoth.Couscous.java.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
-    internal class Hyperlink : IDocumentElement, IHasChildren {
-        private IOptional<string> _anchor;
-        private IList<IDocumentElement> _children;
-        private IOptional<string> _href;
-        private IOptional<string> _targetFrame;
-
-        internal Hyperlink(IOptional<string> href, IOptional<string> anchor, IOptional<string> targetFrame, IList<IDocumentElement> children)
-        {
-            _href = href;
-            _anchor = anchor;
-            _targetFrame = targetFrame;
-            _children = children;
-        }
-
+    internal class Hyperlink(IOptional<string> href, IOptional<string> anchor, IOptional<string> targetFrame, IList<IDocumentElement> children)
+        : IDocumentElement, IHasChildren {
         public T Accept<T, TU>(IDocumentElementVisitor<T, TU> visitor, TU context)
         {
             return visitor.Visit(this, context);
@@ -23,7 +11,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
 
         public IList<IDocumentElement> GetChildren()
         {
-            return _children;
+            return children;
         }
 
         public static Hyperlink Href(string href, IOptional<string> targetFrame, IList<IDocumentElement> children)
@@ -38,17 +26,17 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
 
         public IOptional<string> GetHref()
         {
-            return _href;
+            return href;
         }
 
         public IOptional<string> GetAnchor()
         {
-            return _anchor;
+            return anchor;
         }
 
         public IOptional<string> GetTargetFrame()
         {
-            return _targetFrame;
+            return targetFrame;
         }
     }
 }

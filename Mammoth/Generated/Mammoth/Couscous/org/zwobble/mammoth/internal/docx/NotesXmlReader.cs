@@ -6,17 +6,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class NotesXmlReader {
-        private BodyXmlReader _bodyReader;
-        public NoteType NoteType;
-        private string _tagName;
-
-        internal NotesXmlReader(BodyXmlReader bodyReader, string tagName, NoteType noteType)
-        {
-            _bodyReader = bodyReader;
-            _tagName = tagName;
-            NoteType = noteType;
-        }
+    internal class NotesXmlReader(BodyXmlReader bodyReader, string tagName, NoteType noteType) {
+        public NoteType NoteType = noteType;
 
         public static NotesXmlReader Footnote(BodyXmlReader bodyReader)
         {
@@ -30,23 +21,23 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
         public InternalResult<IList<Note>> ReadElement(XmlElement element)
         {
-            var elements = Iterables.LazyFilter(element.FindChildren("w:" + _tagName), new NotesXmlReaderAnonymous0(this));
+            var elements = Iterables.LazyFilter(element.FindChildren($"w:{tagName}"), new NotesXmlReaderAnonymous0(this));
             return InternalResult.FlatMap(elements, new NotesXmlReaderAnonymous1(this));
         }
 
         public bool IsNoteElement(XmlElement element)
         {
-            return ((element.GetAttributeOrNone("w:type")).Map(new NotesXmlReaderAnonymous2(this))).OrElse(true);
+            return element.GetAttributeOrNone("w:type").Map(new NotesXmlReaderAnonymous2(this)).OrElse(true);
         }
 
         public bool IsSeparatorType(string type)
         {
-            return (type.Equals("continuationSeparator")) || (type.Equals("separator"));
+            return type.Equals("continuationSeparator") || type.Equals("separator");
         }
 
         public InternalResult<Note> ReadNoteElement(XmlElement element)
         {
-            return (((_bodyReader).ReadElements(element.GetChildren())).ToResult()).Map(new NotesXmlReaderAnonymous3(this, element));
+            return bodyReader.ReadElements(element.GetChildren()).ToResult().Map(new NotesXmlReaderAnonymous3(this, element));
         }
     }
 }

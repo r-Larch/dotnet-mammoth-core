@@ -1,4 +1,5 @@
 using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.function;
 using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 using Mammoth.Couscous.org.zwobble.mammoth.@internal.xml;
@@ -31,7 +32,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
         public static IMapEntry<string, NumberingLevel> ReadAbstractNumLevel(XmlElement element)
         {
             var levelIndex = element.GetAttribute("w:ilvl");
-            var numFmt = (element.FindChildOrEmpty("w:numFmt")).GetAttributeOrNone("w:val");
+            var numFmt = element.FindChildOrEmpty("w:numFmt").GetAttributeOrNone("w:val");
             var isOrdered = !numFmt.Equals(Optional.Of("bullet"));
             return Maps.Entry(levelIndex, new NumberingLevel(levelIndex, isOrdered));
         }
@@ -44,8 +45,29 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
         public static IMapEntry<string, IMap<string, NumberingLevel>> ReadNum(XmlElement numElement, IMap<string, IMap<string, NumberingLevel>> abstractNums)
         {
             var numId = numElement.GetAttribute("w:numId");
-            var abstractNumId = ((numElement.FindChild("w:abstractNumId")).Get()).GetAttribute("w:val");
-            return Maps.Entry(numId, (Maps.Lookup(abstractNums, abstractNumId)).Get());
+            var abstractNumId = numElement.FindChild("w:abstractNumId").Get().GetAttribute("w:val");
+            return Maps.Entry(numId, Maps.Lookup(abstractNums, abstractNumId).Get());
+        }
+    }
+
+    internal class NumberingXmlAnonymous0 : IFunction<XmlElement, IMapEntry<string, IMap<string, NumberingLevel>>> {
+        public IMapEntry<string, IMap<string, NumberingLevel>> Apply(XmlElement arg0)
+        {
+            return NumberingXml.ReadAbstractNum(arg0);
+        }
+    }
+
+    internal class NumberingXmlAnonymous1 : IFunction<XmlElement, IMapEntry<string, NumberingLevel>> {
+        public IMapEntry<string, NumberingLevel> Apply(XmlElement arg0)
+        {
+            return NumberingXml.ReadAbstractNumLevel(arg0);
+        }
+    }
+
+    internal class NumberingXmlAnonymous2(IMap<string, IMap<string, NumberingLevel>> abstractNums) : IFunction<XmlElement, IMapEntry<string, IMap<string, NumberingLevel>>> {
+        public IMapEntry<string, IMap<string, NumberingLevel>> Apply(XmlElement numElement)
+        {
+            return NumberingXml.ReadNum(numElement, abstractNums);
         }
     }
 }

@@ -3,23 +3,8 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.documents;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class ParagraphMatcher : IDocumentElementMatcher<Paragraph> {
-        public static ParagraphMatcher Any;
-        private IOptional<NumberingLevel> _numbering;
-        private IOptional<string> _styleId;
-        private IOptional<IStringMatcher> _styleName;
-
-        static ParagraphMatcher()
-        {
-            Any = new ParagraphMatcher(Optional.Empty<string>(), Optional.Empty<IStringMatcher>(), Optional.Empty<NumberingLevel>());
-        }
-
-        internal ParagraphMatcher(IOptional<string> styleId, IOptional<IStringMatcher> styleName, IOptional<NumberingLevel> numbering)
-        {
-            _styleId = styleId;
-            _styleName = styleName;
-            _numbering = numbering;
-        }
+    internal class ParagraphMatcher(IOptional<string> styleId, IOptional<IStringMatcher> styleName, IOptional<NumberingLevel> numbering) : IDocumentElementMatcher<Paragraph> {
+        public static ParagraphMatcher Any = new(Optional.Empty<string>(), Optional.Empty<IStringMatcher>(), Optional.Empty<NumberingLevel>());
 
         public bool Matches(Paragraph paragraph)
         {
@@ -53,12 +38,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
 
         public bool MatchesStyle(Paragraph paragraph)
         {
-            return DocumentElementMatching.MatchesStyle(_styleId, _styleName, paragraph.GetStyle());
+            return DocumentElementMatching.MatchesStyle(styleId, styleName, paragraph.GetStyle());
         }
 
         public bool MatchesNumbering(Paragraph paragraph)
         {
-            return DocumentElementMatching.Matches(_numbering, paragraph.GetNumbering(), new ParagraphMatcherAnonymous0());
+            return DocumentElementMatching.Matches(numbering, paragraph.GetNumbering(), new ParagraphMatcherAnonymous0());
         }
     }
 }

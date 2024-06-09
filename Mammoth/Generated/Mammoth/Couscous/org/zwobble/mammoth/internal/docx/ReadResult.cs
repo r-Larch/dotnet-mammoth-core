@@ -7,23 +7,15 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class ReadResult {
-        public static ReadResult EmptySuccess;
-        public IList<IDocumentElement> Elements;
-        public IList<IDocumentElement> Extra;
-        public ITerable<string> Warnings;
-
-        static ReadResult()
-        {
-            EmptySuccess = Success(Lists.List<IDocumentElement>());
-        }
-
-        internal ReadResult(IList<IDocumentElement> elements, IList<IDocumentElement> extra, ITerable<string> warnings)
-        {
-            Elements = elements;
-            Extra = extra;
-            Warnings = warnings;
-        }
+    internal class ReadResult(
+        IList<IDocumentElement> elements,
+        IList<IDocumentElement> extra,
+        ITerable<string> warnings
+    ) {
+        public static ReadResult EmptySuccess = Success(Lists.List<IDocumentElement>());
+        public IList<IDocumentElement> Elements = elements;
+        public IList<IDocumentElement> Extra = extra;
+        public ITerable<string> Warnings = warnings;
 
         public static ReadResult FlatMap<T>(ITerable<T> iterable, IFunction<T, ReadResult> function)
         {
@@ -85,6 +77,27 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
         public InternalResult<IList<IDocumentElement>> ToResult()
         {
             return new InternalResult<IList<IDocumentElement>>(Elements, Warnings);
+        }
+    }
+
+    internal class ReadResultAnonymous0 : IFunction<ReadResult, ITerable<IDocumentElement>> {
+        public ITerable<IDocumentElement> Apply(ReadResult result)
+        {
+            return result.Elements;
+        }
+    }
+
+    internal class ReadResultAnonymous1 : IFunction<ReadResult, ITerable<IDocumentElement>> {
+        public ITerable<IDocumentElement> Apply(ReadResult result)
+        {
+            return result.Extra;
+        }
+    }
+
+    internal class ReadResultAnonymous2 : IFunction<ReadResult, ITerable<string>> {
+        public ITerable<string> Apply(ReadResult result)
+        {
+            return result.Warnings;
         }
     }
 }

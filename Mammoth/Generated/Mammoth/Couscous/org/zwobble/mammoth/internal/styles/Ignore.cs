@@ -5,12 +5,7 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.html;
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class Ignore : IHtmlPath {
-        public static IHtmlPath Instance;
-
-        static Ignore()
-        {
-            Instance = new Ignore();
-        }
+        public static IHtmlPath Instance = new Ignore();
 
         public ISupplier<IList<IHtmlNode>> Wrap(ISupplier<IList<IHtmlNode>> generateNodes)
         {

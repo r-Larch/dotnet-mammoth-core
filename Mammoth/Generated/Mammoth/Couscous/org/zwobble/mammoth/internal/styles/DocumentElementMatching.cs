@@ -22,7 +22,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
 
         public static bool Matches<T, TU>(IOptional<T> required, IOptional<TU> actual, IBiPredicate<T, TU> areEqual)
         {
-            return (required.Map(new DocumentElementMatchingAnonymous5<T, TU>(actual, areEqual))).OrElse(true);
+            return required.Map(new DocumentElementMatchingAnonymous5<T, TU>(actual, areEqual)).OrElse(true);
         }
     }
 }

@@ -9,38 +9,21 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
-    internal class DocumentToHtml {
-        private static DocumentToHtmlContext _initialContext;
-        public IMap<string, Comment> Comments;
-        private string _idPrefix;
-        public IMageConverterImgElement ImageConverter;
-        public IList<NoteReference> NoteReferences;
-        public bool PreserveEmptyParagraphs;
-        public IList<DocumentToHtmlReferencedComment> ReferencedComments;
-        public StyleMap StyleMap;
-        public ISet<string> Warnings;
-
-        static DocumentToHtml()
-        {
-            _initialContext = new DocumentToHtmlContext(false);
-        }
-
-        internal DocumentToHtml(DocumentToHtmlOptions options, IList<Comment> comments)
-        {
-            NoteReferences = new ArrayList<NoteReference>();
-            ReferencedComments = new ArrayList<DocumentToHtmlReferencedComment>();
-            Warnings = new HashSet<string>();
-            _idPrefix = options.IdPrefix();
-            PreserveEmptyParagraphs = options.ShouldPreserveEmptyParagraphs();
-            StyleMap = options.StyleMap();
-            ImageConverter = options.ImageConverter();
-            Comments = Maps.ToMapWithKey(comments, new DocumentToHtmlAnonymous0());
-        }
+    internal class DocumentToHtml(DocumentToHtmlOptions options, IList<Comment> comments) {
+        private static readonly DocumentToHtmlContext InitialContext = new(false);
+        public IMap<string, Comment> Comments = Maps.ToMapWithKey(comments, new DocumentToHtmlAnonymous0());
+        private readonly string _idPrefix = options.IdPrefix();
+        public IMageConverterImgElement ImageConverter = options.ImageConverter();
+        public IList<NoteReference> NoteReferences = new ArrayList<NoteReference>();
+        public bool PreserveEmptyParagraphs = options.ShouldPreserveEmptyParagraphs();
+        public IList<DocumentToHtmlReferencedComment> ReferencedComments = new ArrayList<DocumentToHtmlReferencedComment>();
+        public StyleMap StyleMap = options.StyleMap();
+        public ISet<string> Warnings = new HashSet<string>();
 
         public static InternalResult<IList<IHtmlNode>> ConvertToHtml(Document document, DocumentToHtmlOptions options)
         {
             var documentConverter = new DocumentToHtml(options, document.GetComments());
-            return new InternalResult<IList<IHtmlNode>>(documentConverter.ConvertToHtml(document, _initialContext), documentConverter.Warnings);
+            return new InternalResult<IList<IHtmlNode>>(documentConverter.ConvertToHtml(document, InitialContext), documentConverter.Warnings);
         }
 
         public static IList<Note> FindNotes(Document document, ITerable<NoteReference> noteReferences)
@@ -51,7 +34,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
         public static InternalResult<IList<IHtmlNode>> ConvertToHtml(IDocumentElement element, DocumentToHtmlOptions options)
         {
             var documentConverter = new DocumentToHtml(options, Lists.List<Comment>());
-            return new InternalResult<IList<IHtmlNode>>(documentConverter.ConvertToHtml(element, _initialContext), documentConverter.Warnings);
+            return new InternalResult<IList<IHtmlNode>>(documentConverter.ConvertToHtml(element, InitialContext), documentConverter.Warnings);
         }
 
         public IList<IHtmlNode> ConvertToHtml(Document document, DocumentToHtmlContext context)
@@ -59,7 +42,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
             var mainBody = ConvertChildrenToHtml(document, context);
             var notes = FindNotes(document, NoteReferences);
             var noteNodes = notes.IsEmpty() ? Lists.List<IHtmlNode>() : Lists.List(Html.Element("ol", Lists.EagerMap(notes, new DocumentToHtmlAnonymous2(this, context))));
-            var commentNodes = (ReferencedComments).IsEmpty() ? Lists.List<IHtmlNode>() : Lists.List(Html.Element("dl", Lists.EagerFlatMap(ReferencedComments, new DocumentToHtmlAnonymous3(this, context))));
+            var commentNodes = ReferencedComments.IsEmpty() ? Lists.List<IHtmlNode>() : Lists.List(Html.Element("dl", Lists.EagerFlatMap(ReferencedComments, new DocumentToHtmlAnonymous3(this, context))));
             return Lists.EagerConcat(mainBody, noteNodes, commentNodes);
         }
 
@@ -68,16 +51,16 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
             var id = GenerateNoteHtmlId(note.GetNoteType(), note.GetId());
             var referenceId = GenerateNoteRefHtmlId(note.GetNoteType(), note.GetId());
             var noteBody = ConvertToHtml(note.GetBody(), context);
-            var backLink = Html.CollapsibleElement("p", Lists.List(Html.Text(" "), Html.Element("a", Maps.Map("href", "#" + referenceId), Lists.List(Html.Text("↑")))));
+            var backLink = Html.CollapsibleElement("p", Lists.List(Html.Text(" "), Html.Element("a", Maps.Map("href", $"#{referenceId}"), Lists.List(Html.Text("↑")))));
             return Html.Element("li", Maps.Map("id", id), Lists.EagerConcat(noteBody, Lists.List(backLink)));
         }
 
         public IList<IHtmlNode> ConvertToHtml(DocumentToHtmlReferencedComment referencedComment, DocumentToHtmlContext context)
         {
-            var commentId = (referencedComment.Comment).GetCommentId();
-            var body = ConvertToHtml((referencedComment.Comment).GetBody(), context);
-            var backLink = Html.CollapsibleElement("p", Lists.List(Html.Text(" "), Html.Element("a", Maps.Map("href", "#" + GenerateReferenceHtmlId("comment", commentId)), Lists.List(Html.Text("↑")))));
-            return Lists.List(Html.Element("dt", Maps.Map("id", GenerateReferentHtmlId("comment", commentId)), Lists.List(Html.Text("Comment " + referencedComment.Label))), Html.Element("dd", Lists.EagerConcat(body, Lists.List(backLink))));
+            var commentId = referencedComment.Comment.GetCommentId();
+            var body = ConvertToHtml(referencedComment.Comment.GetBody(), context);
+            var backLink = Html.CollapsibleElement("p", Lists.List(Html.Text(" "), Html.Element("a", Maps.Map("href", $"#{GenerateReferenceHtmlId("comment", commentId)}"), Lists.List(Html.Text("↑")))));
+            return Lists.List(Html.Element("dt", Maps.Map("id", GenerateReferentHtmlId("comment", commentId)), Lists.List(Html.Text($"Comment {referencedComment.Label}"))), Html.Element("dd", Lists.EagerConcat(body, Lists.List(backLink))));
         }
 
         public IList<IHtmlNode> ConvertToHtml(IList<IDocumentElement> elements, DocumentToHtmlContext context)
@@ -107,24 +90,21 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
 
         public string GenerateReferentHtmlId(string referenceType, string referenceId)
         {
-            return GenerateId((referenceType + "-") + referenceId);
+            return GenerateId($"{referenceType}-{referenceId}");
         }
 
         public string GenerateReferenceHtmlId(string referenceType, string referenceId)
         {
-            return GenerateId((referenceType + "-ref-") + referenceId);
+            return GenerateId($"{referenceType}-ref-{referenceId}");
         }
 
         public string NoteTypeToIdFragment(NoteType noteType)
         {
-            switch (noteType) {
-                case NoteType.Footnote:
-                    return "footnote";
-                case NoteType.Endnote:
-                    return "endnote";
-                default:
-                    throw new UnsupportedOperationException();
-            }
+            return noteType switch {
+                NoteType.Footnote => "footnote",
+                NoteType.Endnote => "endnote",
+                _ => throw new UnsupportedOperationException()
+            };
         }
 
         public string GenerateId(string bookmarkName)

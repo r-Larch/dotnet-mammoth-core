@@ -2,13 +2,8 @@ using Mammoth.Couscous.java.io;
 
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
-    internal class XmlParser {
-        public NamespacePrefixes Namespaces;
-
-        internal XmlParser(NamespacePrefixes namespaces)
-        {
-            Namespaces = namespaces;
-        }
+    internal class XmlParser(NamespacePrefixes namespaces) {
+        public NamespacePrefixes Namespaces = namespaces;
 
         public XmlElement ParseStream(INputStream inputStream)
         {

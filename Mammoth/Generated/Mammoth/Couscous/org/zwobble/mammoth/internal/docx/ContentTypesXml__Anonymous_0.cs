@@ -10,4 +10,11 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
             return ContentTypesXml.ReadDefault(arg0);
         }
     }
+
+    internal class ContentTypesXmlAnonymous1 : IFunction<XmlElement, IMapEntry<string, string>> {
+        public IMapEntry<string, string> Apply(XmlElement arg0)
+        {
+            return ContentTypesXml.ReadOverride(arg0);
+        }
+    }
 }
