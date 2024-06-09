@@ -1,0 +1,12 @@
+namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
+    internal class StatefulBodyXmlReader__Anonymous_11 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult> {
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        internal StatefulBodyXmlReader__Anonymous_11(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader) {
+            this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        }
+        public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult apply(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> arg0) {
+            return (this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).calculateRowspans(arg0);
+        }
+    }
+}
+
