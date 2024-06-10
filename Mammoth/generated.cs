@@ -3894,9 +3894,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
         }
         public string codepointToString(int codePoint) {
             if (Mammoth.Couscous.java.lang.Character.isBmpCodePoint(codePoint)) {
-                return string.valueOf((char) codePoint);
+                return ((char) codePoint).ToString();
             } else {
-                return string.valueOf(Mammoth.Couscous.java.lang.Character.highSurrogate(codePoint)) + Mammoth.Couscous.java.lang.Character.lowSurrogate(codePoint);
+                return ((Mammoth.Couscous.java.lang.Character.highSurrogate(codePoint)).ToString()) + Mammoth.Couscous.java.lang.Character.lowSurrogate(codePoint);
             }
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult readBreak(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement element) {
