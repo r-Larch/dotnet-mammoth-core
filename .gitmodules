@@ -1,3 +1,6 @@
 [submodule "java-mammoth"]
 	path = java-mammoth
-	url = https://github.com/mwilliamson/java-mammoth.git
+	url = https://github.com/r-Larch/java-mammoth.git
+[submodule "java-couscous"]
+	path = java-couscous
+	url = https://github.com/r-Larch/java-couscous.git
