@@ -557,18 +557,3 @@ c:\Temp\apache-maven-3.9.7\bin\mvn clean deploy -P release
 cd %PROJECT%
 %JAVA_HOME%\bin\java.exe -jar c:\Temp\java-couscous\target\couscous-0.0.1-SNAPSHOT.jar
 ```
-
-```cmd
-set PROJECT="c:\Projects\LarchSys\MammothCore"
-set JAVA_HOME="c:\Projects\Java\openlogic-openjdk-8u402-b06-windows-32"
-set PATH="%JAVA_HOME%;%PATH%"
-
-cd c:\Projects\Java\java-couscous\
-c:\Projects\Java\apache-maven-3.9.7\bin\mvn package -Dmaven.test.skip=true
-
-cd %PROJECT%\java-mammoth\
-c:\Projects\Java\apache-maven-3.9.7\bin\mvn clean deploy -P release
-
-cd %PROJECT%
-%JAVA_HOME%\bin\java.exe -jar c:\Projects\Java\java-couscous\target\couscous-0.0.1-SNAPSHOT.jar
-```
