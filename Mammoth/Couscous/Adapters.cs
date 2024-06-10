@@ -1,8 +1,9 @@
 using System.Collections.Generic;
-using System.Linq;
 using Mammoth.Couscous.java.lang;
 using Mammoth.Couscous.java.util;
 using Mammoth.Couscous.java.io;
+using Mammoth.Couscous.java.util.stream;
+
 
 namespace Mammoth.Couscous {
     internal static class FromJava {
@@ -129,6 +130,11 @@ namespace Mammoth.Couscous {
             
             public void add(T value) {
                 throw new UnsupportedOperationException();
+            }
+
+            public Stream<T> stream()
+            {
+                return new StreamSupport<T>(_collection);
             }
         }
     }

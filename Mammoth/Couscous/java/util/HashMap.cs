@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 using Mammoth.Couscous.java.lang;
+using Mammoth.Couscous.java.util.stream;
+
 
 namespace Mammoth.Couscous.java.util {
     internal class HashMap<TKey, TValue> : AbstractMap<TKey, TValue> {
@@ -20,7 +22,21 @@ namespace Mammoth.Couscous.java.util {
         public override void put(TKey key, TValue value) {
             _dictionary[key] = value;
         }
-        
+
+        public override void putAll(Map<TKey, TValue> map)
+        {
+            var iterator = map.entrySet().iterator();
+            while (iterator.hasNext()) {
+                var x = iterator.next();
+                _dictionary.Add(x.getKey(), x.getValue());
+            }
+        }
+
+        public override TValue get(TKey key)
+        {
+            return _dictionary[key];
+        }
+
         public override bool containsKey(TKey key) {
             return _dictionary.ContainsKey(key);
         }
@@ -74,6 +90,11 @@ namespace Mammoth.Couscous.java.util {
             
             public void add(Map__Entry<TKey, TValue> value) {
                 throw new UnsupportedOperationException();
+            }
+
+            public Stream<Map__Entry<TKey, TValue>> stream()
+            {
+                return new StreamSupport<Map__Entry<TKey, TValue>>(_dictionary.Select(entry => Maps.entry(entry.Key, entry.Value)));
             }
         }
     }

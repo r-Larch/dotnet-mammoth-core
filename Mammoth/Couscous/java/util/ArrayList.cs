@@ -1,5 +1,7 @@
 using Mammoth.Couscous.java.lang;
 using Mammoth.Couscous.java.util;
+using Mammoth.Couscous.java.util.stream;
+
 
 namespace Mammoth.Couscous.java.util {
     internal class ArrayList<T> : List<T> {
@@ -51,7 +53,22 @@ namespace Mammoth.Couscous.java.util {
         public void add(T value) {
             _list.Add(value);
         }
-        
+
+        public Stream<T> stream()
+        {
+            return new StreamSupport<T>(_list);
+        }
+
+        public bool addAll(Collection<T> var1)
+        {
+            var iterator = var1.iterator();
+            while (iterator.hasNext()) {
+                _list.Add(iterator.next());
+            }
+
+            return var1.size() != 0;
+        }
+
         public T remove(int index) {
             T value = _list[index];
             _list.RemoveAt(index);

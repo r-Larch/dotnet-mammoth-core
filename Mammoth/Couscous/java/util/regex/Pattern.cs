@@ -21,5 +21,10 @@ namespace Mammoth.Couscous.java.util.regex {
         internal Matcher matcher(string value) {
             return new Matcher(_regex, value);
         }
+
+        internal static bool matches(string pattern, string value)
+        {
+            return Regex.IsMatch(value, pattern);
+        }
     }
 }

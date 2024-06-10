@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Mammoth.Couscous.java.lang;
 
 namespace Mammoth.Couscous.java.util {
     internal abstract class AbstractMap<TKey, TValue> : Map<TKey, TValue> {
@@ -26,6 +25,9 @@ namespace Mammoth.Couscous.java.util {
         }
         
         public abstract void put(TKey key, TValue value);
+        public abstract void putAll(Map<TKey, TValue> map);
+
+        public abstract TValue get(TKey key);
         public abstract bool containsKey(TKey key);
         public abstract Set<Map__Entry<TKey, TValue>> entrySet();
         public abstract Collection<TValue> values();

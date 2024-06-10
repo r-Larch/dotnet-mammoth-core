@@ -7,5 +7,6 @@ namespace Mammoth.Couscous.java.util {
         T remove(int index);
         void set(int index, T value);
         void clear();
+        bool addAll(Collection<T> var1);
     }
 }
