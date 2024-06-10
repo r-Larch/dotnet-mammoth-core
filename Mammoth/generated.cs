@@ -3220,8 +3220,8 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class Numbering__Anonymous_0 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum, Mammoth.Couscous.java.util.stream.Stream<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering.AbstractNumLevel>> {
-        public Mammoth.Couscous.java.util.stream.Stream<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering.AbstractNumLevel> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum abstractNum) {
+    internal class Numbering__Anonymous_0 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum, Mammoth.Couscous.java.util.stream.Stream<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel>> {
+        public Mammoth.Couscous.java.util.stream.Stream<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum abstractNum) {
             return ((abstractNum._levels).values()).stream();
         }
     }
