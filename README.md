@@ -523,19 +523,11 @@ Choose a filder eg. `c:\Temp\`
 
 - [Java 8 JDK Windows x86 64-bit](https://builds.openlogic.com/downloadJDK/openlogic-openjdk/8u402-b06/openlogic-openjdk-8u402-b06-windows-x64.zip)
 - [apache-maven-3.9.7](https://dlcdn.apache.org/maven/maven-3/3.9.7/binaries/apache-maven-3.9.7-bin.zip)
-- [java-couscous (commit:6d42393)](https://github.com/mwilliamson/java-couscous/archive/6d423939b255f42a3334925d7c82e81b0865b318.zip)
 
 **Extract all zips**
 
 - c:/Temp/openlogic-openjdk-8u402-b06-windows-32/
-- c:/Temp/java-couscous/
 - c:/Temp/apache-maven-3.9.7/
-
-**Fix Paths in java-couscous**
-
-Goto `C:\Temp\java-couscous\src\main\java\org\zwobble\couscous\frontends\java\JavaParser.java` and edit line 41 and 46:
-- 41: change path to `c:\\Temp\\openlogic-openjdk-8u402-b06-windows-32\\src.zip`
-- 46: change path to `c:\\Projects\\Java\\openlogic-openjdk-8u402-b06-windows-32\\jre\\lib\\rt.jar`
 
 **Execute the following CMD**
 
@@ -544,16 +536,16 @@ Ensure to set `PROJECT` var to the solution directory without final backslash!
 **NOTE:** java-mammoth may give some errors. You can ignore them as long as the `.\target\couscous-*.jar` file gets generated.
 
 ```cmd
-set PROJECT=".....TODO_PROJECT_DIR....."
-set JAVA_HOME="c:\Temp\openlogic-openjdk-8u402-b06-windows-32"
+set PROJECT="c:\Projects\LarchSys\MammothCore"
+set JAVA_HOME=c:\Temp\openlogic-openjdk-8u402-b06-windows-32
 set PATH="%JAVA_HOME%;%PATH%"
 
-cd c:\Temp\java-couscous\
+cd %PROJECT%\java-couscous\
 c:\Temp\apache-maven-3.9.7\bin\mvn package -Dmaven.test.skip=true
 
 cd %PROJECT%\java-mammoth\
 c:\Temp\apache-maven-3.9.7\bin\mvn clean deploy -P release
 
 cd %PROJECT%
-%JAVA_HOME%\bin\java.exe -jar c:\Temp\java-couscous\target\couscous-0.0.1-SNAPSHOT.jar
+%JAVA_HOME%\bin\java -jar %PROJECT%\java-couscous\target\couscous-0.0.1-SNAPSHOT.jar
 ```
