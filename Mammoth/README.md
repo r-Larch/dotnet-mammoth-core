@@ -1,3 +1,8 @@
+**Based on `mwilliamson/dotnet-mammoth`**
+
+This package contains a .NET Core port of `mwilliamson/java-mammoth`.<br>
+The package version indicates the version of the original java-mammoth.
+
 # How to use
 
 ```csharp

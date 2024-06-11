@@ -9,8 +9,11 @@
 
 # This is a fork of `mwilliamson/dotnet-mammoth`
 
-The original author stoped maintaining the package.
+The original author stoped maintaining the package.<br>
 This fork provides a `.NET Core` port of the original package.
+
+`dotnet-mammoth` is a dotnet port of `mwilliamson/java-mammoth` where the main work is done.<br>
+The nuget package version indicates the version of the original java-mammoth provided in the release.
 
 
 # Mammoth .docx to HTML converter for .NET
