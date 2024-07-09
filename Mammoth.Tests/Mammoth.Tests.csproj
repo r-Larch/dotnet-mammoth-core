@@ -16,6 +16,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="TestData\center.docx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="TestData\empty.docx" />
     <EmbeddedResource Include="TestData\endnotes.docx" />
     <EmbeddedResource Include="TestData\external-picture.docx" />
@@ -29,6 +33,7 @@
     <EmbeddedResource Include="TestData\tiny-picture.docx" />
     <EmbeddedResource Include="TestData\tiny-picture.png" />
     <EmbeddedResource Include="TestData\tiny-picture-custom-content-type.docx" />
+    <EmbeddedResource Include="TestData\center.docx" />
     <EmbeddedResource Include="TestData\underline.docx" />
     <EmbeddedResource Include="TestData\utf8-bom.docx" />
   </ItemGroup>

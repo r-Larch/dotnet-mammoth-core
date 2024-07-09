@@ -810,6 +810,18 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
+    internal class Alignment {
+        internal string _value;
+        internal Alignment(string value) {
+            this._value = value;
+        }
+        public string getValue() {
+            return this._value;
+        }
+    }
+}
+
+namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Bookmark : Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement {
         internal string _name;
         internal Bookmark(string name) {
@@ -1157,17 +1169,22 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Paragraph : Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.HasChildren {
         internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style> _style;
+        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment> _alignment;
         internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> _numbering;
         internal Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.ParagraphIndent _indent;
         internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> _children;
-        internal Paragraph(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style> style, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> numbering, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.ParagraphIndent indent, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> children) {
+        internal Paragraph(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style> style, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment> alignment, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> numbering, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.ParagraphIndent indent, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> children) {
             this._style = style;
+            this._alignment = alignment;
             this._numbering = numbering;
             this._indent = indent;
             this._children = children;
         }
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style> getStyle() {
             return this._style;
+        }
+        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment> getAlignment() {
+            return this._alignment;
         }
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> getNumbering() {
             return this._numbering;
@@ -3164,15 +3181,15 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
         }
         internal Numbering(Mammoth.Couscous.java.util.Map<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum> abstractNums, Mammoth.Couscous.java.util.Map<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Num> nums, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Styles styles) {
             this._abstractNums = abstractNums;
-            this._levelsByParagraphStyleId = ((((abstractNums.values()).stream()).flatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_0())).filter(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_1())).collect<Mammoth.Couscous.java.util.Map<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel>, Mammoth.Couscous.java.lang.Object>(Mammoth.Couscous.java.util.stream.Collectors.toMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel, string, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_2(), new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_3()));
+            this._levelsByParagraphStyleId = Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.toMapWithKey<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel, string>(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.lazyFilter<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel>(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.lazyFlatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel>(abstractNums.values(), new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_0()), new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_1()), new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_2());
             this._nums = nums;
             this._styles = styles;
         }
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> findLevel(string numId, string level) {
-            return (((Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.lookup<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Num>(this._nums, numId)).flatMap<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_4())).flatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_5(this))).flatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_10(this, level));
+            return (((Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.lookup<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Num>(this._nums, numId)).flatMap<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_3())).flatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_4(this))).flatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_9(this, level));
         }
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> findLevelByParagraphStyleId(string styleId) {
-            return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.lookup<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel>(this._levelsByParagraphStyleId, styleId)).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_11());
+            return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.lookup<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel>(this._levelsByParagraphStyleId, styleId)).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_10());
         }
     }
 }
@@ -3220,9 +3237,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class Numbering__Anonymous_0 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum, Mammoth.Couscous.java.util.stream.Stream<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel>> {
-        public Mammoth.Couscous.java.util.stream.Stream<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum abstractNum) {
-            return ((abstractNum._levels).values()).stream();
+    internal class Numbering__Anonymous_0 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum, Mammoth.Couscous.java.lang.Iterable<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel>> {
+        public Mammoth.Couscous.java.lang.Iterable<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum abstractNum) {
+            return (abstractNum._levels).values();
         }
     }
 }
@@ -3244,15 +3261,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class Numbering__Anonymous_3 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel> {
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel level) {
-            return level;
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class Numbering__Anonymous_4 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Num, Mammoth.Couscous.java.util.Optional<string>> {
+    internal class Numbering__Anonymous_3 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Num, Mammoth.Couscous.java.util.Optional<string>> {
         public Mammoth.Couscous.java.util.Optional<string> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Num num) {
             return num._abstractNumId;
         }
@@ -3260,9 +3269,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class Numbering__Anonymous_5 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum>> {
+    internal class Numbering__Anonymous_4 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum>> {
         internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering _numbering;
-        internal Numbering__Anonymous_5(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering numbering) {
+        internal Numbering__Anonymous_4(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering numbering) {
             this._numbering = numbering;
         }
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum> apply(string abstractNumId) {
@@ -3272,9 +3281,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class Numbering__Anonymous_6 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingStyle>> {
+    internal class Numbering__Anonymous_5 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingStyle>> {
         internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering _numbering;
-        internal Numbering__Anonymous_6(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering numbering) {
+        internal Numbering__Anonymous_5(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering numbering) {
             this._numbering = numbering;
         }
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingStyle> apply(string numStyleLink) {
@@ -3284,7 +3293,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class Numbering__Anonymous_7 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingStyle, Mammoth.Couscous.java.util.Optional<string>> {
+    internal class Numbering__Anonymous_6 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingStyle, Mammoth.Couscous.java.util.Optional<string>> {
         public Mammoth.Couscous.java.util.Optional<string> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingStyle style) {
             return style.getNumId();
         }
@@ -3292,10 +3301,10 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class Numbering__Anonymous_8 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>> {
+    internal class Numbering__Anonymous_7 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>> {
         internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering _numbering;
         internal string _level;
-        internal Numbering__Anonymous_8(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering numbering, string level) {
+        internal Numbering__Anonymous_7(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering numbering, string level) {
             this._numbering = numbering;
             this._level = level;
         }
@@ -3306,7 +3315,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class Numbering__Anonymous_9 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> {
+    internal class Numbering__Anonymous_8 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> {
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel value) {
             return value.toNumberingLevel();
         }
@@ -3314,25 +3323,25 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class Numbering__Anonymous_10 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>> {
+    internal class Numbering__Anonymous_9 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>> {
         internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering _numbering;
         internal string _level;
-        internal Numbering__Anonymous_10(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering numbering, string level) {
+        internal Numbering__Anonymous_9(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering numbering, string level) {
             this._numbering = numbering;
             this._level = level;
         }
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum abstractNum) {
             if ((abstractNum._numStyleLink).isPresent()) {
-                return (((abstractNum._numStyleLink).flatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingStyle>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_6(this._numbering))).flatMap<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_7())).flatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_8(this._numbering, this._level));
+                return (((abstractNum._numStyleLink).flatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingStyle>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_5(this._numbering))).flatMap<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_6())).flatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_7(this._numbering, this._level));
             } else {
-                return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.lookup<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel>(abstractNum._levels, this._level)).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_9());
+                return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.lookup<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel>(abstractNum._levels, this._level)).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_8());
             }
         }
     }
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class Numbering__Anonymous_11 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> {
+    internal class Numbering__Anonymous_10 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> {
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel value) {
             return value.toNumberingLevel();
         }
@@ -3807,12 +3816,13 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                 return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.success(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>());
             } else {
                 Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.ParagraphIndent indent = this.readParagraphIndent(properties);
+                Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment> alignment = this.readParagraphAlignment(properties);
                 Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlNode> childrenXml = element.getChildren();
                 if (!(this._deletedParagraphContents).isEmpty()) {
                     childrenXml = Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlNode>(this._deletedParagraphContents, childrenXml);
                     this._deletedParagraphContents = new Mammoth.Couscous.java.util.ArrayList<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlNode>();
                 }
-                return (Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.map<Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>>(this.readParagraphStyle(properties), this.readElements(childrenXml), new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_7(this, properties, indent))).appendExtra();
+                return (Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.map<Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>>(this.readParagraphStyle(properties), this.readElements(childrenXml), new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_7(alignment, this, properties, indent))).appendExtra();
             }
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult readFieldChar(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement element) {
@@ -3864,6 +3874,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
             }
         }
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> readNumbering(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style> style, Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike properties) {
+            Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike numberingProperties = properties.findChildOrEmpty("w:numPr");
+            Mammoth.Couscous.java.util.Optional<string> numId = this.readVal(numberingProperties, "w:numId");
+            Mammoth.Couscous.java.util.Optional<string> levelIndex = this.readVal(numberingProperties, "w:ilvl");
+            if (numId.isPresent() && levelIndex.isPresent()) {
+                return (this._numbering).findLevel(numId.get(), levelIndex.get());
+            }
             if (style.isPresent()) {
                 string styleId = (style.get()).getStyleId();
                 Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> level = (this._numbering).findLevelByParagraphStyleId(styleId);
@@ -3871,12 +3887,26 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                     return level;
                 }
             }
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike numberingProperties = properties.findChildOrEmpty("w:numPr");
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.flatMap<string, string, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(this.readVal(numberingProperties, "w:numId"), this.readVal(numberingProperties, "w:ilvl"), new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_13(this));
+            return Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>();
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.ParagraphIndent readParagraphIndent(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike properties) {
             Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike indent = properties.findChildOrEmpty("w:ind");
             return new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.ParagraphIndent(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<string>(indent.getAttributeOrNone("w:start"), indent.getAttributeOrNone("w:left")), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<string>(indent.getAttributeOrNone("w:end"), indent.getAttributeOrNone("w:right")), indent.getAttributeOrNone("w:firstLine"), indent.getAttributeOrNone("w:hanging"));
+        }
+        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment> readParagraphAlignment(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike properties) {
+            string align = ((properties.findChild("w:jc")).map<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_13())).orElse("");
+            switch (align) {
+                case "left":
+                    return Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment("left"));
+                case "center":
+                    return Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment("center"));
+                case "right":
+                    return Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment("right"));
+                case "both":
+                    return Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment("justify"));
+                default:
+                    return Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment>();
+            }
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult readSymbol(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement element) {
             Mammoth.Couscous.java.util.Optional<string> font = element.getAttributeOrNone("w:font");
@@ -3887,17 +3917,10 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                     dingbat = Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Dingbats.findDingbat(font.get(), int.Parse((charValue.get()).Substring(2)));
                 }
                 if (dingbat.isPresent()) {
-                    return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.success(new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Text(this.codepointToString(dingbat.get())));
+                    return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.success(new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Text(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Strings.codepointToString(dingbat.get())));
                 }
             }
             return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.emptyWithWarning((("A w:sym element with an unsupported character was ignored: char " + charValue.orElse("null")) + " in font ") + font.orElse("null"));
-        }
-        public string codepointToString(int codePoint) {
-            if (Mammoth.Couscous.java.lang.Character.isBmpCodePoint(codePoint)) {
-                return ((char) codePoint).ToString();
-            } else {
-                return ((Mammoth.Couscous.java.lang.Character.highSurrogate(codePoint)).ToString()) + Mammoth.Couscous.java.lang.Character.lowSurrogate(codePoint);
-            }
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult readBreak(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement element) {
             string breakType = (element.getAttributeOrNone("w:type")).orElse("textWrapping");
@@ -4191,16 +4214,18 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__Anonymous_7 : Mammoth.Couscous.java.util.function.BiFunction<Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> {
+        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment> _alignment;
         internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _statefulBodyXmlReader;
         internal Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike _properties;
         internal Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.ParagraphIndent _indent;
-        internal StatefulBodyXmlReader__Anonymous_7(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader statefulBodyXmlReader, Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike properties, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.ParagraphIndent indent) {
+        internal StatefulBodyXmlReader__Anonymous_7(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment> alignment, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader statefulBodyXmlReader, Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike properties, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.ParagraphIndent indent) {
+            this._alignment = alignment;
             this._statefulBodyXmlReader = statefulBodyXmlReader;
             this._properties = properties;
             this._indent = indent;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement apply(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style> style, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> children) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph(style, (this._statefulBodyXmlReader).readNumbering(style, this._properties), this._indent, children);
+            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph(style, this._alignment, (this._statefulBodyXmlReader).readNumbering(style, this._properties), this._indent, children);
         }
     }
 }
@@ -4266,13 +4291,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_13 : Mammoth.Couscous.java.util.function.BiFunction<string, string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _statefulBodyXmlReader;
-        internal StatefulBodyXmlReader__Anonymous_13(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader statefulBodyXmlReader) {
-            this._statefulBodyXmlReader = statefulBodyXmlReader;
-        }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> apply(string arg0, string arg1) {
-            return ((this._statefulBodyXmlReader)._numbering).findLevel(arg0, arg1);
+    internal class StatefulBodyXmlReader__Anonymous_13 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement, string> {
+        public string apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement jc) {
+            return (jc.getAttributeOrNone("w:val")).orElse("");
         }
     }
 }
@@ -5570,37 +5591,43 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
         internal Mammoth.Couscous.java.util.Optional<string> _styleId;
         internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> _styleName;
         internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> _numbering;
+        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> _textAlign;
         static ParagraphMatcher() {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher._ANY = new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher(Mammoth.Couscous.java.util.Optional.empty<string>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>());
+            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher._ANY = new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher(Mammoth.Couscous.java.util.Optional.empty<string>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>());
         }
-        internal ParagraphMatcher(Mammoth.Couscous.java.util.Optional<string> styleId, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> styleName, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> numbering) {
+        internal ParagraphMatcher(Mammoth.Couscous.java.util.Optional<string> styleId, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> styleName, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> numbering, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> textAlign) {
             this._styleId = styleId;
             this._styleName = styleName;
             this._numbering = numbering;
+            this._textAlign = textAlign;
         }
         public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher styleId(string styleId) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher(Mammoth.Couscous.java.util.Optional.of<string>(styleId), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>());
+            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher(Mammoth.Couscous.java.util.Optional.of<string>(styleId), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>());
         }
         public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher styleName(string styleName) {
             return Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher.styleName(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.EqualToStringMatcher(styleName));
         }
         public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher styleName(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher styleName) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher(Mammoth.Couscous.java.util.Optional.empty<string>(), Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>(styleName), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>());
+            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher(Mammoth.Couscous.java.util.Optional.empty<string>(), Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>(styleName), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>());
         }
         public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher orderedList(string level) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher(Mammoth.Couscous.java.util.Optional.empty<string>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>(), Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel.ordered(level)));
+            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher(Mammoth.Couscous.java.util.Optional.empty<string>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>(), Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel.ordered(level)), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>());
         }
         public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher unorderedList(string level) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher(Mammoth.Couscous.java.util.Optional.empty<string>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>(), Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel.unordered(level)));
+            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher(Mammoth.Couscous.java.util.Optional.empty<string>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>(), Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel.unordered(level)), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>());
         }
         public bool matches(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph paragraph) {
-            return this.matchesStyle(paragraph) && this.matchesNumbering(paragraph);
+            return (this.matchesStyle(paragraph) && this.matchesNumbering(paragraph)) && this.matchesTextAlign(paragraph);
         }
         public bool matchesStyle(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph paragraph) {
             return Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.DocumentElementMatching.matchesStyle(this._styleId, this._styleName, paragraph.getStyle());
         }
         public bool matchesNumbering(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph paragraph) {
             return Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.DocumentElementMatching.matches<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(this._numbering, paragraph.getNumbering(), new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher__Anonymous_0());
+        }
+        public bool matchesTextAlign(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph paragraph) {
+            Mammoth.Couscous.java.util.Optional<string> alignment = (paragraph.getAlignment()).map<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher__Anonymous_1());
+            return Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.DocumentElementMatching.matches<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher, string>(this._textAlign, alignment, new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher__Anonymous_2());
         }
     }
 }
@@ -5609,6 +5636,22 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class ParagraphMatcher__Anonymous_0 : Mammoth.Couscous.java.util.function.BiPredicate<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> {
         public bool test(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel first, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel second) {
             return first.isOrdered() == second.isOrdered() && (first.getLevelIndex()).equalsIgnoreCase(second.getLevelIndex());
+        }
+    }
+}
+
+namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
+    internal class ParagraphMatcher__Anonymous_1 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment, string> {
+        public string apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment x) {
+            return x.getValue();
+        }
+    }
+}
+
+namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
+    internal class ParagraphMatcher__Anonymous_2 : Mammoth.Couscous.java.util.function.BiPredicate<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher, string> {
+        public bool test(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher first, string second) {
+            return first.matches(second);
         }
     }
 }
@@ -5650,9 +5693,11 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
         }
         public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher parseParagraphMatcher(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokens) {
             Mammoth.Couscous.java.util.Optional<string> styleId = Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.DocumentMatcherParser.parseStyleId(tokens);
-            Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> styleName = Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.DocumentMatcherParser.parseStyleName(tokens);
+            Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>> options = Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.DocumentMatcherParser.parseOptions(tokens, Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<string>("style-name", "text-align"));
+            Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> styleName = options.apply("style-name");
+            Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> textAlign = options.apply("text-align");
             Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> numbering = Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.DocumentMatcherParser.parseNumbering(tokens);
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher(styleId, styleName, numbering);
+            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher(styleId, styleName, numbering, textAlign);
         }
         public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.RunMatcher parseRunMatcher(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokens) {
             Mammoth.Couscous.java.util.Optional<string> styleId = Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.DocumentMatcherParser.parseStyleId(tokens);
@@ -5666,6 +5711,37 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
         }
         public static Mammoth.Couscous.java.util.Optional<string> parseStyleId(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokens) {
             return Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenParser.parseClassName(tokens);
+        }
+        public static Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>> parseOptions(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokens, Mammoth.Couscous.java.util.List<string> properties) {
+            if (tokens.trySkip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, "[")) {
+                Mammoth.Couscous.java.util.Map<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> options = new Mammoth.Couscous.java.util.HashMap<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>();
+                Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>> result = new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.DocumentMatcherParser__Anonymous_11(options);
+                while (tokens.peekTokenType() == Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._IDENTIFIER) {
+                    string identifier = tokens.nextValue(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._IDENTIFIER);
+                    if (properties.contains(identifier)) {
+                        Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher stringMatcher = Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.DocumentMatcherParser.parseStringMatcher(tokens);
+                        options.put(identifier, stringMatcher);
+                    } else {
+                        throw Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.LineParseException.lineParseException<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(tokens.next(), (("Expected " + (java.lang.String.join(" or ", properties))) + " but got token ") + (tokens.next()).getValue());
+                    }
+                    if (tokens.peekTokenType() == Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._WHITESPACE) {
+                        tokens.skip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._WHITESPACE);
+                    }
+                    if (tokens.isNext(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, ",")) {
+                        tokens.skip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, ",");
+                    } else {
+                        tokens.skip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, "]");
+                        return result;
+                    }
+                    if (tokens.peekTokenType() == Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._WHITESPACE) {
+                        tokens.skip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._WHITESPACE);
+                    }
+                }
+                tokens.skip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, "]");
+                return result;
+            } else {
+                return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.DocumentMatcherParser__Anonymous_12();
+            }
         }
         public static Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> parseStyleName(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokens) {
             if (tokens.trySkip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, "[")) {
@@ -5834,6 +5910,26 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
+    internal class DocumentMatcherParser__Anonymous_11 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>> {
+        internal Mammoth.Couscous.java.util.Map<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> _options;
+        internal DocumentMatcherParser__Anonymous_11(Mammoth.Couscous.java.util.Map<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> options) {
+            this._options = options;
+        }
+        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> apply(string property) {
+            return (this._options).containsKey(property) ? Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>((this._options).get(property)) : Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>();
+        }
+    }
+}
+
+namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
+    internal class DocumentMatcherParser__Anonymous_12 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>> {
+        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> apply(string property) {
+            return Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>();
+        }
+    }
+}
+
+namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class EscapeSequences {
         internal static Mammoth.Couscous.java.util.regex.Pattern _PATTERN;
         static EscapeSequences() {
@@ -5898,7 +5994,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
                 while (_couscous_desugar_foreach_to_for7.hasNext()) {
                     Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.HtmlPathParser__Attribute attribute = _couscous_desugar_foreach_to_for7.next();
                     if (attribute._append && attributes.containsKey(attribute._name)) {
-                        attributes.put(attribute._name, (attributes.get(attribute._name) + " ") + attribute._value);
+                        attributes.put(attribute._name, ((Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.lookup<string, string>(attributes, attribute._name)).get() + " ") + attribute._value);
                     } else {
                         attributes.put(attribute._name, attribute._value);
                     }

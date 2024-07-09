@@ -13,10 +13,14 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
 		internal static bool isNullOrEmpty(string value) {
 			return string.IsNullOrEmpty(value);
 		}
-		
-		internal static bool startsWithIgnoreCase(string value, string prefix) {
+
+        internal static bool startsWithIgnoreCase(string value, string prefix) {
 			return value.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase);
 		}
-	}
+
+        internal static string codepointToString(int codePoint) {
+            return ((char) codePoint).ToString();
+        }
+    }
 }
 
