@@ -581,8 +581,8 @@ Choose a filder eg. `c:\Temp\`
 
 **Extract all zips**
 
-- c:/Temp/openlogic-openjdk-8u402-b06-windows-32/
-- c:/Temp/apache-maven-3.9.7/
+- c:/Projects/Java/openlogic-openjdk-8u402-b06-windows-32/
+- c:/Projects/Java/apache-maven-3.9.7/
 
 **Execute the following CMD**
 
@@ -592,14 +592,14 @@ Ensure to set `PROJECT` var to the solution directory without final backslash!
 
 ```cmd
 set PROJECT="c:\Projects\LarchSys\MammothCore"
-set JAVA_HOME=c:\Temp\openlogic-openjdk-8u402-b06-windows-32
+set JAVA_HOME=c:\Projects\Java\openlogic-openjdk-8u402-b06-windows-32
 set PATH="%JAVA_HOME%;%PATH%"
 
 cd %PROJECT%\java-couscous\
-c:\Temp\apache-maven-3.9.7\bin\mvn package -Dmaven.test.skip=true
+c:\Projects\Java\apache-maven-3.9.7\bin\mvn package -Dmaven.test.skip=true
 
 cd %PROJECT%\java-mammoth\
-c:\Temp\apache-maven-3.9.7\bin\mvn clean deploy -P release
+c:\Projects\Java\apache-maven-3.9.7\bin\mvn clean deploy -P release
 
 cd %PROJECT%
 %JAVA_HOME%\bin\java -jar %PROJECT%\java-couscous\target\couscous-0.0.1-SNAPSHOT.jar

@@ -17,238 +17,6 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.images {
     }
 }
 
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtmlOptions _options;
-        internal InternalDocumentConverter(Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtmlOptions options) {
-            this._options = options;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> convertToHtml(Mammoth.Couscous.java.io.InputStream stream) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.PassThroughException.unwrap<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_1(stream, this));
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> convertToHtml(Mammoth.Couscous.java.io.File file) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.PassThroughException.unwrap<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_3(file, this));
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> convertToHtml(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.java.nio.file.Path> path, Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile) {
-            Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap> styleMap = (this.readEmbeddedStyleMap(zipFile)).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_4());
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtmlOptions conversionOptions = (styleMap.map<Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtmlOptions>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_5(this))).orElse(this._options);
-            return ((((Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.readDocument(path, zipFile)).flatMap<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_6(conversionOptions))).map<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_7())).map<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_8())).map<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_9());
-        }
-        public Mammoth.Couscous.java.util.Optional<string> readEmbeddedStyleMap(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.PassThroughException.wrap<Mammoth.Couscous.java.util.Optional<string>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_10(zipFile));
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> extractRawText(Mammoth.Couscous.java.io.InputStream stream) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.PassThroughException.unwrap<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_12(stream, this));
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> extractRawText(Mammoth.Couscous.java.io.File file) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.PassThroughException.unwrap<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_14(file, this));
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> extractRawText(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.java.nio.file.Path> path, Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile) {
-            return (Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.DocumentReader.readDocument(path, zipFile)).map<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_15());
-        }
-        public static T withDocxFile<T>(Mammoth.Couscous.java.io.File file, Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive, T> function) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile = new Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.ZippedArchive(file);
-            try {
-                return function.apply(zipFile);
-            } finally {
-                zipFile.close();
-            }
-        }
-        public static T withDocxFile<T>(Mammoth.Couscous.java.io.InputStream stream, Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive, T> function) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile = Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.InMemoryArchive.fromStream(stream);
-            try {
-                return function.apply(zipFile);
-            } finally {
-                zipFile.close();
-            }
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_0 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive, Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        internal InternalDocumentConverter__Anonymous_0(Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter) {
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile) {
-            return (this._this_org__zwobble__mammoth__internal__InternalDocumentConverter).convertToHtml(Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.java.nio.file.Path>(), zipFile);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_1 : Mammoth.Couscous.org.zwobble.mammoth.@internal.util.SupplierWithException<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>, Mammoth.Couscous.java.io.IOException> {
-        internal Mammoth.Couscous.java.io.InputStream _stream;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        internal InternalDocumentConverter__Anonymous_1(Mammoth.Couscous.java.io.InputStream stream, Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter) {
-            this._stream = stream;
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> get() {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter.withDocxFile<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(this._stream, new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_0(this._this_org__zwobble__mammoth__internal__InternalDocumentConverter));
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_2 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive, Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        internal Mammoth.Couscous.java.io.File _file;
-        internal InternalDocumentConverter__Anonymous_2(Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter, Mammoth.Couscous.java.io.File file) {
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-            this._file = file;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile) {
-            return (this._this_org__zwobble__mammoth__internal__InternalDocumentConverter).convertToHtml(Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.java.nio.file.Path>((this._file).toPath()), zipFile);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_3 : Mammoth.Couscous.org.zwobble.mammoth.@internal.util.SupplierWithException<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>, Mammoth.Couscous.java.io.IOException> {
-        internal Mammoth.Couscous.java.io.File _file;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        internal InternalDocumentConverter__Anonymous_3(Mammoth.Couscous.java.io.File file, Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter) {
-            this._file = file;
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> get() {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter.withDocxFile<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(this._file, new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_2(this._this_org__zwobble__mammoth__internal__InternalDocumentConverter, this._file));
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_4 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap> {
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap apply(string arg0) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.StyleMapParser.parse(arg0);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_5 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtmlOptions> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        internal InternalDocumentConverter__Anonymous_5(Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter) {
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtmlOptions apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap arg0) {
-            return ((this._this_org__zwobble__mammoth__internal__InternalDocumentConverter)._options).addEmbeddedStyleMap(arg0);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_6 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Document, Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtmlOptions _conversionOptions;
-        internal InternalDocumentConverter__Anonymous_6(Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtmlOptions conversionOptions) {
-            this._conversionOptions = conversionOptions;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Document nodes) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml.convertToHtml(nodes, this._conversionOptions);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_7 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>> {
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> apply(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> arg0) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.stripEmpty(arg0);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_8 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>> {
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> apply(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> arg0) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.collapse(arg0);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_9 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>, string> {
-        public string apply(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> arg0) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.write(arg0);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_10 : Mammoth.Couscous.org.zwobble.mammoth.@internal.util.SupplierWithException<Mammoth.Couscous.java.util.Optional<string>, Mammoth.Couscous.java.io.IOException> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive _zipFile;
-        internal InternalDocumentConverter__Anonymous_10(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile) {
-            this._zipFile = zipFile;
-        }
-        public Mammoth.Couscous.java.util.Optional<string> get() {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.EmbeddedStyleMap.readStyleMap(this._zipFile);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_11 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive, Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        internal InternalDocumentConverter__Anonymous_11(Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter) {
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile) {
-            return (this._this_org__zwobble__mammoth__internal__InternalDocumentConverter).extractRawText(Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.java.nio.file.Path>(), zipFile);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_12 : Mammoth.Couscous.org.zwobble.mammoth.@internal.util.SupplierWithException<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>, Mammoth.Couscous.java.io.IOException> {
-        internal Mammoth.Couscous.java.io.InputStream _stream;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        internal InternalDocumentConverter__Anonymous_12(Mammoth.Couscous.java.io.InputStream stream, Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter) {
-            this._stream = stream;
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> get() {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter.withDocxFile<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(this._stream, new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_11(this._this_org__zwobble__mammoth__internal__InternalDocumentConverter));
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_13 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive, Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        internal Mammoth.Couscous.java.io.File _file;
-        internal InternalDocumentConverter__Anonymous_13(Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter, Mammoth.Couscous.java.io.File file) {
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-            this._file = file;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile) {
-            return (this._this_org__zwobble__mammoth__internal__InternalDocumentConverter).extractRawText(Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.java.nio.file.Path>((this._file).toPath()), zipFile);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_14 : Mammoth.Couscous.org.zwobble.mammoth.@internal.util.SupplierWithException<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>, Mammoth.Couscous.java.io.IOException> {
-        internal Mammoth.Couscous.java.io.File _file;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        internal InternalDocumentConverter__Anonymous_14(Mammoth.Couscous.java.io.File file, Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter) {
-            this._file = file;
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> get() {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter.withDocxFile<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(this._file, new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_13(this._this_org__zwobble__mammoth__internal__InternalDocumentConverter, this._file));
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_15 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Document, string> {
-        public string apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Document arg0) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.RawText.extractRawText(arg0);
-        }
-    }
-}
-
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.archives {
     internal interface Archive : Mammoth.Couscous.java.io.Closeable {
         Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.java.io.InputStream> tryGetInputStream(string name);
@@ -467,15 +235,15 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
             return (mapping.wrap(children)).get();
         }
         public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run run, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
-            Mammoth.Couscous.java.util.function.Supplier<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>> nodes = new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Anonymous_7(this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml, run, context);
+            Mammoth.Couscous.java.util.function.Supplier<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>> nodes = new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Anonymous_7(this._documentToHtml, run, context);
             if ((run.getHighlight()).isPresent()) {
-                nodes = ((((this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getHighlightHtmlPath((run.getHighlight()).get())).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath_static._EMPTY)).wrap(nodes);
+                nodes = ((((this._documentToHtml)._styleMap).getHighlightHtmlPath((run.getHighlight()).get())).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath_static._EMPTY)).wrap(nodes);
             }
             if (run.isSmallCaps()) {
                 nodes = ((((this._documentToHtml)._styleMap).getSmallCaps()).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath_static._EMPTY)).wrap(nodes);
             }
             if (run.isAllCaps()) {
-                nodes = ((((this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._styleMap).getAllCaps()).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath_static._EMPTY)).wrap(nodes);
+                nodes = ((((this._documentToHtml)._styleMap).getAllCaps()).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath_static._EMPTY)).wrap(nodes);
             }
             if (run.isStrikethrough()) {
                 nodes = ((((this._documentToHtml)._styleMap).getStrikethrough()).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath_static.collapsibleElement("s"))).wrap(nodes);
@@ -530,7 +298,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
             return ((Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Casts.tryCast<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.TableRow>(typeof(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.TableRow), child)).map<bool>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Anonymous_13())).orElse(false);
         }
         public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.TableRow tableRow, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.element("tr", Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.cons<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html._FORCE_WRITE, (this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml).convertChildrenToHtml(tableRow, context))));
+            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.element("tr", Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.cons<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html._FORCE_WRITE, (this._documentToHtml).convertChildrenToHtml(tableRow, context))));
         }
         public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.TableCell tableCell, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
             string tagName = context._isHeader ? "th" : "td";
@@ -557,6 +325,14 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
                 return "";
             }
         }
+        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Checkbox checkbox, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
+            Mammoth.Couscous.java.util.Map<string, string> attributes = new Mammoth.Couscous.java.util.HashMap<string, string>();
+            attributes.put("type", "checkbox");
+            if (checkbox.@checked()) {
+                attributes.put("checked", "checked");
+            }
+            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.element("input", attributes));
+        }
         public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Bookmark bookmark, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
             return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.element("a", Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.map<string, string>("id", (this._documentToHtml).generateId(bookmark.getName())), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html._FORCE_WRITE)));
         }
@@ -571,9 +347,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
         }
         public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Image image, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtml__Context context) {
             try {
-                return ((this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._imageConverter).convert(image);
+                return ((this._documentToHtml)._imageConverter).convert(image);
             } catch (Mammoth.Couscous.java.io.IOException exception) {
-                ((this._this_org__zwobble__mammoth__internal__conversion__DocumentToHtml)._warnings).add(exception.getMessage());
+                ((this._documentToHtml)._warnings).add(exception.getMessage());
                 return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>();
             }
         }
@@ -951,14 +727,14 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
     internal class InternalImageConverter__Anonymous_2 : Mammoth.Couscous.org.zwobble.mammoth.@internal.util.SupplierWithException<Mammoth.Couscous.java.util.Map<string, string>, Mammoth.Couscous.java.io.IOException> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.InternalImageConverter _this_org__zwobble__mammoth__internal__conversion__InternalImageConverter;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.InternalImageConverter _internalImageConverter;
         internal Mammoth.Couscous.org.zwobble.mammoth.images.Image _image;
-        internal InternalImageConverter__Anonymous_2(Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.InternalImageConverter this_org__zwobble__mammoth__internal__conversion__InternalImageConverter, Mammoth.Couscous.org.zwobble.mammoth.images.Image image) {
-            this._this_org__zwobble__mammoth__internal__conversion__InternalImageConverter = this_org__zwobble__mammoth__internal__conversion__InternalImageConverter;
+        internal InternalImageConverter__Anonymous_2(Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.InternalImageConverter internalImageConverter, Mammoth.Couscous.org.zwobble.mammoth.images.Image image) {
+            this._internalImageConverter = internalImageConverter;
             this._image = image;
         }
         public Mammoth.Couscous.java.util.Map<string, string> get() {
-            return ((this._this_org__zwobble__mammoth__internal__conversion__InternalImageConverter)._imgElement).convert(this._image);
+            return ((this._internalImageConverter)._imgElement).convert(this._image);
         }
     }
 }
@@ -966,16 +742,16 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
     internal class InternalImageConverter__Anonymous_3 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>> {
         internal Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Image _internalImage;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.InternalImageConverter _this_org__zwobble__mammoth__internal__conversion__InternalImageConverter;
-        internal InternalImageConverter__Anonymous_3(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Image internalImage, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.InternalImageConverter this_org__zwobble__mammoth__internal__conversion__InternalImageConverter) {
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.InternalImageConverter _internalImageConverter;
+        internal InternalImageConverter__Anonymous_3(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Image internalImage, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.InternalImageConverter internalImageConverter) {
             this._internalImage = internalImage;
-            this._this_org__zwobble__mammoth__internal__conversion__InternalImageConverter = this_org__zwobble__mammoth__internal__conversion__InternalImageConverter;
+            this._internalImageConverter = internalImageConverter;
         }
         public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> apply(string contentType) {
             Mammoth.Couscous.org.zwobble.mammoth.images.Image image = new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.InternalImageConverter__Anonymous_0(this._internalImage, contentType);
             Mammoth.Couscous.java.util.Map<string, string> attributes = new Mammoth.Couscous.java.util.HashMap<string, string>();
             ((this._internalImage).getAltText()).ifPresent(new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.InternalImageConverter__Anonymous_1(attributes));
-            attributes.putAll(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.PassThroughException.wrap<Mammoth.Couscous.java.util.Map<string, string>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.InternalImageConverter__Anonymous_2(this._this_org__zwobble__mammoth__internal__conversion__InternalImageConverter, image)));
+            attributes.putAll(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.PassThroughException.wrap<Mammoth.Couscous.java.util.Map<string, string>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.InternalImageConverter__Anonymous_2(this._internalImageConverter, image)));
             return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.Html.element("img", attributes));
         }
     }
@@ -984,13 +760,13 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion {
     internal class InternalImageConverter__Anonymous_4 : Mammoth.Couscous.org.zwobble.mammoth.@internal.util.SupplierWithException<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>, Mammoth.Couscous.java.io.IOException> {
         internal Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Image _internalImage;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.InternalImageConverter _this_org__zwobble__mammoth__internal__conversion__InternalImageConverter;
-        internal InternalImageConverter__Anonymous_4(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Image internalImage, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.InternalImageConverter this_org__zwobble__mammoth__internal__conversion__InternalImageConverter) {
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.InternalImageConverter _internalImageConverter;
+        internal InternalImageConverter__Anonymous_4(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Image internalImage, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.InternalImageConverter internalImageConverter) {
             this._internalImage = internalImage;
-            this._this_org__zwobble__mammoth__internal__conversion__InternalImageConverter = this_org__zwobble__mammoth__internal__conversion__InternalImageConverter;
+            this._internalImageConverter = internalImageConverter;
         }
         public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> get() {
-            return (((this._internalImage).getContentType()).map<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.InternalImageConverter__Anonymous_3(this._internalImage, this._this_org__zwobble__mammoth__internal__conversion__InternalImageConverter))).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>());
+            return (((this._internalImage).getContentType()).map<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.InternalImageConverter__Anonymous_3(this._internalImage, this._internalImageConverter))).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode>());
         }
     }
 }
@@ -1101,6 +877,21 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
+    internal class Checkbox : Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement {
+        internal bool _checked;
+        internal Checkbox(bool @checked) {
+            this._checked = @checked;
+        }
+        public bool @checked() {
+            return this._checked;
+        }
+        public T accept<T, U>(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElementVisitor<T, U> visitor, U context) {
+            return visitor.visit(this, context);
+        }
+    }
+}
+
+namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
     internal class Comment {
         internal string _commentId;
         internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> _body;
@@ -1181,6 +972,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.documents {
         T visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.TableRow tableRow, U context);
         T visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.TableCell tableCell, U context);
         T visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink hyperlink, U context);
+        T visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Checkbox checkbox, U context);
         T visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Bookmark bookmark, U context);
         T visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NoteReference noteReference, U context);
         T visit(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.CommentReference commentReference, U context);
@@ -3510,24 +3302,24 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class Numbering__Anonymous_4 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering _this_org__zwobble__mammoth__internal__docx__Numbering;
-        internal Numbering__Anonymous_4(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering this_org__zwobble__mammoth__internal__docx__Numbering) {
-            this._this_org__zwobble__mammoth__internal__docx__Numbering = this_org__zwobble__mammoth__internal__docx__Numbering;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering _numbering;
+        internal Numbering__Anonymous_4(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering numbering) {
+            this._numbering = numbering;
         }
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum> apply(string abstractNumId) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.lookup<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum>((this._this_org__zwobble__mammoth__internal__docx__Numbering)._abstractNums, abstractNumId);
+            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.lookup<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum>((this._numbering)._abstractNums, abstractNumId);
         }
     }
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class Numbering__Anonymous_5 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingStyle>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering _this_org__zwobble__mammoth__internal__docx__Numbering;
-        internal Numbering__Anonymous_5(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering this_org__zwobble__mammoth__internal__docx__Numbering) {
-            this._this_org__zwobble__mammoth__internal__docx__Numbering = this_org__zwobble__mammoth__internal__docx__Numbering;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering _numbering;
+        internal Numbering__Anonymous_5(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering numbering) {
+            this._numbering = numbering;
         }
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingStyle> apply(string numStyleLink) {
-            return ((this._this_org__zwobble__mammoth__internal__docx__Numbering)._styles).findNumberingStyleById(numStyleLink);
+            return ((this._numbering)._styles).findNumberingStyleById(numStyleLink);
         }
     }
 }
@@ -3542,14 +3334,14 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class Numbering__Anonymous_7 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering _this_org__zwobble__mammoth__internal__docx__Numbering;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering _numbering;
         internal string _level;
-        internal Numbering__Anonymous_7(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering this_org__zwobble__mammoth__internal__docx__Numbering, string level) {
-            this._this_org__zwobble__mammoth__internal__docx__Numbering = this_org__zwobble__mammoth__internal__docx__Numbering;
+        internal Numbering__Anonymous_7(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering numbering, string level) {
+            this._numbering = numbering;
             this._level = level;
         }
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> apply(string linkedNumId) {
-            return (this._this_org__zwobble__mammoth__internal__docx__Numbering).findLevel(linkedNumId, this._level);
+            return (this._numbering).findLevel(linkedNumId, this._level);
         }
     }
 }
@@ -3564,15 +3356,15 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class Numbering__Anonymous_9 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering _this_org__zwobble__mammoth__internal__docx__Numbering;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering _numbering;
         internal string _level;
-        internal Numbering__Anonymous_9(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering this_org__zwobble__mammoth__internal__docx__Numbering, string level) {
-            this._this_org__zwobble__mammoth__internal__docx__Numbering = this_org__zwobble__mammoth__internal__docx__Numbering;
+        internal Numbering__Anonymous_9(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering numbering, string level) {
+            this._numbering = numbering;
             this._level = level;
         }
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNum abstractNum) {
             if ((abstractNum._numStyleLink).isPresent()) {
-                return (((abstractNum._numStyleLink).flatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingStyle>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_5(this._this_org__zwobble__mammoth__internal__docx__Numbering))).flatMap<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_6())).flatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_7(this._this_org__zwobble__mammoth__internal__docx__Numbering, this._level));
+                return (((abstractNum._numStyleLink).flatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingStyle>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_5(this._numbering))).flatMap<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_6())).flatMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_7(this._numbering, this._level));
             } else {
                 return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Maps.lookup<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__AbstractNumLevel>(abstractNum._levels, this._level)).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.NumberingLevel>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Numbering__Anonymous_8());
             }
@@ -3652,7 +3444,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class OfficeXml {
         internal static Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.NamespacePrefixes _XML_NAMESPACES;
         static OfficeXml() {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.OfficeXml._XML_NAMESPACES = ((((((((((((((((Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.NamespacePrefixes.builder()).put("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main")).put("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships")).put("wp", "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing")).put("a", "http://schemas.openxmlformats.org/drawingml/2006/main")).put("pic", "http://schemas.openxmlformats.org/drawingml/2006/picture")).put("w", "http://purl.oclc.org/ooxml/wordprocessingml/main")).put("r", "http://purl.oclc.org/ooxml/officeDocument/relationships")).put("wp", "http://purl.oclc.org/ooxml/drawingml/wordprocessingDrawing")).put("a", "http://purl.oclc.org/ooxml/drawingml/main")).put("pic", "http://purl.oclc.org/ooxml/drawingml/picture")).put("content-types", "http://schemas.openxmlformats.org/package/2006/content-types")).put("relationships", "http://schemas.openxmlformats.org/package/2006/relationships")).put("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006")).put("v", "urn:schemas-microsoft-com:vml")).put("office-word", "urn:schemas-microsoft-com:office:word")).build();
+            Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.OfficeXml._XML_NAMESPACES = (((((((((((((((((Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.NamespacePrefixes.builder()).put("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main")).put("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships")).put("wp", "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing")).put("a", "http://schemas.openxmlformats.org/drawingml/2006/main")).put("pic", "http://schemas.openxmlformats.org/drawingml/2006/picture")).put("w", "http://purl.oclc.org/ooxml/wordprocessingml/main")).put("r", "http://purl.oclc.org/ooxml/officeDocument/relationships")).put("wp", "http://purl.oclc.org/ooxml/drawingml/wordprocessingDrawing")).put("a", "http://purl.oclc.org/ooxml/drawingml/main")).put("pic", "http://purl.oclc.org/ooxml/drawingml/picture")).put("content-types", "http://schemas.openxmlformats.org/package/2006/content-types")).put("relationships", "http://schemas.openxmlformats.org/package/2006/relationships")).put("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006")).put("v", "urn:schemas-microsoft-com:vml")).put("office-word", "urn:schemas-microsoft-com:office:word")).put("wordml", "http://schemas.microsoft.com/office/word/2010/wordml")).build();
         }
         public static Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement parseXml(Mammoth.Couscous.java.io.InputStream inputStream) {
             Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser parser = new Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.OfficeXml._XML_NAMESPACES);
@@ -4032,7 +3824,10 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
             return this.readBooleanElement(properties, "w:smallCaps");
         }
         public bool readBooleanElement(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike properties, string tagName) {
-            return ((properties.findChild(tagName)).map<bool>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_5())).orElse(false);
+            return ((properties.findChild(tagName)).map<bool>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_4(this))).orElse(false);
+        }
+        public bool readBooleanAttributeValue(Mammoth.Couscous.java.util.Optional<string> valAttributeValue) {
+            return (valAttributeValue.map<bool>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_5())).orElse(true);
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.VerticalAlignment readVerticalAlignment(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike properties) {
             string verticalAlignment = (this.readVal(properties, "w:vertAlign")).orElse("");
@@ -4059,53 +3854,71 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                 return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.success(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>());
             } else {
                 Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.ParagraphIndent indent = this.readParagraphIndent(properties);
+                Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment> alignment = this.readParagraphAlignment(properties);
                 Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlNode> childrenXml = element.getChildren();
                 if (!(this._deletedParagraphContents).isEmpty()) {
                     childrenXml = Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlNode>(this._deletedParagraphContents, childrenXml);
                     this._deletedParagraphContents = new Mammoth.Couscous.java.util.ArrayList<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlNode>();
                 }
-                return (Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.map<Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>>(this.readParagraphStyle(properties), this.readElements(childrenXml), new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_8(this, properties, indent))).appendExtra();
+                return (Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.map<Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>>(this.readParagraphStyle(properties), this.readElements(childrenXml), new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_8(alignment, this, properties, indent))).appendExtra();
             }
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult readFieldChar(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement element) {
             string type = (element.getAttributeOrNone("w:fldCharType")).orElse("");
             if (type.Equals("begin")) {
-                (this._complexFieldStack).add(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField_static._UNKNOWN);
+                (this._complexFieldStack).add(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField_static.begin(element));
                 (this._currentInstrText).setLength(0);
             } else if (type.Equals("end")) {
-                (this._complexFieldStack).remove();
+                Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField complexField = (this._complexFieldStack).remove();
+                if (complexField is Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__BeginComplexField) {
+                    complexField = this.parseCurrentInstrText(complexField);
+                }
+                if (complexField is Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__CheckboxComplexField) {
+                    return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.success(new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Checkbox(((Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__CheckboxComplexField) complexField)._checked));
+                }
             } else if (type.Equals("separate")) {
-                string instrText = (this._currentInstrText).toString();
-                Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField complexField = ((this.parseHyperlinkFieldCode(instrText)).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_9())).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField_static._UNKNOWN);
-                (this._complexFieldStack).remove();
+                Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField complexFieldSeparate = (this._complexFieldStack).remove();
+                Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField complexField = this.parseCurrentInstrText(complexFieldSeparate);
                 (this._complexFieldStack).add(complexField);
             }
             return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult._EMPTY_SUCCESS;
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult readInstrText(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement element) {
-            (this._currentInstrText).append(element.innerText());
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult._EMPTY_SUCCESS;
+        public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField parseCurrentInstrText(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField complexField) {
+            string instrText = (this._currentInstrText).toString();
+            Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike fldChar = complexField is Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__BeginComplexField ? ((Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__BeginComplexField) complexField)._fldChar : Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.NullXmlElement._INSTANCE;
+            return this.parseInstrText(instrText, fldChar);
         }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink>> parseHyperlinkFieldCode(string instrText) {
+        public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField parseInstrText(string instrText, Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike fldChar) {
             Mammoth.Couscous.java.util.regex.Pattern externalLinkPattern = Mammoth.Couscous.java.util.regex.Pattern.compile("\\s*HYPERLINK \"(.*)\"");
             Mammoth.Couscous.java.util.regex.Matcher externalLinkMatcher = externalLinkPattern.matcher(instrText);
             if (externalLinkMatcher.lookingAt()) {
                 string href = externalLinkMatcher.group(1);
-                return Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_10(href));
+                return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField_static.hyperlink(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_9(href));
             }
             Mammoth.Couscous.java.util.regex.Pattern internalLinkPattern = Mammoth.Couscous.java.util.regex.Pattern.compile("\\s*HYPERLINK\\s+\\\\l\\s+\"(.*)\"");
             Mammoth.Couscous.java.util.regex.Matcher internalLinkMatcher = internalLinkPattern.matcher(instrText);
             if (internalLinkMatcher.lookingAt()) {
                 string anchor = internalLinkMatcher.group(1);
-                return Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_11(anchor));
+                return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField_static.hyperlink(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_10(anchor));
             }
-            return Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink>>();
+            Mammoth.Couscous.java.util.regex.Pattern checkboxPattern = Mammoth.Couscous.java.util.regex.Pattern.compile("\\s*FORMCHECKBOX\\s*");
+            Mammoth.Couscous.java.util.regex.Matcher checkboxMatcher = checkboxPattern.matcher(instrText);
+            if (checkboxMatcher.lookingAt()) {
+                Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike checkboxElement = (fldChar.findChildOrEmpty("w:ffData")).findChildOrEmpty("w:checkBox");
+                bool @checked = checkboxElement.hasChild("w:checked") ? this.readBooleanElement(checkboxElement, "w:checked") : this.readBooleanElement(checkboxElement, "w:default");
+                return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField_static.checkbox(@checked);
+            }
+            return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField_static._UNKNOWN;
+        }
+        public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult readInstrText(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement element) {
+            (this._currentInstrText).append(element.innerText());
+            return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult._EMPTY_SUCCESS;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>> readParagraphStyle(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike properties) {
-            return this.readStyle(properties, "w:pStyle", "Paragraph", new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_12(this));
+            return this.readStyle(properties, "w:pStyle", "Paragraph", new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_11(this));
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>> readStyle(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike properties, string styleTagName, string styleType, Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>> findStyleById) {
-            return ((this.readVal(properties, styleTagName)).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_13(this, styleType, findStyleById))).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult.empty());
+            return ((this.readVal(properties, styleTagName)).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_12(this, styleType, findStyleById))).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult.empty());
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>> findStyleById(string styleType, string styleId, Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>> findStyleById) {
             Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style> style = findStyleById.apply(styleId);
@@ -4134,6 +3947,21 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.ParagraphIndent readParagraphIndent(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike properties) {
             Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike indent = properties.findChildOrEmpty("w:ind");
             return new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.ParagraphIndent(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<string>(indent.getAttributeOrNone("w:start"), indent.getAttributeOrNone("w:left")), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<string>(indent.getAttributeOrNone("w:end"), indent.getAttributeOrNone("w:right")), indent.getAttributeOrNone("w:firstLine"), indent.getAttributeOrNone("w:hanging"));
+        }
+        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment> readParagraphAlignment(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike properties) {
+            string align = ((properties.findChild("w:jc")).map<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_13())).orElse("");
+            switch (align) {
+                case "left":
+                    return Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment("left"));
+                case "center":
+                    return Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment("center"));
+                case "right":
+                    return Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment("right"));
+                case "both":
+                    return Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment("justify"));
+                default:
+                    return Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment>();
+            }
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult readSymbol(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement element) {
             Mammoth.Couscous.java.util.Optional<string> font = element.getAttributeOrNone("w:font");
@@ -4311,7 +4139,14 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
             }
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult readSdt(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement element) {
-            return this.readElements((element.findChildOrEmpty("w:sdtContent")).getChildren());
+            Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement> checkbox = (element.findChildOrEmpty("w:sdtPr")).findChild("wordml:checkbox");
+            if (checkbox.isPresent()) {
+                Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement> checkedElement = (checkbox.get()).findChild("wordml:checked");
+                bool isChecked = checkedElement.isPresent() && this.readBooleanAttributeValue((checkedElement.get()).getAttributeOrNone("wordml:val"));
+                return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.success(new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Checkbox(isChecked));
+            } else {
+                return this.readElements((element.findChildOrEmpty("w:sdtContent")).getChildren());
+            }
         }
         public string relationshipIdToDocxPath(string relationshipId) {
             string target = (this._relationships).findTargetByRelationshipId(relationshipId);
@@ -4329,8 +4164,14 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
         static StatefulBodyXmlReader__ComplexField_static() {
             Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField_static._UNKNOWN = new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_33();
         }
+        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField begin(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement fldChar) {
+            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__BeginComplexField(fldChar);
+        }
         public static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField hyperlink(Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink> childrenToHyperlink) {
             return new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__HyperlinkComplexField(childrenToHyperlink);
+        }
+        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField checkbox(bool @checked) {
+            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__CheckboxComplexField(@checked);
         }
     }
 }
@@ -4341,10 +4182,28 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
+    internal class StatefulBodyXmlReader__BeginComplexField : Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField {
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement _fldChar;
+        internal StatefulBodyXmlReader__BeginComplexField(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement fldChar) {
+            this._fldChar = fldChar;
+        }
+    }
+}
+
+namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__HyperlinkComplexField : Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField {
         internal Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink> _childrenToHyperlink;
         internal StatefulBodyXmlReader__HyperlinkComplexField(Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink> childrenToHyperlink) {
             this._childrenToHyperlink = childrenToHyperlink;
+        }
+    }
+}
+
+namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
+    internal class StatefulBodyXmlReader__CheckboxComplexField : Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField {
+        internal bool _checked;
+        internal StatefulBodyXmlReader__CheckboxComplexField(bool @checked) {
+            this._checked = @checked;
         }
     }
 }
@@ -4374,11 +4233,11 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
             this._properties = properties;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement apply(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style> style, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> children) {
-            Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__HyperlinkComplexField> hyperlinkComplexField = (this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).currentHyperlinkComplexField();
+            Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__HyperlinkComplexField> hyperlinkComplexField = (this._statefulBodyXmlReader).currentHyperlinkComplexField();
             if (hyperlinkComplexField.isPresent()) {
                 children = Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(((hyperlinkComplexField.get())._childrenToHyperlink).apply(children));
             }
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run((this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).readHighlight(this._properties), (this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isBold(this._properties), (this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isItalic(this._properties), (this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isUnderline(this._properties), (this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isStrikethrough(this._properties), (this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isAllCaps(this._properties), (this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).isSmallCaps(this._properties), (this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).readVerticalAlignment(this._properties), style, children);
+            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run((this._statefulBodyXmlReader).readHighlight(this._properties), (this._statefulBodyXmlReader).isBold(this._properties), (this._statefulBodyXmlReader).isItalic(this._properties), (this._statefulBodyXmlReader).isUnderline(this._properties), (this._statefulBodyXmlReader).isStrikethrough(this._properties), (this._statefulBodyXmlReader).isAllCaps(this._properties), (this._statefulBodyXmlReader).isSmallCaps(this._properties), (this._statefulBodyXmlReader).readVerticalAlignment(this._properties), style, children);
         }
     }
 }
@@ -4408,7 +4267,19 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_4 : Mammoth.Couscous.java.util.function.Function<string, bool> {
+    internal class StatefulBodyXmlReader__Anonymous_4 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement, bool> {
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _statefulBodyXmlReader;
+        internal StatefulBodyXmlReader__Anonymous_4(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader statefulBodyXmlReader) {
+            this._statefulBodyXmlReader = statefulBodyXmlReader;
+        }
+        public bool apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement child) {
+            return (this._statefulBodyXmlReader).readBooleanAttributeValue(child.getAttributeOrNone("w:val"));
+        }
+    }
+}
+
+namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
+    internal class StatefulBodyXmlReader__Anonymous_5 : Mammoth.Couscous.java.util.function.Function<string, bool> {
         public bool apply(string value) {
             return !(value.Equals("false")) && !(value.Equals("0"));
         }
@@ -4416,18 +4287,10 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_5 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement, bool> {
-        public bool apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement child) {
-            return ((child.getAttributeOrNone("w:val")).map<bool>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_4())).orElse(true);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__Anonymous_6 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
-        internal StatefulBodyXmlReader__Anonymous_6(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader) {
-            this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _statefulBodyXmlReader;
+        internal StatefulBodyXmlReader__Anonymous_6(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader statefulBodyXmlReader) {
+            this._statefulBodyXmlReader = statefulBodyXmlReader;
         }
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style> apply(string arg0) {
             return ((this._statefulBodyXmlReader)._styles).findCharacterStyleById(arg0);
@@ -4437,9 +4300,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__Anonymous_7 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
-        internal StatefulBodyXmlReader__Anonymous_7(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader) {
-            this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _statefulBodyXmlReader;
+        internal StatefulBodyXmlReader__Anonymous_7(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader statefulBodyXmlReader) {
+            this._statefulBodyXmlReader = statefulBodyXmlReader;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement arg0) {
             return (this._statefulBodyXmlReader).readElement(arg0);
@@ -4449,57 +4312,27 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__Anonymous_8 : Mammoth.Couscous.java.util.function.BiFunction<Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment> _alignment;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _statefulBodyXmlReader;
         internal Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike _properties;
         internal Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.ParagraphIndent _indent;
-        internal StatefulBodyXmlReader__Anonymous_8(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader, Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike properties, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.ParagraphIndent indent) {
-            this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        internal StatefulBodyXmlReader__Anonymous_8(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Alignment> alignment, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader statefulBodyXmlReader, Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike properties, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.ParagraphIndent indent) {
+            this._alignment = alignment;
+            this._statefulBodyXmlReader = statefulBodyXmlReader;
             this._properties = properties;
             this._indent = indent;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement apply(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style> style, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> children) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph(style, (this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).readNumbering(style, this._properties), this._indent, children);
+            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph(style, this._alignment, (this._statefulBodyXmlReader).readNumbering(style, this._properties), this._indent, children);
         }
     }
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_9 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink>, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField> {
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField apply(Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink> href) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField_static.hyperlink(href);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_10 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink> {
+    internal class StatefulBodyXmlReader__Anonymous_9 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink> {
         internal string _href;
-        internal StatefulBodyXmlReader__Anonymous_10(string href) {
+        internal StatefulBodyXmlReader__Anonymous_9(string href) {
             this._href = href;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink apply(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> children) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink.href(this._href, Mammoth.Couscous.java.util.Optional.empty<string>(), children);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_11 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink> {
-        internal string _anchor;
-        internal StatefulBodyXmlReader__Anonymous_11(string anchor) {
-            this._anchor = anchor;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink apply(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> children) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink.anchor(this._anchor, Mammoth.Couscous.java.util.Optional.empty<string>(), children);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_12 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
-        internal StatefulBodyXmlReader__Anonymous_12(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader) {
-            this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink apply(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> children) {
             return Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Hyperlink.href(this._href, Mammoth.Couscous.java.util.Optional.empty<string>(), children);
@@ -4532,12 +4365,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class StatefulBodyXmlReader__Anonymous_13 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+    internal class StatefulBodyXmlReader__Anonymous_12 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>>> {
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _statefulBodyXmlReader;
         internal string _styleType;
         internal Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>> _findStyleById;
-        internal StatefulBodyXmlReader__Anonymous_13(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader, string styleType, Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>> findStyleById) {
-            this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        internal StatefulBodyXmlReader__Anonymous_12(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader statefulBodyXmlReader, string styleType, Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>> findStyleById) {
+            this._statefulBodyXmlReader = statefulBodyXmlReader;
             this._styleType = styleType;
             this._findStyleById = findStyleById;
         }
@@ -4548,10 +4381,18 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
+    internal class StatefulBodyXmlReader__Anonymous_13 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement, string> {
+        public string apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement jc) {
+            return (jc.getAttributeOrNone("w:val")).orElse("");
+        }
+    }
+}
+
+namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__Anonymous_14 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
-        internal StatefulBodyXmlReader__Anonymous_14(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader) {
-            this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _statefulBodyXmlReader;
+        internal StatefulBodyXmlReader__Anonymous_14(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader statefulBodyXmlReader) {
+            this._statefulBodyXmlReader = statefulBodyXmlReader;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult apply(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> arg0) {
             return (this._statefulBodyXmlReader).calculateRowspans(arg0);
@@ -4569,9 +4410,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__Anonymous_16 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
-        internal StatefulBodyXmlReader__Anonymous_16(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader) {
-            this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _statefulBodyXmlReader;
+        internal StatefulBodyXmlReader__Anonymous_16(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader statefulBodyXmlReader) {
+            this._statefulBodyXmlReader = statefulBodyXmlReader;
         }
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Style> apply(string arg0) {
             return ((this._statefulBodyXmlReader)._styles).findTableStyleById(arg0);
@@ -4628,11 +4469,11 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__Anonymous_20 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _statefulBodyXmlReader;
         internal Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike _properties;
         internal int _colspan;
-        internal StatefulBodyXmlReader__Anonymous_20(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader, Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike properties, int colspan) {
-            this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        internal StatefulBodyXmlReader__Anonymous_20(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader statefulBodyXmlReader, Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElementLike properties, int colspan) {
+            this._statefulBodyXmlReader = statefulBodyXmlReader;
             this._properties = properties;
             this._colspan = colspan;
         }
@@ -4710,10 +4551,10 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__Anonymous_27 : Mammoth.Couscous.org.zwobble.mammoth.@internal.util.InputStreamSupplier {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _statefulBodyXmlReader;
         internal string _imagePath;
-        internal StatefulBodyXmlReader__Anonymous_27(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader, string imagePath) {
-            this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        internal StatefulBodyXmlReader__Anonymous_27(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader statefulBodyXmlReader, string imagePath) {
+            this._statefulBodyXmlReader = statefulBodyXmlReader;
             this._imagePath = imagePath;
         }
         public Mammoth.Couscous.java.io.InputStream open() {
@@ -4725,15 +4566,15 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__Anonymous_28 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult> {
         internal Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement _element;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
-        internal StatefulBodyXmlReader__Anonymous_28(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement element, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader) {
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _statefulBodyXmlReader;
+        internal StatefulBodyXmlReader__Anonymous_28(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement element, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader statefulBodyXmlReader) {
             this._element = element;
             this._statefulBodyXmlReader = statefulBodyXmlReader;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult apply(string relationshipId) {
             Mammoth.Couscous.java.util.Optional<string> title = (this._element).getAttributeOrNone("o:title");
-            string imagePath = (this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).relationshipIdToDocxPath(relationshipId);
-            return (this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader).readImage(imagePath, title, new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_27(this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader, imagePath));
+            string imagePath = (this._statefulBodyXmlReader).relationshipIdToDocxPath(relationshipId);
+            return (this._statefulBodyXmlReader).readImage(imagePath, title, new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_27(this._statefulBodyXmlReader, imagePath));
         }
     }
 }
@@ -4748,10 +4589,10 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__Anonymous_30 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement, Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _statefulBodyXmlReader;
         internal Mammoth.Couscous.java.util.Optional<string> _altText;
-        internal StatefulBodyXmlReader__Anonymous_30(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader, Mammoth.Couscous.java.util.Optional<string> altText) {
-            this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        internal StatefulBodyXmlReader__Anonymous_30(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader statefulBodyXmlReader, Mammoth.Couscous.java.util.Optional<string> altText) {
+            this._statefulBodyXmlReader = statefulBodyXmlReader;
             this._altText = altText;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement blip) {
@@ -4762,10 +4603,10 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__Anonymous_31 : Mammoth.Couscous.org.zwobble.mammoth.@internal.util.InputStreamSupplier {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _statefulBodyXmlReader;
         internal string _imagePath;
-        internal StatefulBodyXmlReader__Anonymous_31(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader, string imagePath) {
-            this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        internal StatefulBodyXmlReader__Anonymous_31(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader statefulBodyXmlReader, string imagePath) {
+            this._statefulBodyXmlReader = statefulBodyXmlReader;
             this._imagePath = imagePath;
         }
         public Mammoth.Couscous.java.io.InputStream open() {
@@ -4776,10 +4617,10 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__Anonymous_32 : Mammoth.Couscous.org.zwobble.mammoth.@internal.util.InputStreamSupplier {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader _statefulBodyXmlReader;
         internal string _imagePath;
-        internal StatefulBodyXmlReader__Anonymous_32(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader, string imagePath) {
-            this._this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader = this_org__zwobble__mammoth__internal__docx__StatefulBodyXmlReader;
+        internal StatefulBodyXmlReader__Anonymous_32(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader statefulBodyXmlReader, string imagePath) {
+            this._statefulBodyXmlReader = statefulBodyXmlReader;
             this._imagePath = imagePath;
         }
         public Mammoth.Couscous.java.io.InputStream open() {
@@ -5075,7 +4916,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.html {
         internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> _children;
         internal static Mammoth.Couscous.java.util.Set<string> _VOID_TAG_NAMES;
         static HtmlElement() {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlElement._VOID_TAG_NAMES = Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Sets.set<string>(new string[] {"img", "br", "hr"});
+            Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlElement._VOID_TAG_NAMES = Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Sets.set<string>(new string[] {"br", "hr", "img", "input"});
         }
         internal HtmlElement(Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlTag tag, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.html.HtmlNode> children) {
             this._tag = tag;
@@ -5313,26 +5154,17 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
                 zipFile.close();
             }
         }
-        public static string extractRawTextOfChildren(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.HasChildren parent) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter.extractRawText(parent.getChildren());
-        }
-        public static string extractRawText(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> nodes) {
-            return java.lang.String.join("", Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.lazyMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement, string>(nodes, new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_16()));
-        }
-        public static string extractRawText(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement node) {
-            return ((Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Casts.tryCast<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Text>(typeof(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Text), node)).map<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_17())).orElseGet(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_20(node));
-        }
     }
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
     internal class InternalDocumentConverter__Anonymous_0 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive, Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        internal InternalDocumentConverter__Anonymous_0(Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter) {
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _internalDocumentConverter;
+        internal InternalDocumentConverter__Anonymous_0(Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter internalDocumentConverter) {
+            this._internalDocumentConverter = internalDocumentConverter;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile) {
-            return (this._this_org__zwobble__mammoth__internal__InternalDocumentConverter).convertToHtml(Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.java.nio.file.Path>(), zipFile);
+            return (this._internalDocumentConverter).convertToHtml(Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.java.nio.file.Path>(), zipFile);
         }
     }
 }
@@ -5340,27 +5172,27 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
     internal class InternalDocumentConverter__Anonymous_1 : Mammoth.Couscous.org.zwobble.mammoth.@internal.util.SupplierWithException<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>, Mammoth.Couscous.java.io.IOException> {
         internal Mammoth.Couscous.java.io.InputStream _stream;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        internal InternalDocumentConverter__Anonymous_1(Mammoth.Couscous.java.io.InputStream stream, Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter) {
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _internalDocumentConverter;
+        internal InternalDocumentConverter__Anonymous_1(Mammoth.Couscous.java.io.InputStream stream, Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter internalDocumentConverter) {
             this._stream = stream;
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+            this._internalDocumentConverter = internalDocumentConverter;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> get() {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter.withDocxFile<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(this._stream, new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_0(this._this_org__zwobble__mammoth__internal__InternalDocumentConverter));
+            return Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter.withDocxFile<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(this._stream, new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_0(this._internalDocumentConverter));
         }
     }
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
     internal class InternalDocumentConverter__Anonymous_2 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive, Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _internalDocumentConverter;
         internal Mammoth.Couscous.java.io.File _file;
-        internal InternalDocumentConverter__Anonymous_2(Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter, Mammoth.Couscous.java.io.File file) {
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+        internal InternalDocumentConverter__Anonymous_2(Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter internalDocumentConverter, Mammoth.Couscous.java.io.File file) {
+            this._internalDocumentConverter = internalDocumentConverter;
             this._file = file;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile) {
-            return (this._this_org__zwobble__mammoth__internal__InternalDocumentConverter).convertToHtml(Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.java.nio.file.Path>((this._file).toPath()), zipFile);
+            return (this._internalDocumentConverter).convertToHtml(Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.java.nio.file.Path>((this._file).toPath()), zipFile);
         }
     }
 }
@@ -5368,13 +5200,13 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
     internal class InternalDocumentConverter__Anonymous_3 : Mammoth.Couscous.org.zwobble.mammoth.@internal.util.SupplierWithException<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>, Mammoth.Couscous.java.io.IOException> {
         internal Mammoth.Couscous.java.io.File _file;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        internal InternalDocumentConverter__Anonymous_3(Mammoth.Couscous.java.io.File file, Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter) {
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _internalDocumentConverter;
+        internal InternalDocumentConverter__Anonymous_3(Mammoth.Couscous.java.io.File file, Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter internalDocumentConverter) {
             this._file = file;
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+            this._internalDocumentConverter = internalDocumentConverter;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> get() {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter.withDocxFile<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(this._file, new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_2(this._this_org__zwobble__mammoth__internal__InternalDocumentConverter, this._file));
+            return Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter.withDocxFile<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(this._file, new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_2(this._internalDocumentConverter, this._file));
         }
     }
 }
@@ -5389,12 +5221,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
     internal class InternalDocumentConverter__Anonymous_5 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap, Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtmlOptions> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        internal InternalDocumentConverter__Anonymous_5(Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter) {
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _internalDocumentConverter;
+        internal InternalDocumentConverter__Anonymous_5(Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter internalDocumentConverter) {
+            this._internalDocumentConverter = internalDocumentConverter;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.DocumentToHtmlOptions apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap arg0) {
-            return ((this._this_org__zwobble__mammoth__internal__InternalDocumentConverter)._options).addEmbeddedStyleMap(arg0);
+            return ((this._internalDocumentConverter)._options).addEmbeddedStyleMap(arg0);
         }
     }
 }
@@ -5449,12 +5281,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
     internal class InternalDocumentConverter__Anonymous_11 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive, Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        internal InternalDocumentConverter__Anonymous_11(Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter) {
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _internalDocumentConverter;
+        internal InternalDocumentConverter__Anonymous_11(Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter internalDocumentConverter) {
+            this._internalDocumentConverter = internalDocumentConverter;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile) {
-            return (this._this_org__zwobble__mammoth__internal__InternalDocumentConverter).extractRawText(Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.java.nio.file.Path>(), zipFile);
+            return (this._internalDocumentConverter).extractRawText(Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.java.nio.file.Path>(), zipFile);
         }
     }
 }
@@ -5462,27 +5294,27 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
     internal class InternalDocumentConverter__Anonymous_12 : Mammoth.Couscous.org.zwobble.mammoth.@internal.util.SupplierWithException<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>, Mammoth.Couscous.java.io.IOException> {
         internal Mammoth.Couscous.java.io.InputStream _stream;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        internal InternalDocumentConverter__Anonymous_12(Mammoth.Couscous.java.io.InputStream stream, Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter) {
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _internalDocumentConverter;
+        internal InternalDocumentConverter__Anonymous_12(Mammoth.Couscous.java.io.InputStream stream, Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter internalDocumentConverter) {
             this._stream = stream;
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+            this._internalDocumentConverter = internalDocumentConverter;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> get() {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter.withDocxFile<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(this._stream, new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_11(this._this_org__zwobble__mammoth__internal__InternalDocumentConverter));
+            return Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter.withDocxFile<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(this._stream, new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_11(this._internalDocumentConverter));
         }
     }
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
     internal class InternalDocumentConverter__Anonymous_13 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive, Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _internalDocumentConverter;
         internal Mammoth.Couscous.java.io.File _file;
-        internal InternalDocumentConverter__Anonymous_13(Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter, Mammoth.Couscous.java.io.File file) {
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+        internal InternalDocumentConverter__Anonymous_13(Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter internalDocumentConverter, Mammoth.Couscous.java.io.File file) {
+            this._internalDocumentConverter = internalDocumentConverter;
             this._file = file;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.archives.Archive zipFile) {
-            return (this._this_org__zwobble__mammoth__internal__InternalDocumentConverter).extractRawText(Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.java.nio.file.Path>((this._file).toPath()), zipFile);
+            return (this._internalDocumentConverter).extractRawText(Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.java.nio.file.Path>((this._file).toPath()), zipFile);
         }
     }
 }
@@ -5490,13 +5322,13 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
     internal class InternalDocumentConverter__Anonymous_14 : Mammoth.Couscous.org.zwobble.mammoth.@internal.util.SupplierWithException<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>, Mammoth.Couscous.java.io.IOException> {
         internal Mammoth.Couscous.java.io.File _file;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _this_org__zwobble__mammoth__internal__InternalDocumentConverter;
-        internal InternalDocumentConverter__Anonymous_14(Mammoth.Couscous.java.io.File file, Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter this_org__zwobble__mammoth__internal__InternalDocumentConverter) {
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter _internalDocumentConverter;
+        internal InternalDocumentConverter__Anonymous_14(Mammoth.Couscous.java.io.File file, Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter internalDocumentConverter) {
             this._file = file;
-            this._this_org__zwobble__mammoth__internal__InternalDocumentConverter = this_org__zwobble__mammoth__internal__InternalDocumentConverter;
+            this._internalDocumentConverter = internalDocumentConverter;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string> get() {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter.withDocxFile<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(this._file, new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_13(this._this_org__zwobble__mammoth__internal__InternalDocumentConverter, this._file));
+            return Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter.withDocxFile<Mammoth.Couscous.org.zwobble.mammoth.@internal.results.InternalResult<string>>(this._file, new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_13(this._internalDocumentConverter, this._file));
         }
     }
 }
@@ -5504,53 +5336,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
     internal class InternalDocumentConverter__Anonymous_15 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Document, string> {
         public string apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Document arg0) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter.extractRawTextOfChildren(arg0);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_16 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement, string> {
-        public string apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement node) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter.extractRawText(node);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_17 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Text, string> {
-        public string apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Text arg0) {
-            return arg0.getValue();
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_18 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.HasChildren, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>> {
-        public Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.HasChildren arg0) {
-            return arg0.getChildren();
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_19 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph, string> {
-        public string apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph paragraph) {
-            return "\n\n";
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal {
-    internal class InternalDocumentConverter__Anonymous_20 : Mammoth.Couscous.java.util.function.Supplier<string> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement _node;
-        internal InternalDocumentConverter__Anonymous_20(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement node) {
-            this._node = node;
-        }
-        public string get() {
-            Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> children = ((Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Casts.tryCast<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.HasChildren>(typeof(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.HasChildren), this._node)).map<Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_18())).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>());
-            string suffix = ((Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Casts.tryCast<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>(typeof(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph), this._node)).map<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter__Anonymous_19())).orElse("");
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.InternalDocumentConverter.extractRawText(children) + suffix;
+            return Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion.RawText.extractRawText(arg0);
         }
     }
 }
@@ -5972,319 +5758,6 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     }
 }
 
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal interface StringMatcher {
-        bool matches(string value);
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StyleMap {
-        internal static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap _EMPTY;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _bold;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _italic;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _underline;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _strikethrough;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _allCaps;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _smallCaps;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _commentReference;
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>> _paragraphStyles;
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>> _runStyles;
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>> _tableStyles;
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>> _breakStyles;
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string>> _highlightStyles;
-        static StyleMap() {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap._EMPTY = (new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder()).build();
-        }
-        internal StyleMap(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> bold, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> italic, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> underline, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> strikethrough, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> allCaps, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> smallCaps, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> commentReference, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>> paragraphStyles, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>> runStyles, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>> tableStyles, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>> breakStyles, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string>> highlightStyles) {
-            this._bold = bold;
-            this._italic = italic;
-            this._underline = underline;
-            this._strikethrough = strikethrough;
-            this._allCaps = allCaps;
-            this._smallCaps = smallCaps;
-            this._commentReference = commentReference;
-            this._paragraphStyles = paragraphStyles;
-            this._runStyles = runStyles;
-            this._tableStyles = tableStyles;
-            this._breakStyles = breakStyles;
-            this._highlightStyles = highlightStyles;
-        }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder builder() {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder();
-        }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap merge(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap high, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap low) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._bold, low._bold), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._italic, low._italic), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._underline, low._underline), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._strikethrough, low._strikethrough), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._allCaps, low._allCaps), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._smallCaps, low._smallCaps), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._commentReference, low._commentReference), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>>(high._paragraphStyles, low._paragraphStyles), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>>(high._runStyles, low._runStyles), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>>(high._tableStyles, low._tableStyles), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>>(high._breakStyles, low._breakStyles), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string>>(high._highlightStyles, low._highlightStyles));
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap update(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap styleMap) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap.merge(styleMap, this);
-        }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getBold() {
-            return this._bold;
-        }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getItalic() {
-            return this._italic;
-        }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getUnderline() {
-            return this._underline;
-        }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getStrikethrough() {
-            return this._strikethrough;
-        }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getAllCaps() {
-            return this._allCaps;
-        }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getSmallCaps() {
-            return this._smallCaps;
-        }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getCommentReference() {
-            return this._commentReference;
-        }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getParagraphHtmlPath(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph paragraph) {
-            return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.tryFind<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>>(this._paragraphStyles, new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_0(paragraph))).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_1());
-        }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getRunHtmlPath(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run run) {
-            return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.tryFind<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>>(this._runStyles, new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_2(run))).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_3());
-        }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getTableHtmlPath(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table table) {
-            return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.tryFind<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>>(this._tableStyles, new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_4(table))).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_5());
-        }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getBreakHtmlPath(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break breakElement) {
-            return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.tryFind<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>>(this._breakStyles, new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_6(breakElement))).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_7());
-        }
-        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getHighlightHtmlPath(string color) {
-            return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.tryFind<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string>>(this._highlightStyles, new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_8(color))).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_9());
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StyleMap__Anonymous_0 : Mammoth.Couscous.java.util.function.Predicate<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph _paragraph;
-        internal StyleMap__Anonymous_0(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph paragraph) {
-            this._paragraph = paragraph;
-        }
-        public bool test(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph> styleMapping) {
-            return styleMapping.matches(this._paragraph);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StyleMap__Anonymous_1 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> {
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph> arg0) {
-            return arg0.getHtmlPath();
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StyleMap__Anonymous_2 : Mammoth.Couscous.java.util.function.Predicate<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run _run;
-        internal StyleMap__Anonymous_2(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run run) {
-            this._run = run;
-        }
-        public bool test(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run> styleMapping) {
-            return styleMapping.matches(this._run);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StyleMap__Anonymous_3 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> {
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run> arg0) {
-            return arg0.getHtmlPath();
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StyleMap__Anonymous_4 : Mammoth.Couscous.java.util.function.Predicate<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table _table;
-        internal StyleMap__Anonymous_4(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table table) {
-            this._table = table;
-        }
-        public bool test(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table> styleMapping) {
-            return styleMapping.matches(this._table);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StyleMap__Anonymous_5 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> {
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table> arg0) {
-            return arg0.getHtmlPath();
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StyleMap__Anonymous_6 : Mammoth.Couscous.java.util.function.Predicate<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break _breakElement;
-        internal StyleMap__Anonymous_6(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break breakElement) {
-            this._breakElement = breakElement;
-        }
-        public bool test(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break> styleMapping) {
-            return styleMapping.matches(this._breakElement);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StyleMap__Anonymous_7 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> {
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break> arg0) {
-            return arg0.getHtmlPath();
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StyleMap__Anonymous_8 : Mammoth.Couscous.java.util.function.Predicate<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string>> {
-        internal string _color;
-        internal StyleMap__Anonymous_8(string color) {
-            this._color = color;
-        }
-        public bool test(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string> styleMapping) {
-            return styleMapping.matches(this._color);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StyleMap__Anonymous_9 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string>, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> {
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string> arg0) {
-            return arg0.getHtmlPath();
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StyleMapBuilder {
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _underline;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _strikethrough;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _allCaps;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _smallCaps;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _bold;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _italic;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _commentReference;
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>> _paragraphStyles;
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>> _runStyles;
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>> _tableStyles;
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>> _breakStyles;
-        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string>> _highlightStyles;
-        internal StyleMapBuilder() {
-            this._paragraphStyles = new Mammoth.Couscous.java.util.ArrayList<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>>();
-            this._runStyles = new Mammoth.Couscous.java.util.ArrayList<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>>();
-            this._tableStyles = new Mammoth.Couscous.java.util.ArrayList<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>>();
-            this._breakStyles = new Mammoth.Couscous.java.util.ArrayList<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>>();
-            this._highlightStyles = new Mammoth.Couscous.java.util.ArrayList<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string>>();
-            this._bold = Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>();
-            this._underline = Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>();
-            this._strikethrough = Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>();
-            this._allCaps = Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>();
-            this._smallCaps = Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>();
-            this._italic = Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>();
-            this._commentReference = Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>();
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder bold(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath path) {
-            this._bold = Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(path);
-            return this;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder italic(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath path) {
-            this._italic = Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(path);
-            return this;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder underline(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath path) {
-            this._underline = Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(path);
-            return this;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder strikethrough(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath path) {
-            this._strikethrough = Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(path);
-            return this;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder allCaps(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath path) {
-            this._allCaps = Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(path);
-            return this;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder smallCaps(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath path) {
-            this._smallCaps = Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(path);
-            return this;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder mapHighlight(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HighlightMatcher matcher, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath path) {
-            (this._highlightStyles).add(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string>(matcher, path));
-            return this;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder commentReference(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath path) {
-            this._commentReference = Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(path);
-            return this;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder mapParagraph(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.ParagraphMatcher matcher, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath path) {
-            (this._paragraphStyles).add(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>(matcher, path));
-            return this;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder mapRun(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.RunMatcher matcher, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath path) {
-            (this._runStyles).add(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>(matcher, path));
-            return this;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder mapTable(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.TableMatcher matcher, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath path) {
-            (this._tableStyles).add(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>(matcher, path));
-            return this;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder mapBreak(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.BreakMatcher matcher, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath path) {
-            (this._breakStyles).add(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>(matcher, path));
-            return this;
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap build() {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap(this._bold, this._italic, this._underline, this._strikethrough, this._allCaps, this._smallCaps, this._commentReference, this._paragraphStyles, this._runStyles, this._tableStyles, this._breakStyles, this._highlightStyles);
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal static class StyleMapping {
-    }
-}
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class StyleMapping<T> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.DocumentElementMatcher<T> _matcher;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath _htmlPath;
-        internal StyleMapping(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.DocumentElementMatcher<T> matcher, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath htmlPath) {
-            this._matcher = matcher;
-            this._htmlPath = htmlPath;
-        }
-        public bool matches(T element) {
-            return (this._matcher).matches(element);
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath getHtmlPath() {
-            return this._htmlPath;
-        }
-    }
-}
-
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
-    internal class TableMatcher : Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.DocumentElementMatcher<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table> {
-        internal static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.TableMatcher _ANY;
-        internal Mammoth.Couscous.java.util.Optional<string> _styleId;
-        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> _styleName;
-        static TableMatcher() {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.TableMatcher._ANY = new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.TableMatcher(Mammoth.Couscous.java.util.Optional.empty<string>(), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>());
-        }
-        internal TableMatcher(Mammoth.Couscous.java.util.Optional<string> styleId, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> styleName) {
-            this._styleId = styleId;
-            this._styleName = styleName;
-        }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.TableMatcher styleId(string styleId) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.TableMatcher(Mammoth.Couscous.java.util.Optional.of<string>(styleId), Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>());
-        }
-        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.TableMatcher styleName(string styleName) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.TableMatcher(Mammoth.Couscous.java.util.Optional.empty<string>(), Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.EqualToStringMatcher(styleName)));
-        }
-        public bool matches(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table table) {
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.DocumentElementMatching.matchesStyle(this._styleId, this._styleName, table.getStyle());
-        }
-    }
-}
-
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class DocumentMatcherParser {
         public static Mammoth.Couscous.java.util.function.BiConsumer<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> parse(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokens) {
@@ -6347,7 +5820,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
         public static Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>> parseOptions(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokens, Mammoth.Couscous.java.util.List<string> properties) {
             if (tokens.trySkip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, "[")) {
                 Mammoth.Couscous.java.util.Map<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> options = new Mammoth.Couscous.java.util.HashMap<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>();
-                Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>> result = new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.DocumentMatcherParser__Anonymous_11(options);
+                Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>> result = new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.DocumentMatcherParser__Anonymous_12(options);
                 while (tokens.peekTokenType() == Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._IDENTIFIER) {
                     string identifier = tokens.nextValue(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._IDENTIFIER);
                     if (properties.contains(identifier)) {
@@ -6372,7 +5845,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
                 tokens.skip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, "]");
                 return result;
             } else {
-                return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.DocumentMatcherParser__Anonymous_12();
+                return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.DocumentMatcherParser__Anonymous_13();
             }
         }
         public static Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> parseStyleName(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokens) {
@@ -6566,9 +6039,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
-    internal class DocumentMatcherParser__Anonymous_11 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>> {
+    internal class DocumentMatcherParser__Anonymous_12 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>> {
         internal Mammoth.Couscous.java.util.Map<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> _options;
-        internal DocumentMatcherParser__Anonymous_11(Mammoth.Couscous.java.util.Map<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> options) {
+        internal DocumentMatcherParser__Anonymous_12(Mammoth.Couscous.java.util.Map<string, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> options) {
             this._options = options;
         }
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> apply(string property) {
@@ -6578,7 +6051,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
-    internal class DocumentMatcherParser__Anonymous_12 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>> {
+    internal class DocumentMatcherParser__Anonymous_13 : Mammoth.Couscous.java.util.function.Function<string, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>> {
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher> apply(string property) {
             return Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StringMatcher>();
         }
@@ -7145,32 +6618,36 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
         internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _italic;
         internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _underline;
         internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _strikethrough;
+        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _allCaps;
         internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _smallCaps;
         internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _commentReference;
         internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>> _paragraphStyles;
         internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>> _runStyles;
         internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>> _tableStyles;
         internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>> _breakStyles;
+        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string>> _highlightStyles;
         static StyleMap() {
             Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap._EMPTY = (new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder()).build();
         }
-        internal StyleMap(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> bold, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> italic, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> underline, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> strikethrough, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> smallCaps, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> commentReference, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>> paragraphStyles, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>> runStyles, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>> tableStyles, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>> breakStyles) {
+        internal StyleMap(Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> bold, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> italic, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> underline, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> strikethrough, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> allCaps, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> smallCaps, Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> commentReference, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>> paragraphStyles, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>> runStyles, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>> tableStyles, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>> breakStyles, Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string>> highlightStyles) {
             this._bold = bold;
             this._italic = italic;
             this._underline = underline;
             this._strikethrough = strikethrough;
+            this._allCaps = allCaps;
             this._smallCaps = smallCaps;
             this._commentReference = commentReference;
             this._paragraphStyles = paragraphStyles;
             this._runStyles = runStyles;
             this._tableStyles = tableStyles;
             this._breakStyles = breakStyles;
+            this._highlightStyles = highlightStyles;
         }
         public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder builder() {
             return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder();
         }
         public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap merge(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap high, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap low) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._bold, low._bold), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._italic, low._italic), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._underline, low._underline), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._strikethrough, low._strikethrough), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._smallCaps, low._smallCaps), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._commentReference, low._commentReference), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>>(high._paragraphStyles, low._paragraphStyles), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>>(high._runStyles, low._runStyles), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>>(high._tableStyles, low._tableStyles), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>>(high._breakStyles, low._breakStyles));
+            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._bold, low._bold), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._italic, low._italic), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._underline, low._underline), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._strikethrough, low._strikethrough), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._allCaps, low._allCaps), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._smallCaps, low._smallCaps), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Optionals.first<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(high._commentReference, low._commentReference), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>>(high._paragraphStyles, low._paragraphStyles), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>>(high._runStyles, low._runStyles), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>>(high._tableStyles, low._tableStyles), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>>(high._breakStyles, low._breakStyles), Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerConcat<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string>>(high._highlightStyles, low._highlightStyles));
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap update(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap styleMap) {
             return Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap.merge(styleMap, this);
@@ -7186,6 +6663,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
         }
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getStrikethrough() {
             return this._strikethrough;
+        }
+        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getAllCaps() {
+            return this._allCaps;
         }
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getSmallCaps() {
             return this._smallCaps;
@@ -7204,6 +6684,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
         }
         public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getBreakHtmlPath(Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break breakElement) {
             return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.tryFind<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>>(this._breakStyles, new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_6(breakElement))).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_7());
+        }
+        public Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> getHighlightHtmlPath(string color) {
+            return (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Iterables.tryFind<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string>>(this._highlightStyles, new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_8(color))).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap__Anonymous_9());
         }
     }
 }
@@ -7289,9 +6772,30 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
 }
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
+    internal class StyleMap__Anonymous_8 : Mammoth.Couscous.java.util.function.Predicate<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string>> {
+        internal string _color;
+        internal StyleMap__Anonymous_8(string color) {
+            this._color = color;
+        }
+        public bool test(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string> styleMapping) {
+            return styleMapping.matches(this._color);
+        }
+    }
+}
+
+namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
+    internal class StyleMap__Anonymous_9 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string>, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> {
+        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string> arg0) {
+            return arg0.getHtmlPath();
+        }
+    }
+}
+
+namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
     internal class StyleMapBuilder {
         internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _underline;
         internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _strikethrough;
+        internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _allCaps;
         internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _smallCaps;
         internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _bold;
         internal Mammoth.Couscous.java.util.Optional<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> _italic;
@@ -7300,14 +6804,17 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
         internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>> _runStyles;
         internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>> _tableStyles;
         internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>> _breakStyles;
+        internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string>> _highlightStyles;
         internal StyleMapBuilder() {
             this._paragraphStyles = new Mammoth.Couscous.java.util.ArrayList<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Paragraph>>();
             this._runStyles = new Mammoth.Couscous.java.util.ArrayList<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Run>>();
             this._tableStyles = new Mammoth.Couscous.java.util.ArrayList<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Table>>();
             this._breakStyles = new Mammoth.Couscous.java.util.ArrayList<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break>>();
+            this._highlightStyles = new Mammoth.Couscous.java.util.ArrayList<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string>>();
             this._bold = Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>();
             this._underline = Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>();
             this._strikethrough = Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>();
+            this._allCaps = Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>();
             this._smallCaps = Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>();
             this._italic = Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>();
             this._commentReference = Mammoth.Couscous.java.util.Optional.empty<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>();
@@ -7328,8 +6835,16 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
             this._strikethrough = Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(path);
             return this;
         }
+        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder allCaps(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath path) {
+            this._allCaps = Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(path);
+            return this;
+        }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder smallCaps(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath path) {
             this._smallCaps = Mammoth.Couscous.java.util.Optional.of<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath>(path);
+            return this;
+        }
+        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder mapHighlight(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HighlightMatcher matcher, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath path) {
+            (this._highlightStyles).add(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapping<string>(matcher, path));
             return this;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder commentReference(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath path) {
@@ -7353,7 +6868,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
             return this;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap build() {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap(this._bold, this._italic, this._underline, this._strikethrough, this._smallCaps, this._commentReference, this._paragraphStyles, this._runStyles, this._tableStyles, this._breakStyles);
+            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMap(this._bold, this._italic, this._underline, this._strikethrough, this._allCaps, this._smallCaps, this._commentReference, this._paragraphStyles, this._runStyles, this._tableStyles, this._breakStyles, this._highlightStyles);
         }
     }
 }
@@ -7617,9 +7132,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
     internal class XmlParser__NodeGenerator : Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.SimpleSaxHandler {
         internal Mammoth.Couscous.java.util.Deque<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlElementBuilder> _elementStack;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser _this_org__zwobble__mammoth__internal__xml__parsing__XmlParser;
-        internal XmlParser__NodeGenerator(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser this_org__zwobble__mammoth__internal__xml__parsing__XmlParser) {
-            this._this_org__zwobble__mammoth__internal__xml__parsing__XmlParser = this_org__zwobble__mammoth__internal__xml__parsing__XmlParser;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser _xmlParser;
+        internal XmlParser__NodeGenerator(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser xmlParser) {
+            this._xmlParser = xmlParser;
             this._elementStack = new Mammoth.Couscous.java.util.ArrayDeque<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlElementBuilder>();
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement getRoot() {
@@ -7634,7 +7149,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
             if (Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Strings.isNullOrEmpty(name.getUri())) {
                 return name.getLocalName();
             } else {
-                return ((((this._this_org__zwobble__mammoth__internal__xml__parsing__XmlParser)._namespaces).lookupUri(name.getUri())).map<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser__Anonymous_2(name))).orElseGet(new Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser__Anonymous_3(name));
+                return ((((this._xmlParser)._namespaces).lookupUri(name.getUri())).map<string>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser__Anonymous_2(name))).orElseGet(new Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser__Anonymous_3(name));
             }
         }
         public void endElement() {
@@ -7651,12 +7166,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
     internal class XmlParser__Anonymous_0 : Mammoth.Couscous.java.util.function.Function<Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.ElementName, string> {
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser__NodeGenerator _this_org__zwobble__mammoth__internal__xml__parsing__XmlParser__NodeGenerator;
-        internal XmlParser__Anonymous_0(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser__NodeGenerator this_org__zwobble__mammoth__internal__xml__parsing__XmlParser__NodeGenerator) {
-            this._this_org__zwobble__mammoth__internal__xml__parsing__XmlParser__NodeGenerator = this_org__zwobble__mammoth__internal__xml__parsing__XmlParser__NodeGenerator;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser__NodeGenerator _xmlParser__NodeGenerator;
+        internal XmlParser__Anonymous_0(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser__NodeGenerator xmlParser__NodeGenerator) {
+            this._xmlParser__NodeGenerator = xmlParser__NodeGenerator;
         }
         public string apply(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.ElementName arg0) {
-            return (this._this_org__zwobble__mammoth__internal__xml__parsing__XmlParser__NodeGenerator).readName(arg0);
+            return (this._xmlParser__NodeGenerator).readName(arg0);
         }
     }
 }
