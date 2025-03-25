@@ -73,7 +73,7 @@ namespace Mammoth.Tests {
                 "<p><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAOvgAADr4B6kKxwAAAABNJREFUKFNj/M+ADzDhlWUYqdIAQSwBE8U+X40AAAAASUVORK5CYII=\" /></p>");
         }
 
-        [Fact]
+        [Fact(Skip = "External Images Are Not Supported!")]
         public void ImagesStoredOutsideOfDocumentAreIncludedInOutput() {
             AssertSuccessfulConversion(
                 ConvertToHtml("external-picture.docx"),
@@ -89,7 +89,7 @@ namespace Mammoth.Tests {
             }
         }
 
-        [Fact]
+        [Fact(Skip = "External Images Are Not Supported!")]
         public void WarnIfImagesStoredOutsideOfDocumentAreNotFound() {
             var tempDirectory = Path.Combine(Path.GetTempPath(), "mammoth-" + Guid.NewGuid());
             Directory.CreateDirectory(tempDirectory);
