@@ -1,21 +1,21 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
     <OutputType>Exe</OutputType>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <IsPackable>false</IsPackable>
-  </PropertyGroup>
-
-  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyTitle>Mammoth.Cli</AssemblyTitle>
     <Copyright>Michael Williamson</Copyright>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <Deterministic>false</Deterministic>
+    <DebugType>portable</DebugType>
+    <Externalconsole>true</Externalconsole>
   </PropertyGroup>
-
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mammoth\Mammoth.csproj" />
   </ItemGroup>
-
 </Project>

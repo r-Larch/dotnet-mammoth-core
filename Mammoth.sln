@@ -1,20 +1,17 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.9.34728.123
+VisualStudioVersion = 17.12.35728.132 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mammoth", "Mammoth\Mammoth.csproj", "{51C5CBD6-8809-4D5E-BABE-1787A16F5ED8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mammoth", "Mammoth\Mammoth.csproj", "{51C5CBD6-8809-4D5E-BABE-1787A16F5ED8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mammoth.Cli", "Mammoth.Cli\Mammoth.Cli.csproj", "{20602E78-EEBD-407B-B8C3-EDB6254BD663}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mammoth.Cli", "Mammoth.Cli\Mammoth.Cli.csproj", "{20602E78-EEBD-407B-B8C3-EDB6254BD663}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mammoth.Tests", "Mammoth.Tests\Mammoth.Tests.csproj", "{E9C3EA8B-FF3B-4E3E-8137-1510465200B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mammoth.Tests", "Mammoth.Tests\Mammoth.Tests.csproj", "{E9C3EA8B-FF3B-4E3E-8137-1510465200B5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{29A002E1-16F9-46FC-B05C-258BC87BC6FF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4D4B9864-B535-45C7-9829-47ECFC09FF19}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\ci.yml = .github\workflows\ci.yml
-		LICENSE = LICENSE
 		README.md = README.md
-		.github\workflows\release-preview.yml = .github\workflows\release-preview.yml
-		.github\workflows\release.yml = .github\workflows\release.yml
 	EndProjectSection
 EndProject
 Global
@@ -38,8 +35,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8EF71DED-E269-4174-9C2A-E211BC03AC5C}
 	EndGlobalSection
 EndGlobal

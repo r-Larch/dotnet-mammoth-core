@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using Mammoth.Couscous.java.util.stream;
-
 
 namespace Mammoth.Couscous.java.util {
     internal class HashSet<T> : Set<T> {
@@ -31,11 +29,6 @@ namespace Mammoth.Couscous.java.util {
         
         public void add(T value) {
             _set.Add(value);
-        }
-
-        public Stream<T> stream()
-        {
-            return new StreamSupport<T>(_set);
         }
     }
 }

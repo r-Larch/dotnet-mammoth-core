@@ -1,11 +1,10 @@
-﻿using Xunit;
+using Xunit;
 using System.IO;
 using Xunit.Sdk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit.Abstractions;
-using Microsoft.VisualStudio.TestPlatform.Utilities;
 
 
 namespace Mammoth.Tests {
@@ -71,7 +70,7 @@ namespace Mammoth.Tests {
                 "<p><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAOvgAADr4B6kKxwAAAABNJREFUKFNj/M+ADzDhlWUYqdIAQSwBE8U+X40AAAAASUVORK5CYII=\" /></p>");
         }
 
-        [Fact(Skip = "External Images Are Not Supported!")]
+        [Fact]
         public void ImagesStoredOutsideOfDocumentAreIncludedInOutput() {
             AssertSuccessfulConversion(
                 ConvertToHtml("external-picture.docx"),
@@ -87,7 +86,7 @@ namespace Mammoth.Tests {
             }
         }
 
-        [Fact(Skip = "External Images Are Not Supported!")]
+        [Fact]
         public void WarnIfImagesStoredOutsideOfDocumentAreNotFound() {
             var tempDirectory = Path.Combine(Path.GetTempPath(), "mammoth-" + Guid.NewGuid());
             Directory.CreateDirectory(tempDirectory);
@@ -101,7 +100,7 @@ namespace Mammoth.Tests {
                 Directory.Delete(tempDirectory, recursive: true);
             }
         }
-        
+
         [Fact]
         public void ImageConversionCanBeCustomised() {
             AssertSuccessfulConversion(
@@ -109,7 +108,7 @@ namespace Mammoth.Tests {
                 "<p><img src=\"iV,image/png\" /></p>"
             );
         }
-        
+
         private IDictionary<string, string> ConvertImage(IImage image) {
             using (var stream = image.GetStream()) {
                 var base64 = StreamToBase64(stream);
@@ -117,11 +116,11 @@ namespace Mammoth.Tests {
                 return new Dictionary<string, string> { { "src", src } };
             }
         }
-        
-        private static string StreamToBase64(Stream stream) {
-            var memoryStream = new MemoryStream();
+
+        private static string StreamToBase64(System.IO.Stream stream) {
+            var memoryStream = new System.IO.MemoryStream();
             stream.CopyTo(memoryStream);
-            return Convert.ToBase64String(memoryStream.ToArray());
+            return System.Convert.ToBase64String(memoryStream.ToArray());
         }
 
         [Fact]

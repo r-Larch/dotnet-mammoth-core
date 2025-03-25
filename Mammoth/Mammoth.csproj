@@ -1,40 +1,35 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <!--<ImplicitUsings>enable</ImplicitUsings>-->
-    <!--<Nullable>enable</Nullable>-->
-    <NoWarn>$(NoWarn);CS1591;CS0168</NoWarn>
-    <IsPackable>true</IsPackable>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Label="Nuget Pack">
-    <PackageId>LarchSys.WordToHtml</PackageId>
-    <Version>0.0.0</Version>
-    <Title>Mammoth</Title>
-    <Authors>LarchSys and Michael Williamson</Authors>
-    <Copyright>Copyright © René Larch 2024 | Michael Williamson 2015 - 2016</Copyright>
-    <PackageTags>docx;html;office;word</PackageTags>
-    <Description>
-      Convert Word documents from docx to simple HTML
-    </Description>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyTitle>Mammoth</AssemblyTitle>
+    <Company>Michael Williamson</Company>
+    <Product>Mammoth</Product>
+    <Description>Convert Word documents from docx to simple HTML</Description>
+    <Copyright>Copyright 2015 - 2016 Michael Williamson</Copyright>
+    <Version>1.8.0</Version>
+    <DebugType>portable</DebugType>
+    <ConsolePause>false</ConsolePause>
+    <Authors>Michael Williamson</Authors>
     <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/r-Larch/dotnet-mammoth-core.git</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/mwilliamson/dotnet-mammoth</PackageProjectUrl>
+    <PackageTags>docx html office word</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
-
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
-    <None Include="README.md" Pack="true" PackagePath="\" />
+    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <Compile Remove="Couscous/mammoth/internal/util/Objects.cs" />
+    <Compile Remove="Couscous/mammoth/internal/styles/parsing/StyleMapParser.cs" />
   </ItemGroup>
-
+  <ItemGroup>
+    <None Include="../README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 </Project>

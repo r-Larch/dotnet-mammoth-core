@@ -272,6 +272,10 @@ Methods:
   such as those used by bookmarks, footnotes and endnotes.
   Defaults to the empty string.
 
+* `DocumentConverter ImageConverter(Func<IImage, IDictionary<string, string>> imageConverter)`:
+  by default, images are converted to `<img>` elements with the source included inline in the `src` attribute.
+  Call this to change how images are converted.
+
 #### `IResult<T>`
 
 Represents the result of a conversion. Properties:
@@ -289,9 +293,9 @@ and has the following members:
 
 * `Stream GetStream()`: open the image file.
 
-* `String ContentType`: the content type of the image, such as `image/png`.
+* `string ContentType`: the content type of the image, such as `image/png`.
 
-* `String AltText`: the alt text of the image, if any.
+* `string AltText`: the alt text of the image, if any, otherwise `null`.
 
 The function should return an `IDictionary` of attributes for the `<img>` element.
 At a minimum, this should include the `src` attribute.
@@ -356,7 +360,7 @@ In this case, style mappings similar to `p[style-name='Aside Heading'] => div.as
 
 ### Document element matchers
 
-#### Paragraphs and runs
+#### Paragraphs, runs and tables
 
 Match any paragraph:
 
@@ -370,7 +374,13 @@ Match any run:
 r
 ```
 
-To match a paragraph or run with a specific style,
+Match any table:
+
+```
+table
+```
+
+To match a paragraph, run or table with a specific style,
 you can reference the style by name.
 This is the style name that is displayed in Microsoft Word or LibreOffice.
 For instance, to match a paragraph with the style name `Heading 1`:
@@ -440,6 +450,28 @@ strike
 Note that this matches text that has had strikethrough explicitly applied to it.
 It will not match any text that is struckthrough because of its paragraph or run style.
 
+#### All caps
+
+Match explicitly all caps text:
+
+```
+all-caps
+```
+
+Note that this matches text that has had all caps explicitly applied to it.
+It will not match any text that is all caps because of its paragraph or run style.
+
+#### Small caps
+
+Match explicitly small caps text:
+
+```
+small-caps
+```
+
+Note that this matches text that has had small caps explicitly applied to it.
+It will not match any text that is small caps because of its paragraph or run style.
+
 #### Ignoring document elements
 
 Use `!` to ignore a document element.
@@ -465,6 +497,12 @@ append a dot followed by the name of the class:
 
 ```
 h1.section-title
+```
+
+To add an attribute, use square brackets similarly to a CSS attribute selector:
+
+```
+p[lang='fr']
 ```
 
 To require that an element is fresh, use `:fresh`:
@@ -543,8 +581,8 @@ Choose a filder eg. `c:\Temp\`
 
 **Extract all zips**
 
-- c:/Temp/openlogic-openjdk-8u402-b06-windows-32/
-- c:/Temp/apache-maven-3.9.7/
+- c:/Projects/Java/openlogic-openjdk-8u402-b06-windows-32/
+- c:/Projects/Java/apache-maven-3.9.7/
 
 **Execute the following CMD**
 
@@ -554,14 +592,14 @@ Ensure to set `PROJECT` var to the solution directory without final backslash!
 
 ```cmd
 set PROJECT="c:\Projects\LarchSys\MammothCore"
-set JAVA_HOME=c:\Temp\openlogic-openjdk-8u402-b06-windows-32
+set JAVA_HOME=c:\Projects\Java\openlogic-openjdk-8u402-b06-windows-32
 set PATH="%JAVA_HOME%;%PATH%"
 
 cd %PROJECT%\java-couscous\
-c:\Temp\apache-maven-3.9.7\bin\mvn package -Dmaven.test.skip=true
+c:\Projects\Java\apache-maven-3.9.7\bin\mvn package -Dmaven.test.skip=true
 
 cd %PROJECT%\java-mammoth\
-c:\Temp\apache-maven-3.9.7\bin\mvn clean deploy -P release
+c:\Projects\Java\apache-maven-3.9.7\bin\mvn clean deploy -P release
 
 cd %PROJECT%
 %JAVA_HOME%\bin\java -jar %PROJECT%\java-couscous\target\couscous-0.0.1-SNAPSHOT.jar

@@ -1,9 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using Mammoth.Couscous.java.lang;
 using Mammoth.Couscous.java.util;
 using Mammoth.Couscous.java.io;
-using Mammoth.Couscous.java.util.stream;
-
 
 namespace Mammoth.Couscous {
     internal static class FromJava {
@@ -89,7 +88,7 @@ namespace Mammoth.Couscous {
             return new ArrayList<T>(list);
         }
         
-        internal static InputStream StreamToInputStream(System.IO.Stream stream) {
+        internal static java.io.InputStream StreamToInputStream(System.IO.Stream stream) {
             return new StreamToInputStreamAdapter(stream);
         }
         
@@ -101,11 +100,11 @@ namespace Mammoth.Couscous {
             }
         }
         
-        internal static Collection<T> CollectionToCollection<T>(ICollection<T> collection) {
+        internal static java.util.Collection<T> CollectionToCollection<T>(ICollection<T> collection) {
             return new CollectionToCollectionAdapter<T>(collection);
         }
         
-        private class CollectionToCollectionAdapter<T> : Collection<T> {
+        private class CollectionToCollectionAdapter<T> : java.util.Collection<T> {
             private readonly ICollection<T> _collection;
             
             internal CollectionToCollectionAdapter(ICollection<T> collection) {
@@ -125,16 +124,11 @@ namespace Mammoth.Couscous {
             }
             
             public Iterator<T> iterator() {
-                return EnumeratorToIterator(_collection.GetEnumerator());
+                return ToJava.EnumeratorToIterator(_collection.GetEnumerator());
             }
             
             public void add(T value) {
                 throw new UnsupportedOperationException();
-            }
-
-            public Stream<T> stream()
-            {
-                return new StreamSupport<T>(_collection);
             }
         }
     }

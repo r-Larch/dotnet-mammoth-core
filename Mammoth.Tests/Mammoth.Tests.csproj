@@ -1,25 +1,24 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-
-    <IsPackable>false</IsPackable>
-    <IsTestProject>true</IsTestProject>
-  </PropertyGroup>
-
-  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyTitle>Mammoth.Tests</AssemblyTitle>
     <Copyright>Michael Williamson</Copyright>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <Deterministic>false</Deterministic>
+    <DebugType>portable</DebugType>
+    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
-
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
-    <None Remove="TestData\text-align.docx" />
-    <None Remove="TestData\text-align_mixed.docx" />
+    <PackageReference Include="xunit" Version="2.8.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="TestData\empty.docx" />
     <EmbeddedResource Include="TestData\endnotes.docx" />
@@ -39,20 +38,7 @@
     <EmbeddedResource Include="TestData\underline.docx" />
     <EmbeddedResource Include="TestData\utf8-bom.docx" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="coverlet.collector" Version="6.0.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
-    <PackageReference Include="xunit" Version="2.5.3" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Mammoth\Mammoth.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Using Include="Xunit" />
-  </ItemGroup>
-
 </Project>
