@@ -27,6 +27,11 @@ namespace Mammoth.Couscous.java.util {
             }
         }
 
+        public override TValue get(TKey key)
+        {
+            return _dictionary[key];
+        }
+
         public override bool containsKey(TKey key) {
             return _dictionary.ContainsKey(key);
         }

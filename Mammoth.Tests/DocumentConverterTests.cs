@@ -8,7 +8,10 @@ using Xunit.Abstractions;
 
 
 namespace Mammoth.Tests {
-    public class DocumentConverterTests(ITestOutputHelper output) {
+    public class DocumentConverterTests {
+        private readonly ITestOutputHelper output;
+        public DocumentConverterTests(ITestOutputHelper output) => this.output = output;
+
         [Fact]
         public void DocxContainingOneParagraphIsConvertedToSingleParagraphElement() {
             AssertSuccessfulConversion(

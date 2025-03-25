@@ -27,6 +27,7 @@ namespace Mammoth.Couscous.java.util {
 
         public abstract void put(TKey key, TValue value);
         public abstract void putAll(Map<TKey, TValue> other);
+        public abstract TValue get(TKey key);
         public abstract bool containsKey(TKey key);
         public abstract Set<Map__Entry<TKey, TValue>> entrySet();
         public abstract Collection<TValue> values();

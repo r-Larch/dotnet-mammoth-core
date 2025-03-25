@@ -6,6 +6,7 @@ namespace Mammoth.Couscous.java.util {
     internal interface Map<K, V> : Map {
 	void put(K key, V value);
 	void putAll(Map<K, V> other);
+	V get(K key);
 	bool containsKey(K key);
 	Set<Map__Entry<K, V>> entrySet();
 	Collection<V> values();
