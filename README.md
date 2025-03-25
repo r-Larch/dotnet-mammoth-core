@@ -1,3 +1,21 @@
+
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/r-Larch/dotnet-mammoth-core/ci.yml) ![NuGet Version](https://img.shields.io/nuget/v/LarchSys.WordToHtml)
+
+**Install Nuget**
+
+```bash
+> dotnet add package LarchSys.WordToHtml --prerelease
+```
+
+# This is a fork of `mwilliamson/dotnet-mammoth`
+
+The original author stoped maintaining the package.<br>
+This fork provides a `.NET Core` port of the original package.
+
+`dotnet-mammoth` is a dotnet port of `mwilliamson/java-mammoth` where the main work is done.<br>
+The nuget package version indicates the version of the original java-mammoth provided in the release.
+
+
 # Mammoth .docx to HTML converter for .NET
 
 Mammoth is designed to convert .docx documents,
@@ -499,6 +517,20 @@ Modifiers must be used in the correct order:
 h1.section-title:fresh
 ```
 
+#### Text Alignment
+
+To convert text alignment, it is possible to match paragraphs with text-align attribute.
+
+```
+p[text-align='center'] => p.center:fresh
+p[text-align='right'] => p.right:fresh
+p[text-align='justify'] => p.justify:fresh
+p[style-name='Heading 1', text-align='center'] => h1.center:fresh
+p[style-name='Heading 1', text-align='right'] => h1.right:fresh
+```
+
+Note: Order is important. Last selector wins!
+
 #### Separators
 
 To specify a separator to place between the contents of paragraphs that are collapsed together,
@@ -537,3 +569,38 @@ If you'd like to say thanks, feel free to [make a donation through Ko-fi](https:
 
 If you use Mammoth as part of your business,
 please consider supporting the ongoing maintenance of Mammoth by [making a weekly donation through Liberapay](https://liberapay.com/mwilliamson/donate).
+
+## Build / Update `generated.cs`
+
+Choose a filder eg. `c:\Temp\`
+
+**Download ZIP:**
+
+- [Java 8 JDK Windows x86 64-bit](https://builds.openlogic.com/downloadJDK/openlogic-openjdk/8u402-b06/openlogic-openjdk-8u402-b06-windows-x64.zip)
+- [apache-maven-3.9.7](https://dlcdn.apache.org/maven/maven-3/3.9.7/binaries/apache-maven-3.9.7-bin.zip)
+
+**Extract all zips**
+
+- c:/Temp/openlogic-openjdk-8u402-b06-windows-32/
+- c:/Temp/apache-maven-3.9.7/
+
+**Execute the following CMD**
+
+Ensure to set `PROJECT` var to the solution directory without final backslash!
+
+**NOTE:** java-mammoth may give some errors. You can ignore them as long as the `.\target\couscous-*.jar` file gets generated.
+
+```cmd
+set PROJECT="c:\Projects\LarchSys\MammothCore"
+set JAVA_HOME=c:\Temp\openlogic-openjdk-8u402-b06-windows-32
+set PATH="%JAVA_HOME%;%PATH%"
+
+cd %PROJECT%\java-couscous\
+c:\Temp\apache-maven-3.9.7\bin\mvn package -Dmaven.test.skip=true
+
+cd %PROJECT%\java-mammoth\
+c:\Temp\apache-maven-3.9.7\bin\mvn clean deploy -P release
+
+cd %PROJECT%
+%JAVA_HOME%\bin\java -jar %PROJECT%\java-couscous\target\couscous-0.0.1-SNAPSHOT.jar
+```

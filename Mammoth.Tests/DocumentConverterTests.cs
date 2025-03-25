@@ -4,9 +4,11 @@ using Xunit.Sdk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xunit.Abstractions;
+
 
 namespace Mammoth.Tests {
-    public class DocumentConverterTests {
+    public class DocumentConverterTests(ITestOutputHelper output) {
         [Fact]
         public void DocxContainingOneParagraphIsConvertedToSingleParagraphElement() {
             AssertSuccessfulConversion(
@@ -167,6 +169,41 @@ namespace Mammoth.Tests {
         }
 
         [Fact]
+        public void CanHandleTextAlignment() {
+            AssertSuccessfulConversion(
+                ConvertToHtml("text-align.docx", mammoth => mammoth
+                    .AddStyleMap("p[text-align='center'] => p.center:fresh")
+                    .AddStyleMap("p[text-align='right'] => p.right:fresh")
+                    .AddStyleMap("p[text-align='justify'] => p.justify:fresh")
+                ),
+                "<p class=\"center\"><strong>The Sunset Tree</strong></p>" +
+                "<p class=\"justify\">Lorem ipsum justify</p>" +
+                "<p class=\"justify\">Foobar justify</p>" +
+                "<p class=\"right\">TextAlign Right</p>" +
+                "<p class=\"center\">Center 1</p>" +
+                "<p class=\"center\">Center 2</p>" +
+                "<p>Left 1</p>" +
+                "<p>Left 2</p>");
+        }
+
+        [Fact]
+        public void CanHandleTextAlignmentWithStyle() {
+            AssertSuccessfulConversion(
+                ConvertToHtml("text-align_mixed.docx", mammoth => mammoth
+                    .AddStyleMap("p[text-align='center'] => p.center:fresh")
+                    .AddStyleMap("p[text-align='right'] => p.right:fresh")
+                    .AddStyleMap("p[text-align='justify'] => p.justify:fresh")
+                    .AddStyleMap("p[style-name='Heading 1', text-align='center'] => h1.center:fresh")
+                    .AddStyleMap("p[style-name='Heading 1', text-align='right'] => h1.right:fresh")
+                ),
+                "<h1 class=\"center\">Header 1 Center</h1>" +
+                "<h1>Header 1 Left</h1>" +
+                "<h1 class=\"right\">Header 1 Right</h1>" +
+                "<p>Normal paragraph, lorem ipsum.</p>" +
+                "<p class=\"center\">Normal paragraph, align center, lorem ipsum.</p>");
+        }
+
+        [Fact]
         public void CanUseCustomStyleMap() {
             AssertSuccessfulConversion(
                 ConvertToHtml("underline.docx", mammoth => mammoth.AddStyleMap("u => em")),
@@ -257,6 +294,7 @@ namespace Mammoth.Tests {
             if (result.Warnings.Count > 0) {
                 throw new XunitException("Unexpected warnings: " + string.Join(", ", result.Warnings));
             }
+            output.WriteLine(result.Value);
             Assert.Equal(expectedValue, result.Value);
         }
 

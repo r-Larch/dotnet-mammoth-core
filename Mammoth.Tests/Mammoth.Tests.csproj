@@ -29,10 +29,12 @@
     <EmbeddedResource Include="TestData\single-paragraph.docx" />
     <EmbeddedResource Include="TestData\strikethrough.docx" />
     <EmbeddedResource Include="TestData\tables.docx" />
+    <EmbeddedResource Include="TestData\text-align_mixed.docx" />
     <EmbeddedResource Include="TestData\text-box.docx" />
     <EmbeddedResource Include="TestData\tiny-picture.docx" />
     <EmbeddedResource Include="TestData\tiny-picture.png" />
     <EmbeddedResource Include="TestData\tiny-picture-custom-content-type.docx" />
+    <EmbeddedResource Include="TestData\text-align.docx" />
     <EmbeddedResource Include="TestData\underline.docx" />
     <EmbeddedResource Include="TestData\utf8-bom.docx" />
   </ItemGroup>
