@@ -1,5 +1,5 @@
 
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/r-Larch/dotnet-mammoth-core/ci.yml) ![NuGet Version](https://img.shields.io/nuget/v/LarchSys.WordToHtml)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/r-Larch/dotnet-mammoth-core/ci.yml)](https://github.com/r-Larch/dotnet-mammoth-core/actions) [![NuGet Version](https://img.shields.io/nuget/v/LarchSys.WordToHtml)](https://www.nuget.org/packages/LarchSys.WordToHtml)
 
 **Install Nuget**
 
