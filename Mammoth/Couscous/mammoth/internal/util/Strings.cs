@@ -19,7 +19,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
 		}
 
         internal static string codepointToString(int codePoint) {
-            return ((char) codePoint).ToString();
+            return char.ConvertFromUtf32(codePoint);
         }
     }
 }
