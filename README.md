@@ -250,6 +250,10 @@ Methods:
   if the document contains an embedded style map, then it is combined with the default style map.
   Call this to ignore any embedded style maps.
 
+* `DocumentConverter EnableExternalFileAccess()`: Source documents may reference files outside of the source document.
+  Access to any such external files is disabled by default.
+  Call this to enable access when converting trusted source documents.
+
 * `DocumentConverter PreserveEmptyParagraphs()`: by default, empty paragraphs are ignored.
   Call this to preserve empty paragraphs in the output.
 
@@ -320,6 +324,10 @@ For instance:
   automatically convert the document into HTML on the server,
   and embed the HTML into your website,
   this may allow arbitrary files on the server to be read and exfiltrated.
+
+  To avoid this issue, access to any such external files is disabled by default.
+  To enable access when converting trusted source documents,
+  call `EnableExternalFileAccess()`.
 
 ## Writing style maps
 
