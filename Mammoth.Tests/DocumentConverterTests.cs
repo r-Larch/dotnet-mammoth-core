@@ -73,24 +73,38 @@ namespace Mammoth.Tests {
                 "<p><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAOvgAADr4B6kKxwAAAABNJREFUKFNj/M+ADzDhlWUYqdIAQSwBE8U+X40AAAAASUVORK5CYII=\" /></p>");
         }
 
-        [Fact(Skip = "External Images Are Not Supported!")]
-        public void ImagesStoredOutsideOfDocumentAreIncludedInOutput() {
+        [Fact]
+        public void WhenExternalFileAccessIsEnabledThenImagesStoredOutsideOfDocumentAreIncludedInOutput() {
             AssertSuccessfulConversion(
-                ConvertToHtml("external-picture.docx"),
+                ConvertToHtml("external-picture.docx", mammoth => mammoth.EnableExternalFileAccess()),
                 "<p><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAOvgAADr4B6kKxwAAAABNJREFUKFNj/M+ADzDhlWUYqdIAQSwBE8U+X40AAAAASUVORK5CYII=\" /></p>");
         }
 
         [Fact]
-        public void WarnIfDocumentHasImagesStoredOutsideOfDocumentWhenPathOfDocumentIsUnknown() {
+        public void WhenExternalFileAccessIsEnabledThenWarnIfDocumentHasImagesStoredOutsideOfDocumentWhenPathOfDocumentIsUnknown() {
             using (var file = File.OpenRead(TestFilePath("external-picture.docx"))) {
-                var result = new DocumentConverter().ConvertToHtml(file);
+                var result = new DocumentConverter()
+                    .EnableExternalFileAccess()
+                    .ConvertToHtml(file);
+
                 Assert.Equal("", result.Value);
                 Assert.Equal(new[]{"could not open external image 'tiny-picture.png': path of document is unknown, but is required for relative URI"}, result.Warnings);
             }
         }
 
-        [Fact(Skip = "External Images Are Not Supported!")]
-        public void WarnIfImagesStoredOutsideOfDocumentAreNotFound() {
+        [Fact]
+        public void GivenExternalFileAccessIsDisabledByDefaultThenWarnIfDocumentHasImagesStoredOutsideOfDocument()
+        {
+            using (var file = File.OpenRead(TestFilePath("external-picture.docx"))) {
+                var result = new DocumentConverter().ConvertToHtml(file);
+
+                Assert.Equal("", result.Value);
+                Assert.Equal(new[]{"could not open external image 'tiny-picture.png': external file access is disabled"}, result.Warnings);
+            }
+        }
+
+        [Fact]
+        public void WhenExternalFileAccessIsEnabledThenWarnIfImagesStoredOutsideOfDocumentAreNotFound() {
             var tempDirectory = Path.Combine(Path.GetTempPath(), "mammoth-" + Guid.NewGuid());
             Directory.CreateDirectory(tempDirectory);
             try {

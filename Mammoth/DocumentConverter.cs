@@ -31,34 +31,40 @@ namespace Mammoth {
         public DocumentConverter DisableDefaultStyleMap() {
             return new DocumentConverter(options.disableDefaultStyleMap());
         }
-        
+
         public DocumentConverter DisableEmbeddedStyleMap() {
             return new DocumentConverter(options.disableEmbeddedStyleMap());
         }
-        
-        public DocumentConverter ImageConverter(Func<IImage, IDictionary<string, string>> imageConverter) {
+
+        public DocumentConverter EnableExternalFileAccess()
+        {
+            return new DocumentConverter(options.enableExternalFileAccess());
+        }
+
+        public DocumentConverter ImageConverter(Func<IImage, IDictionary<string, string>> imageConverter)
+        {
             return new DocumentConverter(options.imageConverter(new ImageConverterShim(imageConverter)));
         }
-        
+
         internal class ImageConverterShim : Mammoth.Couscous.org.zwobble.mammoth.images.ImageConverter__ImgElement {
             private readonly Func<IImage, IDictionary<string, string>> func;
-            
+
             internal ImageConverterShim(Func<IImage, IDictionary<string, string>> func) {
                 this.func = func;
             }
-            
+
             public Mammoth.Couscous.java.util.Map<string, string> convert(Mammoth.Couscous.org.zwobble.mammoth.images.Image image) {
                 return ToJava.DictionaryToMap(func(new Image(image)));
             }
         }
-        
+
         internal class Image : IImage {
             private readonly Mammoth.Couscous.org.zwobble.mammoth.images.Image image;
-            
+
             internal Image(Mammoth.Couscous.org.zwobble.mammoth.images.Image image) {
                 this.image = image;
             }
-            
+
             public string AltText { get { return image.getAltText().orElse(null); } }
             public string ContentType { get { return image.getContentType(); } }
             public Stream GetStream() { return image.getInputStream().Stream; }
