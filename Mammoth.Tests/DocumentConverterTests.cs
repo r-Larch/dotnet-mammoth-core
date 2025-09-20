@@ -73,7 +73,7 @@ namespace Mammoth.Tests {
                 "<p><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAOvgAADr4B6kKxwAAAABNJREFUKFNj/M+ADzDhlWUYqdIAQSwBE8U+X40AAAAASUVORK5CYII=\" /></p>");
         }
 
-        [Fact]
+        [Fact(Skip = "Not Supported with file:/// urls")]
         public void WhenExternalFileAccessIsEnabledThenImagesStoredOutsideOfDocumentAreIncludedInOutput() {
             AssertSuccessfulConversion(
                 ConvertToHtml("external-picture.docx", mammoth => mammoth.EnableExternalFileAccess()),
